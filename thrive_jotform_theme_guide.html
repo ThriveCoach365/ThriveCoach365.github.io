@@ -1,0 +1,409 @@
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #C9963A; --gold-light: #F0C97A; --forest: #1A3028; --sage: #2F5243;
+    --cream: #FAF6EE; --warm-white: #FDF9F3; --muted: #8A9E94;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+  body { font-family: var(--font-body); background: var(--warm-white); color: var(--forest); }
+
+  .tab-bar { display: flex; gap: 0; border-bottom: 2px solid rgba(26,48,40,0.1); padding: 0 20px; position: sticky; top: 0; background: var(--warm-white); z-index: 10; overflow-x: auto; }
+  .tab { font-size: 12px; font-weight: 500; padding: 13px 14px; border: none; background: transparent; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all .2s; white-space: nowrap; }
+  .tab.active { color: var(--forest); border-bottom-color: var(--gold); }
+  .tab:hover:not(.active) { color: var(--forest); }
+  .panel { display: none; padding: 24px 20px 40px; }
+  .panel.active { display: block; animation: fadeUp .25s ease both; }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+
+  .hero-bar { background: var(--forest); border-radius: 14px; padding: 20px 24px; margin-bottom: 22px; position: relative; overflow: hidden; }
+  .hero-bar::before { content: attr(data-bg); position: absolute; right: -8px; top: -10px; font-family: var(--font-display); font-size: 72px; font-weight: 900; font-style: italic; color: rgba(255,255,255,0.04); pointer-events: none; }
+  .hb-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 6px; }
+  .hb-title { font-family: var(--font-display); font-size: 20px; font-weight: 900; color: var(--cream); line-height: 1.2; margin-bottom: 6px; }
+  .hb-title em { font-style: italic; color: var(--gold-light); }
+  .hb-sub { font-size: 12px; color: rgba(250,246,238,.6); font-weight: 300; line-height: 1.6; }
+
+  .section-lbl { font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin: 20px 0 10px; display: flex; align-items: center; gap: 6px; }
+  .section-lbl::before { content: ''; display: block; width: 12px; height: 1px; background: var(--gold); }
+
+  .card { background: var(--cream); border: 1px solid rgba(201,150,58,.15); border-radius: 13px; padding: 16px 18px; margin-bottom: 12px; }
+  .card-title { font-size: 13px; font-weight: 500; color: var(--forest); margin-bottom: 8px; }
+  .card-body { font-size: 12px; color: #3a5246; line-height: 1.75; font-weight: 300; }
+
+  /* COLOUR SWATCHES */
+  .swatch-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 16px; }
+  .swatch { border-radius: 10px; padding: 14px 16px; }
+  .swatch-name { font-size: 11px; font-weight: 500; margin-bottom: 2px; }
+  .swatch-hex { font-size: 12px; font-family: 'Courier New', monospace; }
+  .sw-forest { background: #1A3028; } .sw-forest .swatch-name, .sw-forest .swatch-hex { color: rgba(250,246,238,.8); }
+  .sw-gold { background: #C9963A; } .sw-gold .swatch-name, .sw-gold .swatch-hex { color: #fff; }
+  .sw-cream { background: #FAF6EE; border: 1px solid rgba(201,150,58,.2); } .sw-cream .swatch-name { color: #1A3028; } .sw-cream .swatch-hex { color: #5a3e0e; }
+  .sw-sage { background: #2F5243; } .sw-sage .swatch-name, .sw-sage .swatch-hex { color: rgba(250,246,238,.8); }
+  .sw-muted { background: #8A9E94; } .sw-muted .swatch-name, .sw-muted .swatch-hex { color: #fff; }
+  .sw-warm { background: #FDF9F3; border: 1px solid rgba(201,150,58,.15); } .sw-warm .swatch-name { color: #1A3028; } .sw-warm .swatch-hex { color: #5a3e0e; }
+
+  /* FORM PREVIEW */
+  .form-preview {
+    background: #FDF9F3; border: 1px solid rgba(201,150,58,.2); border-radius: 14px;
+    overflow: hidden; margin-bottom: 16px;
+  }
+  .fp-header { background: #1A3028; padding: 20px 22px; }
+  .fp-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: #F0C97A; margin-bottom: 6px; }
+  .fp-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 900; color: #FAF6EE; margin-bottom: 4px; }
+  .fp-title em { font-style: italic; color: #F0C97A; }
+  .fp-sub { font-size: 11px; color: rgba(250,246,238,.55); font-weight: 300; }
+  .fp-body { padding: 18px 22px; }
+  .fp-field { margin-bottom: 14px; }
+  .fp-label { font-size: 11px; font-weight: 500; color: #1A3028; margin-bottom: 5px; letter-spacing: .02em; }
+  .fp-input { width: 100%; background: #fff; border: 1px solid rgba(26,48,40,.15); border-radius: 8px; padding: 9px 12px; font-size: 13px; color: #1A3028; font-family: 'DM Sans', sans-serif; outline: none; }
+  .fp-input:focus { border-color: #C9963A; box-shadow: 0 0 0 2px rgba(201,150,58,.12); }
+  .fp-select { width: 100%; background: #fff; border: 1px solid rgba(26,48,40,.15); border-radius: 8px; padding: 9px 12px; font-size: 13px; color: #1A3028; font-family: 'DM Sans', sans-serif; appearance: none; }
+  .fp-btn { background: #C9963A; color: #fff; border: none; border-radius: 99px; padding: 12px 28px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; letter-spacing: .02em; transition: background .2s; }
+  .fp-btn:hover { background: #b0812e; }
+  .fp-divider { height: 1px; background: rgba(201,150,58,.15); margin: 16px 0; }
+  .fp-verse { font-size: 11px; font-style: italic; color: #8A9E94; border-left: 2px solid #F0C97A; padding-left: 10px; margin-bottom: 16px; line-height: 1.5; }
+
+  /* STEPS */
+  .step { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
+  .step-num { width: 26px; height: 26px; border-radius: 50%; background: var(--forest); color: var(--gold-light); font-size: 11px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .step-body { font-size: 12px; color: #3a5246; line-height: 1.7; font-weight: 300; padding-top: 3px; }
+  .step-body strong { font-weight: 500; color: var(--forest); }
+
+  .setting-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 9px 0; border-bottom: 1px solid rgba(26,48,40,.07); gap: 12px; flex-wrap: wrap; }
+  .setting-row:last-child { border-bottom: none; }
+  .setting-name { font-size: 12px; font-weight: 500; color: var(--forest); }
+  .setting-val { font-size: 12px; color: var(--sage); font-family: 'Courier New', monospace; background: rgba(47,82,67,.08); padding: 2px 8px; border-radius: 4px; }
+
+  .tip-box { background: rgba(201,150,58,.08); border-left: 2px solid var(--gold); padding: 10px 14px; border-radius: 0 8px 8px 0; margin-top: 10px; font-size: 12px; color: #5a3e0e; line-height: 1.6; font-style: italic; }
+
+  .css-block { background: var(--forest); border-radius: 10px; padding: 14px 16px; margin: 10px 0; font-family: 'Courier New', monospace; font-size: 11px; color: var(--gold-light); line-height: 1.8; overflow-x: auto; white-space: pre; }
+  .css-comment { color: rgba(250,246,238,.3); }
+  .css-selector { color: #7ec8e3; }
+  .css-prop { color: #f0c97a; }
+  .css-val { color: #9fe1cb; }
+
+  .form-link-row { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(26,48,40,.07); flex-wrap: wrap; }
+  .form-link-row:last-child { border-bottom: none; }
+  .fl-name { font-size: 13px; font-weight: 500; color: var(--forest); min-width: 180px; }
+  .fl-url { font-size: 11px; color: var(--muted); font-family: 'Courier New', monospace; }
+</style>
+
+<div>
+  <div class="tab-bar">
+    <button class="tab active" onclick="show('colours', this)">Thrive Colours</button>
+    <button class="tab" onclick="show('preview', this)">Form Preview</button>
+    <button class="tab" onclick="show('steps', this)">Step-by-Step</button>
+    <button class="tab" onclick="show('css', this)">Custom CSS</button>
+    <button class="tab" onclick="show('forms', this)">All 4 Forms</button>
+  </div>
+
+  <!-- COLOURS -->
+  <div id="p-colours" class="panel active">
+    <div class="hero-bar" data-bg="THEME">
+      <div class="hb-eyebrow">Thrive brand colours</div>
+      <div class="hb-title">Your exact <em>colour palette</em></div>
+      <div class="hb-sub">These are the precise hex codes from your landing page. Apply them consistently across all 4 forms so everything looks like one unified brand.</div>
+    </div>
+
+    <div class="swatch-grid">
+      <div class="swatch sw-forest">
+        <div class="swatch-name">Forest (Primary)</div>
+        <div class="swatch-hex">#1A3028</div>
+      </div>
+      <div class="swatch sw-gold">
+        <div class="swatch-name">Gold (Accent)</div>
+        <div class="swatch-hex">#C9963A</div>
+      </div>
+      <div class="swatch sw-cream">
+        <div class="swatch-name">Cream (Background)</div>
+        <div class="swatch-hex">#FAF6EE</div>
+      </div>
+      <div class="swatch sw-sage">
+        <div class="swatch-name">Sage (Secondary)</div>
+        <div class="swatch-hex">#2F5243</div>
+      </div>
+      <div class="swatch sw-muted">
+        <div class="swatch-name">Muted (Subtle text)</div>
+        <div class="swatch-hex">#8A9E94</div>
+      </div>
+      <div class="swatch sw-warm">
+        <div class="swatch-name">Warm White (Page BG)</div>
+        <div class="swatch-hex">#FDF9F3</div>
+      </div>
+    </div>
+
+    <div class="section-lbl">Where each colour goes in Jotform</div>
+    <div class="card">
+      <div class="setting-row"><span class="setting-name">Form background</span><span class="setting-val">#FDF9F3</span></div>
+      <div class="setting-row"><span class="setting-name">Header / banner background</span><span class="setting-val">#1A3028</span></div>
+      <div class="setting-row"><span class="setting-name">Header title text</span><span class="setting-val">#FAF6EE</span></div>
+      <div class="setting-row"><span class="setting-name">Submit button colour</span><span class="setting-val">#C9963A</span></div>
+      <div class="setting-row"><span class="setting-name">Submit button text</span><span class="setting-val">#FFFFFF</span></div>
+      <div class="setting-row"><span class="setting-name">Input field border (focus)</span><span class="setting-val">#C9963A</span></div>
+      <div class="setting-row"><span class="setting-name">Question label text</span><span class="setting-val">#1A3028</span></div>
+      <div class="setting-row"><span class="setting-name">Body / answer text</span><span class="setting-val">#2F5243</span></div>
+      <div class="setting-row"><span class="setting-name">Placeholder text</span><span class="setting-val">#8A9E94</span></div>
+    </div>
+
+    <div class="section-lbl">Typography</div>
+    <div class="card">
+      <div class="setting-row"><span class="setting-name">Form title font</span><span class="setting-val">Playfair Display (serif)</span></div>
+      <div class="setting-row"><span class="setting-name">Body / question font</span><span class="setting-val">DM Sans (sans-serif)</span></div>
+      <div class="setting-row"><span class="setting-name">Font weight for labels</span><span class="setting-val">500 (medium)</span></div>
+      <div class="setting-row"><span class="setting-name">Font weight for body text</span><span class="setting-val">300 (light)</span></div>
+    </div>
+  </div>
+
+  <!-- PREVIEW -->
+  <div id="p-preview" class="panel">
+    <div class="hero-bar" data-bg="PREVIEW">
+      <div class="hb-eyebrow">What your forms will look like</div>
+      <div class="hb-title">Thrive-branded <em>form preview</em></div>
+      <div class="hb-sub">This is exactly how each form should look once the theme is applied — consistent with your landing page in every detail.</div>
+    </div>
+
+    <div class="form-preview">
+      <div class="fp-header">
+        <div class="fp-eyebrow">Identity & Purpose Seminar · Registration</div>
+        <div class="fp-title">You Were Made to <em>Thrive.</em></div>
+        <div class="fp-sub">Secure your spot for the 3-day online seminar. Ages 13–25.</div>
+      </div>
+      <div class="fp-body">
+        <div class="fp-verse">"For we are God's handiwork, created in Christ Jesus to do good works." — Ephesians 2:10</div>
+        <div class="fp-field">
+          <div class="fp-label">Full Name *</div>
+          <input class="fp-input" type="text" placeholder="Your full name">
+        </div>
+        <div class="fp-field">
+          <div class="fp-label">Email Address *</div>
+          <input class="fp-input" type="email" placeholder="Your email address">
+        </div>
+        <div class="fp-field">
+          <div class="fp-label">WhatsApp Number *</div>
+          <input class="fp-input" type="text" placeholder="+254 ...">
+        </div>
+        <div class="fp-field">
+          <div class="fp-label">Age Group *</div>
+          <select class="fp-select">
+            <option>Select your age group</option>
+            <option>13–15</option>
+            <option>16–18</option>
+            <option>19–21</option>
+            <option>22–25</option>
+          </select>
+        </div>
+        <div class="fp-field">
+          <div class="fp-label">M-Pesa / Payment Reference *</div>
+          <input class="fp-input" type="text" placeholder="Enter your confirmation code">
+        </div>
+        <div class="fp-divider"></div>
+        <button class="fp-btn">Reserve My Spot →</button>
+      </div>
+    </div>
+
+    <div class="tip-box">This preview shows the Registration form. All 4 forms use the same header style, colour scheme, fonts, and button — creating a seamless experience from landing page to form to confirmation.</div>
+  </div>
+
+  <!-- STEPS -->
+  <div id="p-steps" class="panel">
+    <div class="hero-bar" data-bg="STEPS">
+      <div class="hb-eyebrow">Inside Jotform builder</div>
+      <div class="hb-title">Apply the theme to <em>each form</em></div>
+      <div class="hb-sub">Do these steps once — then repeat for all 4 forms. Takes about 10 minutes per form. Start with the Registration form.</div>
+    </div>
+
+    <div class="section-lbl">Part 1 — Open the Form Builder</div>
+    <div class="card">
+      <div class="step"><div class="step-num">1</div><div class="step-body">Log in to <strong>jotform.com</strong> → click <strong>My Forms</strong> → find "Identity and Purpose Group Coaching – Registration" → click <strong>Edit</strong>.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body">In the form builder, click the <strong>Paint Brush icon</strong> on the left sidebar — this opens the <strong>Form Designer</strong> panel.</div></div>
+    </div>
+
+    <div class="section-lbl">Part 2 — Apply Thrive Colours</div>
+    <div class="card">
+      <div class="step"><div class="step-num">3</div><div class="step-body">In Form Designer, click <strong>"Customize Theme"</strong> or scroll to find individual colour pickers. Set <strong>Form Background</strong> to <strong style="font-family:monospace">#FDF9F3</strong>.</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body">Set <strong>Button Color</strong> to <strong style="font-family:monospace">#C9963A</strong>. Set button text to <strong style="font-family:monospace">#FFFFFF</strong>. Change button label to <strong>"Reserve My Spot →"</strong>.</div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-body">Set <strong>Selected / Active element colour</strong> (radio buttons, checkboxes tick) to <strong style="font-family:monospace">#C9963A</strong>.</div></div>
+      <div class="step"><div class="step-num">6</div><div class="step-body">Set <strong>Input border focus colour</strong> to <strong style="font-family:monospace">#C9963A</strong>. Set label text to <strong style="font-family:monospace">#1A3028</strong>.</div></div>
+    </div>
+
+    <div class="section-lbl">Part 3 — Style the Header</div>
+    <div class="card">
+      <div class="step"><div class="step-num">7</div><div class="step-body">Click the <strong>Header</strong> section at the top of your form. Set background colour to <strong style="font-family:monospace">#1A3028</strong>. Set header text colour to <strong style="font-family:monospace">#FAF6EE</strong>.</div></div>
+      <div class="step"><div class="step-num">8</div><div class="step-body">Update the header <strong>Title</strong> to match the form's purpose (see "All 4 Forms" tab for exact titles). Add a short subtitle in the description field.</div></div>
+      <div class="step"><div class="step-num">9</div><div class="step-body">Add a <strong>Scripture verse</strong> as a Text element just below the header — using the gold border-left style via Custom CSS (see CSS tab). Each form has its own verse.</div></div>
+    </div>
+
+    <div class="section-lbl">Part 4 — Set Typography</div>
+    <div class="card">
+      <div class="step"><div class="step-num">10</div><div class="step-body">In Form Designer → <strong>Font</strong> section: set Question Font to <strong>DM Sans</strong>. If DM Sans isn't available in Jotform's list, choose <strong>Lato</strong> as the closest match.</div></div>
+      <div class="step"><div class="step-num">11</div><div class="step-body">Set question label <strong>font size to 14px</strong>, weight to <strong>Medium (500)</strong>. Set input text size to <strong>14px</strong>, weight <strong>Regular (400)</strong>.</div></div>
+    </div>
+
+    <div class="section-lbl">Part 5 — Save and Repeat</div>
+    <div class="card">
+      <div class="step"><div class="step-num">12</div><div class="step-body">Click <strong>Save</strong> in the top right. Preview the form on mobile. Then go back to My Forms and repeat steps 1–11 for the remaining 3 forms.</div></div>
+      <div class="step"><div class="step-num">13</div><div class="step-body"><strong>Pro move:</strong> After styling the first form, Jotform lets you save it as a Theme. Click <strong>Save as Theme</strong> in the designer panel, name it "Thrive Brand", then apply it to all other forms in one click.</div></div>
+    </div>
+  </div>
+
+  <!-- CSS -->
+  <div id="p-css" class="panel">
+    <div class="hero-bar" data-bg="CSS">
+      <div class="hb-eyebrow">Advanced · Custom CSS</div>
+      <div class="hb-title">Pixel-perfect <em>Thrive styling</em></div>
+      <div class="hb-sub">Paste this into Jotform's Custom CSS box (Form Designer → Advanced → Custom CSS) to get exact landing page styling that Jotform's colour pickers alone can't achieve.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">How to add Custom CSS in Jotform</div>
+      <div class="card-body">Form Builder → <strong>Paint Brush icon</strong> → scroll to the bottom → <strong>"Advanced"</strong> section → <strong>"Custom CSS"</strong> text area → paste the code below → Save.</div>
+    </div>
+
+    <div class="css-block"><span class="css-comment">/* ── Thrive Brand CSS for Jotform ── */</span>
+
+<span class="css-comment">/* Page background */</span>
+<span class="css-selector">.jotform-form</span> {
+  <span class="css-prop">background-color</span>: <span class="css-val">#FDF9F3</span> !important;
+  <span class="css-prop">font-family</span>: <span class="css-val">'DM Sans', 'Lato', sans-serif</span> !important;
+}
+
+<span class="css-comment">/* Form header */</span>
+<span class="css-selector">.form-header-group</span> {
+  <span class="css-prop">background</span>: <span class="css-val">#1A3028</span> !important;
+  <span class="css-prop">border-radius</span>: <span class="css-val">14px 14px 0 0</span> !important;
+  <span class="css-prop">padding</span>: <span class="css-val">24px 28px</span> !important;
+}
+
+<span class="css-comment">/* Header title */</span>
+<span class="css-selector">.form-header-group .form-header</span> {
+  <span class="css-prop">color</span>: <span class="css-val">#FAF6EE</span> !important;
+  <span class="css-prop">font-family</span>: <span class="css-val">'Playfair Display', Georgia, serif</span> !important;
+  <span class="css-prop">font-weight</span>: <span class="css-val">900</span> !important;
+  <span class="css-prop">font-size</span>: <span class="css-val">24px</span> !important;
+}
+
+<span class="css-comment">/* Header subtitle */</span>
+<span class="css-selector">.form-header-group .form-subHeader</span> {
+  <span class="css-prop">color</span>: <span class="css-val">rgba(250,246,238,0.65)</span> !important;
+  <span class="css-prop">font-weight</span>: <span class="css-val">300</span> !important;
+}
+
+<span class="css-comment">/* Question labels */</span>
+<span class="css-selector">.form-label</span> {
+  <span class="css-prop">color</span>: <span class="css-val">#1A3028</span> !important;
+  <span class="css-prop">font-weight</span>: <span class="css-val">500</span> !important;
+  <span class="css-prop">font-size</span>: <span class="css-val">14px</span> !important;
+}
+
+<span class="css-comment">/* Input fields */</span>
+<span class="css-selector">.form-input, .form-textarea, .form-dropdown</span> {
+  <span class="css-prop">border</span>: <span class="css-val">1px solid rgba(26,48,40,0.15)</span> !important;
+  <span class="css-prop">border-radius</span>: <span class="css-val">8px</span> !important;
+  <span class="css-prop">background</span>: <span class="css-val">#FFFFFF</span> !important;
+  <span class="css-prop">color</span>: <span class="css-val">#1A3028</span> !important;
+  <span class="css-prop">font-size</span>: <span class="css-val">14px</span> !important;
+  <span class="css-prop">padding</span>: <span class="css-val">10px 14px</span> !important;
+}
+
+<span class="css-comment">/* Input focus ring — gold */</span>
+<span class="css-selector">.form-input:focus, .form-textarea:focus</span> {
+  <span class="css-prop">border-color</span>: <span class="css-val">#C9963A</span> !important;
+  <span class="css-prop">box-shadow</span>: <span class="css-val">0 0 0 3px rgba(201,150,58,0.12)</span> !important;
+  <span class="css-prop">outline</span>: <span class="css-val">none</span> !important;
+}
+
+<span class="css-comment">/* Radio / checkbox accent */</span>
+<span class="css-selector">.form-radio-item input:checked + label::before,
+.form-checkbox-item input:checked + label::before</span> {
+  <span class="css-prop">background-color</span>: <span class="css-val">#C9963A</span> !important;
+  <span class="css-prop">border-color</span>: <span class="css-val">#C9963A</span> !important;
+}
+
+<span class="css-comment">/* Submit button */</span>
+<span class="css-selector">.form-submit-button, button[type="submit"]</span> {
+  <span class="css-prop">background</span>: <span class="css-val">#C9963A</span> !important;
+  <span class="css-prop">color</span>: <span class="css-val">#FFFFFF</span> !important;
+  <span class="css-prop">border</span>: <span class="css-val">none</span> !important;
+  <span class="css-prop">border-radius</span>: <span class="css-val">99px</span> !important;
+  <span class="css-prop">font-weight</span>: <span class="css-val">500</span> !important;
+  <span class="css-prop">letter-spacing</span>: <span class="css-val">0.02em</span> !important;
+  <span class="css-prop">padding</span>: <span class="css-val">14px 32px</span> !important;
+  <span class="css-prop">transition</span>: <span class="css-val">background 0.2s</span> !important;
+}
+<span class="css-selector">.form-submit-button:hover</span> {
+  <span class="css-prop">background</span>: <span class="css-val">#b0812e</span> !important;
+}
+
+<span class="css-comment">/* Scripture verse block (add as Text element) */</span>
+<span class="css-selector">.supernova-form .form-section-content p</span> {
+  <span class="css-prop">border-left</span>: <span class="css-val">2px solid #F0C97A</span> !important;
+  <span class="css-prop">padding-left</span>: <span class="css-val">12px</span> !important;
+  <span class="css-prop">font-style</span>: <span class="css-val">italic</span> !important;
+  <span class="css-prop">color</span>: <span class="css-val">#C9963A</span> !important;
+  <span class="css-prop">font-size</span>: <span class="css-val">13px</span> !important;
+  <span class="css-prop">line-height</span>: <span class="css-val">1.6</span> !important;
+}</div>
+
+    <div class="tip-box">Paste this CSS once into your first form, save it as a Jotform Theme named "Thrive Brand", then apply that saved theme to the remaining 3 forms — no need to re-paste the CSS each time.</div>
+  </div>
+
+  <!-- ALL 4 FORMS -->
+  <div id="p-forms" class="panel">
+    <div class="hero-bar" data-bg="FORMS">
+      <div class="hb-eyebrow">All 4 forms · Header copy</div>
+      <div class="hb-title">Exact titles, subtitles<br><em>& verses per form</em></div>
+      <div class="hb-sub">Use these exact words for each form's header. They match the landing page tone and the 3-day framework — so every touchpoint feels like Thrive.</div>
+    </div>
+
+    <div class="section-lbl">Form 1 · Registration</div>
+    <div class="card">
+      <div class="setting-row"><span class="setting-name">Form title</span><span class="setting-val">You Were Made to Thrive.</span></div>
+      <div class="setting-row"><span class="setting-name">Subtitle</span><span class="setting-val">Secure your spot for the 3-day Identity & Purpose Seminar · Ages 13–25</span></div>
+      <div class="setting-row"><span class="setting-name">Scripture verse (text block)</span><span class="setting-val">"For we are God's handiwork, created in Christ Jesus to do good works." — Ephesians 2:10</span></div>
+      <div class="setting-row"><span class="setting-name">Submit button text</span><span class="setting-val">Reserve My Spot →</span></div>
+    </div>
+
+    <div class="section-lbl">Form 2 · Pre-Session Questionnaire</div>
+    <div class="card">
+      <div class="setting-row"><span class="setting-name">Form title</span><span class="setting-val">Before We Begin — A Few Questions.</span></div>
+      <div class="setting-row"><span class="setting-name">Subtitle</span><span class="setting-val">Help us personalise your Thrive experience. This takes 3 minutes.</span></div>
+      <div class="setting-row"><span class="setting-name">Scripture verse (text block)</span><span class="setting-val">"I praise you because I am fearfully and wonderfully made." — Psalm 139:14</span></div>
+      <div class="setting-row"><span class="setting-name">Submit button text</span><span class="setting-val">I'm Ready →</span></div>
+    </div>
+
+    <div class="section-lbl">Form 3 · Post-Session Reflection</div>
+    <div class="card">
+      <div class="setting-row"><span class="setting-name">Form title</span><span class="setting-val">You Did It. Now Let It Land.</span></div>
+      <div class="setting-row"><span class="setting-name">Subtitle</span><span class="setting-val">Share what happened for you this weekend. This is for you as much as it is for us.</span></div>
+      <div class="setting-row"><span class="setting-name">Scripture verse (text block)</span><span class="setting-val">"He who began a good work in you will carry it on to completion." — Philippians 1:6</span></div>
+      <div class="setting-row"><span class="setting-name">Submit button text</span><span class="setting-val">Submit My Reflection →</span></div>
+    </div>
+
+    <div class="section-lbl">Form 4 · Final Feedback (Day 30)</div>
+    <div class="card">
+      <div class="setting-row"><span class="setting-name">Form title</span><span class="setting-val">One Month Later — How Are You Really?</span></div>
+      <div class="setting-row"><span class="setting-name">Subtitle</span><span class="setting-val">30 days ago you made a choice. Help us understand what's changed.</span></div>
+      <div class="setting-row"><span class="setting-name">Scripture verse (text block)</span><span class="setting-val">"Let us not become weary in doing good, for at the proper time we will reap a harvest." — Galatians 6:9</span></div>
+      <div class="setting-row"><span class="setting-name">Submit button text</span><span class="setting-val">Share My Story →</span></div>
+    </div>
+
+    <div class="section-lbl">Your form links</div>
+    <div class="card">
+      <div class="form-link-row"><span class="fl-name">Registration</span><span class="fl-url">form.jotform.com/260915543340049</span></div>
+      <div class="form-link-row"><span class="fl-name">Pre-Session</span><span class="fl-url">form.jotform.com/260950675933062</span></div>
+      <div class="form-link-row"><span class="fl-name">Post-Session Reflection</span><span class="fl-url">form.jotform.com/260950682377062</span></div>
+      <div class="form-link-row"><span class="fl-name">Final Feedback</span><span class="fl-url">form.jotform.com/260915830439057</span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('p-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
