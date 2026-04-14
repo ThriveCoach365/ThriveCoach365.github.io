@@ -618,7 +618,7 @@
       <div class="pricing-period">Full 3-day access · Price rises at 30 spots</div>
     </div>
     <div class="pricing-body">
-      <div class="early-badge">🕐 Early bird pricing ends soon — save KSh 100 when you register this week.</div>
+      <div class="early-badge">🕐 Make a commitment with yourself with Ksh 200 if you register this week. </div>
       <ul class="pricing-includes">
         <li><span class="check">✓</span> 3 live online sessions (1–2 hrs each)</li>
         <li><span class="check">✓</span> Daily reflection workbooks (PDF, yours to keep)</li>
@@ -626,26 +626,24 @@
         <li><span class="check">✓</span> Post-seminar follow-up email series</li>
         <li><span class="check">✓</span> Facilitator Q&A each day</li>
       </ul>   
-  <script src="https://cdn.jotfor.ms/s/static/latest/static/feedback2.js"></script>
-  <script>
-    var componentID = new JotformFeedback({
-  type: false,
-  width: 700,
-  height: 500,
-      
-  fontColor: "#FFFFFF",
-  background: "#F59202",
-  isCardForm: false,
-  formId: "260990117584059"
-  ,
-      buttonText: "Reserve My Spot",
-      buttonSide: "right",
-      buttonAlign: "center",
-      base: "https://form.jotform.com/",
-    }).componentID;
-  </script>
-  <script src='https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js'></script>
-  <script>window.jotformEmbedHandler("iframe[id='" + componentID + "_iframe']", "https://form.jotform.com/")</script>
+ <!-- Place this inside your pricing section, after the early-badge div -->
+<div style="margin-top: 20px; border-radius: 12px; overflow: hidden;">
+  <iframe
+    id="thrive-registration-form"
+    src="https://form.jotform.com/260990117584059"
+    style="width:100%; min-height:600px; border:none; display:block;"
+    scrolling="no"
+    allowfullscreen>
+  </iframe>
+</div>
+
+<script src='https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js'></script>
+<script>
+  window.jotformEmbedHandler(
+    "iframe[id='thrive-registration-form']",
+    "https://form.jotform.com/"
+  )
+</script>
     </div>
   </div>
 </section>
