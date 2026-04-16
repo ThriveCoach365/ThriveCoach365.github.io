@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Refund Policy - Identity & Purpose Seminar</title>
+<style>
+  body {
+    background-color: #FDF9F3 !important;
+  font-family: 'DM Sans', 'Lato', sans-serif !important;
+        margin: 20px;
+    line-height: 1.6;
+    color: #333;
+  }
+  h1 {
+    color: #1A3028;
+  }
+  h2 {
+    color: #1A3028;
+    margin-top: 1em;
+  }
+  p {
+    margin-bottom: 1em;
+  }
+  .section {
+    margin-bottom: 2em;
+  }
+</style>
+</head>
+<body>
+
+<h1>Refund Policy for the Identity & Purpose Seminar</h1>
+
+<div class="section">
+  <p>At Thrive, we believe that every young person’s journey to discover their purpose is precious and unique. We are committed to creating a safe, supportive space for you to grow, learn, and be inspired. Because of this, we want to be transparent and understanding about our refund policy.</p>
+</div>
+
+<h2>Our Commitment to You</h2>
+<div class="section">
+  <p>We understand that plans can change and sometimes circumstances shift unexpectedly. If you need to request a refund, please reach out to us as soon as possible — we’re here to listen and support you through the process.</p>
+</div>
+
+<h2>Refund Details</h2>
+<div class="section">
+  <ul>
+    <li><strong>Full Refund:</strong> If you contact us at least 14 days before the seminar start date, you will receive a full refund of your registration fee.</li>
+    <li><strong>Partial Refund:</strong> Requests made between 7 to 13 days before the event will be eligible for a 50% refund.</li>
+    <li><strong>No Refunds:</strong> Unfortunately, we are unable to process refunds for cancellations made less than 7 days before the seminar begins. We encourage you to consider your commitment carefully when registering.</li>
+  </ul>
+</div>
+
+<h2>Exceptions</h2>
+<div class="section">
+  <p>We understand that life can be unpredictable. If you experience a serious emergency or unforeseen circumstance, please contact us directly. We are open to discussing alternative options, including transferring your registration to another participant or future events.</p>
+</div>
+
+<h2>Our Heart</h2>
+<div class="section">
+  <p>We are grateful for your trust and excited about the journey ahead. Remember, your purpose is already unfolding — and even if plans change, God’s plan for you remains steadfast, full of hope and promise.</p>
+  <p>If you have any questions or need assistance with your refund request, please reach out to us at <a href="tel:+254717585709">+254 717 585709</a> or <a href="mailto:teensmentor365@gmail.com">teensmentor365@gmail.com</a>.</p>
+  <p>With faith and love,<br/>Thrive Team</p>
+</div>
+
+</body>
+</html>
