@@ -647,6 +647,13 @@
   <button class="btn-primary" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Reserve My Spot →</button>
   <div class="verse-footer">"For we are God's handiwork, created in Christ Jesus to do good works." — Ephesians 2:10</div>
 </section>
-
+<script>
+  window.addEventListener("message", function(e) {
+    if (e.data === "submissionCompleted" ||
+        (typeof e.data === "object" && e.data.action === "submission-completed")) {
+      document.getElementById("register").scrollIntoView({ behavior: "smooth" });
+    }
+  });
+</script>
 </body>
 </html>
