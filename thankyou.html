@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're in — Thrive</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --gold: #C9963A; --forest: #1A3028; --cream: #FAF6EE; --warm-white: #FDF9F3; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 40px 20px;
+  }
+  .card {
+    background: var(--forest);
+    border-radius: 20px;
+    padding: 48px 40px;
+    max-width: 520px;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .card::before {
+    content: 'THRIVE';
+    position: absolute; font-family: 'Playfair Display', serif;
+    font-size: 120px; font-weight: 900; font-style: italic;
+    color: rgba(255,255,255,.04);
+    top: 50%; left: 50%; transform: translate(-50%,-50%);
+    pointer-events: none; white-space: nowrap;
+  }
+  .icon { font-size: 36px; margin-bottom: 20px; position: relative; }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px; font-weight: 900; font-style: italic;
+    color: #FAF6EE; line-height: 1.2; margin-bottom: 14px;
+    position: relative;
+  }
+  h1 span { color: #F0C97A; }
+  p {
+    font-size: 15px; color: rgba(250,246,238,.65);
+    line-height: 1.75; font-weight: 300; margin-bottom: 10px;
+    position: relative;
+  }
+  .details {
+    background: rgba(201,150,58,.12);
+    border: 1px solid rgba(201,150,58,.25);
+    border-radius: 10px; padding: 14px 18px;
+    margin: 20px 0; text-align: left; position: relative;
+  }
+  .details p { color: rgba(250,246,238,.8); font-size: 13px; margin-bottom: 6px; }
+  .details p:last-child { margin-bottom: 0; }
+  .details strong { color: #F0C97A; font-weight: 500; }
+  .verse {
+    font-size: 12px; font-style: italic;
+    color: rgba(250,246,238,.35); margin-top: 24px;
+    position: relative;
+  }
+  .btn {
+    display: inline-block; margin-top: 24px;
+    background: var(--gold); color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 500;
+    padding: 13px 28px; border-radius: 99px;
+    text-decoration: none; position: relative;
+    transition: background .2s;
+  }
+  .btn:hover { background: #b0812e; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">✦</div>
+    <h1>You're in.<br><span>Welcome to Thrive.</span></h1>
+    <p>Your spot is reserved for the Identity & Purpose Seminar. Check your email — your confirmation and next steps are on their way.</p>
+    <div class="details">
+      <p><strong>Dates:</strong> Tuesday–Thursday, 12–14 May 2026</p>
+      <p><strong>Time:</strong> 1.5 hrs per session · 8:00pm · East African Time</p>
+      <p><strong>Next step:</strong> Complete your Pre-Session Questionnaire (link in your email)</p>
+    </div>
+    <p>In the meantime, check your spam folder if you don't see the confirmation email within a few minutes.</p>
+    <a class="btn" href="https://yourusername.github.io">← Back to Thrive</a>
+    <div class="verse">"For we are God's handiwork, created in Christ Jesus to do good works." — Ephesians 2:10</div>
+  </div>
+</body>
+</html>
