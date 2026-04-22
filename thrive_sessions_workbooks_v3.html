@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thrive — Session Outlines & Workbooks v3</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #C9963A; --gold-light: #F0C97A; --forest: #1A3028; --sage: #2F5243;
+    --cream: #FAF6EE; --warm-white: #FDF9F3; --muted: #8A9E94;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+  body { font-family: var(--font-body); background: var(--warm-white); color: var(--forest); }
+
+  .day-nav { display: flex; gap: 0; border-bottom: 2px solid rgba(26,48,40,.1); padding: 0 24px; position: sticky; top: 0; background: var(--warm-white); z-index: 10; }
+  .day-tab { font-family: var(--font-body); font-size: 13px; font-weight: 500; padding: 14px 18px; border: none; background: transparent; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all .2s; white-space: nowrap; }
+  .day-tab.active { color: var(--forest); border-bottom-color: var(--gold); }
+  .day-tab:hover:not(.active) { color: var(--forest); }
+
+  .day-panel { display: none; padding: 28px 24px 48px; }
+  .day-panel.active { display: block; animation: fadeUp .3s ease both; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+  /* DAY HERO */
+  .day-hero { background: var(--forest); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; position: relative; overflow: hidden; }
+  .day-hero::before { content: attr(data-day); position: absolute; right: -10px; top: -18px; font-family: var(--font-display); font-size: 100px; font-weight: 900; font-style: italic; color: rgba(255,255,255,.04); line-height: 1; pointer-events: none; letter-spacing: -4px; }
+  .day-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 6px; }
+  .day-title-lg { font-family: var(--font-display); font-size: 26px; font-weight: 900; color: var(--cream); line-height: 1.15; margin-bottom: 8px; }
+  .day-title-lg em { font-style: italic; color: var(--gold-light); }
+  .day-itch { font-size: 13px; color: rgba(250,246,238,.75); line-height: 1.6; max-width: 500px; margin-bottom: 8px; font-weight: 300; }
+  .day-resolution { font-size: 13px; font-weight: 500; color: var(--gold-light); line-height: 1.5; max-width: 500px; }
+  .day-verse { font-size: 12px; font-style: italic; color: rgba(250,246,238,.45); line-height: 1.55; max-width: 480px; margin-top: 12px; border-left: 1px solid rgba(201,150,58,.3); padding-left: 12px; }
+  .day-meta { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+  .meta-pill { font-size: 10px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; padding: 4px 10px; border-radius: 99px; border: 1px solid rgba(201,150,58,.3); color: var(--gold-light); }
+  .meta-pill.date { border-color: rgba(255,255,255,.15); color: rgba(250,246,238,.5); }
+
+  /* DAILY PROMISE */
+  .daily-promise { background: rgba(201,150,58,.1); border: 1.5px solid rgba(201,150,58,.3); border-radius: 12px; padding: 16px 18px; margin-bottom: 20px; display: flex; gap: 12px; align-items: flex-start; }
+  .dp-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+  .dp-label { font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+  .dp-promise { font-family: var(--font-display); font-size: 15px; font-weight: 700; font-style: italic; color: var(--forest); line-height: 1.4; margin-bottom: 4px; }
+  .dp-before { font-size: 12px; color: #A32D2D; font-weight: 400; margin-bottom: 2px; }
+  .dp-after { font-size: 12px; color: #2F9E6B; font-weight: 500; }
+
+  /* SECTION LABELS */
+  .section-lbl { font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin: 20px 0 10px; display: flex; align-items: center; gap: 6px; }
+  .section-lbl::before { content: ''; display: block; width: 12px; height: 1px; background: var(--gold); }
+
+  /* BLOCKS */
+  .block-card { background: var(--cream); border: 1px solid rgba(201,150,58,.15); border-radius: 13px; padding: 16px 20px; margin-bottom: 10px; }
+  .block-card.highlight { background: var(--forest); border-color: var(--forest); }
+  .block-card.itch { background: rgba(163,45,45,.06); border: 1px solid rgba(163,45,45,.15); }
+  .block-time { font-size: 10px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+  .block-card.highlight .block-time { color: rgba(240,201,122,.7); }
+  .block-card.itch .block-time { color: #A32D2D; opacity: .7; }
+  .block-title { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--forest); margin-bottom: 7px; line-height: 1.3; }
+  .block-card.highlight .block-title { color: var(--cream); }
+  .block-card.itch .block-title { color: #791F1F; }
+  .block-body { font-size: 13px; color: #4a6055; line-height: 1.7; font-weight: 300; }
+  .block-card.highlight .block-body { color: rgba(250,246,238,.75); }
+  .block-card.itch .block-body { color: #6b2a2a; }
+  .block-list { list-style: none; margin-top: 8px; display: flex; flex-direction: column; gap: 7px; }
+  .block-list li { font-size: 13px; color: #3a5246; display: flex; gap: 8px; align-items: flex-start; line-height: 1.5; }
+  .block-list li::before { content: '–'; color: var(--gold); flex-shrink: 0; margin-top: 1px; font-weight: 500; }
+  .block-card.highlight .block-list li { color: rgba(250,246,238,.8); }
+  .block-card.highlight .block-list li::before { color: var(--gold-light); }
+  .block-card.itch .block-list li { color: #791F1F; }
+  .block-card.itch .block-list li::before { color: #A32D2D; }
+  .rhythm-badge { display: inline-flex; align-items: center; gap: 5px; background: rgba(47,82,67,.08); border: 1px solid rgba(47,82,67,.18); border-radius: 6px; padding: 4px 10px; margin-top: 8px; font-size: 11px; font-weight: 500; color: var(--sage); }
+
+  .divider { height: 1px; background: rgba(201,150,58,.1); margin: 22px 0; }
+
+  /* WORKBOOK */
+  .wb-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+  .wb-badge { background: rgba(201,150,58,.12); border: 1px solid rgba(201,150,58,.25); border-radius: 8px; padding: 5px 12px; font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: #8a6020; }
+  .wb-deliverable { font-size: 12px; color: var(--muted); font-style: italic; }
+
+  .prompt-card { background: var(--warm-white); border: 1px solid rgba(26,48,40,.1); border-radius: 13px; padding: 16px 20px; margin-bottom: 12px; }
+  .prompt-card.key { border-color: rgba(201,150,58,.35); background: var(--cream); }
+  .prompt-num { font-family: var(--font-display); font-size: 20px; font-weight: 900; font-style: italic; color: rgba(201,150,58,.3); line-height: 1; margin-bottom: 6px; }
+  .prompt-card.key .prompt-num { color: rgba(201,150,58,.5); }
+  .prompt-type { font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+  .prompt-itch { font-size: 11px; font-weight: 500; color: #A32D2D; background: rgba(163,45,45,.06); border-radius: 4px; padding: 2px 8px; display: inline-block; margin-bottom: 6px; }
+  .prompt-q { font-size: 15px; font-weight: 500; color: var(--forest); line-height: 1.5; margin-bottom: 7px; }
+  .prompt-hint { font-size: 12px; color: var(--muted); font-style: italic; line-height: 1.6; margin-bottom: 4px; }
+  .prompt-shift { font-size: 12px; font-weight: 500; color: #2F9E6B; margin-top: 6px; }
+  .write-lines { margin-top: 10px; border-top: 1px solid rgba(26,48,40,.07); padding-top: 10px; display: flex; flex-direction: column; gap: 9px; }
+  .write-line { height: 1px; background: rgba(26,48,40,.09); border-radius: 1px; }
+
+  /* SCRIPTURE */
+  .scripture-anchor { background: var(--forest); border-radius: 13px; padding: 18px 20px; margin-top: 18px; display: flex; gap: 12px; align-items: flex-start; }
+  .anchor-icon { width: 32px; height: 32px; border-radius: 50%; background: rgba(201,150,58,.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px; }
+  .anchor-label { font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 4px; }
+  .anchor-verse { font-size: 13px; font-style: italic; color: var(--cream); line-height: 1.6; }
+  .anchor-ref { font-size: 11px; color: rgba(240,201,122,.65); margin-top: 4px; font-weight: 500; }
+
+  /* CLOSING */
+  .closing-challenge { background: rgba(201,150,58,.09); border: 1px solid rgba(201,150,58,.22); border-radius: 13px; padding: 16px 20px; margin-top: 16px; }
+  .cc-label { font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 7px; }
+  .cc-text { font-size: 14px; color: var(--forest); font-weight: 500; line-height: 1.6; margin-bottom: 5px; }
+  .cc-sub { font-size: 12px; color: #5a7060; font-weight: 300; line-height: 1.65; }
+
+  /* WHAT COMES NEXT */
+  .next-block { background: var(--sage); border-radius: 13px; padding: 18px 20px; margin-top: 16px; }
+  .nb-label { font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 8px; }
+  .nb-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .nb-list li { font-size: 13px; color: rgba(250,246,238,.85); display: flex; gap: 8px; align-items: flex-start; line-height: 1.5; }
+  .nb-list li::before { content: '→'; color: var(--gold-light); flex-shrink: 0; font-weight: 500; }
+
+  /* CAPABILITY SHIFT SUMMARY */
+  .shift-box { border-radius: 13px; overflow: hidden; margin-top: 18px; border: 1px solid rgba(26,48,40,.1); }
+  .shift-before { background: rgba(163,45,45,.06); padding: 12px 16px; border-bottom: 1px solid rgba(26,48,40,.08); }
+  .shift-after { background: rgba(47,158,107,.06); padding: 12px 16px; }
+  .shift-label { font-size: 10px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 4px; }
+  .shift-before .shift-label { color: #A32D2D; }
+  .shift-after .shift-label { color: #2F9E6B; }
+  .shift-text { font-size: 13px; line-height: 1.6; font-weight: 400; }
+  .shift-before .shift-text { color: #791F1F; }
+  .shift-after .shift-text { color: #1a5c35; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<div>
+  <div class="day-nav">
+    <button class="day-tab active" onclick="showDay(1,this)">Day 1 · Who Am I?</button>
+    <button class="day-tab" onclick="showDay(2,this)">Day 2 · What Do I Value?</button>
+    <button class="day-tab" onclick="showDay(3,this)">Day 3 · Where Am I Going?</button>
+  </div>
+
+  <!-- ══════════════════════════════
+       DAY 1 — WHO AM I?
+  ══════════════════════════════ -->
+  <div id="day-1" class="day-panel active">
+
+    <div class="day-hero" data-day="01">
+      <div class="day-eyebrow">Day 1 · Tuesday 12 May 2026 · EAT</div>
+      <div class="day-title-lg">You've been living by labels<br>that were never <em>yours.</em></div>
+      <div class="day-itch">The itch: you can describe what you do, where you study, and what people say about you — but strip all of that away and you're not sure what's underneath. You've been performing an identity that was handed to you.</div>
+      <div class="day-resolution">After today: you can say who you are in your own words — without borrowing anyone else's description of you.</div>
+      <div class="day-verse">"I praise you because I am fearfully and wonderfully made; your works are wonderful, I know that full well." — Psalm 139:14</div>
+      <div class="day-meta">
+        <span class="meta-pill date">Tue 12 May 2026</span>
+        <span class="meta-pill">1.5 hrs · EAT</span>
+        <span class="meta-pill">Live + Breakout</span>
+        <span class="meta-pill">Max 20 mins teaching at a stretch</span>
+      </div>
+    </div>
+
+    <div class="daily-promise">
+      <div class="dp-icon">✦</div>
+      <div>
+        <div class="dp-label">Open with this — say it out loud in the first 2 minutes</div>
+        <div class="dp-promise">"By the end of today, you will be able to say who you are — in your own words, not borrowed ones."</div>
+        <div class="dp-before">Before today: you describe yourself by your roles, achievements, or what others say about you.</div>
+        <div class="dp-after">After today: you have a written identity statement that comes from inside, not outside.</div>
+      </div>
+    </div>
+
+    <div class="section-lbl">Session outline · 1.5 hrs</div>
+
+    <div class="block-card itch">
+      <div class="block-time">0:00 – 0:10 · Opening</div>
+      <div class="block-title">Name the itch — before anything else</div>
+      <div class="block-body">Open with a short personal story: a moment when you were asked "who are you?" and didn't have a real answer — just a list of what you do. Invite the group: "If I stripped away your name, your course, your job, your family role — what's left?" Let that sit for 10 seconds. Don't answer it yet. State the daily promise out loud.</div>
+      <div class="rhythm-badge">⏱ 10 mins · Name the problem before offering the solution</div>
+    </div>
+
+    <div class="block-card highlight">
+      <div class="block-time">0:10 – 0:30 · Teaching</div>
+      <div class="block-title">The labels you've been wearing</div>
+      <div class="block-body">Core teaching: most people have an identity that was built by others — parents, teachers, peers, social media, wounds. The problem isn't that you have labels. It's that you've never stopped to decide which ones are true.</div>
+      <ul class="block-list">
+        <li>The difference between identity and reputation — one is built by you, one is built by others</li>
+        <li>How the labels you carry quietly shape every decision you make</li>
+        <li>The "false self" — the version of you performing for an audience that isn't watching anymore</li>
+        <li>Psalm 139: God's description of you predates every label anyone else gave you</li>
+        <li>The one question that cuts through everything: who are you when no one is watching?</li>
+      </ul>
+      <div class="rhythm-badge">⏱ 20 mins max — then move immediately to the workbook</div>
+    </div>
+
+    <div class="block-card">
+      <div class="block-time">0:30 – 0:55 · Workbook — Solo</div>
+      <div class="block-title">Workbook prompts 1 to 4 — solo writing time</div>
+      <div class="block-body">Participants open Day 1 workbook. Quiet solo writing. Soft background music. Facilitator circulates (virtually) — available, not interrupting. This is where the real work happens. Do not cut it short.</div>
+      <ul class="block-list">
+        <li>Prompt 1: What labels have you been carrying that don't fit?</li>
+        <li>Prompt 2: When did you last feel most like yourself — what were you doing?</li>
+        <li>Prompt 3: What do you do effortlessly that others find hard?</li>
+        <li>Prompt 4: If God described you based on how He made you — what would He say?</li>
+      </ul>
+      <div class="rhythm-badge">⏱ 25 mins · The most important time block of Day 1</div>
+    </div>
+
+    <div class="block-card">
+      <div class="block-time">0:55 – 1:15 · Breakout</div>
+      <div class="block-title">Small groups — one label you're putting down</div>
+      <div class="block-body">Groups of 3–4. Breakout prompt: "Share one label you've been given that you're ready to put down — and one thing from your writing that feels more true." No pressure to share everything. Groups report one insight back to the main room.</div>
+      <ul class="block-list">
+        <li>Facilitator affirms themes — names what keeps coming up across the room</li>
+        <li>Remind: different people, same itch. No one is alone in this.</li>
+      </ul>
+      <div class="rhythm-badge">⏱ 20 mins · Community is the context, not the content</div>
+    </div>
+
+    <div class="block-card highlight">
+      <div class="block-time">1:15 – 1:30 · Deliverable + Close</div>
+      <div class="block-title">Write it. Say it. Own it.</div>
+      <div class="block-body">Participants complete Prompt 5 — their identity statement. Then invite anyone willing to read one sentence out loud in the chat or on camera. Facilitator responds to each one: not to evaluate, but to reflect back what they heard. Close with the daily promise fulfilled out loud: "You came in with labels that don't fit. You're leaving with words that are yours."</div>
+      <ul class="block-list">
+        <li>Read the Psalm 139:14 anchor together</li>
+        <li>Assign overnight challenge</li>
+        <li>Preview Day 2: "Tomorrow we find out what you stand for."</li>
+      </ul>
+      <div class="rhythm-badge">⏱ 15 mins · End on the deliverable — not on feeling</div>
+    </div>
+
+    <div class="shift-box">
+      <div class="shift-before">
+        <div class="shift-label">Before Day 1</div>
+        <div class="shift-text">You describe yourself by listing what you do — your course, your job, your family role. Strip those away and you're not sure what's left.</div>
+      </div>
+      <div class="shift-after">
+        <div class="shift-label">After Day 1</div>
+        <div class="shift-text">You can say who you are in one written sentence that comes from inside you — not from what others have said or what you've achieved.</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- WORKBOOK D1 -->
+    <div class="wb-header">
+      <div class="wb-badge">Day 1 Workbook · Identity</div>
+      <span class="wb-deliverable">Deliverable: your written identity statement</span>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-num">01</div>
+      <div class="prompt-itch">The itch</div>
+      <div class="prompt-type">Labels inventory</div>
+      <div class="prompt-q">What are the labels others have given you — at home, at school, online, in relationships — that you've quietly started to believe about yourself?</div>
+      <div class="prompt-hint">Write them honestly. You're not agreeing with them — you're naming what's been living rent-free in your head. Naming a label is the first step to deciding whether it stays.</div>
+      <div class="write-lines"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-num">02</div>
+      <div class="prompt-type">Your most alive moment</div>
+      <div class="prompt-q">Describe a specific moment when you felt most like yourself — most free, most present, most alive. Where were you? What were you doing? Who were you with?</div>
+      <div class="prompt-hint">Don't overthink it. It can be small. A conversation, a project, a place. The moment matters more than the size of it. This is a clue about who you actually are.</div>
+      <div class="write-lines"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-num">03</div>
+      <div class="prompt-type">Your effortless strengths</div>
+      <div class="prompt-q">List 3 things you do that feel natural — things that come easily to you even when they're hard work for others. What do people come to you for? What do you lose track of time doing?</div>
+      <div class="prompt-hint">Strengths are not the same as skills. A skill is learned. A strength is wired in. You've had these since before anyone told you they were valuable.</div>
+      <div class="write-lines"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-num">04</div>
+      <div class="prompt-type">God's view of you</div>
+      <div class="prompt-q">Read Psalm 139:13–16 slowly — once for information, once to let it speak. Then write: if God described you to someone based on how He made you — not your mistakes, not your highlights — what do you think He'd say?</div>
+      <div class="prompt-hint">This isn't a theology exam. It's a permission slip. You are allowed to see yourself through kinder, truer eyes than the world has given you.</div>
+      <div class="write-lines"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="prompt-card key">
+      <div class="prompt-num">05</div>
+      <div class="prompt-type">Day 1 Deliverable — Identity Statement</div>
+      <div class="prompt-q">Complete this in your own words: "I am someone who ____________. I was made to ____________. The truth about me — beyond what others have said — is ____________."</div>
+      <div class="prompt-hint">This is your first draft. It doesn't need to be perfect. It needs to be honest. You will build on this on Day 3.</div>
+      <div class="prompt-shift">→ After writing this, you can say who you are without borrowing anyone else's words.</div>
+      <div class="write-lines"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="scripture-anchor">
+      <div class="anchor-icon">✦</div>
+      <div>
+        <div class="anchor-label">Scripture anchor — read this before Prompt 4</div>
+        <div class="anchor-verse">"You made all the delicate, inner parts of my body and knit me together in my mother's womb... Every day of my life was recorded in your book. Every moment was laid out before a single day had passed."</div>
+        <div class="anchor-ref">Psalm 139:13, 16 (NLT) — Your identity was established before any label was ever given to you.</div>
+      </div>
+    </div>
+
+    <div class="closing-challenge">
+      <div class="cc-label">Overnight challenge</div>
+      <div class="cc-text">Write "I AM ___________" somewhere you will see it first thing tomorrow.</div>
+      <div class="cc-sub">Your mirror. Your phone lock screen. A sticky note on your door. Fill in the blank with something true about you that has nothing to do with what you've achieved or what others have said. This is practice — saying it to yourself before you say it to anyone else.</div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════
+       DAY 2 — WHAT DO I VALUE?
+  ══════════════════════════════ -->
+  <div id="day-2" class="day-panel">
+
+    <div class="day-hero" data-day="02">
+      <div class="day-eyebrow">Day 2 · Wednesday 13 May 2026 · EAT</div>
+      <div class="day-title-lg">You've been deciding without knowing<br>what you actually <em>stand for.</em></div>
+      <div class="day-itch">The itch: you keep ending up in commitments, relationships, and situations that don't feel right — but you said yes anyway. Not because you're weak. Because you never stopped to name what you're actually protecting when you say no.</div>
+      <div class="day-resolution">After today: you can make decisions from the inside out — because you know what you stand for and why.</div>
+      <div class="day-verse">"Guard your heart above all else, for it determines the course of your life." — Proverbs 4:23</div>
+      <div class="day-meta">
+        <span class="meta-pill date">Wed 13 May 2026</span>
+        <span class="meta-pill">1.5 hrs · EAT</span>
+        <span class="meta-pill">Values Mapping</span>
+        <span class="meta-pill">Peer Breakout</span>
+      </div>
+    </div>
+
+    <div class="daily-promise">
+      <div class="dp-icon">◈</div>
+      <div>
+        <div class="dp-label">Open with this — say it out loud in the first 2 minutes</div>
+        <div class="dp-promise">"By the end of today, you will know what you actually stand for — and you'll be able to say no to the wrong things without guilt."</div>
+        <div class="dp-before">Before today: you make decisions based on what people expect, what's easiest, or what you've always done.</div>
+        <div class="dp-after">After today: you have your top 5 values named — and a decision filter you can actually use.</div>
+      </div>
+    </div>
+
+    <div class="section-lbl">Session outline · 1.5 hrs</div>
+
+    <div class="block-card itch">
+      <div class="block-time">0:00 – 0:08 · Opening</div>
+      <div class="block-title">Check-in and name the itch for Day 2</div>
+      <div class="block-body">One word for how they woke up. Invite 2–3 to share their overnight challenge from Day 1. Then introduce the Day 2 itch directly: "Today we're looking at why you keep ending up in the wrong room. Not because you chose badly — but because you were deciding without knowing what you were deciding from."</div>
+      <div class="rhythm-badge">⏱ 8 mins · Fast opening, get to the teaching</div>
+    </div>
+
+    <div class="block-card highlight">
+      <div class="block-time">0:08 – 0:28 · Teaching</div>
+      <div class="block-title">The beliefs quietly running your life</div>
+      <div class="block-body">Core teaching: everyone operates on values — but most people's values are inherited, not chosen. They came from parents, culture, wounds, and habit. And inherited values don't protect you — they just run in the background, making decisions before you consciously do.</div>
+      <ul class="block-list">
+        <li>Values are not preferences — they're the beliefs you'd sacrifice something to protect</li>
+        <li>Your values are revealed by your decisions, not your declarations</li>
+        <li>The cost of living by someone else's values: you end up somewhere you didn't choose</li>
+        <li>Daniel 1:8 — he knew what he stood for before the pressure came. That's the goal.</li>
+        <li>What it looks like to make a decision that's actually yours</li>
+      </ul>
+      <div class="rhythm-badge">⏱ 20 mins max — then straight into the mapping</div>
+    </div>
+
+    <div class="block-card">
+      <div class="block-time">0:28 – 0:55 · Workbook — Solo</div>
+      <div class="block-title">Values mapping — prompts 1 to 3</div>
+      <div class="block-body">Facilitator walks through the values inventory process live — 30 values on the page, circle all that resonate, eliminate to 10, name your top 5. Then participants work through prompts 2 and 3 — testing their values against real decisions they've made.</div>
+      <ul class="block-list">
+        <li>Step 1: Circle every value that resonates — no filter, fast pass</li>
+        <li>Step 2: Eliminate to 10. Then narrow to your top 5. Write why each one matters.</li>
+        <li>Prompt 2: For your #1 value — name a moment you lived it out even when it was hard</li>
+        <li>Prompt 3: Name a recent decision that felt wrong. Which value did it violate?</li>
+      </ul>
+      <div class="rhythm-badge">⏱ 27 mins · This is the core work of Day 2 — protect it</div>
+    </div>
+
+    <div class="block-card">
+      <div class="block-time">0:55 – 1:15 · Peer Breakout</div>
+      <div class="block-title">What you stand for — shared out loud</div>
+      <div class="block-body">Groups of 3–4. Each person shares their top 3 values and one story that proves they're real — a moment they chose or defended that value, or felt devastated when it was violated. Breakout prompt: "Tell us about a time you compromised a value. What did it cost you?"</div>
+      <ul class="block-list">
+        <li>Different values aren't wrong — they're a design feature. Note where they differ.</li>
+        <li>Groups report one shared insight back to the room</li>
+      </ul>
+      <div class="rhythm-badge">⏱ 20 mins · Different values, same seriousness about living them</div>
+    </div>
+
+    <div class="block-card highlight">
+      <div class="block-time">1:15 – 1:30 · Deliverable + Close</div>
+      <div class="block-title">Write your values statement. Say your #1 value out loud.</div>
+      <div class="block-body">Participants complete Prompt 5 — their values statement. Then each person types their #1 value in the chat — one word, no explanation needed. Facilitator reads them all back. Close: "Your values don't need anyone's approval to be real. And now they have a name."</div>
+      <ul class="block-list">
+        <li>Read Proverbs 4:23 together</li>
+        <li>Assign overnight challenge: have one honest conversation about values with someone you trust</li>
+        <li>Preview Day 3: "Tomorrow we take what you know about yourself and where you stand — and we find your direction."</li>
+      </ul>
+      <div class="rhythm-badge">⏱ 15 mins · Close on the deliverable and the declaration</div>
+    </div>
+
+    <div class="shift-box">
+      <div class="shift-before">
+        <div class="shift-label">Before Day 2</div>
+        <div class="shift-text">You make decisions based on pressure, habit, or what others expect. You say yes to things that feel wrong and can't explain why they do.</div>
+      </div>
+      <div class="shift-after">
+        <div class="shift-label">After Day 2</div>
+        <div class="shift-text">You know what you stand for. You can name it. And when the next decision comes, you have a filter — not a feeling — to decide from.</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- WORKBOOK D2 -->
+    <div class="wb-header">
+      <div class="wb-badge">Day 2 Workbook · Values</div>
+      <span class="wb-deliverable">Deliverable: your top 5 values named + written values statement</span>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-num">01</div>
+      <div class="prompt-itch">The itch</div>
+      <div class="prompt-type">Values inventory</div>
+      <div class="prompt-q">Circle every value that resonates — don't filter, go fast. Then eliminate to 10. Then narrow to your top 5. Write them below and next to each one, write one word for why it matters to you.</div>
+      <div class="prompt-hint">Integrity · Faith · Family · Courage · Creativity · Service · Excellence · Freedom · Honesty · Compassion · Justice · Loyalty · Growth · Humility · Adventure · Community · Discipline · Kindness · Leadership · Peace · Purpose · Resilience · Wisdom · Authenticity · Joy · Responsibility · Generosity · Boldness · Gratitude · Love</div>
+      <div class="write-lines"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-num">02</div>
+      <div class="prompt-type">Proof — your #1 value in action</div>
+      <div class="prompt-q">For your #1 value: write about a specific, real moment when you lived it out — even when it cost you something. What happened? What did you choose? What did it feel like afterwards?</div>
+      <div class="prompt-hint">If you can't think of a moment, ask yourself honestly: have I actually lived this value, or do I just admire it from a distance? Both answers are useful.</div>
+      <div class="write-lines"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-num">03</div>
+      <div class="prompt-itch">The itch</div>
+      <div class="prompt-type">The tension — when you violated a value</div>
+      <div class="prompt-q">Think of a recent decision that felt wrong afterwards — a yes you regretted, a path that didn't fit. Looking back honestly: which of your values did that decision violate? What were you actually choosing against?</div>
+      <div class="prompt-hint">This isn't about guilt. It's about data. The discomfort you felt was your values working — trying to protect something you care about. Now you know what that is.</div>
+      <div class="write-lines"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-num">04</div>
+      <div class="prompt-type">God's view — where is your heart?</div>
+      <div class="prompt-q">Read Matthew 6:19–21 slowly. Then answer honestly: where is your heart most invested right now — your time, attention, and energy? Is that where you want it to be? What would it look like to align your heart with your values?</div>
+      <div class="prompt-hint">No performance here. Just honesty. The point isn't to feel bad about the gap — it's to see it clearly so you can choose differently.</div>
+      <div class="write-lines"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="prompt-card key">
+      <div class="prompt-num">05</div>
+      <div class="prompt-type">Day 2 Deliverable — Values Statement</div>
+      <div class="prompt-q">Write your personal values statement — 2 to 3 sentences. Start with: "I am someone who believes in ______. I will live this out by ______. When life gets hard and I start to drift, I will return to ______."</div>
+      <div class="prompt-hint">This is your decision filter. Any time you face a choice that doesn't feel right — come back to this. It will tell you what you're protecting and what to choose.</div>
+      <div class="prompt-shift">→ After writing this, you can say no to the wrong things — without guilt and without needing to explain yourself.</div>
+      <div class="write-lines"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="scripture-anchor">
+      <div class="anchor-icon">◈</div>
+      <div>
+        <div class="anchor-label">Scripture anchor</div>
+        <div class="anchor-verse">"But Daniel resolved not to defile himself... he asked the chief official for permission not to defile himself this way."</div>
+        <div class="anchor-ref">Daniel 1:8 (NIV) — He knew what he stood for before the pressure came. That's the goal of today.</div>
+      </div>
+    </div>
+
+    <div class="closing-challenge">
+      <div class="cc-label">Overnight challenge</div>
+      <div class="cc-text">Have one honest conversation about values tonight.</div>
+      <div class="cc-sub">Ask a parent, sibling, or close friend: "What do you think I care most about — based on how I actually live?" Their answer might surprise you. Write down what they say. That's the gap between who you're becoming and how you're being perceived — and it's useful data.</div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════
+       DAY 3 — WHERE AM I GOING?
+  ══════════════════════════════ -->
+  <div id="day-3" class="day-panel">
+
+    <div class="day-hero" data-day="03">
+      <div class="day-eyebrow">Day 3 · Thursday 14 May 2026 · EAT</div>
+      <div class="day-title-lg">You've been moving —<br>but not sure you're going <em>anywhere that's yours.</em></div>
+      <div class="day-itch">The itch: you have goals, maybe even a plan — but it's hard to shake the feeling that you're living someone else's version of your life. You're busy but not purposeful. Active but not directed. Moving, but not toward anything you consciously chose.</div>
+      <div class="day-resolution">After today: you can answer "where are you going?" in one sentence. And mean every word of it.</div>
+      <div class="day-verse">"For I know the plans I have for you, declares the Lord — plans to prosper you and not to harm you, plans to give you hope and a future." — Jeremiah 29:11</div>
+      <div class="day-meta">
+        <span class="meta-pill date">Thu 14 May 2026</span>
+        <span class="meta-pill">1.5 hrs · EAT</span>
+        <span class="meta-pill">North Star Statement</span>
+        <span class="meta-pill">What Comes Next</span>
+      </div>
+    </div>
+
+    <div class="daily-promise">
+      <div class="dp-icon">◎</div>
+      <div>
+        <div class="dp-label">Open with this — say it out loud in the first 2 minutes</div>
+        <div class="dp-promise">"By the end of today, you will have a written North Star Statement — a direction that is yours — and a clear picture of what happens next."</div>
+        <div class="dp-before">Before today: you have a vague sense of where you want to go — but it lives in your head, untested, unwritten, uncommitted.</div>
+        <div class="dp-after">After today: it is written. It is yours. And you know exactly what Monday looks like because of it.</div>
+      </div>
+    </div>
+
+    <div class="section-lbl">Session outline · 1.5 hrs</div>
+
+    <div class="block-card itch">
+      <div class="block-time">0:00 – 0:08 · Opening</div>
+      <div class="block-title">Honour the journey — name Day 3's itch</div>
+      <div class="block-body">Acknowledge what the group has done over two days. Quick recap: Day 1 resolved the identity confusion — you have your own words now. Day 2 resolved the decision confusion — you have your values. Today we resolve the direction confusion. Open with the itch directly: "Most of us are moving. But are we going anywhere we actually chose?" Let that land before moving on.</div>
+      <div class="rhythm-badge">⏱ 8 mins · Fast — establish the stakes for the day</div>
+    </div>
+
+    <div class="block-card highlight">
+      <div class="block-time">0:08 – 0:28 · Teaching</div>
+      <div class="block-title">Purpose is not a job title</div>
+      <div class="block-body">Core teaching: the most common confusion about purpose is that it's a career. It isn't. Purpose is the thread that runs through everything — how you show up in a room, how you treat people, what you build, what you protect. A job title can change. Purpose doesn't.</div>
+      <ul class="block-list">
+        <li>The difference between purpose and ambition — one is about what you build for others, one is about what you acquire for yourself</li>
+        <li>"I don't know my purpose" usually means "I haven't stopped long enough to look"</li>
+        <li>Your identity (Day 1) + your values (Day 2) = your direction (Day 3)</li>
+        <li>Ephesians 2:10 — your purpose was written before you were born, and it predates every confusion you've had about it</li>
+        <li>The North Star framework: I am ___, I exist to ___, I will know I'm on track when ___</li>
+      </ul>
+      <div class="rhythm-badge">⏱ 20 mins max — then straight into purpose mapping</div>
+    </div>
+
+    <div class="block-card">
+      <div class="block-time">0:28 – 0:52 · Workbook — Solo</div>
+      <div class="block-title">Purpose mapping — prompts 1 to 4</div>
+      <div class="block-body">The purpose mapping exercise connects what participants discovered on Days 1 and 2 into a direction. They work through 4 prompts before writing their North Star Statement in Prompt 5. This is the most important 24 minutes of the three days — protect it completely.</div>
+      <ul class="block-list">
+        <li>Prompt 1: Where do your Day 1 strengths and Day 2 values overlap? What pattern do you see?</li>
+        <li>Prompt 2: What breaks your heart — what problem in the world makes you feel urgency more than others?</li>
+        <li>Prompt 3: If fear, money, and other people's opinions were gone — what would you be doing in 10 years?</li>
+        <li>Prompt 4: What is one specific thing you could do this week to move one step closer to that person?</li>
+      </ul>
+      <div class="rhythm-badge">⏱ 24 mins · The most important solo block of the three days</div>
+    </div>
+
+    <div class="block-card">
+      <div class="block-time">0:52 – 1:10 · Full Group Share</div>
+      <div class="block-title">Read your North Star Statement out loud</div>
+      <div class="block-body">Every participant who wants to reads their North Star Statement to the group — the full 2–3 sentences. Facilitator responds to each one: not to evaluate, but to affirm what they heard. The group responds with one word in the chat after each share. This is the centrepiece of all three days.</div>
+      <ul class="block-list">
+        <li>Participants can pass — no pressure — but encourage them to be brave. This is what they came for.</li>
+        <li>Facilitator names the recurring themes across all the statements: "I keep hearing ___. That's not a coincidence."</li>
+      </ul>
+      <div class="rhythm-badge">⏱ 18 mins · The most important 18 minutes of the seminar</div>
+    </div>
+
+    <div class="block-card highlight">
+      <div class="block-time">1:10 – 1:25 · What Comes Next</div>
+      <div class="block-title">The seminar ends. The direction doesn't.</div>
+      <div class="block-body">Answer the question the survey told us participants always ask: "What happens after?" Be specific. Don't leave this to the email series — say it in the room while everyone is still present and the momentum is alive.</div>
+      <ul class="block-list">
+        <li>The 30-day post-seminar email series: 8 emails, what each one covers, when it arrives</li>
+        <li>The Thrive community: where it lives, how to stay connected with this cohort</li>
+        <li>1-on-1 coaching: who it's for, what it covers, how to indicate interest (Post-Session form)</li>
+        <li>Cohort 2: if you know someone who needs this, here is how to refer them</li>
+      </ul>
+      <div class="rhythm-badge">⏱ 15 mins · Answer "what next" while they're still in the room</div>
+    </div>
+
+    <div class="block-card">
+      <div class="block-time">1:25 – 1:30 · Commissioning</div>
+      <div class="block-title">A sending out — not a sign-off</div>
+      <div class="block-body">This is not a graduation. It is a sending out. Each participant types one commitment in the chat — one thing they will do differently this week. Facilitator reads a selection. Certificate announced. Share the Post-Session Reflection form link in the session and in WhatsApp. Close with a personal blessing over the group.</div>
+      <div class="rhythm-badge">⏱ 5 mins · Brief, powerful, forward-facing</div>
+    </div>
+
+    <div class="shift-box">
+      <div class="shift-before">
+        <div class="shift-label">Before Day 3</div>
+        <div class="shift-text">You have a vague sense of where you want to go, but it lives in your head — untested, unwritten, and still someone else's version of your life.</div>
+      </div>
+      <div class="shift-after">
+        <div class="shift-label">After Day 3</div>
+        <div class="shift-text">You can answer "where are you going?" in one sentence. It is written. It is yours. And you know what Monday looks like because of it.</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- WORKBOOK D3 -->
+    <div class="wb-header">
+      <div class="wb-badge">Day 3 Workbook · Purpose</div>
+      <span class="wb-deliverable">Deliverable: your written North Star Statement</span>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-num">01</div>
+      <div class="prompt-type">The intersection — strengths meet values</div>
+      <div class="prompt-q">Look back at your Day 1 workbook (your strengths and your most alive moment) and your Day 2 workbook (your top 5 values). Where do they overlap? What kind of person do those two things point to? What pattern keeps showing up?</div>
+      <div class="prompt-hint">You're not writing a career plan. You're looking for a thread — the thing that runs through who you are across different contexts. Name it even if it feels incomplete.</div>
+      <div class="write-lines"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-num">02</div>
+      <div class="prompt-itch">The itch</div>
+      <div class="prompt-type">What breaks your heart</div>
+      <div class="prompt-q">What situation, problem, or injustice in the world makes you feel something deeply — anger, grief, urgency? Why does it bother you more than it bothers others? Be specific — not "poverty" but what aspect of it, where, and why it pulls at you.</div>
+      <div class="prompt-hint">Pain is often a pointer. The thing that breaks your heart is often the thing you were designed to do something about. It doesn't have to be dramatic — it just has to be real.</div>
+      <div class="write-lines"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-num">03</div>
+      <div class="prompt-type">Dream freely — no filters</div>
+      <div class="prompt-q">If fear, money, other people's opinions, and the pressure to be "realistic" were completely removed — what would you be doing with your life in 10 years? Who would you be helping? What would you be building? What would a Thursday afternoon look like?</div>
+      <div class="prompt-hint">Don't edit yourself. Write the version you actually want — not the responsible one, not the safe one, not the one that wouldn't embarrass you if someone read it. The real one.</div>
+      <div class="write-lines"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-num">04</div>
+      <div class="prompt-type">One next step — this week</div>
+      <div class="prompt-q">What is one specific thing — just one — you could do this week that would move you one step closer to the person you described in Prompt 3? Make it small enough to actually do by Sunday.</div>
+      <div class="prompt-hint">Not "read more" — what book, starting when? Not "exercise" — what, where, what day? The more specific it is, the more likely it happens. A conversation. A decision. A habit. A message you've been putting off.</div>
+      <div class="write-lines"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="prompt-card key">
+      <div class="prompt-num">05</div>
+      <div class="prompt-type">Day 3 Deliverable — North Star Statement</div>
+      <div class="prompt-q">Write your personal North Star Statement — 2 to 3 sentences that capture who you are, what you stand for, and where you're moving. Use present tense. Write it as if it's already true — because in God's eyes, it is.</div>
+      <div class="prompt-hint">Start with: "I am ______. I exist to ______. I will know I'm on track when ______." This is not a final answer. It's a stake in the ground. It will grow as you do.</div>
+      <div class="prompt-shift">→ After writing this, you can answer "where are you going?" in one sentence — and mean every word of it.</div>
+      <div class="write-lines"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+    </div>
+
+    <div class="scripture-anchor">
+      <div class="anchor-icon">◎</div>
+      <div>
+        <div class="anchor-label">Scripture anchor</div>
+        <div class="anchor-verse">"For we are God's handiwork, created in Christ Jesus to do good works, which God prepared in advance for us to do."</div>
+        <div class="anchor-ref">Ephesians 2:10 (NIV) — Your purpose was written before any confusion entered. Today you're recovering it, not inventing it.</div>
+      </div>
+    </div>
+
+    <div class="next-block">
+      <div class="nb-label">What comes next — fill this in before you close your workbook</div>
+      <ul class="nb-list">
+        <li>Check your email tomorrow — your Day 1 post-seminar email arrives within 24 hours of the seminar ending</li>
+        <li>Put your North Star Statement somewhere you will see it every single day for the next 30 days — phone wallpaper, mirror, journal cover</li>
+        <li>Complete your Post-Session Reflection form — the link is in your WhatsApp group and your confirmation email</li>
+        <li>If you'd like to go deeper through 1-on-1 coaching, indicate it on the Post-Session form — we'll reach out personally</li>
+        <li>Share Thrive with one person this week who is living with the same itch you came in with</li>
+      </ul>
+    </div>
+
+    <div class="closing-challenge">
+      <div class="cc-label">Your commitment — say it in the chat before you leave</div>
+      <div class="cc-text">One thing I will do differently this week because of Thrive:</div>
+      <div class="cc-sub">Not a feeling. Not "I'll try to be more intentional." A specific, named action you will take by Sunday. Type it in the chat. Say it to the group. That moment of accountability — saying it out loud in front of people who've done the same work — is the bridge between clarity and change.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showDay(n, btn) {
+  document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('day-' + n).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
