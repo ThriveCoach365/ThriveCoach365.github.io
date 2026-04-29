@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meet Your Coach — Janet Oyende-Kariuki · Thrive</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #C9963A;
+    --gold-light: #F0C97A;
+    --deep: #0E1B14;
+    --forest: #1A3028;
+    --sage: #2F5243;
+    --cream: #FAF6EE;
+    --warm-white: #FDF9F3;
+    --muted: #8A9E94;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--warm-white);
+    color: var(--forest);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 40px;
+    background: rgba(253,249,243,0.94);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,150,58,0.15);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 22px; font-weight: 900; color: var(--forest);
+    text-decoration: none; letter-spacing: -0.5px;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-back {
+    font-size: 13px; font-weight: 500; color: var(--sage);
+    text-decoration: none; display: flex; align-items: center; gap: 6px;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--forest); }
+  .nav-cta {
+    background: var(--gold); color: #fff;
+    font-family: var(--font-body); font-size: 13px; font-weight: 500;
+    padding: 10px 22px; border-radius: 99px; border: none;
+    cursor: pointer; letter-spacing: 0.02em;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { background: #b0812e; transform: scale(1.02); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 110px 40px 80px;
+    gap: 64px;
+    background: var(--forest);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: 'THRIVE';
+    position: absolute;
+    font-family: var(--font-display);
+    font-size: 260px; font-weight: 900; font-style: italic;
+    color: rgba(255,255,255,0.025);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: -10px;
+  }
+  .hero-left { position: relative; z-index: 1; animation: fadeUp 0.7s 0.1s both; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold-light); margin-bottom: 20px;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block; width: 24px; height: 1px; background: var(--gold);
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(38px, 5vw, 60px);
+    font-weight: 900; line-height: 1.08;
+    color: var(--cream);
+    letter-spacing: -1.5px;
+    margin-bottom: 6px;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold-light); }
+  .hero-title-line {
+    font-family: var(--font-display);
+    font-size: 18px; font-style: italic;
+    color: rgba(250,246,238,0.55);
+    margin-bottom: 28px;
+    font-weight: 400;
+  }
+  .hero-bio {
+    font-size: 16px; color: rgba(250,246,238,0.72);
+    line-height: 1.8; font-weight: 300;
+    max-width: 500px; margin-bottom: 36px;
+  }
+  .hero-verse {
+    font-size: 13px; font-style: italic;
+    color: rgba(250,246,238,0.38);
+    border-left: 1px solid rgba(201,150,58,0.35);
+    padding-left: 14px;
+    line-height: 1.65;
+  }
+
+  /* Hero photo collage */
+  .hero-right {
+    position: relative; z-index: 1;
+    height: 560px;
+    animation: fadeUp 0.7s 0.3s both;
+  }
+  .photo-main {
+    position: absolute;
+    top: 0; right: 0;
+    width: 72%;
+    height: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.45);
+  }
+  .photo-main img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center top;
+  }
+  .photo-accent {
+    position: absolute;
+    bottom: 40px; left: 0;
+    width: 52%;
+    height: 52%;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 3px solid var(--forest);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.55);
+    z-index: 2;
+  }
+  .photo-accent img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center 20%;
+  }
+  .photo-badge {
+    position: absolute;
+    top: 24px; left: 20px;
+    background: var(--gold);
+    color: #fff;
+    font-size: 11px; font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 99px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    z-index: 3;
+  }
+
+  /* ── STORY SECTION ── */
+  .story-section {
+    background: var(--warm-white);
+    padding: 100px 40px;
+  }
+  .story-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .story-sidebar { position: sticky; top: 100px; }
+  .section-label {
+    font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-label::before { content: ''; display: block; width: 20px; height: 1px; background: var(--gold); }
+  .section-heading {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.5vw, 42px);
+    font-weight: 900; line-height: 1.12;
+    color: var(--forest);
+    letter-spacing: -0.5px;
+    margin-bottom: 20px;
+  }
+  .section-heading em { font-style: italic; color: var(--gold); }
+  .sidebar-stat {
+    background: var(--cream);
+    border: 1px solid rgba(201,150,58,0.15);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-top: 28px;
+  }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 38px; font-weight: 900; font-style: italic;
+    color: var(--gold); line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label { font-size: 12px; color: var(--muted); font-weight: 400; line-height: 1.5; }
+
+  .story-body p {
+    font-size: 16px; color: #3d5548;
+    line-height: 1.9; font-weight: 300;
+    margin-bottom: 22px;
+  }
+  .story-body p:last-child { margin-bottom: 0; }
+  .story-body strong { font-weight: 500; color: var(--forest); }
+  .story-pullquote {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 2.5vw, 26px);
+    font-style: italic;
+    color: var(--forest);
+    line-height: 1.45;
+    border-left: 3px solid var(--gold);
+    padding-left: 24px;
+    margin: 36px 0;
+  }
+
+  /* ── ITCH SECTION ── */
+  .itch-section {
+    background: var(--forest);
+    padding: 100px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .itch-section::before {
+    content: '"';
+    position: absolute;
+    font-family: var(--font-display);
+    font-size: 500px; font-weight: 900;
+    color: rgba(255,255,255,0.025);
+    top: -80px; left: -20px;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .itch-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .itch-text .section-label { color: var(--gold-light); }
+  .itch-text .section-label::before { background: var(--gold-light); }
+  .itch-text .section-heading { color: var(--cream); max-width: 400px; }
+  .itch-text p {
+    font-size: 16px; color: rgba(250,246,238,0.68);
+    line-height: 1.85; font-weight: 300; margin-bottom: 20px;
+  }
+  .itch-verse {
+    font-size: 13px; font-style: italic;
+    color: rgba(250,246,238,0.38);
+    border-left: 1px solid rgba(201,150,58,0.3);
+    padding-left: 14px; line-height: 1.65;
+    margin-top: 24px;
+  }
+  .itch-cards { display: flex; flex-direction: column; gap: 16px; }
+  .itch-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 22px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .itch-card::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--gold);
+    border-radius: 2px 0 0 2px;
+  }
+  .itch-card-num {
+    font-family: var(--font-display);
+    font-size: 28px; font-weight: 900; font-style: italic;
+    color: rgba(201,150,58,0.3);
+    line-height: 1; margin-bottom: 8px;
+  }
+  .itch-card-title {
+    font-size: 14px; font-weight: 500; color: var(--gold-light);
+    margin-bottom: 6px;
+  }
+  .itch-card-body { font-size: 13px; color: rgba(250,246,238,0.65); line-height: 1.65; font-weight: 300; }
+
+  /* ── CREDENTIALS SECTION ── */
+  .creds-section {
+    background: var(--cream);
+    padding: 100px 40px;
+  }
+  .creds-inner { max-width: 1100px; margin: 0 auto; }
+  .creds-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 48px;
+  }
+  .cred-card {
+    background: var(--warm-white);
+    border: 1px solid rgba(201,150,58,0.15);
+    border-radius: 16px;
+    padding: 28px 24px;
+  }
+  .cred-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: rgba(201,150,58,0.12);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; margin-bottom: 14px;
+  }
+  .cred-title {
+    font-family: var(--font-display);
+    font-size: 17px; font-weight: 700; color: var(--forest);
+    margin-bottom: 8px; line-height: 1.3;
+  }
+  .cred-body { font-size: 13px; color: #4a6055; line-height: 1.7; font-weight: 300; }
+
+  /* ── MISSION STRIP ── */
+  .mission-strip {
+    background: var(--sage);
+    padding: 60px 40px;
+  }
+  .mission-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .mission-strip blockquote {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 3vw, 32px);
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.45;
+    margin-bottom: 18px;
+  }
+  .mission-strip blockquote em { color: var(--gold-light); }
+  .mission-attribution {
+    font-size: 12px; color: rgba(250,246,238,0.5);
+    font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+
+  /* ── CTA SECTION ── */
+  .cta-section {
+    background: var(--warm-white);
+    padding: 100px 40px;
+    text-align: center;
+  }
+  .cta-section .section-heading { max-width: 600px; margin: 0 auto 16px; }
+  .cta-section p {
+    font-size: 16px; color: #4a6055;
+    line-height: 1.75; max-width: 480px;
+    margin: 0 auto 36px; font-weight: 300;
+  }
+  .cta-row { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--forest); color: #fff;
+    font-family: var(--font-body); font-size: 15px; font-weight: 500;
+    padding: 15px 36px; border-radius: 99px; border: none;
+    cursor: pointer; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--sage); transform: translateY(-1px); }
+  .btn-ghost {
+    background: transparent; color: var(--forest);
+    font-family: var(--font-body); font-size: 14px; font-weight: 500;
+    padding: 14px 24px; border-radius: 99px;
+    border: 1.5px solid rgba(26,48,40,0.25);
+    cursor: pointer; text-decoration: none;
+    transition: border-color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--forest); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--forest);
+    padding: 32px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 20px; font-weight: 900; color: var(--cream);
+  }
+  .footer-logo span { color: var(--gold); }
+  .footer-verse {
+    font-size: 12px; font-style: italic;
+    color: rgba(250,246,238,0.35);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 14px 20px; }
+    .hero {
+      grid-template-columns: 1fr;
+      padding: 100px 20px 60px;
+      gap: 48px;
+    }
+    .hero-right { height: 380px; }
+    .photo-main { width: 80%; }
+    .story-inner, .itch-inner { grid-template-columns: 1fr; gap: 40px; }
+    .story-sidebar { position: static; }
+    .creds-grid { grid-template-columns: 1fr; }
+    .story-section, .itch-section, .creds-section, .cta-section { padding: 64px 20px; }
+    .mission-strip { padding: 48px 20px; }
+    footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">Thrive<span>.</span></a>
+  <a class="nav-back" href="index.html">← Back to Thrive</a>
+  <a class="nav-cta" href="index.html#register">Reserve My Spot</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Your facilitator</div>
+    <h1>Meet <em>Janet</em><br>Oyende-Kariuki.</h1>
+    <div class="hero-title-line">Learning & Development Professional · Youth Mentor · Missionary</div>
+    <p class="hero-bio">
+      For over a two decades, Janet has worked with young people across Kenya and beyond — in schools, universities, churches, and communities — asking the same question she once desperately needed someone to ask her: <em>do you know who you are?</em>
+    </p>
+    <div class="hero-verse">
+      "This is life's purpose — pointing men and women to Christ Jesus<br>and preparing them to meet Him when He comes."<br>
+      <span style="color:rgba(250,246,238,0.25);font-style:normal;font-size:11px">Janet Oyende, on the banks of River Weija, Ghana</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="photo-main">
+      <img src="DSC_0742.JPG" alt="Janet Oyende-Kariuki — Thrive facilitator" loading="eager">
+    </div>
+    <div class="photo-accent">
+      <img src="Janet_3.jpg" alt="Janet Oyende speaking" loading="eager">
+    </div>
+    <div class="photo-badge">Thrive Coach</div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story-section">
+  <div class="story-inner">
+    <div class="story-sidebar">
+      <div class="section-label">Her story</div>
+      <h2 class="section-heading">She didn't always have the <em>answers.</em></h2>
+      <div class="sidebar-stat">
+        <div class="stat-num">20+</div>
+        <div class="stat-label">Years working with teens & young adults in mentorship, training, and community development</div>
+      </div>
+      <div class="sidebar-stat">
+        <div class="stat-num">300+</div>
+        <div class="stat-label">Caregivers and community educators trained as Trainers of Trainers</div>
+      </div>
+      <div class="sidebar-stat">
+        <div class="stat-num">400+</div>
+        <div class="stat-label">Parents equipped through long-term family intervention programs</div>
+      </div>
+    </div>
+
+    <div class="story-body">
+      <p>
+        Janet didn't grow up with the answers. As a teenager and young adult, she struggled with identity — the quiet, persistent kind of confusion that doesn't announce itself but shapes every decision you make. She remembers looking around rooms, wondering if anyone would reach out. Wondering if anyone saw what she was carrying. Wishing someone would walk her through the hard questions she didn't even have words for yet.
+      </p>
+      <p>
+        Nobody did. So she learned — through faith, through failure, through years of honest reflection — to find her own footing. And once she found it, she couldn't stop wanting that for other young people.
+      </p>
+
+      <div class="story-pullquote">
+        "I looked around the room as a teenager, wondering who would reach out. I wished anyone would walk me through stuff back then. That wish became my purpose."
+      </div>
+
+      <p>
+        That's the origin of her burden for young people. Not theory. Not a programme she read about. A lived ache that grew into a calling. Over more than a decade, she has poured that calling into classrooms, campuses, church halls, and community centres — in Kenya and across the continent.
+      </p>
+      <p>
+        She has stood on the banks of rivers watching lives transformed at baptism. She has sat with young people in the scorching afternoon heat, praying for souls who didn't yet know they were worth praying for. She has designed curricula for corporate institutions and university programmes, lectured at Strathmore and Mount Kenya University, trained caregivers in vulnerable communities, and built youth mentorship programmes from the ground up at Akili Consult.
+      </p>
+      <p>
+        Her formal training spans a First Class degree in Information Technology from Jomo Kenyatta University of Agriculture and Technology (JKUAT) and a Master's in ICT for Development from the University of Manchester — but the education that shapes Thrive most profoundly was earned in rooms full of young people who needed someone to see them clearly and tell them the truth.
+      </p>
+      <p>
+        Today, Janet serves as Assistant Director of Marketing, PR and Alumni Affairs at the Adventist University of Africa, serves on the board of Generation Youth Christ Africa, and regularly visits high schools and university campuses as a speaker. She is also a trained medical missionary, a photographer, and someone who believes deeply that <strong>every young person deserves the chance to thrive — not just survive.</strong>
+      </p>
+
+      <div class="story-pullquote">
+        "She writes with honesty about removing the mask — about the gap between the life we project publicly and who we actually are in private. That's the work Thrive is built to do."
+      </div>
+
+      <p>
+        Her blog, which she has kept since 2009, captures her voice most directly. She writes about real humility — not the kind that shrinks, but the kind that depends on God's strength. About fear and faith. About all things working together for good, even when the plan falls apart. About what it means to live from the inside out. These aren't abstract convictions. They are the hard-won conclusions of a life lived with open hands.
+      </p>
+      <p>
+        Thrive is her invitation to young adults to do in three days what took her years — to name who they are, stand for something real, and step into a direction that is genuinely theirs.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- THE ITCH SHE LIVED -->
+<section class="itch-section">
+  <div class="itch-inner">
+    <div class="itch-text">
+      <div class="section-label">Why she built this</div>
+      <h2 class="section-heading">She knows the <em>itch.</em></h2>
+      <p>
+        Thrive wasn't designed in a conference room. It was built from the inside out — from Janet's own experience of the questions it addresses, and from years of watching young people carry those same unanswered questions into adulthood.
+      </p>
+      <p>
+        She has travelled to multiple countries as a missionary and trainer, desiring as many young people as possible to have excellent characters — lives that are a living witness of integrity and Christian grace to everyone they meet.
+      </p>
+      <p>
+        That desire has never been about programmes. It has always been about people. About the teenager sitting in the room, wondering if anyone will speak to what they're actually carrying.
+      </p>
+      <div class="itch-verse">
+        "Give me one hundred preachers who fear nothing but sin and desire nothing but God... such alone will shake the gates of hell and set up the kingdom of heaven on earth." — John Wesley
+      </div>
+    </div>
+    <div class="itch-cards">
+      <div class="itch-card">
+        <div class="itch-card-num">01</div>
+        <div class="itch-card-title">She lived the identity confusion</div>
+        <div class="itch-card-body">As a teenager and young adult, Janet wrestled with who she was — beyond labels, roles, and other people's expectations. She builds Day 1 of Thrive from that lived experience, not from a textbook.</div>
+      </div>
+      <div class="itch-card">
+        <div class="itch-card-num">02</div>
+        <div class="itch-card-title">She teaches values from conviction, not curriculum</div>
+        <div class="itch-card-body">Her writing and her life show someone who has had to decide what she stands for — in hard moments, not comfortable ones. Day 2 of Thrive is built on that kind of tested conviction.</div>
+      </div>
+      <div class="itch-card">
+        <div class="itch-card-num">03</div>
+        <div class="itch-card-title">She has walked the purpose question with thousands</div>
+        <div class="itch-card-body">From USAID-funded community programs in Nairobi to mission fields in West Africa, Janet has spent her career helping people find direction. Day 3 draws on everything she has learned doing that work.</div>
+      </div>
+      <div class="itch-card">
+        <div class="itch-card-num">04</div>
+        <div class="itch-card-title">She is still doing it</div>
+        <div class="itch-card-body">Janet is not a theorist. She is in high schools and campuses right now, as a speaker. She is on the board of a pan-African youth movement. Thrive comes from someone still in the work.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section class="creds-section">
+  <div class="creds-inner">
+    <div class="section-label">Background</div>
+    <h2 class="section-heading" style="max-width:500px">Credentials that <em>matter.</em></h2>
+    <p style="font-size:15px;color:#4a6055;max-width:540px;font-weight:300;line-height:1.75;margin-top:12px">
+      The formal qualifications are real and substantial. But what makes Janet effective with young people isn't her CV — it's that she has never stopped being genuinely present in the spaces where young people are asking hard questions.
+    </p>
+    <div class="creds-grid">
+      <div class="cred-card">
+        <div class="cred-icon">🎓</div>
+        <div class="cred-title">MSc. ICT for Development</div>
+        <div class="cred-body">University of Manchester, UK · 2006–2007. Specialised in using technology as a tool for human development and community transformation.</div>
+      </div>
+      <div class="cred-card">
+        <div class="cred-icon">🏆</div>
+        <div class="cred-title">BSc. Information Technology (First Class)</div>
+        <div class="cred-body">JKUAT, Nairobi · 2001–2004. Graduated with First Class Honours. Built her analytical rigour here — which she now uses to design learning programmes that actually work.</div>
+      </div>
+      <div class="cred-card">
+        <div class="cred-icon">📚</div>
+        <div class="cred-title">Learning & Development Leadership</div>
+        <div class="cred-body">Training & Mentorship Development Director at Akili Consult · Programme Officer at ACCS (USAID-funded) · Lecturer at Strathmore and Mount Kenya University.</div>
+      </div>
+      <div class="cred-card">
+        <div class="cred-icon">🌍</div>
+        <div class="cred-title">Missionary & Cross-Cultural Trainer</div>
+        <div class="cred-body">Travelled to multiple countries as a missionary and trainer. Stood at baptisms in Ghana, Ethiopia and Bulgaria. Trained caregivers in Kenya's most vulnerable communities. Built learning that transcends context.</div>
+      </div>
+      <div class="cred-card">
+        <div class="cred-icon">⛪</div>
+        <div class="cred-title">Youth Leadership</div>
+        <div class="cred-body">Drama Band Leader (2003-2006) and Youth Leader (2009–2012) at Nairobi Central SDA Church. Board Member of GYC Africa (2024–present). President and Founder of Africans Living in View of Eternity (ALIVE) Kenya (2010–2013). Outreach Youth Leader, Vacation Bible School trainer.</div>
+      </div>
+      <div class="cred-card">
+        <div class="cred-icon">🏛️</div>
+        <div class="cred-title">Current Role</div>
+        <div class="cred-body">Assistant Director, Marketing, PR & Alumni Affairs at Adventist University of Africa (2023–present). Regular campus and high school speaker. Still in the rooms where young people are.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION QUOTE -->
+<section class="mission-strip">
+  <div class="mission-inner">
+    <blockquote>
+      "Real humility fulfils God's purposes by <em>depending upon His strength.</em> It doesn't mean being a dwarf in intellect, deficient in aspiration, or cowardly in life."
+    </blockquote>
+    <div class="mission-attribution">Janet's guiding conviction · jtoyende.wordpress.com</div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="section-label" style="justify-content:center">The invitation</div>
+  <h2 class="section-heading">This is the person<br>who will walk with <em>you.</em></h2>
+  <p>
+    Janet isn't coming to Thrive with a clipboard and a curriculum. She's coming with a story, a genuine burden, and twenty years of asking the same questions you're carrying. Three days. Real work. A facilitator who knows the itch from the inside.
+  </p>
+  <div class="cta-row">
+    <a class="btn-primary" href="index.html#register">Reserve My Spot — KSh 500 →</a>
+    <a class="btn-ghost" href="index.html#schedule">See the programme</a>
+  </div>
+  <p style="font-size:13px;color:var(--muted);margin-top:24px;margin-bottom:0">
+    Thrive: Identity & Purpose Seminar · Tuesday–Thursday, 12–14 May 2026 · Online · 8pm, EAT
+  </p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Thrive<span>.</span></div>
+  <div class="footer-verse">"For we are God's handiwork, created in Christ Jesus to do good works." — Ephesians 2:10</div>
+</footer>
+
+</body>
+</html>
