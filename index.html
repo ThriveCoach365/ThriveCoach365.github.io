@@ -32,6 +32,11 @@
     border: none; cursor: pointer; letter-spacing: 0.02em; transition: background 0.2s, transform 0.15s;
   }
   .nav-cta:hover { background: #b0812e; transform: scale(1.02); }
+ .nav-coach {
+  font-size: 13px; font-weight: 500; color: var(--sage);
+  text-decoration: none; transition: color 0.2s;
+}
+.nav-coach:hover { color: var(--forest); }
 
   /* HERO */
   .hero {
@@ -275,7 +280,9 @@
 <!-- NAV -->
 <nav>
   <div class="nav-logo">Thrive<span>.</span></div>
-  <button class="nav-cta" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Reserve My Spot</button>
+   <a class="nav-logo" href="index.html">Thrive<span>.</span></a>
+  <a class="nav-coach" href="coach.html">Meet your coach</a>
+   <button class="nav-cta" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Reserve My Spot</button>
 </nav>
 
 <!-- HERO -->
@@ -562,7 +569,23 @@
   </div>
 </section>
 
-<!-- PRICING -->
+ <!-- THE COACH -->
+<section style="background:var(--cream);padding:48px 40px;">
+  <div style="max-width:680px;margin:0 auto;display:flex;align-items:center;gap:28px;background:var(--warm-white);border:1px solid rgba(201,150,58,0.15);border-radius:16px;padding:28px 32px;">
+    <img src="DSC_0742.JPG" alt="Janet Oyende-Kariuki"
+      style="width:80px;height:80px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:2px solid rgba(201,150,58,0.25);">
+    <div>
+      <div style="font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">Your facilitator</div>
+      <div style="font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--forest);margin-bottom:6px;">Janet Oyende</div>
+      <div style="font-size:13px;color:#4a6055;line-height:1.65;font-weight:300;margin-bottom:12px;">
+        She knows the itch from the inside — she lived it. Over two decades of working with young people across Kenya and beyond, she built Thrive so others don't have to take as long as she did to find their footing.
+      </div>
+      <a href="coach.html" style="font-size:13px;font-weight:500;color:var(--gold);text-decoration:none;">Read her story →</a>
+    </div>
+  </div>
+</section>
+
+ <!-- PRICING -->
 <section class="pricing-section" id="pricing">
   <div class="section-label">Join us</div>
   <h2 class="section-heading">Ready to discover<br>your <em>purpose?</em></h2>
@@ -675,6 +698,9 @@
   <h2>Stop performing.<br><span>Start knowing.</span></h2>
   <p>You don't need to have it figured out before you show up. You need to show up so you can figure it out. Three days. Three deliverables. One direction that is finally yours.</p>
   <button class="btn-primary" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Reserve My Spot →</button>
+ <p style="font-size:13px;color:rgba(250,246,238,0.45);margin-top:16px;font-weight:300;">
+  Not sure yet? <a href="coach.html" style="color:var(--gold-light);text-decoration:none;font-weight:500;">Meet the person who will walk with you →</a>
+</p>
   <div class="verse-footer">"For we are God's handiwork, created in Christ Jesus to do good works." — Ephesians 2:10</div>
 </section>
 
