@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thrive — Identity & Purpose Seminar</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #C9963A; --gold-light: #F0C97A; --deep: #0E1B14;
+    --forest: #1A3028; --sage: #2F5243; --cream: #FAF6EE;
+    --warm-white: #FDF9F3; --muted: #8A9E94;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+  body { font-family: var(--font-body); background: var(--warm-white); color: var(--deep); overflow-x: hidden; line-height: 1.6; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 40px;
+    background: rgba(253,249,243,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,150,58,0.15);
+  }
+  .nav-logo { font-family: var(--font-display); font-size: 22px; font-weight: 900; color: var(--forest); letter-spacing: -0.5px; }
+  .nav-logo span { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold); color: #fff; font-family: var(--font-body);
+    font-size: 13px; font-weight: 500; padding: 10px 22px; border-radius: 99px;
+    border: none; cursor: pointer; letter-spacing: 0.02em; transition: background 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { background: #b0812e; transform: scale(1.02); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; padding: 100px 40px 60px; gap: 60px;
+    background: var(--warm-white); position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -120px; right: -120px;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,150,58,0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 20px;
+  }
+  .hero-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+  .hero h1 {
+    font-family: var(--font-display); font-size: clamp(38px, 5vw, 58px);
+    font-weight: 900; line-height: 1.1; color: var(--forest);
+    margin-bottom: 24px; letter-spacing: -1px;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-sub { font-size: 17px; color: #4a6055; line-height: 1.75; max-width: 460px; margin-bottom: 16px; font-weight: 300; }
+
+  /* NEW: deliverables preview under hero sub */
+  .hero-deliverables {
+    background: rgba(201,150,58,0.08); border: 1px solid rgba(201,150,58,0.2);
+    border-radius: 12px; padding: 14px 18px; margin-bottom: 28px; max-width: 460px;
+  }
+  .hd-label { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .hd-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .hd-list li { font-size: 13px; color: var(--forest); display: flex; gap: 8px; align-items: flex-start; font-weight: 400; }
+  .hd-list li::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0; }
+
+  .hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--forest); color: #fff; font-family: var(--font-body);
+    font-size: 15px; font-weight: 500; padding: 14px 32px; border-radius: 99px;
+    border: none; cursor: pointer; transition: background 0.2s, transform 0.15s; letter-spacing: 0.01em;
+  }
+  .btn-primary:hover { background: var(--sage); transform: translateY(-1px); }
+  .btn-ghost {
+    background: transparent; color: var(--forest); font-family: var(--font-body);
+    font-size: 14px; font-weight: 500; padding: 14px 24px; border-radius: 99px;
+    border: 1.5px solid rgba(26,48,40,0.25); cursor: pointer; transition: border-color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--forest); }
+
+  /* HERO VISUAL */
+  .hero-visual { display: flex; flex-direction: column; gap: 14px; animation: fadeUp 0.8s 0.2s both; }
+  .hero-card { background: var(--cream); border: 1px solid rgba(201,150,58,0.2); border-radius: 16px; padding: 20px 24px; position: relative; }
+  .hero-card.featured { background: var(--forest); color: var(--cream); border-color: var(--forest); }
+  .day-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .hero-card.featured .day-label { color: var(--gold-light); }
+  .day-title { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--forest); line-height: 1.2; }
+  .hero-card.featured .day-title { color: var(--cream); }
+  .day-desc { font-size: 13px; color: var(--muted); margin-top: 5px; }
+  .hero-card.featured .day-desc { color: rgba(250,246,238,0.7); }
+  .day-outcome { font-size: 12px; font-weight: 500; color: var(--gold); margin-top: 8px; }
+  .hero-card.featured .day-outcome { color: var(--gold-light); }
+  .day-icon { position: absolute; top: 20px; right: 20px; width: 36px; height: 36px; border-radius: 50%; background: rgba(201,150,58,0.15); display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .hero-card.featured .day-icon { background: rgba(201,150,58,0.25); }
+
+  /* PROOF STRIP */
+  .proof-strip {
+    background: var(--forest); padding: 18px 40px;
+    display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap;
+  }
+  .proof-item { display: flex; align-items: center; gap: 10px; font-size: 13px; color: rgba(250,246,238,0.75); font-weight: 300; }
+  .proof-item strong { color: var(--gold-light); font-weight: 500; }
+
+  /* SECTIONS */
+  section { padding: 80px 40px; }
+  .section-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+  }
+  .section-label::before { content: ''; display: block; width: 20px; height: 1px; background: var(--gold); }
+  .section-heading { font-family: var(--font-display); font-size: clamp(28px, 4vw, 42px); font-weight: 900; line-height: 1.15; color: var(--forest); letter-spacing: -0.5px; max-width: 540px; margin-bottom: 16px; }
+  .section-heading em { font-style: italic; color: var(--gold); }
+  .section-sub { font-size: 16px; color: #4a6055; line-height: 1.75; max-width: 520px; font-weight: 300; margin-bottom: 48px; }
+
+  /* NEW: IS THIS FOR YOU section */
+  .fit-section { background: var(--forest); }
+  .fit-section .section-heading { color: var(--cream); }
+  .fit-section .section-sub { color: rgba(250,246,238,0.65); }
+  .fit-section .section-label { color: var(--gold-light); }
+  .fit-section .section-label::before { background: var(--gold-light); }
+  .fit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 860px; }
+  .fit-card { border-radius: 14px; padding: 24px 22px; }
+  .fit-card.yes { background: rgba(255,255,255,0.06); border: 1px solid rgba(240,201,122,0.25); }
+  .fit-card.no { background: rgba(0,0,0,0.15); border: 1px solid rgba(255,255,255,0.08); }
+  .fit-card-title { font-family: var(--font-display); font-size: 17px; font-weight: 700; margin-bottom: 14px; }
+  .fit-card.yes .fit-card-title { color: var(--gold-light); }
+  .fit-card.no .fit-card-title { color: rgba(250,246,238,0.4); }
+  .fit-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  .fit-list li { font-size: 13px; line-height: 1.55; display: flex; gap: 8px; align-items: flex-start; }
+  .fit-card.yes .fit-list li { color: rgba(250,246,238,0.85); }
+  .fit-card.yes .fit-list li::before { content: '✓'; color: var(--gold-light); font-weight: 700; flex-shrink: 0; }
+  .fit-card.no .fit-list li { color: rgba(250,246,238,0.35); }
+  .fit-card.no .fit-list li::before { content: '✕'; color: rgba(250,246,238,0.25); font-weight: 700; flex-shrink: 0; }
+
+  /* WHY */
+  .why-section { background: var(--cream); }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 900px; }
+  .why-card { background: var(--warm-white); border: 1px solid rgba(201,150,58,0.15); border-radius: 16px; padding: 28px 28px 24px; }
+  .why-icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(201,150,58,0.12); display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 16px; }
+  .why-title { font-family: var(--font-display); font-size: 19px; font-weight: 700; color: var(--forest); margin-bottom: 8px; }
+  .why-body { font-size: 14px; color: #4a6055; line-height: 1.7; font-weight: 300; }
+
+  /* SCHEDULE */
+  .schedule-section { background: var(--warm-white); }
+  .schedule-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 900px; }
+  .sched-card { border: 1px solid rgba(26,48,40,0.12); border-radius: 16px; overflow: hidden; }
+  .sched-header { background: var(--forest); padding: 20px 24px 16px; }
+  .sched-day { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 6px; }
+  .sched-title { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--cream); line-height: 1.2; }
+  /* NEW: day outcome badge */
+  .sched-outcome { font-size: 11px; color: var(--gold-light); margin-top: 8px; font-style: italic; opacity: 0.8; }
+  .sched-body { padding: 20px 24px; }
+  .sched-verse { font-size: 12px; font-style: italic; color: var(--gold); border-left: 2px solid var(--gold-light); padding-left: 12px; margin-bottom: 16px; line-height: 1.5; }
+  .sched-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .sched-list li { font-size: 13px; color: #3a5246; line-height: 1.5; display: flex; gap: 8px; align-items: flex-start; }
+  .sched-list li::before { content: '–'; color: var(--gold); font-weight: 500; flex-shrink: 0; margin-top: 1px; }
+  /* NEW: practical tag */
+  .sched-practical { display: inline-block; margin-top: 14px; font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 99px; background: rgba(201,150,58,0.1); color: #7a5010; letter-spacing: 0.04em; }
+
+  /* OUTCOMES */
+  .outcomes-section { background: var(--forest); }
+  .outcomes-section .section-heading { color: var(--cream); max-width: 600px; }
+  .outcomes-section .section-sub { color: rgba(250,246,238,0.65); }
+  .outcomes-section .section-label { color: var(--gold-light); }
+  .outcomes-section .section-label::before { background: var(--gold-light); }
+  .outcomes-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; max-width: 860px; }
+  .outcome-item { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 22px 20px; }
+  .outcome-num { font-family: var(--font-display); font-size: 32px; font-weight: 900; font-style: italic; color: rgba(201,150,58,0.4); line-height: 1; margin-bottom: 10px; }
+  .outcome-text { font-size: 14px; color: rgba(250,246,238,0.85); line-height: 1.6; font-weight: 300; }
+  /* NEW: tangible tag */
+  .outcome-tag { font-size: 10px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold-light); margin-top: 8px; opacity: 0.7; }
+
+  /* VALUE STACK — NEW */
+  .value-section { background: var(--cream); }
+  .value-stack { max-width: 560px; border: 1.5px solid var(--forest); border-radius: 16px; overflow: hidden; }
+  .vs-header { background: var(--forest); padding: 20px 24px; }
+  .vs-title { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--cream); margin-bottom: 4px; }
+  .vs-sub { font-size: 12px; color: rgba(250,246,238,0.55); }
+  .vs-body { padding: 20px 24px; }
+  .vs-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(201,150,58,0.12); }
+  .vs-row:last-child { border-bottom: none; }
+  .vs-item { font-size: 13px; color: #3a5246; display: flex; gap: 10px; align-items: center; }
+  .vs-item::before { content: '✓'; color: var(--gold); font-weight: 700; }
+  .vs-val { font-size: 12px; font-weight: 500; color: var(--muted); }
+  .vs-total { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; background: rgba(201,150,58,0.08); border-top: 1px solid rgba(201,150,58,0.2); }
+  .vs-total-label { font-size: 14px; font-weight: 500; color: var(--forest); }
+  .vs-total-price { font-family: var(--font-display); font-size: 28px; font-weight: 900; color: var(--gold); }
+  .vs-total-price sup { font-size: 14px; vertical-align: super; }
+
+  /* TESTIMONIALS */
+  .testimonial-section { background: var(--warm-white); }
+  .testimonial-block { max-width: 680px; border-left: 3px solid var(--gold); padding-left: 28px; margin-bottom: 40px; }
+  .testimonial-quote { font-family: var(--font-display); font-size: clamp(20px, 3vw, 26px); font-style: italic; color: var(--forest); line-height: 1.45; margin-bottom: 16px; }
+  .testimonial-author { font-size: 13px; font-weight: 500; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+
+  /* PRICING */
+  .pricing-section { background: var(--cream); }
+  .pricing-card { max-width: 480px; border: 1.5px solid var(--forest); border-radius: 20px; overflow: hidden; }
+  .pricing-header { background: var(--forest); padding: 28px 32px; }
+  .pricing-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 10px; }
+  .pricing-name { font-family: var(--font-display); font-size: 24px; font-weight: 700; color: var(--cream); margin-bottom: 6px; }
+  .pricing-tiers { display: flex; gap: 20px; align-items: flex-end; margin-top: 8px; }
+  .pricing-early { }
+  .pricing-early-label { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold-light); }
+  .pricing-early-amount { font-size: 38px; font-weight: 300; color: var(--cream); line-height: 1; }
+  .pricing-early-amount sup { font-size: 16px; vertical-align: super; }
+  .pricing-standard { }
+  .pricing-standard-label { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,246,238,0.4); }
+  .pricing-standard-amount { font-size: 24px; font-weight: 300; color: rgba(250,246,238,0.45); line-height: 1; text-decoration: line-through; }
+  .pricing-standard-amount sup { font-size: 12px; vertical-align: super; }
+  .pricing-period { font-size: 13px; color: rgba(250,246,238,0.45); margin-top: 6px; }
+  .pricing-body { padding: 28px 32px; }
+  .pricing-includes { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+  .pricing-includes li { font-size: 14px; color: #3a5246; display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; }
+  .check { color: var(--gold); font-weight: 700; flex-shrink: 0; }
+  .early-badge { background: rgba(201,150,58,0.12); border: 1px solid rgba(201,150,58,0.3); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #8a6020; margin-bottom: 20px; line-height: 1.5; }
+  /* NEW: commitment fee note */
+  .commitment-note { font-size: 12px; color: var(--muted); font-style: italic; margin-bottom: 20px; line-height: 1.6; padding: 0 2px; }
+  .btn-register { width: 100%; background: var(--gold); color: #fff; font-family: var(--font-body); font-size: 15px; font-weight: 500; padding: 16px; border: none; border-radius: 10px; cursor: pointer; transition: background 0.2s, transform 0.15s; letter-spacing: 0.01em; }
+  .btn-register:hover { background: #b0812e; transform: translateY(-1px); }
+
+  /* JOTFORM EMBED */
+  .form-embed-section { background: var(--warm-white); padding: 60px 40px; }
+  .form-embed-inner { max-width: 680px; margin: 0 auto; }
+  .form-embed-label { text-align: center; margin-bottom: 28px; }
+  .form-embed-label .section-label { justify-content: center; }
+  .form-embed-label .section-heading { margin: 0 auto 12px; text-align: center; }
+  .form-embed-label .section-sub { margin: 0 auto; text-align: center; }
+
+  /* FAQ */
+  .faq-section { background: var(--cream); }
+  .faq-list { max-width: 640px; display: flex; flex-direction: column; gap: 0; }
+  .faq-item { border-bottom: 1px solid rgba(26,48,40,0.12); padding: 20px 0; cursor: pointer; }
+  .faq-q { font-size: 15px; font-weight: 500; color: var(--forest); display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .faq-arrow { color: var(--gold); font-size: 18px; flex-shrink: 0; transition: transform 0.2s; }
+  .faq-item.open .faq-arrow { transform: rotate(45deg); }
+  .faq-a { font-size: 14px; color: #4a6055; line-height: 1.75; font-weight: 300; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s; }
+  .faq-item.open .faq-a { max-height: 300px; padding-top: 12px; }
+
+  /* CTA FOOTER */
+  .cta-footer { background: var(--forest); padding: 80px 40px; text-align: center; position: relative; overflow: hidden; }
+  .cta-footer::before { content: 'THRIVE'; position: absolute; font-family: var(--font-display); font-size: 220px; font-weight: 900; font-style: italic; color: rgba(255,255,255,0.03); top: 50%; left: 50%; transform: translate(-50%, -50%); white-space: nowrap; pointer-events: none; letter-spacing: -8px; }
+  .cta-footer h2 { font-family: var(--font-display); font-size: clamp(30px, 5vw, 50px); font-weight: 900; font-style: italic; color: var(--cream); line-height: 1.2; margin-bottom: 16px; position: relative; }
+  .cta-footer h2 span { color: var(--gold-light); }
+  .cta-footer p { font-size: 16px; color: rgba(250,246,238,0.65); line-height: 1.7; max-width: 460px; margin: 0 auto 36px; font-weight: 300; position: relative; }
+  .cta-footer .btn-primary { background: var(--gold); position: relative; font-size: 15px; padding: 16px 40px; }
+  .cta-footer .btn-primary:hover { background: var(--gold-light); color: var(--forest); }
+  .verse-footer { margin-top: 40px; font-size: 13px; font-style: italic; color: rgba(250,246,238,0.4); position: relative; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-left { animation: fadeUp 0.7s 0.1s both; }
+  .hero-visual { animation: fadeUp 0.7s 0.3s both; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .hero { grid-template-columns: 1fr; padding: 90px 20px 50px; gap: 40px; }
+    .hero-visual { display: none; }
+    section, .form-embed-section { padding: 56px 20px; }
+    .why-grid, .schedule-grid, .outcomes-grid, .fit-grid { grid-template-columns: 1fr; }
+    .proof-strip { gap: 24px; padding: 18px 20px; }
+    .cta-footer { padding: 60px 20px; }
+    .pricing-tiers { flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Thrive<span>.</span></div>
+  <button class="nav-cta" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Join Cohort 2 Waitlist</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Cohort 1 Completed · Cohort 2 Coming September 2026</div>
+    <h1>You're busy.<br>But are you going <em>anywhere?</em></h1>
+    <p class="hero-sub">Cohort 1 of Thrive: Identity & Purpose Seminar has just completed — and the results were everything we hoped for. Young adults walked away with a written identity statement, their top values named, and a North Star purpose statement they can navigate by.</p>
+    <p class="hero-sub" style="margin-top:-8px">Cohort 2 is coming in September 2026. Join the waitlist to be first in the room.</p>
+
+    <div class="hero-deliverables">
+      <div class="hd-label">The bold promise — after 3 days you will be able to</div>
+      <ul class="hd-list">
+        <li>Say who you are without borrowing someone else's words</li>
+        <li>Make decisions from the inside out — not from fear or pressure</li>
+        <li>Name your direction in one sentence and mean every word of it</li>
+      </ul>
+    </div>
+
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Join Cohort 2 Waitlist →</button>
+      <button class="btn-ghost" onclick="document.getElementById('schedule').scrollIntoView({behavior:'smooth'})">See what's inside</button>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card featured">
+      <div class="day-icon">✦</div>
+      <div class="day-label">Day 1 · The itch</div>
+      <div class="day-title">You've been living by labels that aren't yours.</div>
+      <div class="day-desc">We name them, dismantle them, and replace them with the truth of who God made you to be.</div>
+      <div class="day-outcome">→ You leave able to say who you are — in your own words.</div>
+    </div>
+    <div class="hero-card">
+      <div class="day-icon">◈</div>
+      <div class="day-label">Day 2 · The anchor</div>
+      <div class="day-title">You've been deciding without knowing what you stand for.</div>
+      <div class="day-desc">We surface the values already in you — and give them a name so they can do their job.</div>
+      <div class="day-outcome">→ You leave able to say no to the wrong things — with confidence.</div>
+    </div>
+    <div class="hero-card">
+      <div class="day-icon">◎</div>
+      <div class="day-label">Day 3 · The direction</div>
+      <div class="day-title">You've been moving — but not sure you're going anywhere.</div>
+      <div class="day-desc">Identity plus values equals direction. You write it down. You own it. You leave with it.</div>
+      <div class="day-outcome">→ You leave with a North Star you can navigate by on Monday.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF STRIP -->
+<div class="proof-strip">
+  <div class="proof-item"><strong>Cohort 1</strong> completed May 2026</div>
+  <div class="proof-item"><strong>Cohort 2</strong> coming September 2026</div>
+  <div class="proof-item"><strong>Ages 18–28</strong> welcome</div>
+  <div class="proof-item"><strong>Faith-rooted</strong> mentorship</div>
+  <div class="proof-item"><strong>1.5 hrs/day</strong> live + workbook</div>
+  <div class="proof-item"><strong>Community</strong> access included</div>
+</div>
+
+<!-- THE ITCH -->
+<section class="fit-section">
+  <div class="section-label" style="color:var(--gold-light)"><span style="display:inline-block;width:20px;height:1px;background:var(--gold-light);margin-right:8px"></span>Name the feeling</div>
+  <h2 class="section-heading" style="color:var(--cream);max-width:580px">You know something is <em>off.</em><br>Here's what it looks like.</h2>
+  <p class="section-sub">This isn't about being broken. It's about being 18–28 in a world that moves fast and never stops to ask: but who are <em>you</em> in the middle of all of it?</p>
+  <div class="fit-grid">
+    <div class="fit-card yes">
+      <div class="fit-card-title">The itch — you've felt this</div>
+      <ul class="fit-list">
+        <li>You say yes to things because it's easier than explaining why you want to say no</li>
+        <li>You compare yourself constantly — and you're never quite winning</li>
+        <li>You don't know how to describe who you are without listing what you do</li>
+        <li>You make decisions based on what others expect, then wonder why they don't feel right</li>
+        <li>You're moving — but not sure you're going anywhere that's actually yours</li>
+        <li>You've been waiting to "figure yourself out" before you start really living</li>
+      </ul>
+    </div>
+    <div class="fit-card no">
+      <div class="fit-card-title">What Thrive resolves</div>
+      <ul class="fit-list">
+        <li>You stop performing and start choosing — because you know what you're choosing from</li>
+        <li>You can say who you are without borrowing someone else's words</li>
+        <li>Your decisions come from your values — not from fear, pressure, or habit</li>
+        <li>You have a direction that's yours — written, named, and real</li>
+        <li>You know what Monday looks like — and the Monday after that</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why-section">
+  <div class="section-label">Why it matters</div>
+  <h2 class="section-heading">Not knowing who you are<br>is <em>costing you something.</em></h2>
+  <p class="section-sub">The problem isn't that you're lazy or lost. The problem is that nobody ever sat with you long enough to help you answer the questions that determine everything else. Thrive does that — in three days, with faith as the anchor and honesty as the method.</p>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">🪞</div>
+      <div class="why-title">When you don't know who you are</div>
+      <div class="why-body">You become what the room needs you to be. You shrink in some spaces and perform in others. You carry labels that were never yours. Thrive names that pattern — then helps you replace it with something true.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">⚖️</div>
+      <div class="why-title">When you don't know what you stand for</div>
+      <div class="why-body">Every decision becomes negotiable. You drift into relationships, commitments, and directions that don't fit — because you have no internal compass to say "this isn't me." Thrive builds that compass.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">📖</div>
+      <div class="why-title">What faith brings to the table</div>
+      <div class="why-body">Scripture doesn't tell you who to become. It tells you who you already are. Thrive uses that as a foundation — not a lecture. You don't need to have your faith figured out. You just need to be open.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">⚡</div>
+      <div class="why-title">Why 3 days is enough</div>
+      <div class="why-body">Because clarity isn't complicated — it's just rarely given the space it needs. Three focused sessions, honest work, and the right questions are enough to change how you see yourself. Then you carry that into every day after.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="schedule-section" id="schedule">
+  <div class="section-label">The experience</div>
+  <h2 class="section-heading">Three days.<br>Each one resolves <em>something real.</em></h2>
+  <p class="section-sub">Cohort 1 ran 12–14 May 2026 (EAT). Cohort 2 is coming in September 2026. Each day targets a specific part of the confusion — and ends with a written deliverable that proves you've moved through it.</p>
+  <div class="schedule-grid">
+    <div class="sched-card">
+      <div class="sched-header">
+        <div class="sched-day">Day 1 · Who Am I?</div>
+        <div class="sched-title">Who Am I?</div>
+        <div class="sched-outcome">You leave able to say who you are — in your own words, not borrowed ones.</div>
+      </div>
+      <div class="sched-body">
+        <div class="sched-verse">"I praise you because I am fearfully and wonderfully made." — Psalm 139:14</div>
+        <ul class="sched-list">
+          <li>The itch: you've been living by labels that were never yours</li>
+          <li>We name the labels, trace where they came from, and put them down</li>
+          <li>You discover your God-given design — strengths, wiring, story</li>
+          <li>You write your identity statement — your first deliverable</li>
+        </ul>
+        <span class="sched-practical">Practical · No theory without a tool</span>
+      </div>
+    </div>
+    <div class="sched-card">
+      <div class="sched-header">
+        <div class="sched-day">Day 2 · What Do I Value?</div>
+        <div class="sched-title">What Do I Value?</div>
+        <div class="sched-outcome">You leave able to make decisions from the inside — not from pressure, habit, or fear.</div>
+      </div>
+      <div class="sched-body">
+        <div class="sched-verse">"Guard your heart above all else, for it determines the course of your life." — Proverbs 4:23</div>
+        <ul class="sched-list">
+          <li>The itch: you've been deciding without knowing what you actually stand for</li>
+          <li>We surface the values already operating in your life — named and unnamed</li>
+          <li>You map your top 5, test them against your real decisions, and own them</li>
+          <li>You write your values statement — your second deliverable</li>
+        </ul>
+        <span class="sched-practical">Practical · No theory without a tool</span>
+      </div>
+    </div>
+    <div class="sched-card">
+      <div class="sched-header">
+        <div class="sched-day">Day 3 · Where Am I Going?</div>
+        <div class="sched-title">Where Am I Going?</div>
+        <div class="sched-outcome">You leave with a direction that is yours — written, specific, and ready for Monday.</div>
+      </div>
+      <div class="sched-body">
+        <div class="sched-verse">"For I know the plans I have for you," declares the Lord. — Jeremiah 29:11</div>
+        <ul class="sched-list">
+          <li>The itch: you've been moving without a destination that actually belongs to you</li>
+          <li>Identity plus values equals direction — we build yours step by step</li>
+          <li>You write your North Star Statement — your third and final deliverable</li>
+          <li>You leave knowing what comes next — the 30-day plan, community, and coaching</li>
+        </ul>
+        <span class="sched-practical">Practical · No theory without a tool</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTCOMES -->
+<section class="outcomes-section">
+  <div class="section-label" style="color:var(--gold-light)"><span style="display:inline-block;width:20px;height:1px;background:var(--gold-light);margin-right:8px"></span>What you can do after that you couldn't before</div>
+  <h2 class="section-heading" style="color:var(--cream);max-width:620px">The difference between<br>before and after <em>Thrive.</em></h2>
+  <p class="section-sub">These aren't abstract feelings. They're specific shifts in how you show up — in decisions, conversations, and the direction of your life.</p>
+  <div class="outcomes-grid">
+    <div class="outcome-item">
+      <div class="outcome-num">01</div>
+      <div class="outcome-text">You can describe who you are without listing your job, grades, or what you do for others. You have your own words now.</div>
+      <div class="outcome-tag">Identity statement written</div>
+    </div>
+    <div class="outcome-item">
+      <div class="outcome-num">02</div>
+      <div class="outcome-text">You can say no — clearly, without guilt — because you know what you're protecting when you do.</div>
+      <div class="outcome-tag">Values named and owned</div>
+    </div>
+    <div class="outcome-item">
+      <div class="outcome-num">03</div>
+      <div class="outcome-text">You can answer "where are you going?" in one sentence. And mean it. That sentence is your North Star Statement.</div>
+      <div class="outcome-tag">North Star Statement written</div>
+    </div>
+    <div class="outcome-item">
+      <div class="outcome-num">04</div>
+      <div class="outcome-text">You have 3 workbooks of honest written reflection — yours to return to whenever life gets loud and clarity starts to fade.</div>
+      <div class="outcome-tag">Yours to keep forever</div>
+    </div>
+    <div class="outcome-item">
+      <div class="outcome-num">05</div>
+      <div class="outcome-text">You're not alone in it. A community of peers who did the same work — and will call you back to it when you drift.</div>
+      <div class="outcome-tag">30-day support built in</div>
+    </div>
+    <div class="outcome-item">
+      <div class="outcome-num">06</div>
+      <div class="outcome-text">You know what comes next — practically, spiritually, and personally. The seminar ends. The clarity doesn't.</div>
+      <div class="outcome-tag">Optional 1-on-1 coaching</div>
+    </div>
+  </div>
+</section>
+
+<!-- SURVEY FIX 2: VALUE STACK -->
+<section class="value-section">
+  <div class="section-label">What you get</div>
+  <h2 class="section-heading">Everything included.<br>No <em>hidden extras.</em></h2>
+  <p class="section-sub">Here is exactly what Thrive delivers — so you know what you're joining when Cohort 2 opens in September 2026.</p>
+  <div class="value-stack">
+    <div class="vs-header">
+      <div class="vs-title">Thrive: Identity & Purpose Seminar</div>
+      <div class="vs-sub">Full access · Everything listed below</div>
+    </div>
+    <div class="vs-body">
+      <div class="vs-row"><span class="vs-item">3 live online sessions (1.5 hrs each, EAT)</span><span class="vs-val">KSh 600</span></div>
+      <div class="vs-row"><span class="vs-item">3 daily reflection workbooks (PDF, yours to keep)</span><span class="vs-val">KSh 200</span></div>
+      <div class="vs-row"><span class="vs-item">Access to the Thrive participant community</span><span class="vs-val">KSh 100</span></div>
+      <div class="vs-row"><span class="vs-item">30-day post-seminar follow-up email series</span><span class="vs-val">KSh 150</span></div>
+      <div class="vs-row"><span class="vs-item">Certificate of completion</span><span class="vs-val">Included</span></div>
+      <div class="vs-row"><span class="vs-item">Facilitator Q&A each day</span><span class="vs-val">Included</span></div>
+    </div>
+    <div class="vs-total">
+      <span class="vs-total-label">Cohort 2 pricing — to be confirmed</span>
+      <span class="vs-total-price" style="font-size:28px;padding-top:4px">September 2026</span>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonial-section">
+  <div class="section-label">Stories</div>
+  <h2 class="section-heading">Real young people.<br><em>Real</em> transformation.</h2>
+  <div class="testimonial-block">
+    <div class="testimonial-quote">"I came in not knowing what I wanted from life. I left knowing exactly who I was made to be. That's not something you can put a price on."</div>
+    <div class="testimonial-author">— Amara, 19 · Thrive Alumni</div>
+  </div>
+  <div class="testimonial-block" style="border-color: var(--sage)">
+    <div class="testimonial-quote">"The workbooks alone were worth it. I still go back to my purpose statement whenever I feel lost."</div>
+    <div class="testimonial-author">— Kofi, 22 · Thrive Alumni</div>
+  </div>
+</section>
+
+<!-- COHORT 2 WAITLIST -->
+<section class="pricing-section" id="register">
+  <div class="section-label">Cohort 2 · September 2026</div>
+  <h2 class="section-heading">Cohort 1 is done.<br><em>You're next.</em></h2>
+  <p class="section-sub">Cohort 1 completed in May 2026 — and the feedback has been extraordinary. Cohort 2 opens in September 2026. Join the waitlist to be notified first, secure early bird pricing, and get your spot before general registration opens.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:900px">
+
+    <div class="pricing-card" style="max-width:100%">
+      <div class="pricing-header">
+        <div class="pricing-tag">Identity &amp; Purpose Seminar · Cohort 2</div>
+        <div class="pricing-name">September 2026</div>
+        <div style="font-size:38px;font-weight:300;color:#fff;line-height:1;margin:12px 0 4px">Online · 3 days</div>
+        <div class="pricing-period">Exact dates · pricing · and schedule coming soon</div>
+      </div>
+      <div class="pricing-body">
+        <div class="early-badge">🌿 Cohort 1 was a resounding success. Join the waitlist — you'll be the first to know when Cohort 2 opens.</div>
+        <ul class="pricing-includes">
+          <li><span class="check">✓</span> 3 live online sessions (1.5 hrs each · EAT)</li>
+          <li><span class="check">✓</span> Daily workbooks — identity, values, purpose</li>
+          <li><span class="check">✓</span> Thrive participant community access</li>
+          <li><span class="check">✓</span> 30-day post-seminar email series</li>
+          <li><span class="check">✓</span> Certificate of completion</li>
+          <li><span class="check">✓</span> Optional 1-on-1 coaching follow-up</li>
+        </ul>
+        <a href="mailto:teensmentor365@gmail.com?subject=Thrive Cohort 2 Waitlist&body=Hi Janet,%0A%0APlease add me to the Thrive Cohort 2 waitlist.%0A%0AName:%0AAge:%0AWhatsApp number:%0A%0ALooking forward to it!" class="btn-register" style="display:block;text-align:center;text-decoration:none;padding:16px">Join Cohort 2 Waitlist →</a>
+        <p style="font-size:12px;color:var(--muted);margin-top:10px;text-align:center">Opens a pre-filled email — takes 30 seconds.</p>
+      </div>
+    </div>
+
+    <div class="pricing-card" style="max-width:100%">
+      <div class="pricing-header" style="background:var(--sage)">
+        <div class="pricing-tag">Faith-based Bootcamp · November 2026</div>
+        <div class="pricing-name">Thrive Bootcamp 🏕️</div>
+        <div style="font-size:38px;font-weight:300;color:#fff;line-height:1;margin:12px 0 4px">Immersive</div>
+        <div class="pricing-period">Residential · Dates and details being confirmed</div>
+      </div>
+      <div class="pricing-body">
+        <div class="early-badge">🏕️ An intensive residential experience — deeper, longer, and more immersive than the seminar. Perfect for those who want to go further.</div>
+        <ul class="pricing-includes">
+          <li><span class="check">✓</span> Immersive multi-day residential experience</li>
+          <li><span class="check">✓</span> Daily Bible study, worship and reflection</li>
+          <li><span class="check">✓</span> Leadership and team-building challenges</li>
+          <li><span class="check">✓</span> Community service and outreach</li>
+          <li><span class="check">✓</span> Full identity, values and purpose framework</li>
+          <li><span class="check">✓</span> Mentorship and small group conversations</li>
+        </ul>
+        <a href="mailto:teensmentor365@gmail.com?subject=Thrive Bootcamp November 2026 — notify me&body=Hi Janet,%0A%0APlease notify me when Thrive Bootcamp registration opens.%0A%0AName:%0AAge:%0AWhatsApp number:" class="btn-register" style="display:block;text-align:center;text-decoration:none;padding:16px;background:var(--sage)">Notify Me About the Bootcamp →</a>
+        <p style="font-size:12px;color:var(--muted);margin-top:10px;text-align:center">Opens a pre-filled email — takes 30 seconds.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- COHORT 1 ALUMNI -->
+<section class="form-embed-section" id="community" style="background:var(--forest)">
+  <div class="form-embed-inner" style="text-align:center">
+    <div style="font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-light);margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:8px"><span style="display:block;width:20px;height:1px;background:var(--gold-light)"></span>Cohort 1 Alumni<span style="display:block;width:20px;height:1px;background:var(--gold-light)"></span></div>
+    <h2 style="font-family:var(--font-display);font-size:clamp(26px,4vw,40px);font-weight:900;color:var(--cream);line-height:1.2;margin-bottom:14px">You did something<br><em style="color:var(--gold-light)">real here.</em></h2>
+    <p style="font-size:15px;color:rgba(250,246,238,.65);line-height:1.8;font-weight:300;max-width:520px;margin:0 auto 28px">Cohort 1 is complete. The community you built is still alive — in the WhatsApp group, in the 30-day email series, and in the North Star Statements you wrote on Day 3. Stay connected. Your journey doesn't end here.</p>
+    <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap">
+      <a href="mailto:teensmentor365@gmail.com?subject=Thrive Cohort 2 Waitlist&body=Hi Janet,%0A%0APlease add me to the Thrive Cohort 2 waitlist.%0A%0AName:%0AAge:%0AWhatsApp number:" style="background:var(--gold);color:#fff;font-family:var(--font-body);font-size:14px;font-weight:500;padding:14px 28px;border-radius:99px;text-decoration:none;transition:background .2s">Join Cohort 2 Waitlist →</a>
+      <a href="coach.html" style="background:transparent;color:var(--cream);font-family:var(--font-body);font-size:14px;font-weight:500;padding:13px 24px;border-radius:99px;border:1.5px solid rgba(250,246,238,.3);text-decoration:none">Meet your coach</a>
+    </div>
+    <p style="font-size:12px;font-style:italic;color:rgba(250,246,238,.25);margin-top:24px">"For we are God's handiwork, created in Christ Jesus to do good works." — Ephesians 2:10</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="section-label">Questions</div>
+  <h2 class="section-heading">We've got <em>answers.</em></h2>
+  <div class="faq-list">
+
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">What exactly will I walk away with? <span class="faq-arrow">+</span></div>
+      <div class="faq-a">Three concrete, written deliverables: a personal identity statement (Day 1), your top 5 values articulated in your own words (Day 2), and a North Star purpose statement (Day 3). These are not abstract feelings — they are written documents you keep and return to. You also receive 3 workbooks, a 30-day email series, community access, and a certificate of completion.</div>
+    </div>
+
+    <!-- SURVEY FIX 2: Faith-rooted not faith-exclusive -->
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Do I need to be religious or have a church background? <span class="faq-arrow">+</span></div>
+      <div class="faq-a">No. Thrive is faith-rooted but not faith-exclusive. Our framework draws on Scripture because we believe it offers timeless wisdom on identity and purpose — but you don't need a church background to benefit. You don't need to have your faith figured out. We share these truths with warmth, not pressure, and every participant is welcomed exactly where they are.</div>
+    </div>
+
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Is this all theory or will it be practical? <span class="faq-arrow">+</span></div>
+      <div class="faq-a">Every session is built around the principle: no theory without a tool. We never lecture for more than 25 minutes before moving into a solo exercise, peer breakout, or workbook activity. The sessions are designed to feel like a workshop, not a class. By the end of each day you have something written — not just something heard.</div>
+    </div>
+
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">What happens after the seminar ends? <span class="faq-arrow">+</span></div>
+      <div class="faq-a">The work doesn't stop on Day 3. You receive a 30-day post-seminar email series designed to keep you anchored to what you discovered. You also stay connected through the Thrive community. For those who want to go deeper, 1-on-1 coaching is available after the seminar — just indicate your interest on your Post-Session Reflection form.</div>
+    </div>
+
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Why is there a commitment fee rather than a free registration? <span class="faq-arrow">+</span></div>
+      <div class="faq-a">Because people who invest — even a small amount — show up differently. A commitment fee is your way of telling yourself: I'm serious about this. Cohort 1 participants found it made a real difference to how they engaged. Cohort 2 pricing will be confirmed when registration opens — join the waitlist to be first to know.</div>
+    </div>
+
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">What if I can't make one of the live sessions? <span class="faq-arrow">+</span></div>
+      <div class="faq-a">We strongly encourage attending live — the community experience is central to how Thrive works. If you have a scheduling conflict, reach out to us before registering and we'll do our best to find a solution. Each session builds on the previous one, so attendance across all 3 days makes the biggest difference.</div>
+    </div>
+
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">What do I need to participate? <span class="faq-arrow">+</span></div>
+      <div class="faq-a">A phone or laptop with reliable internet, a quiet space where you can speak and listen freely, something to write with, and an open heart. We handle everything else. Sessions are designed to work even on a phone with limited data.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA FOOTER -->
+<section class="cta-footer">
+  <h2>Cohort 1 proved it.<br><span>Cohort 2 is your turn.</span></h2>
+  <p>Three days. Three questions. One direction that is finally yours. Cohort 2 opens September 2026 — and the Bootcamp follows in November. Don't wait until you have it figured out. That's exactly what Thrive is for.</p>
+  <a href="mailto:teensmentor365@gmail.com?subject=Thrive Cohort 2 Waitlist&body=Hi Janet,%0A%0APlease add me to the Thrive Cohort 2 waitlist.%0A%0AName:%0AAge:%0AWhatsApp number:" class="btn-primary" style="display:inline-block;text-decoration:none;background:var(--gold);padding:16px 40px;border-radius:99px;font-size:15px;font-weight:500;color:#fff">Join Cohort 2 Waitlist →</a>
+  <div class="verse-footer">"For we are God's handiwork, created in Christ Jesus to do good works." — Ephesians 2:10</div>
+</section>
+
+</body>
+</html>

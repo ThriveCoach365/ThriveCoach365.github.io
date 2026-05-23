@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resources — Thrive</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #C9963A; --gold-light: #F0C97A; --forest: #1A3028; --sage: #2F5243;
+    --cream: #FAF6EE; --warm-white: #FDF9F3; --muted: #8A9E94;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--warm-white); color: var(--forest); overflow-x: hidden; line-height: 1.6; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 40px; background: rgba(253,249,243,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201,150,58,0.15); }
+  .nav-logo { font-family: var(--font-display); font-size: 22px; font-weight: 900; color: var(--forest); text-decoration: none; letter-spacing: -0.5px; }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--sage); text-decoration: none; transition: color .2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--forest); }
+  .nav-cta { background: var(--gold); color: #fff; font-family: var(--font-body); font-size: 13px; font-weight: 500; padding: 10px 22px; border-radius: 99px; border: none; cursor: pointer; text-decoration: none; transition: background .2s; }
+  .nav-cta:hover { background: #b0812e; }
+
+  /* HERO */
+  .hero { background: var(--forest); padding: 140px 40px 80px; position: relative; overflow: hidden; }
+  .hero::before { content: 'READ'; position: absolute; font-family: var(--font-display); font-size: 280px; font-weight: 900; font-style: italic; color: rgba(255,255,255,0.025); bottom: -40px; right: -20px; pointer-events: none; letter-spacing: -8px; }
+  .hero-inner { max-width: 700px; position: relative; z-index: 1; animation: fadeUp .7s .1s both; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 20px; }
+  .hero-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+  .hero h1 { font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); font-weight: 900; line-height: 1.1; color: var(--cream); letter-spacing: -1.5px; margin-bottom: 20px; }
+  .hero h1 em { font-style: italic; color: var(--gold-light); }
+  .hero-lead { font-size: 16px; color: rgba(250,246,238,.65); line-height: 1.85; font-weight: 300; }
+
+  /* FILTER */
+  .filter-bar { background: var(--cream); padding: 20px 40px; border-bottom: 1px solid rgba(201,150,58,.12); display: flex; gap: 8px; flex-wrap: wrap; position: sticky; top: 64px; z-index: 90; }
+  .filter-btn { font-size: 12px; font-weight: 500; padding: 6px 16px; border-radius: 99px; border: 0.5px solid rgba(26,48,40,.2); background: transparent; color: var(--sage); cursor: pointer; transition: all .15s; }
+  .filter-btn.active, .filter-btn:hover { background: var(--forest); color: var(--cream); border-color: var(--forest); }
+
+  /* ARTICLES */
+  .articles-section { padding: 60px 40px 96px; }
+  .articles-inner { max-width: 1100px; margin: 0 auto; }
+  .featured-article { display: grid; grid-template-columns: 1fr 1.2fr; gap: 48px; align-items: center; background: var(--cream); border: 1px solid rgba(201,150,58,.15); border-radius: 20px; overflow: hidden; margin-bottom: 24px; }
+  .fa-visual { background: var(--forest); min-height: 340px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 40px; }
+  .fa-visual::before { content: attr(data-num); position: absolute; font-family: var(--font-display); font-size: 180px; font-weight: 900; font-style: italic; color: rgba(255,255,255,.06); right: -10px; bottom: -20px; pointer-events: none; }
+  .fa-tag { font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 10px; }
+  .fa-title { font-family: var(--font-display); font-size: 28px; font-weight: 900; color: var(--cream); line-height: 1.2; }
+  .fa-content { padding: 40px 40px 40px 0; }
+  .fa-category { display: inline-block; font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); background: rgba(201,150,58,.1); padding: 3px 10px; border-radius: 99px; margin-bottom: 14px; }
+  .fa-heading { font-family: var(--font-display); font-size: 26px; font-weight: 900; color: var(--forest); line-height: 1.2; margin-bottom: 14px; }
+  .fa-excerpt { font-size: 15px; color: #4a6055; line-height: 1.8; font-weight: 300; margin-bottom: 20px; }
+  .fa-verse { font-size: 13px; font-style: italic; color: var(--sage); border-left: 2px solid var(--gold-light); padding-left: 12px; margin-bottom: 20px; line-height: 1.6; }
+  .fa-read { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: var(--gold); text-decoration: none; cursor: pointer; }
+  .fa-read:hover { color: var(--forest); }
+
+  .articles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 8px; }
+  .article-card { background: var(--cream); border: 1px solid rgba(201,150,58,.12); border-radius: 16px; overflow: hidden; cursor: pointer; transition: transform .2s, box-shadow .2s; }
+  .article-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(26,48,40,.1); }
+  .ac-header { background: var(--forest); padding: 24px 22px 18px; position: relative; overflow: hidden; min-height: 120px; }
+  .ac-header::before { content: attr(data-icon); position: absolute; font-size: 80px; right: -10px; bottom: -16px; pointer-events: none; opacity: .15; }
+  .ac-category { font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 8px; }
+  .ac-title { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--cream); line-height: 1.3; }
+  .ac-body { padding: 18px 22px 22px; }
+  .ac-excerpt { font-size: 13px; color: #4a6055; line-height: 1.7; font-weight: 300; margin-bottom: 14px; }
+  .ac-verse { font-size: 12px; font-style: italic; color: var(--muted); border-left: 1.5px solid rgba(201,150,58,.3); padding-left: 10px; line-height: 1.55; margin-bottom: 14px; }
+  .ac-read { font-size: 12px; font-weight: 500; color: var(--gold); text-decoration: none; }
+
+  /* ARTICLE MODAL */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(14,27,20,.7); backdrop-filter: blur(8px); z-index: 200; display: none; align-items: flex-start; justify-content: center; padding: 20px; overflow-y: auto; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--warm-white); border-radius: 20px; max-width: 720px; width: 100%; margin: auto; position: relative; animation: fadeUp .25s ease both; }
+  .modal-header { background: var(--forest); border-radius: 20px 20px 0 0; padding: 36px 40px 28px; position: relative; overflow: hidden; }
+  .modal-header::before { content: attr(data-num); position: absolute; font-family: var(--font-display); font-size: 160px; font-weight: 900; font-style: italic; color: rgba(255,255,255,.05); right: -10px; top: -20px; pointer-events: none; }
+  .modal-cat { font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 8px; }
+  .modal-title { font-family: var(--font-display); font-size: 28px; font-weight: 900; color: var(--cream); line-height: 1.2; }
+  .modal-close { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,.1); border: none; color: var(--cream); width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; transition: background .2s; }
+  .modal-close:hover { background: rgba(255,255,255,.2); }
+  .modal-body { padding: 32px 40px 40px; }
+  .modal-body p { font-size: 15px; color: #3d5548; line-height: 1.95; font-weight: 300; margin-bottom: 20px; }
+  .modal-body p:last-child { margin-bottom: 0; }
+  .modal-body strong { font-weight: 500; color: var(--forest); }
+  .modal-body em { font-style: italic; }
+  .modal-verse { background: var(--forest); border-radius: 12px; padding: 18px 22px; margin: 24px 0; }
+  .mv-text { font-size: 14px; font-style: italic; color: var(--cream); line-height: 1.7; margin-bottom: 5px; }
+  .mv-ref { font-size: 11px; color: var(--gold-light); font-weight: 500; }
+  .modal-list { list-style: none; margin: 12px 0 20px; display: flex; flex-direction: column; gap: 10px; }
+  .modal-list li { font-size: 15px; color: #3d5548; display: flex; gap: 10px; align-items: flex-start; line-height: 1.7; font-weight: 300; }
+  .modal-list li::before { content: '—'; color: var(--gold); flex-shrink: 0; font-weight: 500; }
+  .modal-prayer { background: rgba(201,150,58,.08); border: 1px solid rgba(201,150,58,.2); border-radius: 10px; padding: 16px 20px; margin-top: 24px; font-size: 14px; font-style: italic; color: var(--sage); line-height: 1.7; }
+
+  /* BIBLE PROMISES TEASER */
+  .promises-teaser { background: var(--sage); padding: 80px 40px; text-align: center; }
+  .pt-inner { max-width: 640px; margin: 0 auto; }
+  .pt-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 20px; }
+  .pt-eyebrow::before { content: ''; display: block; width: 20px; height: 1px; background: var(--gold); }
+  .pt-heading { font-family: var(--font-display); font-size: clamp(26px, 3.5vw, 38px); font-weight: 900; color: var(--cream); line-height: 1.15; margin-bottom: 14px; }
+  .pt-heading em { font-style: italic; color: var(--gold-light); }
+  .pt-sub { font-size: 15px; color: rgba(250,246,238,.65); line-height: 1.75; font-weight: 300; margin-bottom: 28px; }
+  .pt-btn { background: var(--gold); color: #fff; font-family: var(--font-body); font-size: 14px; font-weight: 500; padding: 13px 30px; border-radius: 99px; border: none; cursor: pointer; text-decoration: none; transition: background .2s; }
+  .pt-btn:hover { background: #b0812e; }
+
+  footer { background: var(--forest); padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .footer-logo { font-family: var(--font-display); font-size: 20px; font-weight: 900; color: var(--cream); }
+  .footer-logo span { color: var(--gold); }
+  .footer-verse { font-size: 12px; font-style: italic; color: rgba(250,246,238,.3); }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+  @media(max-width:860px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 110px 20px 60px; }
+    .filter-bar { padding: 16px 20px; top: 58px; }
+    .articles-section { padding: 40px 20px 64px; }
+    .featured-article { grid-template-columns: 1fr; }
+    .fa-visual { min-height: 180px; }
+    .fa-content { padding: 28px 24px; }
+    .articles-grid { grid-template-columns: 1fr; }
+    .modal-body { padding: 24px; }
+    .modal-header { padding: 28px 24px 20px; }
+    .promises-teaser { padding: 56px 20px; }
+    footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="seminar.html">Thrive<span>.</span></a>
+  <div class="nav-links">
+    <a href="about.html">About</a>
+    <a href="resources.html" class="active">Resources</a>
+    <a href="programmes.html">Programmes</a>
+    <a href="coach.html">Meet the Coach</a>
+  </div>
+  <a class="nav-cta" href="seminar.html#register">Join Cohort 2 Waitlist</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Resources · Teen Life</div>
+    <h1>Honest writing<br>for <em>real life.</em></h1>
+    <p class="hero-lead">Real stories, practical wisdom, and faith-rooted reflection — written for young people navigating identity, purpose, failure, and the search for what matters. From Janet's own journey and the voices of those who've walked the path before you.</p>
+  </div>
+</section>
+
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterArticles('all',this)">All</button>
+  <button class="filter-btn" onclick="filterArticles('identity',this)">Identity</button>
+  <button class="filter-btn" onclick="filterArticles('purpose',this)">Purpose</button>
+  <button class="filter-btn" onclick="filterArticles('character',this)">Character</button>
+  <button class="filter-btn" onclick="filterArticles('faith',this)">Faith</button>
+  <button class="filter-btn" onclick="filterArticles('relationships',this)">Relationships</button>
+</div>
+
+<section class="articles-section">
+  <div class="articles-inner">
+
+    <!-- FEATURED -->
+    <div class="featured-article" data-cat="identity">
+      <div class="fa-visual" data-num="7">
+        <div>
+          <div class="fa-tag">Featured · Identity</div>
+          <div class="fa-title">Seven Reasons<br>You Matter</div>
+        </div>
+      </div>
+      <div class="fa-content">
+        <span class="fa-category">Identity</span>
+        <h2 class="fa-heading">Seven Reasons You Matter</h2>
+        <p class="fa-excerpt">At fourteen, Janet wondered if she mattered to anyone — not the brightest in class, not from the most elite family, carrying brown stained teeth and a shattered self-esteem. Then a stranger said something that changed everything. And the Bible said seven things that confirmed it.</p>
+        <div class="fa-verse">"I praise you because I am fearfully and wonderfully made; your works are wonderful, I know that full well." — Psalm 139:14</div>
+        <a class="fa-read" onclick="openModal('seven-reasons')">Read the full article →</a>
+      </div>
+    </div>
+
+    <div class="articles-grid">
+      <!-- FEAR OF FAILURE -->
+      <div class="article-card" data-cat="character" onclick="openModal('fear-failure')">
+        <div class="ac-header" data-icon="💪">
+          <div class="ac-category">Character</div>
+          <div class="ac-title">Fear of Failure and Overcoming It</div>
+        </div>
+        <div class="ac-body">
+          <p class="ac-excerpt">She sat there petrified. Afraid to take the assignment. Afraid to fail. Janet unpacks perfectionism, pride, and the approval addiction — and offers five practical steps to deal with failure constructively.</p>
+          <div class="ac-verse">"He whose trust is in God will with Paul be able to say, 'I can do all things in Him that strengtheneth me.'" — Philippians 4:13</div>
+          <a class="ac-read">Read more →</a>
+        </div>
+      </div>
+
+      <!-- SEARCH FOR SIGNIFICANCE -->
+      <div class="article-card" data-cat="purpose" onclick="openModal('significance')">
+        <div class="ac-header" data-icon="🎯">
+          <div class="ac-category">Purpose</div>
+          <div class="ac-title">Search for Significance</div>
+        </div>
+        <div class="ac-body">
+          <p class="ac-excerpt">What happens when your to-do list defines your worth — and then everything goes wrong? A personal story about being demoted, doubting yourself, and finding a reset that goes deeper than performance.</p>
+          <div class="ac-verse">"Don't let anyone look down on you because you are young, but set an example in speech, in conduct, in love, in faith and in purity." — 1 Timothy 4:12</div>
+          <a class="ac-read">Read more →</a>
+        </div>
+      </div>
+
+      <!-- SECRETS OF SUCCESS -->
+      <div class="article-card" data-cat="character" onclick="openModal('success')">
+        <div class="ac-header" data-icon="⭐">
+          <div class="ac-category">Character</div>
+          <div class="ac-title">Seven Secrets to Unparalleled Success</div>
+        </div>
+        <div class="ac-body">
+          <p class="ac-excerpt">A favourite, spoiled son. Sold into slavery. Falsely accused. Imprisoned. And yet — Joseph was one of the most successful people in the Bible. Seven reasons why, and what you can do in the 21st century to follow suit.</p>
+          <div class="ac-verse">"The Lord was with Joseph, and he was a successful man." — Genesis 39:2</div>
+          <a class="ac-read">Read more →</a>
+        </div>
+      </div>
+
+      <!-- TRUE MEANING OF LIFE -->
+      <div class="article-card" data-cat="relationships" onclick="openModal('true-meaning')">
+        <div class="ac-header" data-icon="💛">
+          <div class="ac-category">Relationships</div>
+          <div class="ac-title">The True Meaning of Life</div>
+        </div>
+        <div class="ac-body">
+          <p class="ac-excerpt">For years, Janet thought life consisted of the latest gadgets, what people thought of her, and academic excellence. Here's what she learned — the hard way — about what actually matters at the end.</p>
+          <div class="ac-verse">"Build meaningful relationships. That's what matters." — Janet Oyende</div>
+          <a class="ac-read">Read more →</a>
+        </div>
+      </div>
+
+      <!-- I WISH SOMEONE TOLD ME -->
+      <div class="article-card" data-cat="identity" onclick="openModal('wish-told')">
+        <div class="ac-header" data-icon="✉️">
+          <div class="ac-category">Identity & Wisdom</div>
+          <div class="ac-title">I Wish Someone Told Me</div>
+        </div>
+        <div class="ac-body">
+          <p class="ac-excerpt">Janet asked friends — some approaching 70 — what they wished someone had told them as teenagers. The responses are witty, profound, and totally relatable. A collection of wisdom from those who've already walked the road you're on.</p>
+          <div class="ac-verse">"I wish I was told it's OK to say no, and that my opinion matters without feeling guilty." — A reader</div>
+          <a class="ac-read">Read more →</a>
+        </div>
+      </div>
+
+      <!-- COUNSEL TO MY TEEN SELF -->
+      <div class="article-card" data-cat="faith" onclick="openModal('counsel-teen')">
+        <div class="ac-header" data-icon="📝">
+          <div class="ac-category">Faith & Life Skills</div>
+          <div class="ac-title">Counsel to My Teen Self</div>
+        </div>
+        <div class="ac-body">
+          <p class="ac-excerpt">If you could write a letter to your younger self, what would it say? Real responses from real people — about saving early, learning to study deeply, saying no, and the things that matter more than grades.</p>
+          <div class="ac-verse">"Be yourself and let people like you for who you are." — Sammy Idowu</div>
+          <a class="ac-read">Read more →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="promises-teaser">
+  <div class="pt-inner">
+    <div class="pt-eyebrow">Bible Promises</div>
+    <h2 class="pt-heading">Twenty-two promises<br>for every <em>teen.</em></h2>
+    <p class="pt-sub">In her own teenage years, Janet found passages in the Bible that were as a bulwark — a strong defence, for protection and guidance, in a very turbulent time. Here are the ones she took to heart, with reflections for the young person carrying them today.</p>
+    <a class="pt-btn" href="promises.html">Read the promises →</a>
+  </div>
+</section>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal-content">
+    <div class="modal-header" id="modal-header" data-num="">
+      <div class="modal-cat" id="modal-cat"></div>
+      <div class="modal-title" id="modal-title"></div>
+      <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Thrive<span>.</span></div>
+  <div class="footer-verse">"For we are God's handiwork, created in Christ Jesus to do good works." — Ephesians 2:10</div>
+</footer>
+
+<script>
+const articles = {
+  'seven-reasons': {
+    cat: 'Identity', num: '7', title: 'Seven Reasons You Matter',
+    body: `<p>I was fourteen and wondered if I mattered to anyone — if I was a mistake, if I was going to amount to anything.</p>
+<p>I was not the brightest in class. I always seemed to be at the tail end, especially in arts and languages. I did not come from the most elite of families. My father settled in a suburb where there were more farm animals than people. A terrible thing for a teenager. The water had too much fluoride and it stained my teeth a rich shade of brown. This ate out all my self-esteem. My skin tone was dark rather than light. My hair was curly and brown rather than straight and black. I felt not-pretty-enough, not-bright-enough, not-from-the-best-suburb. <strong>I did not matter to anyone.</strong></p>
+<p>Then one day, a stranger walked up to me and said: "You have a wonderful smile." Me? Even with stained teeth? But he said it. My facial expression transformed. I started smiling so much more.</p>
+<p>Later, as I read through the Bible, I came across verses that told me who I was. Here are the seven that convinced me.</p>
+<p><strong>1. Delicate.</strong> "You made all the delicate, inner parts of my body and knit me together in my mother's womb." Psalm 139:13. Delicate does not mean weak — it means intricate quality. When you understand how intricate you are, you will not allow yourself to be manipulated by others. You will define and communicate your boundaries.</p>
+<p><strong>2. Wonderfully complex.</strong> "Thank you for making me so wonderfully complex! Your workmanship is marvellous." Psalm 139:14. Sadly, most of us do not know how wonderfully we are made. And because we don't know it, we often indulge in risky behaviour, totally unaware that we are destroying a wonderfully complex person.</p>
+<p><strong>3. Watched over.</strong> "You watched me as I was being formed in utter seclusion... You saw me before I was born." Psalm 139:15. God did not create you and leave you to your own devices. He watched over your intricate development — and He is watching over you with tender care today. You are not alone.</p>
+<p><strong>4. Not a mistake.</strong> "Every day of my life was recorded in your book. Every moment was laid out before a single day had passed." Psalm 139:16. Perhaps you have been told you are an accident, that you were not planned for. That may not be true according to God's account. Nothing catches Him by surprise. He had planned for you way before your parents thought of you.</p>
+<p><strong>5. Precious.</strong> "How precious are your thoughts about me, O God. They cannot be numbered — they outnumber the grains of sand!" Psalm 139:17-18. Impossible to count. His plans and intentions for your life are incredibly more than you could ever ask or imagine. Do not think lowly of yourself. You are precious in God's sight.</p>
+<p><strong>6. Not Alone.</strong> "And when I wake up, you are still with me!" Psalm 139:18. Life can be very lonely. There are times we may be in a crowd but feel so left out. The good news is that you are not alone. God is still with you.</p>
+<p><strong>7. Loved.</strong> "I have loved you with an everlasting love. With unfailing love, I have drawn you to myself." Jeremiah 31:3. If there was one word to summarise all the above reasons, it would be love. God loves you. Yes, you.</p>
+<div class="modal-prayer">Delicate. Wonderfully complex. Watched over. Not a mistake. Precious. Not alone. Loved. That is your true identity. Believe it. Own it. Live it. Thinking anything less of yourself would be an injustice to yourself — and a distrust of God.</div>`
+  },
+  'fear-failure': {
+    cat: 'Character', num: '5', title: 'Fear of Failure and Overcoming It',
+    body: `<p>I sat there petrified. Fear held me back. I hesitated — should I? Should I not? I wanted to take up the work assignment but doubted my abilities. The thought of failing mortified me to inaction.</p>
+<p>Why was I afraid? <strong>Perfectionism</strong> — I held an impossibly high standard for myself, accompanied by critical self-evaluation. <strong>Pride</strong> — I based my self-worth on my performance. <strong>Fear of disapproval</strong> — more than I wanted to acknowledge, I was probably an approval addict.</p>
+<p>As a result, I avoided risks, had anxiety attacks about my performance, and self-condemned myself when I failed. I remember my failing grades in high school. Life seems cut out for failure — but we fear it, are not prepared for it, and most people do not talk about it.</p>
+<p>So how can we deal with failure constructively? Here are the <strong>5 A's</strong>:</p>
+<ul class="modal-list">
+  <li><strong>Acknowledge</strong> — own up to your state of mind and emotions. Naming it frees the mind to act.</li>
+  <li><strong>Ask for help</strong> — you do not need to know all things. Asking for help is confessing that you are human and humble enough to know it.</li>
+  <li><strong>Avail yourself to learn</strong> — either through self-learning, attaching yourself to a mentor, or going to school. Continual growth is one of the keys to unparalleled success.</li>
+  <li><strong>Allow yourself to fail</strong> — there is no guarantee of success. Recognise that your life is not made up of that one failure. It is one chapter of many.</li>
+  <li><strong>Award progress</strong> — celebrate each small milestone. A pat on the shoulder. A treat. Whatever virtuous way to award each step forward.</li>
+</ul>
+<div class="modal-verse"><div class="mv-text">"He whose trust is in God will with Paul be able to say, 'I can do all things in Him that strengtheneth me.' Whatever the mistakes or failures of the past, we may, with the help of God, press on."</div><div class="mv-ref">Philippians 4:13</div></div>
+<p>Einstein couldn't speak until he was four. He didn't read until he was seven. His teachers called him mentally slow. He went on to win the Nobel Prize. He believed: <em>"Success is failure in progress."</em> Just because you haven't achieved anything great yet does not mean you cannot be an Einstein yourself.</p>
+<div class="modal-prayer">Lord, help me to press forward even when I fail. Remind me that my worth is not in my performance but in You — and that every failure is a step in the education of a life well lived.</div>`
+  },
+  'significance': {
+    cat: 'Purpose', num: '4', title: 'Search for Significance',
+    body: `<p>If you are like me — a high-achiever — you probably find a lot of meaning in your education, work, or trophies of whatever nature. Attainments of any form grant you much significance. Loss of any may cause real distress.</p>
+<p>It happened to me. I was requested to take up an assignment that was beyond my scope and training. A year down the line, my to-do list had over 90% pending items. My boss called me in and said, "I would like to restructure your department." A politically correct statement meaning: I was demoted. <em>Ouch.</em></p>
+<p>I began to doubt myself. I had always met my deadlines. I was commended for my contribution. But not anymore. I felt really discouraged, dejected — and I wanted out.</p>
+<p>There are many of us who find significance in things like:</p>
+<ul class="modal-list">
+  <li><strong>Performance</strong> — "I must meet certain standards to feel good about myself."</li>
+  <li><strong>Approval</strong> — "I must be approved by certain people to feel good about myself."</li>
+  <li><strong>Blame</strong> — "Those who fail are unworthy of love and deserve to be punished."</li>
+  <li><strong>Shame</strong> — "I am what I am; I cannot change; I am hopeless."</li>
+</ul>
+<p>Realising I was placing significance in the wrong places, I needed a reset. And this was it:</p>
+<p><strong>My calling is more than what I do or do not do. My purpose is not defined by my career, physical ability, or social status.</strong> It is not based on temporary things. Neither is yours. It is based on God's truth. And that purpose is much greater, much higher than our careers or personal accolades.</p>
+<div class="modal-verse"><div class="mv-text">"Don't let anyone look down on you because you are young, but set an example for the believers in speech, in conduct, in love, in faith and in purity."</div><div class="mv-ref">1 Timothy 4:12 NIV</div></div>
+<p>The One who created us defined our purpose and desires to fulfil it in us daily. What I become is more important than what I do. What you become is more important than what you do.</p>
+<div class="modal-prayer">Dear God, help me to remember that the work I do is not as important as the person I become. Please make me more like You.</div>`
+  },
+  'success': {
+    cat: 'Character', num: '7', title: 'Seven Secrets to Unparalleled Success',
+    body: `<p>Let us talk about success for a minute. Let us look at Joseph — a favourite, spoiled son who was sold into slavery by his own brothers, falsely accused, and imprisoned. Yet he became one of the most successful people in the Bible. What made him stand out?</p>
+<div class="modal-verse"><div class="mv-text">"The Lord was with Joseph, and he was a successful man... his master saw that the Lord was with him and that the Lord made all he did to prosper in his hand."</div><div class="mv-ref">Genesis 39:2-3, NKJV</div></div>
+<ul class="modal-list">
+  <li><strong>Fidelity to God</strong> — unashamed before the heathens. Egypt was the most civilised nation and idolatry was rampant. Joseph stayed faithful anyway.</li>
+  <li><strong>Industry, care and passion</strong> towards all his work — knowing he was working for God and not merely for men (Colossians 3:23).</li>
+  <li><strong>Consistency and well-directed effort</strong> — success rarely comes from a lottery win. It comes from consistent, deliberate, well-directed effort over time.</li>
+  <li><strong>Christian courtesy and kind-heartedness</strong> — even in prison, Joseph was kind and considerate of other people's needs above his own.</li>
+  <li><strong>Continual growth in knowledge</strong> — from a young nomad to a slave to a palace official. There must have been much learning along the way.</li>
+  <li><strong>Networking</strong> — the guests at Potiphar's house were definitely of high rank. Connections matter. Build them with integrity.</li>
+  <li><strong>God's favour and blessing</strong> — above all, the Lord was with Joseph. That made the difference.</li>
+</ul>
+<p>Joseph's story reminds me that despite my circumstances, I too can have unparalleled success. You can choose to be faithful when everyone else is unfaithful. To be industrious when others are idle. To be kind when others are cruel. To keep growing when others have stopped.</p>
+<div class="modal-prayer">Lord, regardless of my circumstances, help me to be faithful, industrious, consistent, and kind — and to trust You for the blessing and favour that only You can give.</div>`
+  },
+  'true-meaning': {
+    cat: 'Relationships', num: '∞', title: 'The True Meaning of Life',
+    body: `<p>In my younger days, I thought life consisted of the material things I owned, how I dressed, what my parents owned and where they lived, what people thought of me, what I studied and excelled in, and the kind of employment I engaged in.</p>
+<p>Unfortunately, these were incorrect measures of what makes life meaningful. The reason they are wrong is because those things are temporary and ever-changing. This new gadget owned today becomes a relic tomorrow. The fashionable dress of today becomes unwearable in a year or two. The significance of what you studied today can be outsourced to a machine tomorrow.</p>
+<p>So what makes up life? What is this life all about?</p>
+<p><strong>I have learnt that meaningful relationships are what make up a meaningful life.</strong></p>
+<ul class="modal-list">
+  <li>How do I treat my loving mother — is it in loving response towards her sacrifice?</li>
+  <li>How do I relate with my absent father — do I demonstrate respect for his efforts?</li>
+  <li>Do I prioritise my siblings and treat them with love?</li>
+  <li>How do I treat the less fortunate — is it with compassion and empathy?</li>
+  <li>Do I engage the older people in my life with respect, and the younger with careful exemplary attention?</li>
+  <li>Do I give quality time to my friends, adding value to their lives?</li>
+</ul>
+<p>What will really count at your deathbed is not the material things you accumulated in life but the persons who will surround your bed and weep because of the great love you showed them while you lived. <strong>That is what counts.</strong></p>
+<p>Build meaningful relationships. That is what matters.</p>
+<p>Beyond human relationships, build the most important relationship — with God. Know Him. Read His Word. Obey His commands. Talk with Him. Praise Him. Taste and see that God is good. He is good.</p>
+<div class="modal-prayer">Now that is what life is about.</div>`
+  },
+  'wish-told': {
+    cat: 'Identity & Wisdom', num: '∞', title: 'I Wish Someone Told Me',
+    body: `<p>I asked several of my friends — some approaching 70 years of age — what was the one thing they wish they were told when they were teenagers. Here are the themes that emerged.</p>
+<p><strong>About God:</strong></p>
+<ul class="modal-list">
+  <li>I wish I was told that the essence of life is to know God.</li>
+  <li>I wish someone told me that God loves me.</li>
+  <li>I wish I was told that God is more interested in building a relationship with me than in my performance — that I cannot perform to buy His approval.</li>
+  <li>I wish I was reminded that God's love superseded the don'ts.</li>
+</ul>
+<p><strong>About self-awareness:</strong></p>
+<ul class="modal-list">
+  <li>I wish I was told to love myself.</li>
+  <li>That it is OK to say no regardless of place and person — and that my opinion matters without feeling guilty.</li>
+  <li>That it is OK to embrace who I am regardless of how different I am from others.</li>
+  <li>To have a healthier relationship with myself and others.</li>
+</ul>
+<p><strong>About life's challenges:</strong></p>
+<ul class="modal-list">
+  <li>That life is tough and hard and full of temptations.</li>
+  <li>That life is not always a smooth journey, it is not always fair — and it is OK when we are disappointed or cannot have our way.</li>
+  <li>That resilience and openness to explore wider than the conventional are essential skills no university teaches.</li>
+</ul>
+<p><strong>Beyond the books:</strong></p>
+<ul class="modal-list">
+  <li>That being a top achiever does not always guarantee success. Life owes you nothing. Do your best — but do not base your worth on it.</li>
+  <li>That books are not everything. Life is about family, friends, talents, sports, cooking, creativity — and much more.</li>
+  <li>I wish I was taught how to play a musical instrument in my teenage years. I am struggling with the learning now — and it is a real struggle.</li>
+</ul>
+<div class="modal-prayer">These are not regrets. They are gifts — wisdom passed from one generation to the next so you don't have to learn everything the hard way. Take what is useful. Pass it on.</div>`
+  },
+  'counsel-teen': {
+    cat: 'Faith & Life Skills', num: '∞', title: 'Counsel to My Teen Self',
+    body: `<p>If you could write a letter to your teenage self, what would it say? Here is a collection of real counsel from real people who have already walked the road you are on.</p>
+<ul class="modal-list">
+  <li><em>"The worst handwriting is better than the best memory."</em> Write things down. This applies to dates, lessons, ideas — all of it. — Atieno</li>
+  <li><em>"Learn to think for yourself."</em> — Beryl</li>
+  <li><em>"Saving and education I was told about. Having healthier relationships with yourself and others — I wish I was taught that earlier."</em> — Lilian</li>
+  <li><em>"Life out here is tough and hard and full of temptations. I wish someone told me how to navigate through life's wholesome challenges."</em> — Freda</li>
+  <li><em>"I was told predicaments don't define you. You can always rise above them. I wish I was also told it's OK to say no — and that my opinion matters without feeling guilty."</em> — Sheila</li>
+  <li><em>"Be yourself and let people like you for who you are. Start saving early."</em> — Sammy</li>
+  <li><em>"I wish someone told me to love myself."</em> — Anonymous</li>
+  <li><em>"My father told me: My son, your character is more important than what you achieve. I am grateful he said it."</em> — Philemon</li>
+  <li><em>"Being a top achiever can raise much opposition and does not always guarantee economic success. Life owes you nothing. Do your best to the best of your ability."</em> — Philemon</li>
+</ul>
+<div class="modal-verse"><div class="mv-text">"Don't let anyone look down on you because you are young, but set an example for the believers in speech, in conduct, in love, in faith and in purity."</div><div class="mv-ref">1 Timothy 4:12 NIV</div></div>
+<div class="modal-prayer">Take this counsel to heart. You are not alone in the questions you are carrying. Many have walked this road before you — and they survived, grew, and are wiser for it. So will you.</div>`
+  }
+};
+
+function openModal(id) {
+  const a = articles[id];
+  if (!a) return;
+  document.getElementById('modal-cat').textContent = a.cat;
+  document.getElementById('modal-title').textContent = a.title;
+  document.getElementById('modal-header').setAttribute('data-num', a.num);
+  document.getElementById('modal-body').innerHTML = a.body;
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModalDirect();
+}
+function closeModalDirect() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function filterArticles(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.article-card, .featured-article').forEach(card => {
+    if (cat === 'all' || card.dataset.cat === cat) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+</script>
+</body>
+</html>

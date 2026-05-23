@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bible Promises for Every Teen — Thrive</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #C9963A; --gold-light: #F0C97A; --forest: #1A3028; --sage: #2F5243;
+    --cream: #FAF6EE; --warm-white: #FDF9F3; --muted: #8A9E94;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--warm-white); color: var(--forest); overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 40px; background: rgba(253,249,243,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201,150,58,0.15); }
+  .nav-logo { font-family: var(--font-display); font-size: 22px; font-weight: 900; color: var(--forest); text-decoration: none; letter-spacing: -0.5px; }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--sage); text-decoration: none; transition: color .2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--forest); }
+  .nav-cta { background: var(--gold); color: #fff; font-family: var(--font-body); font-size: 13px; font-weight: 500; padding: 10px 22px; border-radius: 99px; border: none; cursor: pointer; text-decoration: none; transition: background .2s; }
+  .nav-cta:hover { background: #b0812e; }
+
+  /* HERO */
+  .hero { background: var(--forest); padding: 140px 40px 80px; position: relative; overflow: hidden; }
+  .hero::before { content: '22'; position: absolute; font-family: var(--font-display); font-size: 400px; font-weight: 900; font-style: italic; color: rgba(255,255,255,0.025); top: -40px; right: -20px; pointer-events: none; line-height: 1; }
+  .hero-inner { max-width: 760px; position: relative; z-index: 1; animation: fadeUp .7s .1s both; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 20px; }
+  .hero-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+  .hero h1 { font-family: var(--font-display); font-size: clamp(36px, 5vw, 58px); font-weight: 900; line-height: 1.1; color: var(--cream); letter-spacing: -1.5px; margin-bottom: 22px; }
+  .hero h1 em { font-style: italic; color: var(--gold-light); }
+  .hero-lead { font-size: 16px; color: rgba(250,246,238,.65); line-height: 1.85; font-weight: 300; max-width: 620px; margin-bottom: 28px; }
+  .hero-janet { font-size: 13px; font-style: italic; color: rgba(250,246,238,.38); border-left: 1px solid rgba(201,150,58,.3); padding-left: 14px; line-height: 1.7; }
+
+  /* INTRO */
+  .intro-section { padding: 80px 40px; background: var(--cream); }
+  .intro-inner { max-width: 760px; margin: 0 auto; }
+  .intro-inner p { font-size: 16px; color: #3d5548; line-height: 1.95; font-weight: 300; margin-bottom: 20px; }
+  .intro-inner p:last-child { margin-bottom: 0; }
+  .intro-inner strong { font-weight: 500; color: var(--forest); }
+
+  /* PROMISES */
+  .promises-section { padding: 40px 40px 96px; background: var(--warm-white); }
+  .promises-inner { max-width: 960px; margin: 0 auto; }
+
+  .category-label { font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin: 40px 0 20px; display: flex; align-items: center; gap: 8px; }
+  .category-label::before { content: ''; display: block; width: 20px; height: 1px; background: var(--gold); }
+
+  .promise-card { border: 0.5px solid rgba(26,48,40,.1); border-radius: 16px; overflow: hidden; margin-bottom: 14px; cursor: pointer; transition: box-shadow .2s; }
+  .promise-card:hover { box-shadow: 0 8px 32px rgba(26,48,40,.08); }
+  .promise-card.open { box-shadow: 0 8px 32px rgba(26,48,40,.1); }
+  .pc-header { display: flex; align-items: flex-start; gap: 16px; padding: 18px 22px; background: var(--cream); }
+  .pc-num { font-family: var(--font-display); font-size: 22px; font-weight: 900; font-style: italic; color: rgba(201,150,58,.4); min-width: 36px; line-height: 1; padding-top: 2px; }
+  .pc-head-text { flex: 1; }
+  .pc-title { font-size: 15px; font-weight: 500; color: var(--forest); line-height: 1.4; margin-bottom: 5px; }
+  .pc-verse-preview { font-size: 12px; color: var(--muted); font-style: italic; line-height: 1.5; }
+  .pc-toggle { font-size: 18px; color: var(--muted); flex-shrink: 0; transition: transform .2s; margin-top: 2px; }
+  .promise-card.open .pc-toggle { transform: rotate(45deg); }
+
+  .pc-body { display: none; padding: 0 22px 22px 74px; background: var(--cream); }
+  .promise-card.open .pc-body { display: block; }
+  .pc-verse-full { background: var(--forest); border-radius: 12px; padding: 16px 20px; margin-bottom: 14px; }
+  .pvf-text { font-size: 14px; font-style: italic; color: var(--cream); line-height: 1.7; margin-bottom: 6px; }
+  .pvf-ref { font-size: 11px; color: var(--gold-light); font-weight: 500; }
+  .pc-reflection { font-size: 14px; color: #3d5548; line-height: 1.85; font-weight: 300; }
+  .pc-reflection strong { font-weight: 500; color: var(--forest); }
+
+  /* CLOSING PRAYER */
+  .prayer-section { background: var(--sage); padding: 80px 40px; text-align: center; }
+  .prayer-inner { max-width: 640px; margin: 0 auto; }
+  .prayer-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 16px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .prayer-eyebrow::before, .prayer-eyebrow::after { content: ''; display: block; width: 20px; height: 1px; background: var(--gold-light); }
+  .prayer-heading { font-family: var(--font-display); font-size: clamp(24px,3.5vw,36px); font-weight: 900; color: var(--cream); line-height: 1.2; margin-bottom: 20px; }
+  .prayer-heading em { font-style: italic; color: var(--gold-light); }
+  .prayer-text { font-size: 15px; color: rgba(250,246,238,.7); line-height: 1.9; font-weight: 300; font-style: italic; margin-bottom: 24px; }
+  .prayer-ref { font-size: 12px; color: rgba(250,246,238,.38); }
+
+  footer { background: var(--forest); padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .footer-logo { font-family: var(--font-display); font-size: 20px; font-weight: 900; color: var(--cream); }
+  .footer-logo span { color: var(--gold); }
+  .footer-verse { font-size: 12px; font-style: italic; color: rgba(250,246,238,.3); }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+  @media(max-width:860px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 110px 20px 60px; }
+    .intro-section, .promises-section, .prayer-section { padding: 56px 20px; }
+    .pc-body { padding: 0 16px 16px 16px; }
+    footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="seminar.html">Thrive<span>.</span></a>
+  <div class="nav-links">
+    <a href="about.html">About</a>
+    <a href="resources.html" class="active">Resources</a>
+    <a href="programmes.html">Programmes</a>
+    <a href="coach.html">Meet the Coach</a>
+  </div>
+  <a class="nav-cta" href="seminar.html#register">Join Cohort 2 Waitlist</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Bible Promises · Teen Life</div>
+    <h1>Twenty-two promises<br>for every <em>teen.</em></h1>
+    <p class="hero-lead">In her own teenage years, Janet found passages in the Bible that were as a bulwark — a defensive wall — for protection and guidance in a very turbulent time. She took these promises to heart, owned them, and asked God to make each one true in her life. He came through. Here they are — with reflections for the young person carrying them today.</p>
+    <div class="hero-janet">"God is able to do exceedingly abundantly in your life, if you allow Him. Our dreams go as far as our nose, but God's plans for us are far greater, more solid, excellent and glorious than anything we could imagine." — Janet Oyende</div>
+  </div>
+</section>
+
+<section class="intro-section">
+  <div class="intro-inner">
+    <p>Teenage-hood is an interesting time. Add <em>difficult</em> as well. Interesting because it is a time of discovery and figuring out oneself. Difficult because it is a time of transition — from childhood to adulthood — and few people give you a reliable map for that journey.</p>
+    <p>These promises are not a magic formula. They are anchors. When Janet read them as a teenager, she did something specific with each one: she <strong>took it to heart, owned it as hers, and asked God to make that promise true in her life.</strong> God came through — not always as she wanted, but definitely as she needed.</p>
+    <p>Click any promise to read the full verse and Janet's reflection on what it means for a young person today. You may not be able to take all of them at once. Start with one. The one that feels most alive for where you are right now.</p>
+  </div>
+</section>
+
+<section class="promises-section">
+  <div class="promises-inner">
+
+    <div class="category-label">Identity & Worth</div>
+
+    <div class="promise-card" onclick="toggle(this)">
+      <div class="pc-header"><div class="pc-num">01</div><div class="pc-head-text"><div class="pc-title">You are called to live an exemplary life</div><div class="pc-verse-preview">1 Timothy 4:12 — Don't let anyone look down on you because you are young...</div></div><div class="pc-toggle">+</div></div>
+      <div class="pc-body"><div class="pc-verse-full"><div class="pvf-text">"Don't let anyone look down on you because you are young, but set an example for the believers in speech, in conduct, in love, in faith and in purity."</div><div class="pvf-ref">1 Timothy 4:12 NIV</div></div><div class="pc-reflection">Not only Janet, but <strong>every young person is called to be an exceptional example</strong> in every sphere of their life. The temptation at your age is to think you're too young to matter, too unknown to make a difference. This verse says otherwise. Your speech, your conduct, your love, your faith, your purity — these are already influencing someone. The question is: what direction are you pointing them?</div></div>
+    </div>
+
+    <div class="promise-card" onclick="toggle(this)">
+      <div class="pc-header"><div class="pc-num">02</div><div class="pc-head-text"><div class="pc-title">God's mercies are new every morning</div><div class="pc-verse-preview">Lamentations 3:22-23 — Great is Your faithfulness...</div></div><div class="pc-toggle">+</div></div>
+      <div class="pc-body"><div class="pc-verse-full"><div class="pvf-text">"Because of the Lord's great love we are not consumed, for his compassions never fail. They are new every morning; great is your faithfulness."</div><div class="pvf-ref">Lamentations 3:22-23 NIV</div></div><div class="pc-reflection">Regardless of how far you have gone from God, regardless of how bad yesterday was — <strong>God's mercies are new each day.</strong> You can start from a clean slate. This is not a licence to keep failing — it is a lifeline when you do. The slate is clean every morning. The question is what you will write on it today.</div></div>
+    </div>
+
+    <div class="promise-card" onclick="toggle(this)">
+      <div class="pc-header"><div class="pc-num">03</div><div class="pc-head-text"><div class="pc-title">God works in you</div><div class="pc-verse-preview">Philippians 2:13 — For it is God who works in you...</div></div><div class="pc-toggle">+</div></div>
+      <div class="pc-body"><div class="pc-verse-full"><div class="pvf-text">"For it is God who works in you to will and to act in order to fulfil his good purpose."</div><div class="pvf-ref">Philippians 2:13 NIV</div></div><div class="pc-reflection">Are there things you struggle with — subjects in school, emotions that run riot, difficult choices, hard conversations? <strong>Ask God to work in you.</strong> He is willing, able, and delights to do so. You are not doing this alone. The same God who created the universe is actively at work inside you — if you give Him room to do it.</div></div>
+    </div>
+
+    <div class="category-label">Patience & Waiting</div>
+
+    <div class="promise-card" onclick="toggle(this)">
+      <div class="pc-header"><div class="pc-num">04</div><div class="pc-head-text"><div class="pc-title">Wait in patience — your strength will be renewed</div><div class="pc-verse-preview">Isaiah 40:31 — Those who hope in the Lord will renew their strength...</div></div><div class="pc-toggle">+</div></div>
+      <div class="pc-body"><div class="pc-verse-full"><div class="pvf-text">"But those who hope in the Lord will renew their strength. They will soar on wings like eagles; they will run and not grow weary, they will walk and not be faint."</div><div class="pvf-ref">Isaiah 40:31 NIV</div></div><div class="pc-reflection">Janet was an impatient teen — she wanted things now, if not earlier. If that sounds familiar, this promise is for you. <strong>Waiting on God is not passive.</strong> It is active trust. Eagles soar not by flapping harder but by riding the thermals — trusting that what is beneath them will lift them. Waiting on God is learning to trust the current beneath you.</div></div>
+    </div>
+
+    <div class="promise-card" onclick="toggle(this)">
+      <div class="pc-header"><div class="pc-num">05</div><div class="pc-head-text"><div class="pc-title">Seek God's will for a straight path</div><div class="pc-verse-preview">Proverbs 3:5-6 — Trust in the Lord with all your heart...</div></div><div class="pc-toggle">+</div></div>
+      <div class="pc-body"><div class="pc-verse-full"><div class="pvf-text">"Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to him, and he will make your paths straight."</div><div class="pvf-ref">Proverbs 3:5-6 NIV</div></div><div class="pc-reflection">If you would like to have a smooth and straight path, <strong>seek God's will through prayer.</strong> Even if there are obstacles in that path, God will show you how to overcome each one. This does not mean the path will be easy. It means you will not walk it without direction. "Lean not on your own understanding" — this is the hardest part. Our understanding is limited. His is not.</div></div>
+    </div>
+
+    <div class="category-label">Help & Strength</div>
+
+    <div class="promise-card" onclick="toggle(this)">
+      <div class="pc-header"><div class="pc-num">06</div><div class="pc-head-text"><div class="pc-title">God is your greatest source of help</div><div class="pc-verse-preview">Psalm 121:1-2 — I lift up my eyes to the mountains...</div></div><div class="pc-toggle">+</div></div>
+      <div class="pc-body"><div class="pc-verse-full"><div class="pvf-text">"I lift up my eyes to the mountains — where does my help come from? My help comes from the Lord, the Maker of heaven and earth."</div><div class="pvf-ref">Psalm 121:1-2 NIV</div></div><div class="pc-reflection">From providing the knowledge to understand mathematics, to granting the Holy Spirit for self-control to manage emotions, to being a friend who sticks closer than a brother — <strong>God is your greatest source of help.</strong> In whatever you face today, your help does not come from a person, a platform, or your own cleverness. It comes from the Maker of heaven and earth.</div></div>
+    </div>
+
+    <div class="promise-card" onclick="toggle(this)">
+      <div class="pc-header"><div class="pc-num">07</div><div class="pc-head-text"><div class="pc-title">I can do all things through Christ</div><div class="pc-verse-preview">Philippians 4:13 — I can do all this through him who gives me strength...</div></div><div class="pc-toggle">+</div></div>
+      <div class="pc-body"><div class="pc-verse-full"><div class="pvf-text">"I can do all this through him who gives me strength."</div><div class="pvf-ref">Philippians 4:13 NIV</div></div><div class="pc-reflection">This is not a promise that God will give you whatever you want. It is a promise that whatever God calls you to do, <strong>He will give you the strength to do it.</strong> The context in Philippians 4 is Paul speaking about contentment in all circumstances — in plenty and in want. Whatever the circumstance you are in right now, this strength is available to you.</div></div>
+    </div>
+
+    <div class="promise-card" onclick="toggle(this)">
+      <div class="pc-header"><div class="pc-num">08</div><div class="pc-head-text"><div class="pc-title">There are no impossibilities with God</div><div class="pc-verse-preview">Luke 1:37 — For with God nothing shall be impossible...</div></div><div class="pc-toggle">+</div></div>
+      <div class="pc-body"><div class="pc-verse-full"><div class="pvf-text">"For with God nothing shall be impossible."</div><div class="pvf-ref">Luke 1:37 KJV</div></div><div class="pc-reflection">He still works miracles today. <strong>Do you believe that?</strong> Not as a theological position — but as a personal conviction. The same God who parted seas, opened wombs, and raised the dead is the God you are praying to. That does not mean every prayer gets the answer you want. But it means no situation is beyond His ability to work in.</div></div>
+    </div>
+
+    <div class="category-label">Feelings & Anxiety</div>
+
+    <div class="promise-card" onclick="toggle(this)">
+      <div class="pc-header"><div class="pc-num">09</div><div class="pc-head-text"><div class="pc-title">Do not trust your feelings alone</div><div class="pc-verse-preview">Proverbs 14:12 — There is a way that appears to be right...</div></div><div class="pc-toggle">+</div></div>
+      <div class="pc-body"><div class="pc-verse-full"><div class="pvf-text">"There is a way that appears to be right, but in the end it leads to death."</div><div class="pvf-ref">Proverbs 14:12 NIV</div></div><div class="pc-reflection">Janet used to heavily rely on her feelings as a teenager — and it was tempestuous. One moment happy, the next angry, then sad, then afraid. <strong>Feelings are real but they are not always reliable guides.</strong> When you feel like something is right, check it against God's Word before you act on it. Feelings are data. They are not direction.</div></div>
+    </div>
+
+    <div class="promise-card" onclick="toggle(this)">
+      <div class="pc-header"><div class="pc-num">10</div><div class="pc-head-text"><div class="pc-title">Cast your anxiety on God</div><div class="pc-verse-preview">Philippians 4:6-7 — Do not be anxious about anything...</div></div><div class="pc-toggle">+</div></div>
+      <div class="pc-body"><div class="pc-verse-full"><div class="pvf-text">"Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus."</div><div class="pvf-ref">Philippians 4:6-7 NIV</div></div><div class="pc-reflection">Anxious about exams? A friendship going sour? Your relationship with a parent? Fees? Other people's perception of you? <strong>Give those anxieties to Jesus.</strong> Not as a formula — as an act of trust. The peace that follows is not because the problem is gone. It is because your heart is guarded by something stronger than the problem.</div></div>
+    </div>
+
+    <div class="category-label">Purpose & Future</div>
+
+    <div class="promise-card" onclick="toggle(this)">
+      <div class="pc-header"><div class="pc-num">11</div><div class="pc-head-text"><div class="pc-title">God has plans for you — plans for a future and hope</div><div class="pc-verse-preview">Jeremiah 29:11 — For I know the plans I have for you...</div></div><div class="pc-toggle">+</div></div>
+      <div class="pc-body"><div class="pc-verse-full"><div class="pvf-text">"For I know the plans I have for you, declares the Lord — plans to prosper you and not to harm you, plans to give you hope and a future."</div><div class="pvf-ref">Jeremiah 29:11 NIV</div></div><div class="pc-reflection">This verse was spoken to people in exile — people who felt their future had been taken from them. <strong>It is for you too.</strong> Whatever season you are in — confused, stuck, waiting — God has plans. Not vague goodwill. Specific, deliberate plans. For you. The path forward exists even when you cannot see it.</div></div>
+    </div>
+
+    <div class="promise-card" onclick="toggle(this)">
+      <div class="pc-header"><div class="pc-num">12</div><div class="pc-head-text"><div class="pc-title">You are God's handiwork — made for good works</div><div class="pc-verse-preview">Ephesians 2:10 — For we are God's handiwork...</div></div><div class="pc-toggle">+</div></div>
+      <div class="pc-body"><div class="pc-verse-full"><div class="pvf-text">"For we are God's handiwork, created in Christ Jesus to do good works, which God prepared in advance for us to do."</div><div class="pvf-ref">Ephesians 2:10 NIV</div></div><div class="pc-reflection">The Greek word for handiwork is <em>poiēma</em> — the same root as our word "poem." <strong>You are God's poem.</strong> Written with intention, with care, with meaning in every line. Your purpose was prepared before you were born. Today you are not inventing it — you are recovering it. And it is waiting for you.</div></div>
+    </div>
+
+    <div class="promise-card" onclick="toggle(this)">
+      <div class="pc-header"><div class="pc-num">13</div><div class="pc-head-text"><div class="pc-title">What God has started, He will finish</div><div class="pc-verse-preview">Philippians 1:6 — He who began a good work in you...</div></div><div class="pc-toggle">+</div></div>
+      <div class="pc-body"><div class="pc-verse-full"><div class="pvf-text">"And I am sure of this, that he who began a good work in you will bring it to completion at the day of Jesus Christ."</div><div class="pvf-ref">Philippians 1:6 ESV</div></div><div class="pc-reflection">God does not abandon unfinished projects. <strong>The good work He started in you will be completed.</strong> This is not just about your spiritual life — it is about everything He has put in you. Your gifts, your purpose, your character. He began it. He is committed to finishing it. Your part is to stay in the process.</div></div>
+    </div>
+
+    <div class="category-label">Daily Life & Wisdom</div>
+
+    <div class="promise-card" onclick="toggle(this)">
+      <div class="pc-header"><div class="pc-num">14</div><div class="pc-head-text"><div class="pc-title">Three things to do each day</div><div class="pc-verse-preview">1 Thessalonians 5:16-18 — Rejoice always, pray continually...</div></div><div class="pc-toggle">+</div></div>
+      <div class="pc-body"><div class="pc-verse-full"><div class="pvf-text">"Rejoice always, pray continually, give thanks in all circumstances; for this is God's will for you in Christ Jesus."</div><div class="pvf-ref">1 Thessalonians 5:16-18 NIV</div></div><div class="pc-reflection">Three things. Simple. <strong>Rejoice. Pray. Give thanks.</strong> Not because life is always easy — but because God is always present. These three practices, done consistently, will reshape how you experience every day. Start with one. Pick whichever feels most out of reach right now — and start there.</div></div>
+    </div>
+
+    <div class="promise-card" onclick="toggle(this)">
+      <div class="pc-header"><div class="pc-num">15</div><div class="pc-head-text"><div class="pc-title">The litmus test for everything</div><div class="pc-verse-preview">Philippians 4:8 — Whatever is true, whatever is noble...</div></div><div class="pc-toggle">+</div></div>
+      <div class="pc-body"><div class="pc-verse-full"><div class="pvf-text">"Finally, brothers and sisters, whatever is true, whatever is noble, whatever is right, whatever is pure, whatever is lovely, whatever is admirable — if anything is excellent or praiseworthy — think about such things."</div><div class="pvf-ref">Philippians 4:8 NIV</div></div><div class="pc-reflection">Janet often wondered what to read, what to watch, how to dress, where to go, what to do — until she found this test. <strong>Ask of everything: is it true? Noble? Right? Pure? Lovely? Admirable?</strong> It does not eliminate all grey areas. But it brings most decisions into sharp focus very quickly.</div></div>
+    </div>
+
+    <div class="promise-card" onclick="toggle(this)">
+      <div class="pc-header"><div class="pc-num">16</div><div class="pc-head-text"><div class="pc-title">Invite Jesus into everything you do</div><div class="pc-verse-preview">Proverbs 3:6 — In all your ways submit to him...</div></div><div class="pc-toggle">+</div></div>
+      <div class="pc-body"><div class="pc-verse-full"><div class="pvf-text">"In all your ways submit to him, and he will make your paths straight."</div><div class="pvf-ref">Proverbs 3:6 NIV</div></div><div class="pc-reflection">Whatever you do, wherever you go — <strong>make a point to invite Jesus in.</strong> God delights to be with us, in all our operations. Invite Him in the big and the small things. The exam hall and the canteen. The conversation with your parents and the scroll through your phone. He is not too important for the small things. He made them.</div></div>
+    </div>
+
+    <div class="category-label">Fear & Courage</div>
+
+    <div class="promise-card" onclick="toggle(this)">
+      <div class="pc-header"><div class="pc-num">17</div><div class="pc-head-text"><div class="pc-title">Fear nothing — God is with you</div><div class="pc-verse-preview">Isaiah 41:10 — Do not fear, for I am with you...</div></div><div class="pc-toggle">+</div></div>
+      <div class="pc-body"><div class="pc-verse-full"><div class="pvf-text">"Do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand."</div><div class="pvf-ref">Isaiah 41:10 NIV</div></div><div class="pc-reflection">Many teens fear embarrassment, failure, betrayal, disappointment, shame. <strong>God reminds us not to be afraid — and He tells us why.</strong> Not "don't fear because the threat isn't real." But "don't fear because I am with you." The situation may be real. His presence is more real. He will strengthen. He will help. He will uphold. Three verbs. All active. All His.</div></div>
+    </div>
+
+    <div class="promise-card" onclick="toggle(this)">
+      <div class="pc-header"><div class="pc-num">18</div><div class="pc-head-text"><div class="pc-title">More than conquerors</div><div class="pc-verse-preview">Romans 8:37-39 — In all these things we are more than conquerors...</div></div><div class="pc-toggle">+</div></div>
+      <div class="pc-body"><div class="pc-verse-full"><div class="pvf-text">"No, in all these things we are more than conquerors through him who loved us. For I am convinced that neither death nor life, neither angels nor demons, neither the present nor the future, nor any powers, neither height nor depth, nor anything else in all creation, will be able to separate us from the love of God that is in Christ Jesus our Lord."</div><div class="pvf-ref">Romans 8:37-39 NIV</div></div><div class="pc-reflection">Not just conquerors — <strong>more than conquerors.</strong> Whatever you are facing, you are not facing it without the love of God behind you. The list of things that cannot separate you from that love is exhaustive: death, life, angels, demons, the present, the future, height, depth — and anything else in all creation. That list includes your worst day, your worst choice, and your worst fear.</div></div>
+    </div>
+
+    <div class="category-label">God's Word & Truth</div>
+
+    <div class="promise-card" onclick="toggle(this)">
+      <div class="pc-header"><div class="pc-num">19</div><div class="pc-head-text"><div class="pc-title">The one thing worth boasting about</div><div class="pc-verse-preview">Jeremiah 9:23-24 — Let not the wise boast of their wisdom...</div></div><div class="pc-toggle">+</div></div>
+      <div class="pc-body"><div class="pc-verse-full"><div class="pvf-text">"This is what the Lord says: 'Let not the wise boast of their wisdom or the strong boast of their strength or the rich boast of their riches, but let the one who boasts boast about this: that they have the understanding to know me.'"</div><div class="pvf-ref">Jeremiah 9:23-24 NIV</div></div><div class="pc-reflection">Teens tend to brag about many things — physical appearance, social status, material possessions, athletic or academic ability. <strong>God says there is only one thing truly worth boasting about: knowing Him.</strong> Not knowing about Him — knowing Him. That is the one credential that outlasts every season of life.</div></div>
+    </div>
+
+    <div class="promise-card" onclick="toggle(this)">
+      <div class="pc-header"><div class="pc-num">20</div><div class="pc-head-text"><div class="pc-title">Press on to know God</div><div class="pc-verse-preview">Hosea 6:3 — Let us press on to acknowledge him...</div></div><div class="pc-toggle">+</div></div>
+      <div class="pc-body"><div class="pc-verse-full"><div class="pvf-text">"Let us press on to acknowledge him. As surely as the sun rises, he will appear; he will come to us like the winter rains, like the spring rains that water the earth."</div><div class="pvf-ref">Hosea 6:3 NIV</div></div><div class="pc-reflection"><strong>Make every effort to spend time with Jesus in prayer and Bible Study.</strong> That time spent with Him will not be in vain. It will be richly rewarded — perhaps not in monetary terms, but in an intimacy with God that will be your greatest asset throughout your life. Press on to know Him. As surely as the sun rises, He will show up.</div></div>
+    </div>
+
+    <div class="category-label">Hope & Eternity</div>
+
+    <div class="promise-card" onclick="toggle(this)">
+      <div class="pc-header"><div class="pc-num">21</div><div class="pc-head-text"><div class="pc-title">Life is brief — make the best of each day</div><div class="pc-verse-preview">Psalm 90:12 — Teach us to number our days...</div></div><div class="pc-toggle">+</div></div>
+      <div class="pc-body"><div class="pc-verse-full"><div class="pvf-text">"Teach us to number our days, that we may gain a heart of wisdom."</div><div class="pvf-ref">Psalm 90:12 NIV</div></div><div class="pc-reflection">Life is brief. Make the best of each day, for you know not if tomorrow will be yours. Someone once said: <strong>"Do all the good you can, by all the means you can, in all the ways you can, in all the places you can, at all the times you can, to all the people you can, as long as ever you can."</strong> That is what it looks like to number your days well.</div></div>
+    </div>
+
+    <div class="promise-card" onclick="toggle(this)">
+      <div class="pc-header"><div class="pc-num">22</div><div class="pc-head-text"><div class="pc-title">Hope — He is coming back</div><div class="pc-verse-preview">John 14:3 — And if I go and prepare a place for you...</div></div><div class="pc-toggle">+</div></div>
+      <div class="pc-body"><div class="pc-verse-full"><div class="pvf-text">"And if I go and prepare a place for you, I will come back and take you to be with me that you also may be where I am."</div><div class="pvf-ref">John 14:3 NIV</div></div><div class="pc-reflection">There is coming a day when all the cares and fares of the world will be over. A world without death, sickness, bullying, pain, or fear. <strong>He is coming back for you</strong> — so that you may live with Him eternally. Whatever you are enduring right now is not the end of the story. Hold on. The best chapter is still to come.</div></div>
+    </div>
+
+  </div>
+</section>
+
+<section class="prayer-section">
+  <div class="prayer-inner">
+    <div class="prayer-eyebrow">A closing prayer</div>
+    <h2 class="prayer-heading">Own it.<br><em>Claim it. Live it.</em></h2>
+    <p class="prayer-text">"Lord, fulfil Your lofty and high calling in my life today. Help me to remember that the work I do is not as important as the person I become. Make me more like You — and let my life be a living evidence of Your grace to all who meet me."</p>
+    <div class="prayer-ref">— Adapted from Janet Oyende's daily prayer</div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Thrive<span>.</span></div>
+  <div class="footer-verse">"What God has started, He will finish." — Philippians 1:6</div>
+</footer>
+
+<script>
+function toggle(card) {
+  card.classList.toggle('open');
+}
+</script>
+</body>
+</html>

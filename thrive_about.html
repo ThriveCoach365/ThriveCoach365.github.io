@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Thrive — Guiding Young Lives Through Life's Challenges</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #C9963A; --gold-light: #F0C97A; --forest: #1A3028; --sage: #2F5243;
+    --cream: #FAF6EE; --warm-white: #FDF9F3; --muted: #8A9E94;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--warm-white); color: var(--forest); overflow-x: hidden; line-height: 1.6; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 40px;
+    background: rgba(253,249,243,0.94); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,150,58,0.15);
+  }
+  .nav-logo { font-family: var(--font-display); font-size: 22px; font-weight: 900; color: var(--forest); text-decoration: none; letter-spacing: -0.5px; }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--sage); text-decoration: none; transition: color .2s; }
+  .nav-links a:hover { color: var(--forest); }
+  .nav-links a.active { color: var(--forest); }
+  .nav-cta { background: var(--gold); color: #fff; font-family: var(--font-body); font-size: 13px; font-weight: 500; padding: 10px 22px; border-radius: 99px; border: none; cursor: pointer; text-decoration: none; transition: background .2s; }
+  .nav-cta:hover { background: #b0812e; }
+
+  /* HERO */
+  .hero {
+    background: var(--forest); padding: 140px 40px 100px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: 'THRIVE'; position: absolute;
+    font-family: var(--font-display); font-size: 280px; font-weight: 900; font-style: italic;
+    color: rgba(255,255,255,0.025);
+    top: 50%; left: 50%; transform: translate(-50%,-50%);
+    white-space: nowrap; pointer-events: none; letter-spacing: -10px;
+  }
+  .hero-inner { max-width: 820px; margin: 0 auto; position: relative; z-index: 1; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 20px; }
+  .hero-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+  .hero h1 { font-family: var(--font-display); font-size: clamp(38px, 5vw, 60px); font-weight: 900; line-height: 1.1; color: var(--cream); letter-spacing: -1.5px; margin-bottom: 24px; }
+  .hero h1 em { font-style: italic; color: var(--gold-light); }
+  .hero-lead { font-size: 18px; color: rgba(250,246,238,.68); line-height: 1.85; font-weight: 300; max-width: 640px; }
+
+  /* SHARED */
+  .section-label { font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .section-label::before { content: ''; display: block; width: 20px; height: 1px; background: var(--gold); }
+  .section-heading { font-family: var(--font-display); font-size: clamp(28px, 3.5vw, 42px); font-weight: 900; line-height: 1.1; color: var(--forest); letter-spacing: -.5px; margin-bottom: 14px; }
+  .section-heading em { font-style: italic; color: var(--gold); }
+  .section-sub { font-size: 16px; color: #4a6055; line-height: 1.85; font-weight: 300; max-width: 580px; margin-bottom: 48px; }
+
+  /* MISSION */
+  .mission-section { padding: 96px 40px; background: var(--warm-white); }
+  .mission-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: center; }
+  .mission-body p { font-size: 16px; color: #3d5548; line-height: 1.95; font-weight: 300; margin-bottom: 22px; }
+  .mission-body p strong { font-weight: 500; color: var(--forest); }
+  .mission-body p:last-child { margin-bottom: 0; }
+  .mission-stat { background: var(--cream); border: 1px solid rgba(201,150,58,.15); border-radius: 14px; padding: 28px 24px; margin-bottom: 14px; }
+  .ms-num { font-family: var(--font-display); font-size: 42px; font-weight: 900; font-style: italic; color: var(--gold); line-height: 1; margin-bottom: 6px; }
+  .ms-label { font-size: 13px; color: var(--sage); line-height: 1.5; font-weight: 300; }
+
+  /* VALUES STRIP */
+  .values-strip { background: var(--forest); padding: 60px 40px; }
+  .values-inner { max-width: 1100px; margin: 0 auto; }
+  .values-strip .section-label { color: var(--gold-light); }
+  .values-strip .section-label::before { background: var(--gold-light); }
+  .values-strip .section-heading { color: var(--cream); margin-bottom: 40px; }
+  .values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .value-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 24px 20px; }
+  .vc-icon { font-size: 22px; margin-bottom: 12px; }
+  .vc-title { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--cream); margin-bottom: 8px; }
+  .vc-body { font-size: 13px; color: rgba(250,246,238,.6); line-height: 1.7; font-weight: 300; }
+
+  /* FOCUS AREAS */
+  .focus-section { padding: 96px 40px; background: var(--cream); }
+  .focus-inner { max-width: 1100px; margin: 0 auto; }
+  .focus-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .focus-card { background: var(--warm-white); border: 1px solid rgba(201,150,58,.15); border-radius: 16px; overflow: hidden; }
+  .fc-header { background: var(--forest); padding: 24px 28px; }
+  .fc-num { font-family: var(--font-display); font-size: 48px; font-weight: 900; font-style: italic; color: rgba(201,150,58,.25); line-height: 1; margin-bottom: 8px; }
+  .fc-title { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--cream); line-height: 1.2; }
+  .fc-body { padding: 24px 28px; }
+  .fc-lead { font-size: 14px; color: #3a5246; line-height: 1.75; font-weight: 300; margin-bottom: 16px; }
+  .fc-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .fc-list li { font-size: 13px; color: #4a6055; display: flex; gap: 8px; align-items: flex-start; line-height: 1.5; }
+  .fc-list li::before { content: '→'; color: var(--gold); flex-shrink: 0; font-weight: 500; }
+
+  /* IMPACT PROMISES */
+  .impact-section { padding: 96px 40px; background: var(--warm-white); }
+  .impact-inner { max-width: 1100px; margin: 0 auto; }
+  .impact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 48px; }
+  .impact-card { border-left: 3px solid var(--gold); padding: 20px 24px; background: var(--cream); border-radius: 0 12px 12px 0; }
+  .ic-quote { font-family: var(--font-display); font-size: 17px; font-style: italic; color: var(--forest); line-height: 1.45; margin-bottom: 8px; }
+  .ic-sub { font-size: 12px; color: var(--muted); line-height: 1.6; font-weight: 300; }
+
+  /* PROGRAMMES PREVIEW */
+  .programmes-section { background: var(--sage); padding: 96px 40px; }
+  .programmes-inner { max-width: 1100px; margin: 0 auto; }
+  .programmes-section .section-label { color: var(--gold-light); }
+  .programmes-section .section-label::before { background: var(--gold-light); }
+  .programmes-section .section-heading { color: var(--cream); }
+  .programmes-section .section-sub { color: rgba(250,246,238,.65); }
+  .prog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .prog-card { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); border-radius: 14px; padding: 24px 22px; text-decoration: none; transition: background .2s; }
+  .prog-card:hover { background: rgba(255,255,255,.12); }
+  .prog-icon { font-size: 24px; margin-bottom: 12px; }
+  .prog-title { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--cream); margin-bottom: 8px; line-height: 1.3; }
+  .prog-desc { font-size: 13px; color: rgba(250,246,238,.6); line-height: 1.65; font-weight: 300; }
+  .prog-link { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 500; color: var(--gold-light); margin-top: 12px; }
+
+  /* CTA */
+  .cta-section { background: var(--warm-white); padding: 96px 40px; text-align: center; }
+  .cta-section .section-heading { max-width: 560px; margin: 12px auto 16px; }
+  .cta-section p { font-size: 16px; color: #4a6055; line-height: 1.75; max-width: 480px; margin: 0 auto 36px; font-weight: 300; }
+  .btn-row { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
+  .btn-primary { background: var(--forest); color: #fff; font-family: var(--font-body); font-size: 15px; font-weight: 500; padding: 15px 36px; border-radius: 99px; border: none; cursor: pointer; text-decoration: none; transition: background .2s, transform .15s; }
+  .btn-primary:hover { background: var(--sage); transform: translateY(-1px); }
+  .btn-ghost { background: transparent; color: var(--forest); font-family: var(--font-body); font-size: 14px; font-weight: 500; padding: 14px 24px; border-radius: 99px; border: 1.5px solid rgba(26,48,40,.25); cursor: pointer; text-decoration: none; transition: border-color .2s; }
+  .btn-ghost:hover { border-color: var(--forest); }
+
+  footer { background: var(--forest); padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .footer-logo { font-family: var(--font-display); font-size: 20px; font-weight: 900; color: var(--cream); }
+  .footer-logo span { color: var(--gold); }
+  .footer-verse { font-size: 12px; font-style: italic; color: rgba(250,246,238,.3); }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  .hero-inner { animation: fadeUp .7s .1s both; }
+
+  @media(max-width:860px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 110px 20px 64px; }
+    .mission-inner { grid-template-columns: 1fr; gap: 40px; }
+    .focus-grid, .values-grid, .impact-grid, .prog-grid { grid-template-columns: 1fr; }
+    .mission-section, .focus-section, .impact-section, .programmes-section, .cta-section, .values-strip { padding: 64px 20px; }
+    footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="seminar.html">Thrive<span>.</span></a>
+  <div class="nav-links">
+    <a href="about.html" class="active">About</a>
+    <a href="resources.html">Resources</a>
+    <a href="programmes.html">Programmes</a>
+    <a href="coach.html">Meet the Coach</a>
+  </div>
+  <a class="nav-cta" href="seminar.html#register">Join Cohort 2 Waitlist</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">About Thrive</div>
+    <h1>Guiding young lives<br>through life's <em>challenges.</em></h1>
+    <p class="hero-lead">Thrive is a faith-rooted mentorship platform designed to support teenagers and young adults during one of the most tumultuous phases of their lives. We believe every young person deserves guidance, encouragement, and a community to help them emerge with confidence, integrity, and a strong sense of self.</p>
+  </div>
+</section>
+
+<section class="mission-section">
+  <div class="mission-inner">
+    <div>
+      <div class="section-label">Our mission</div>
+      <h2 class="section-heading">Not just to survive —<br>to <em>thrive.</em></h2>
+      <div class="mission-stat">
+        <div class="ms-num">10+</div>
+        <div class="ms-label">Years walking with teens and young adults through identity, values, and purpose</div>
+      </div>
+      <div class="mission-stat">
+        <div class="ms-num">18–28</div>
+        <div class="ms-label">The age range where the most important questions about identity and direction are being asked — and too often, unanswered</div>
+      </div>
+      <div class="mission-stat">
+        <div class="ms-num">4</div>
+        <div class="ms-label">Core approaches: relational mentoring, character development, faith-based boot camps, and mentorship seminars</div>
+      </div>
+    </div>
+    <div class="mission-body">
+      <p>Thrive exists because too many young people are navigating the most formative years of their lives without a compass. They are busy — studying, working, performing — but privately unsure of who they are, what they stand for, or where they are going.</p>
+      <p>The questions of identity, values, and purpose are not luxury questions. They are foundational. Every decision a young person makes flows from — consciously or unconsciously — their answers to these three questions. When those answers are borrowed from other people's expectations, or simply absent, the result is a life that looks productive but feels hollow.</p>
+      <p><strong>Thrive is built to change that.</strong> Through relational mentoring, structured seminars, character development workshops, and faith-rooted community, we help teens and young adults find their footing — and step into the next season of their lives with clarity, conviction, and confidence.</p>
+      <p>Our framework is rooted in Scripture — not to lecture, but to offer timeless truth as an anchor in a noisy world. We don't require a church background. We require an open heart.</p>
+    </div>
+  </div>
+</section>
+
+<section class="values-strip">
+  <div class="values-inner">
+    <div class="section-label">Our brand voice</div>
+    <h2 class="section-heading" style="color:var(--cream);max-width:500px">How we <em>speak.</em><br>How we show up.</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="vc-icon">🤝</div>
+        <div class="vc-title">Authentic & Relational</div>
+        <div class="vc-body">We speak from the heart. We build real relationships. Every young person we work with should feel seen, heard, and valued — not processed.</div>
+      </div>
+      <div class="value-card">
+        <div class="vc-icon">⚡</div>
+        <div class="vc-title">Encouraging & Empowering</div>
+        <div class="vc-body">We believe in the potential of every young person. Our words uplift without flattering. We communicate confidence in their ability to overcome challenges and become their best selves.</div>
+      </div>
+      <div class="value-card">
+        <div class="vc-icon">📖</div>
+        <div class="vc-title">Faith-Rooted & Hopeful</div>
+        <div class="vc-body">Our messaging is anchored in faith and hope. We offer spiritual guidance and moral clarity with warmth and optimism — never pressure, never performance.</div>
+      </div>
+      <div class="value-card">
+        <div class="vc-icon">🌱</div>
+        <div class="vc-title">Practical & Youthful</div>
+        <div class="vc-body">We are clear, actionable, and relevant to everyday teen life. Dynamic, warm, and relatable — we meet young people where they are, with understanding and respect.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="focus-section">
+  <div class="focus-inner">
+    <div class="section-label">What we do</div>
+    <h2 class="section-heading">Four ways we walk<br>with young people.</h2>
+    <p class="section-sub">Thrive uses four core approaches to mentor and disciple teens and young adults — each designed to meet young people where they are and move them toward who they're made to be.</p>
+    <div class="focus-grid">
+      <div class="focus-card">
+        <div class="fc-header">
+          <div class="fc-num">01</div>
+          <div class="fc-title">Relational Mentoring Model</div>
+        </div>
+        <div class="fc-body">
+          <p class="fc-lead">Building meaningful relationships between mentors and mentees. Trust, open communication, and genuine presence — because transformation happens in relationship, not in programmes.</p>
+          <ul class="fc-list">
+            <li>Mentors paired with mentees based on shared interests and backgrounds</li>
+            <li>Regular one-on-one meetings with honest conversations about challenges and faith</li>
+            <li>Informal group gatherings to build peer connections and supportive community</li>
+          </ul>
+        </div>
+      </div>
+      <div class="focus-card">
+        <div class="fc-header">
+          <div class="fc-num">02</div>
+          <div class="fc-title">Character Development Workshops</div>
+        </div>
+        <div class="fc-body">
+          <p class="fc-lead">Equipping young people with essential life skills and values that build strong character and ethical decision-making — grounded in the realities of their everyday lives.</p>
+          <ul class="fc-list">
+            <li>Interactive workshops on integrity, resilience, empathy, and conflict resolution</li>
+            <li>Role-playing, group discussions, and practical scenario-based learning</li>
+            <li>Actionable takeaways and goal-setting tied to character growth</li>
+          </ul>
+        </div>
+      </div>
+      <div class="focus-card">
+        <div class="fc-header">
+          <div class="fc-num">03</div>
+          <div class="fc-title">Faith-Based Boot Camps</div>
+        </div>
+        <div class="fc-body">
+          <p class="fc-lead">Immersive experiences centred on building faith, leadership skills, and community service. Intensive, transformative, and deeply personal — where participants deepen their faith and its application to everyday life.</p>
+          <ul class="fc-list">
+            <li>Weekend retreats or week-long camps: Bible study, prayer, worship, and reflection</li>
+            <li>Team-building activities fostering collaboration, problem-solving, and leadership</li>
+            <li>Community service projects that show the impact of giving back</li>
+          </ul>
+        </div>
+      </div>
+      <div class="focus-card">
+        <div class="fc-header">
+          <div class="fc-num">04</div>
+          <div class="fc-title">Mentorship Seminars & Guest Speakers</div>
+        </div>
+        <div class="fc-body">
+          <p class="fc-lead">Bringing experienced voices into the room on topics that matter to young people — mental health, career direction, relationships, spiritual growth, and purpose.</p>
+          <ul class="fc-list">
+            <li>Diverse speakers who can relate personally to the teenage experience</li>
+            <li>Open Q&amp;A sessions addressing specific concerns and questions</li>
+            <li>Actionable resources from each seminar that attendees can apply immediately</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="impact-section">
+  <div class="impact-inner">
+    <div class="section-label">Our promise</div>
+    <h2 class="section-heading">What Thrive is<br><em>built to do.</em></h2>
+    <p class="section-sub">These are not taglines. They are the four commitments that shape every programme, seminar, and conversation Thrive is a part of.</p>
+    <div class="impact-grid">
+      <div class="impact-card">
+        <div class="ic-quote">"Empowering Tomorrow's Leaders Today."</div>
+        <div class="ic-sub">We equip teens and young adults with the confidence, skills, and faith they need to become the leaders of tomorrow — not someday, but starting now.</div>
+      </div>
+      <div class="impact-card">
+        <div class="ic-quote">"Navigating Life's Storms Together."</div>
+        <div class="ic-sub">When life gets hard, Thrive stands by your side — offering personalised support and guidance through life's challenges, not just from a safe distance.</div>
+      </div>
+      <div class="impact-card">
+        <div class="ic-quote">"Transforming Potential into Purpose."</div>
+        <div class="ic-sub">Every young life is filled with potential. Our programmes turn that potential into a clear sense of purpose and direction — written, named, and owned.</div>
+      </div>
+      <div class="impact-card">
+        <div class="ic-quote">"Building Character, One Young Person at a Time."</div>
+        <div class="ic-sub">Through workshops and mentorship, we cultivate integrity and resilience in the hearts of young people — preparing them for a future they'll be proud of.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="programmes-section">
+  <div class="programmes-inner">
+    <div class="section-label">Programmes</div>
+    <h2 class="section-heading" style="color:var(--cream)">Coming up at <em>Thrive.</em></h2>
+    <p class="section-sub">From the Identity & Purpose Seminar to upcoming boot camps and character development workshops — there is something here for every young person at every stage.</p>
+    <div class="prog-grid">
+      <a class="prog-card" href="seminar.html">
+        <div class="prog-icon">✦</div>
+        <div class="prog-title">Identity & Purpose Seminar — Cohort 2</div>
+        <div class="prog-desc">Cohort 1 completed May 2026 — and was a resounding success. Cohort 2 opens September 2026. Who am I? What do I stand for? Where am I going? Three days. Three deliverables. One direction that is finally yours.</div>
+        <div class="prog-link">Join Cohort 2 Waitlist →</div>
+      </a>
+      <a class="prog-card" href="programmes.html">
+        <div class="prog-icon">🏕️</div>
+        <div class="prog-title">Thrive Bootcamp</div>
+        <div class="prog-desc">An immersive faith-based boot camp focused on spiritual growth, leadership, and character development. Dates and details coming soon.</div>
+        <div class="prog-link">Learn more →</div>
+      </a>
+      <a class="prog-card" href="programmes.html">
+        <div class="prog-icon">🌱</div>
+        <div class="prog-title">Roots and Wings</div>
+        <div class="prog-desc">A forthcoming programme for teens aged 13–18 — building deep roots of faith and character while giving young people the wings to launch into their future with confidence.</div>
+        <div class="prog-link">Coming soon →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="section-label" style="justify-content:center">Join us</div>
+  <h2 class="section-heading">Ready to be part<br>of the <em>community?</em></h2>
+  <p>Whether you're a young person carrying hard questions, a parent looking for support for your teenager, or a church or school wanting to bring Thrive to your community — we'd love to connect.</p>
+  <div class="btn-row">
+    <a class="btn-primary" href="mailto:teensmentor365@gmail.com?subject=Thrive Cohort 2 Waitlist&body=Hi Janet,%0A%0APlease add me to the Thrive Cohort 2 waitlist.%0A%0AName:%0AAge:%0AWhatsApp number:">Join Cohort 2 Waitlist →</a>
+    <a class="btn-ghost" href="coach.html">Meet the coach</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Thrive<span>.</span></div>
+  <div class="footer-verse">"For we are God's handiwork, created in Christ Jesus to do good works." — Ephesians 2:10</div>
+</footer>
+
+</body>
+</html>
