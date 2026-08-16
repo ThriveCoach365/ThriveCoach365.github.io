@@ -485,9 +485,9 @@
   async function loadState(){
     setStatus('Loading your wheel…');
     try{
-      const res = await window.storage.get(STORAGE_KEY, false);
-      if(res && res.value){
-        const parsed = JSON.parse(res.value);
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(raw){
+        const parsed = JSON.parse(raw);
         AREAS.forEach(a=>{
           if(parsed.entries && parsed.entries[a.id]) state.entries[a.id] = parsed.entries[a.id];
           if(parsed.reflections && parsed.reflections[a.id]) state.reflections[a.id] = parsed.reflections[a.id];
@@ -502,10 +502,10 @@
   function saveState(){
     setStatus('Saving…');
     clearTimeout(saveTimer);
-    saveTimer = setTimeout(async ()=>{
+    saveTimer = setTimeout(()=>{
       try{
-        const result = await window.storage.set(STORAGE_KEY, JSON.stringify(state), false);
-        setStatus(result ? 'Saved' : 'Could not save');
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        setStatus('Saved');
         setTimeout(()=>setStatus(''), 1400);
       }catch(err){
         setStatus('Could not save — your changes stay for this visit');
