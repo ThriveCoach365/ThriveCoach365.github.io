@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Is Your Wheel Whole? — A Life Goals Self-Assessment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1A3028;        /* Forest — primary */
+    --ink-2:#22392F;       /* Forest, one step lighter, for nested dark panels */
+    --paper:#FAF6EE;       /* Cream — card/section background */
+    --paper-dim:#F1E7D3;   /* Cream, deepened slightly for alternating sections */
+    --warm-white:#FDF9F3;  /* Warm White — page background */
+    --gold:#C9963A;        /* Gold — accent */
+    --gold-dim:#A97D2E;    /* Gold, darkened for text-on-light contrast */
+    --sage:#2F5243;        /* Sage — secondary */
+    --slate:#8A9E94;       /* Muted — subtle text */
+    --line:rgba(250,246,238,0.14);
+    --line-dark:rgba(26,48,40,0.14);
+    --text-ink:#1A3028;
+    --shadow:0 20px 50px rgba(26,48,40,0.16);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--warm-white);
+    color:var(--text-ink);
+    font-family:'DM Sans',sans-serif;
+    font-weight:300;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'DM Sans',sans-serif;}
+  .serif{font-family:'Playfair Display',serif;}
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:radial-gradient(circle at 20% -10%, #2C4A3B 0%, var(--ink) 55%);
+    color:var(--paper);
+    padding:76px 24px 90px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-rings{
+    position:absolute;
+    right:-120px; top:-120px;
+    width:480px; height:480px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    opacity:.6;
+  }
+  .hero-rings::before,.hero-rings::after{
+    content:'';
+    position:absolute; inset:60px;
+    border-radius:50%;
+    border:1px solid var(--line);
+  }
+  .hero-rings::after{inset:130px; border-color:rgba(201,150,58,0.35);}
+  .hero-inner{max-width:760px; margin:0 auto; position:relative; z-index:1;}
+  .hero-eyebrow{
+    text-transform:uppercase;
+    letter-spacing:.16em;
+    font-size:12px;
+    font-weight:500;
+    color:var(--gold);
+    margin:0 0 18px;
+  }
+  .hero h1{
+    font-family:'Playfair Display',serif;
+    font-optical-sizing:auto;
+    font-weight:600;
+    font-size:clamp(38px,6.5vw,64px);
+    line-height:1.05;
+    margin:0 0 22px;
+    max-width:11ch;
+  }
+  .hero h1 em{font-style:italic; color:var(--gold); font-weight:500;}
+  .hero p{
+    font-size:17px;
+    line-height:1.65;
+    color:rgba(250,246,238,0.78);
+    max-width:52ch;
+    margin:0 0 34px;
+  }
+  .hero-cta{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:var(--gold);
+    color:var(--ink);
+    font-weight:500;
+    font-size:15px;
+    padding:14px 26px;
+    border-radius:999px;
+    text-decoration:none;
+    border:none;
+    cursor:pointer;
+    transition:transform .18s ease, background .18s ease;
+  }
+  .hero-cta:hover{background:#f2b459; transform:translateY(-1px);}
+  .hero-note{
+    margin-top:16px;
+    font-size:13px;
+    color:var(--slate);
+  }
+
+  /* ---------- SHARED SECTION STYLES ---------- */
+  section{padding:64px 24px;}
+  .section-inner{max-width:1080px; margin:0 auto;}
+  .kicker{
+    text-transform:uppercase;
+    letter-spacing:.14em;
+    font-size:12px;
+    color:var(--gold-dim);
+    font-weight:500;
+    margin:0 0 10px;
+  }
+  h2.section-title{
+    font-family:'Playfair Display',serif;
+    font-weight:600;
+    font-size:clamp(26px,3.6vw,38px);
+    margin:0 0 12px;
+    max-width:20ch;
+  }
+  .section-lede{
+    font-size:16px;
+    line-height:1.65;
+    color:#4C5E54;
+    max-width:60ch;
+    margin:0 0 40px;
+  }
+
+  /* ---------- ASSESSMENT GRID ---------- */
+  #assessment{background:var(--paper);}
+  .assess-grid{
+    display:grid;
+    grid-template-columns:340px 1fr;
+    gap:40px;
+    align-items:start;
+  }
+  @media (max-width:880px){
+    .assess-grid{grid-template-columns:1fr;}
+  }
+  .wheel-panel{
+    position:sticky;
+    top:20px;
+    background:var(--ink);
+    border-radius:22px;
+    padding:26px 20px 22px;
+    box-shadow:var(--shadow);
+  }
+  @media (max-width:880px){
+    .wheel-panel{position:static;}
+  }
+  .wheel-panel h3{
+    color:var(--paper);
+    font-family:'Playfair Display',serif;
+    font-weight:600;
+    font-size:19px;
+    margin:0 0 4px;
+    text-align:center;
+  }
+  .wheel-panel .status{
+    text-align:center;
+    font-size:12px;
+    font-weight:500;
+    color:var(--slate);
+    margin:0 0 10px;
+    height:16px;
+  }
+  .wheel-legend{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    margin-top:8px;
+    flex-wrap:wrap;
+  }
+  .wheel-legend span{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:12px;
+    font-weight:500;
+    color:rgba(250,246,238,0.78);
+  }
+  .dot{width:9px; height:9px; border-radius:50%; display:inline-block;}
+
+  .areas-list{display:flex; flex-direction:column; gap:14px;}
+  .area-card{
+    background:#fff;
+    border:1px solid var(--line-dark);
+    border-radius:16px;
+    padding:20px 22px;
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  .area-card.active-focus{border-color:var(--gold); box-shadow:0 0 0 3px rgba(201,150,58,0.15);}
+  .area-head{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    margin-bottom:14px;
+  }
+  .area-num{
+    font-family:'DM Sans',sans-serif;
+    font-size:12px;
+    font-weight:500;
+    color:var(--gold-dim);
+    background:var(--paper-dim);
+    border-radius:6px;
+    padding:2px 7px;
+  }
+  .area-name{
+    font-family:'Playfair Display',serif;
+    font-weight:600;
+    font-size:18px;
+    margin:0;
+  }
+  .slider-row{margin-bottom:12px;}
+  .slider-row label{
+    display:flex;
+    justify-content:space-between;
+    font-size:13px;
+    font-weight:500;
+    color:#5C6D63;
+    margin-bottom:6px;
+  }
+  .slider-row .val{font-family:'DM Sans',sans-serif; color:var(--text-ink); font-weight:500;}
+  input[type=range]{
+    width:100%;
+    -webkit-appearance:none;
+    appearance:none;
+    height:6px;
+    border-radius:999px;
+    background:linear-gradient(90deg, var(--sage) 0%, var(--sage) var(--fill,50%), #eae4d6 var(--fill,50%), #eae4d6 100%);
+    outline:none;
+  }
+  input[type=range].desired-slider{
+    background:linear-gradient(90deg, var(--gold) 0%, var(--gold) var(--fill,50%), #eae4d6 var(--fill,50%), #eae4d6 100%);
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;
+    width:18px; height:18px;
+    border-radius:50%;
+    background:#fff;
+    border:3px solid var(--ink);
+    cursor:pointer;
+    margin-top:0;
+  }
+  input[type=range]::-moz-range-thumb{
+    width:18px; height:18px;
+    border-radius:50%;
+    background:#fff;
+    border:3px solid var(--ink);
+    cursor:pointer;
+  }
+  .priority-row{display:flex; align-items:center; gap:10px; margin-top:16px;}
+  .priority-row .p-label{font-size:12px; font-weight:500; color:#5C6D63; text-transform:uppercase; letter-spacing:.08em;}
+  .p-pills{display:flex; gap:6px;}
+  .p-pill{
+    font-size:12px;
+    font-weight:500;
+    padding:6px 13px;
+    border-radius:999px;
+    border:1px solid var(--line-dark);
+    background:#fff;
+    cursor:pointer;
+    color:#5C6D63;
+    transition:all .15s ease;
+  }
+  .p-pill[data-p="low"].on{background:var(--slate); border-color:var(--slate); color:#fff;}
+  .p-pill[data-p="medium"].on{background:var(--sage); border-color:var(--sage); color:#fff;}
+  .p-pill[data-p="high"].on{background:var(--gold); border-color:var(--gold); color:var(--ink);}
+
+  /* ---------- RESULTS ---------- */
+  #results{background:var(--ink); color:var(--paper);}
+  #results .section-lede{color:rgba(250,246,238,0.78);}
+  #results .kicker{color:var(--gold);}
+  .focus-list{display:flex; flex-direction:column; gap:12px;}
+  .focus-row{
+    display:grid;
+    grid-template-columns:34px 1fr 90px;
+    align-items:center;
+    gap:16px;
+    background:var(--ink-2);
+    border-radius:14px;
+    padding:16px 20px;
+  }
+  .focus-rank{font-family:'Playfair Display',serif; font-weight:600; font-size:20px; color:var(--gold);}
+  .focus-name{font-weight:500; font-size:15px; margin-bottom:6px;}
+  .focus-bar-track{background:rgba(255,255,255,0.1); height:6px; border-radius:999px; overflow:hidden;}
+  .focus-bar-fill{height:100%; background:linear-gradient(90deg, var(--sage), var(--gold)); border-radius:999px;}
+  .focus-gap{font-family:'DM Sans',sans-serif; font-weight:500; text-align:right; font-size:13px; color:var(--slate);}
+  .empty-note{color:var(--slate); font-size:14px;}
+
+  /* ---------- DEEPER ---------- */
+  #deeper{background:var(--paper-dim);}
+  .deeper-intro{
+    background:#fff;
+    border-radius:18px;
+    padding:26px 28px;
+    margin-bottom:28px;
+    border:1px solid var(--line-dark);
+  }
+  .deeper-intro p{font-size:15px; line-height:1.7; color:#4C5E54; margin:0;}
+  .deeper-toggle{
+    display:inline-flex; align-items:center; gap:8px;
+    margin-top:14px; font-size:13px; color:var(--gold-dim); font-weight:500; cursor:pointer; user-select:none;
+  }
+  .reflect-card{
+    background:#fff;
+    border:1px solid var(--line-dark);
+    border-radius:16px;
+    padding:24px 26px;
+    margin-bottom:16px;
+  }
+  .reflect-card h4{
+    font-family:'Playfair Display',serif;
+    font-weight:600;
+    font-size:19px;
+    margin:0 0 16px;
+  }
+  .q-block{margin-bottom:16px;}
+  .q-block .q-num{
+    font-family:'DM Sans',sans-serif;
+    font-size:11px;
+    font-weight:500;
+    color:var(--gold-dim);
+    text-transform:uppercase;
+    letter-spacing:.08em;
+  }
+  .q-block .q-text{font-size:14px; margin:4px 0 8px; color:var(--text-ink); font-weight:300;}
+  .q-block textarea{
+    width:100%;
+    min-height:56px;
+    border:1px solid var(--line-dark);
+    border-radius:10px;
+    padding:10px 12px;
+    font-family:'DM Sans',sans-serif;
+    font-size:14px;
+    resize:vertical;
+    background:var(--paper);
+  }
+  .q-block textarea:focus{outline:2px solid var(--gold); outline-offset:1px;}
+  .faith-note{
+    font-size:13px;
+    color:#6D7D73;
+    border-left:3px solid var(--gold);
+    padding-left:12px;
+    margin-top:18px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--ink);
+    color:var(--slate);
+    padding:34px 24px;
+    text-align:center;
+    font-size:13px;
+  }
+  .reset-btn{
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--slate);
+    font-size:12px;
+    padding:8px 16px;
+    border-radius:999px;
+    cursor:pointer;
+    margin-top:14px;
+  }
+  .reset-btn:hover{border-color:var(--gold); color:var(--gold);}
+
+  a{color:inherit;}
+  ::selection{background:var(--gold); color:var(--ink);}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-rings" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <p class="hero-eyebrow">A life goals self-assessment</p>
+    <h1>Is your wheel <em>whole</em>?</h1>
+    <p>Most of us are pouring everything into one or two areas of life while the rest quietly go flat. This tool walks you through ten areas of a whole life, has you rate where you honestly stand, name where you want to grow, and points you to what deserves your attention first.</p>
+    <a href="#assessment" class="hero-cta">Start your assessment ↓</a>
+    <p class="hero-note">Takes about 10 minutes. Your answers are saved automatically, only for you.</p>
+  </div>
+</header>
+
+<section id="assessment">
+  <div class="section-inner">
+    <p class="kicker">Step 1</p>
+    <h2 class="section-title">Rate each area, honestly</h2>
+    <p class="section-lede">For each area below, rate your current satisfaction and the level you'd like to reach a year from now. Then flag how much of a priority it is right now. There's no wrong answer — this is between you and yourself.</p>
+
+    <div class="assess-grid">
+      <div class="wheel-panel">
+        <h3>Your Wheel</h3>
+        <p class="status" id="statusText"></p>
+        <svg id="wheelSvg" viewBox="0 0 400 400" role="img" aria-label="Wheel of life chart"></svg>
+        <div class="wheel-legend">
+          <span><i class="dot" style="background:var(--sage)"></i>Today</span>
+          <span><i class="dot" style="background:var(--gold)"></i>One-year goal</span>
+        </div>
+      </div>
+
+      <div class="areas-list" id="areasList"></div>
+    </div>
+  </div>
+</section>
+
+<section id="results">
+  <div class="section-inner">
+    <p class="kicker">Step 2</p>
+    <h2 class="section-title">Where the biggest gaps are</h2>
+    <p class="section-lede">This ranks areas by the size of the gap between where you are and where you want to be, weighted by how much of a priority you marked them. Start here — not everywhere at once.</p>
+    <div class="focus-list" id="focusList"></div>
+  </div>
+</section>
+
+<section id="deeper">
+  <div class="section-inner">
+    <p class="kicker">Step 3 — optional</p>
+    <h2 class="section-title">Five honest questions</h2>
+    <p class="section-lede">Before you chase a goal, it's worth testing it. These five questions are adapted from an old exercise for examining a dream before you commit to it. They're applied here to your top three focus areas.</p>
+
+    <div class="deeper-intro">
+      <p>A goal is worth the climb when it's actually yours, not someone else's expectation; when you're honest about the cost; when it doesn't come at another person's expense; and when it's not just about you. Sit with each question for your top areas below — there's no need to have a polished answer.</p>
+    </div>
+
+    <div id="reflectList"></div>
+  </div>
+</section>
+
+<footer>
+  <div>Built for reflection, not comparison. Nobody else sees your wheel.</div>
+  <button class="reset-btn" id="resetBtn">Start over</button>
+</footer>
+
+<script>
+(function(){
+  const AREAS = [
+    {id:'faith', name:'Faith & Spirituality'},
+    {id:'growth', name:'Personal Growth'},
+    {id:'family', name:'Family'},
+    {id:'relationships', name:'Relationships'},
+    {id:'finances', name:'Finances'},
+    {id:'career', name:'Career / Study'},
+    {id:'health', name:'Health & Wellness'},
+    {id:'social', name:'Social Life & Recreation'},
+    {id:'purpose', name:'Purpose & Passion'},
+    {id:'community', name:'Community & Service'}
+  ];
+
+  const QUESTIONS = [
+    "Is this really true to who you are, not something you picked up because it looked good on someone else?",
+    "Is it honest — or is some of it about proving something, or pleasing someone?",
+    "Have you actually thought through what it will cost you, and are you willing to pay it?",
+    "Does reaching it take something away from someone else, or ask them to lower their own standards?",
+    "Is it big enough to matter beyond just you — who else does it serve if it comes true?"
+  ];
+
+  const PRIORITY_WEIGHT = {low:1, medium:1.5, high:2};
+  const STORAGE_KEY = 'wheel-of-life:v1';
+
+  let state = {
+    entries: {},
+    reflections: {}
+  };
+
+  AREAS.forEach(a=>{
+    state.entries[a.id] = {current:5, desired:7, priority:'medium'};
+    state.reflections[a.id] = ['','','','','',];
+  });
+
+  const statusText = document.getElementById('statusText');
+  let saveTimer = null;
+
+  function setStatus(msg){ statusText.textContent = msg; }
+
+  async function loadState(){
+    setStatus('Loading your wheel…');
+    try{
+      const res = await window.storage.get(STORAGE_KEY, false);
+      if(res && res.value){
+        const parsed = JSON.parse(res.value);
+        AREAS.forEach(a=>{
+          if(parsed.entries && parsed.entries[a.id]) state.entries[a.id] = parsed.entries[a.id];
+          if(parsed.reflections && parsed.reflections[a.id]) state.reflections[a.id] = parsed.reflections[a.id];
+        });
+      }
+      setStatus('');
+    }catch(err){
+      setStatus('');
+    }
+  }
+
+  function saveState(){
+    setStatus('Saving…');
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(async ()=>{
+      try{
+        const result = await window.storage.set(STORAGE_KEY, JSON.stringify(state), false);
+        setStatus(result ? 'Saved' : 'Could not save');
+        setTimeout(()=>setStatus(''), 1400);
+      }catch(err){
+        setStatus('Could not save — your changes stay for this visit');
+        setTimeout(()=>setStatus(''), 2200);
+      }
+    }, 400);
+  }
+
+  // ---------- WHEEL DRAWING ----------
+  const svg = document.getElementById('wheelSvg');
+  const CX=200, CY=200, MAXR=150, N=AREAS.length;
+
+  function polar(index, value){
+    const angle = (Math.PI*2*index/N) - Math.PI/2;
+    const r = (value/10)*MAXR;
+    return [CX + r*Math.cos(angle), CY + r*Math.sin(angle)];
+  }
+  function axisEnd(index){
+    const angle = (Math.PI*2*index/N) - Math.PI/2;
+    return [CX + MAXR*Math.cos(angle), CY + MAXR*Math.sin(angle)];
+  }
+
+  function ns(tag){ return document.createElementNS('http://www.w3.org/2000/svg', tag); }
+
+  function drawWheel(){
+    svg.innerHTML='';
+
+    // grid rings
+    [0.2,0.4,0.6,0.8,1.0].forEach(f=>{
+      const c = ns('circle');
+      c.setAttribute('cx',CX); c.setAttribute('cy',CY); c.setAttribute('r', MAXR*f);
+      c.setAttribute('fill','none');
+      c.setAttribute('stroke','rgba(255,255,255,0.08)');
+      svg.appendChild(c);
+    });
+
+    // axis spokes + number labels
+    AREAS.forEach((a,i)=>{
+      const [ex,ey] = axisEnd(i);
+      const line = ns('line');
+      line.setAttribute('x1',CX); line.setAttribute('y1',CY);
+      line.setAttribute('x2',ex); line.setAttribute('y2',ey);
+      line.setAttribute('stroke','rgba(255,255,255,0.14)');
+      svg.appendChild(line);
+
+      const [lx,ly] = polar(i, 11.6);
+      const label = ns('text');
+      label.setAttribute('x', lx); label.setAttribute('y', ly);
+      label.setAttribute('text-anchor','middle');
+      label.setAttribute('dominant-baseline','middle');
+      label.setAttribute('font-size','13');
+      label.setAttribute('font-family','DM Sans, sans-serif');
+      label.setAttribute('fill', '#C9963A');
+      label.textContent = (i+1);
+      svg.appendChild(label);
+    });
+
+    // today polygon
+    const todayPts = AREAS.map((a,i)=>polar(i, state.entries[a.id].current).join(',')).join(' ');
+    const todayPoly = ns('polygon');
+    todayPoly.setAttribute('points', todayPts);
+    todayPoly.setAttribute('fill','rgba(47,82,67,0.35)');
+    todayPoly.setAttribute('stroke','#2F5243');
+    todayPoly.setAttribute('stroke-width','2');
+    svg.appendChild(todayPoly);
+
+    // desired polygon
+    const desiredPts = AREAS.map((a,i)=>polar(i, state.entries[a.id].desired).join(',')).join(' ');
+    const desiredPoly = ns('polygon');
+    desiredPoly.setAttribute('points', desiredPts);
+    desiredPoly.setAttribute('fill','none');
+    desiredPoly.setAttribute('stroke','#C9963A');
+    desiredPoly.setAttribute('stroke-width','2');
+    desiredPoly.setAttribute('stroke-dasharray','5,4');
+    svg.appendChild(desiredPoly);
+
+    // priority dots on desired vertex
+    AREAS.forEach((a,i)=>{
+      const [px,py] = polar(i, state.entries[a.id].desired);
+      const dot = ns('circle');
+      const p = state.entries[a.id].priority;
+      const r = p==='high' ? 6 : p==='medium' ? 4.5 : 3.2;
+      const color = p==='high' ? '#C9963A' : p==='medium' ? '#2F5243' : '#8A9E94';
+      dot.setAttribute('cx',px); dot.setAttribute('cy',py); dot.setAttribute('r',r);
+      dot.setAttribute('fill',color);
+      dot.setAttribute('stroke', '#FAF6EE');
+      dot.setAttribute('stroke-width','1.5');
+      svg.appendChild(dot);
+    });
+  }
+
+  // ---------- AREA CARDS ----------
+  const areasList = document.getElementById('areasList');
+
+  function buildCards(){
+    areasList.innerHTML='';
+    AREAS.forEach((a,i)=>{
+      const e = state.entries[a.id];
+      const card = document.createElement('div');
+      card.className='area-card';
+      card.id = 'card-'+a.id;
+      card.innerHTML = `
+        <div class="area-head">
+          <span class="area-num">${String(i+1).padStart(2,'0')}</span>
+          <h3 class="area-name">${a.name}</h3>
+        </div>
+        <div class="slider-row">
+          <label>Current satisfaction <span class="val" id="cur-val-${a.id}">${e.current}</span></label>
+          <input type="range" min="1" max="10" value="${e.current}" class="current-slider" data-id="${a.id}">
+        </div>
+        <div class="slider-row">
+          <label>One-year goal <span class="val" id="des-val-${a.id}">${e.desired}</span></label>
+          <input type="range" min="1" max="10" value="${e.desired}" class="desired-slider" data-id="${a.id}">
+        </div>
+        <div class="priority-row">
+          <span class="p-label">Priority</span>
+          <div class="p-pills" data-id="${a.id}">
+            <button type="button" class="p-pill" data-p="low">Low</button>
+            <button type="button" class="p-pill" data-p="medium">Medium</button>
+            <button type="button" class="p-pill" data-p="high">High</button>
+          </div>
+        </div>
+      `;
+      areasList.appendChild(card);
+    });
+    syncSliderFills();
+    syncPriorityPills();
+    attachCardListeners();
+  }
+
+  function syncSliderFills(){
+    AREAS.forEach(a=>{
+      const e = state.entries[a.id];
+      const cur = document.querySelector(`.current-slider[data-id="${a.id}"]`);
+      const des = document.querySelector(`.desired-slider[data-id="${a.id}"]`);
+      if(cur) cur.style.setProperty('--fill', ((e.current-1)/9*100)+'%');
+      if(des) des.style.setProperty('--fill', ((e.desired-1)/9*100)+'%');
+    });
+  }
+
+  function syncPriorityPills(){
+    AREAS.forEach(a=>{
+      const group = document.querySelector(`.p-pills[data-id="${a.id}"]`);
+      if(!group) return;
+      group.querySelectorAll('.p-pill').forEach(btn=>{
+        btn.classList.toggle('on', btn.dataset.p === state.entries[a.id].priority);
+      });
+    });
+  }
+
+  function attachCardListeners(){
+    document.querySelectorAll('.current-slider').forEach(inp=>{
+      inp.addEventListener('input', e=>{
+        const id = e.target.dataset.id;
+        state.entries[id].current = parseInt(e.target.value,10);
+        document.getElementById('cur-val-'+id).textContent = state.entries[id].current;
+        syncSliderFills();
+        drawWheel();
+        renderResults();
+        saveState();
+      });
+    });
+    document.querySelectorAll('.desired-slider').forEach(inp=>{
+      inp.addEventListener('input', e=>{
+        const id = e.target.dataset.id;
+        state.entries[id].desired = parseInt(e.target.value,10);
+        document.getElementById('des-val-'+id).textContent = state.entries[id].desired;
+        syncSliderFills();
+        drawWheel();
+        renderResults();
+        saveState();
+      });
+    });
+    document.querySelectorAll('.p-pills').forEach(group=>{
+      group.querySelectorAll('.p-pill').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          const id = group.dataset.id;
+          state.entries[id].priority = btn.dataset.p;
+          syncPriorityPills();
+          drawWheel();
+          renderResults();
+          saveState();
+        });
+      });
+    });
+  }
+
+  // ---------- RESULTS ----------
+  const focusList = document.getElementById('focusList');
+
+  function computeFocus(){
+    return AREAS.map(a=>{
+      const e = state.entries[a.id];
+      const gap = Math.max(0, e.desired - e.current);
+      const weighted = gap * PRIORITY_WEIGHT[e.priority];
+      return {id:a.id, name:a.name, gap, weighted, current:e.current, desired:e.desired};
+    }).sort((x,y)=> y.weighted - x.weighted);
+  }
+
+  function renderResults(){
+    const ranked = computeFocus();
+    focusList.innerHTML='';
+    document.querySelectorAll('.area-card').forEach(c=>c.classList.remove('active-focus'));
+
+    if(ranked.every(r=>r.gap===0)){
+      focusList.innerHTML = '<p class="empty-note">No gaps yet — adjust your sliders above to see your focus areas here.</p>';
+      renderReflections([]);
+      return;
+    }
+
+    const top = ranked.slice(0,5).filter(r=>r.gap>0);
+    const maxWeighted = Math.max(...top.map(r=>r.weighted), 1);
+
+    top.forEach((r,i)=>{
+      const row = document.createElement('div');
+      row.className='focus-row';
+      row.innerHTML = `
+        <div class="focus-rank">${i+1}</div>
+        <div>
+          <div class="focus-name">${r.name}</div>
+          <div class="focus-bar-track"><div class="focus-bar-fill" style="width:${(r.weighted/maxWeighted*100).toFixed(0)}%"></div></div>
+        </div>
+        <div class="focus-gap">${r.current} → ${r.desired}</div>
+      `;
+      focusList.appendChild(row);
+      const card = document.getElementById('card-'+r.id);
+      if(card) card.classList.add('active-focus');
+    });
+
+    renderReflections(top.slice(0,3));
+  }
+
+  // ---------- REFLECTIONS ----------
+  const reflectList = document.getElementById('reflectList');
+
+  function renderReflections(topThree){
+    reflectList.innerHTML='';
+    if(!topThree.length){
+      reflectList.innerHTML = '<p class="empty-note">Once you have focus areas above, your five questions for each will show up here.</p>';
+      return;
+    }
+    topThree.forEach(r=>{
+      const card = document.createElement('div');
+      card.className='reflect-card';
+      const qBlocks = QUESTIONS.map((q,qi)=>`
+        <div class="q-block">
+          <div class="q-num">Question ${qi+1}</div>
+          <div class="q-text">${q}</div>
+          <textarea data-area="${r.id}" data-q="${qi}" placeholder="Write a few honest words…">${state.reflections[r.id][qi] || ''}</textarea>
+        </div>
+      `).join('');
+      card.innerHTML = `<h4>${r.name}</h4>${qBlocks}
+        <p class="faith-note">If faith is part of your life, one more is worth asking: does this dream connect to something bigger than you — and are you willing to hold it open-handed?</p>`;
+      reflectList.appendChild(card);
+    });
+
+    reflectList.querySelectorAll('textarea').forEach(ta=>{
+      ta.addEventListener('input', e=>{
+        const areaId = e.target.dataset.area;
+        const qi = parseInt(e.target.dataset.q,10);
+        state.reflections[areaId][qi] = e.target.value;
+        saveState();
+      });
+    });
+  }
+
+  // ---------- RESET ----------
+  document.getElementById('resetBtn').addEventListener('click', async ()=>{
+    if(!confirm('Reset your wheel? This clears all ratings and reflections.')) return;
+    AREAS.forEach(a=>{
+      state.entries[a.id] = {current:5, desired:7, priority:'medium'};
+      state.reflections[a.id] = ['','','','','',];
+    });
+    buildCards();
+    drawWheel();
+    renderResults();
+    saveState();
+  });
+
+  // ---------- INIT ----------
+  (async function init(){
+    await loadState();
+    buildCards();
+    drawWheel();
+    renderResults();
+  })();
+})();
+</script>
+</body>
+</html>
