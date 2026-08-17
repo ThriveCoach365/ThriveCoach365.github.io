@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Identity Blueprint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1A3028;
+    --ink-2:#22392F;
+    --paper:#FAF6EE;
+    --paper-dim:#F1E7D3;
+    --warm-white:#FDF9F3;
+    --gold:#C9963A;
+    --gold-dim:#A97D2E;
+    --sage:#2F5243;
+    --slate:#8A9E94;
+    --line:rgba(250,246,238,0.14);
+    --line-dark:rgba(26,48,40,0.14);
+    --text-ink:#1A3028;
+    --shadow:0 20px 50px rgba(26,48,40,0.16);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--warm-white);
+    color:var(--text-ink);
+    font-family:'DM Sans',sans-serif;
+    font-weight:300;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:radial-gradient(circle at 20% -10%, #2C4A3B 0%, var(--ink) 55%);
+    color:var(--paper);
+    padding:70px 24px 56px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-rings{
+    position:absolute;
+    right:-120px; top:-120px;
+    width:480px; height:480px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    opacity:.6;
+  }
+  .hero-rings::before,.hero-rings::after{
+    content:'';
+    position:absolute; inset:60px;
+    border-radius:50%;
+    border:1px solid var(--line);
+  }
+  .hero-rings::after{inset:130px; border-color:rgba(201,150,58,0.35);}
+  .hero-inner{max-width:720px; margin:0 auto; position:relative; z-index:1;}
+  .hero-eyebrow{
+    text-transform:uppercase;
+    letter-spacing:.16em;
+    font-size:12px;
+    font-weight:500;
+    color:var(--gold);
+    margin:0 0 18px;
+  }
+  .hero h1{
+    font-family:'Playfair Display',serif;
+    font-weight:600;
+    font-size:clamp(34px,6vw,54px);
+    line-height:1.08;
+    margin:0 0 26px;
+    max-width:14ch;
+  }
+  blockquote.verse{
+    margin:0 0 30px;
+    padding-left:18px;
+    border-left:3px solid var(--gold);
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:19px;
+    line-height:1.55;
+    color:#EDE6D6;
+  }
+  blockquote.verse cite{
+    display:block;
+    margin-top:10px;
+    font-family:'DM Sans',sans-serif;
+    font-style:normal;
+    font-weight:500;
+    font-size:13px;
+    color:var(--gold);
+  }
+  .hero-note{
+    font-size:13px;
+    color:var(--slate);
+    margin:0;
+  }
+
+  /* ---------- MINI NAV ---------- */
+  .mini-nav{
+    position:sticky;
+    top:0;
+    z-index:30;
+    background:var(--warm-white);
+    border-bottom:1px solid var(--line-dark);
+  }
+  .mini-nav-inner{
+    max-width:760px;
+    margin:0 auto;
+    display:flex;
+    gap:4px;
+    padding:10px 24px;
+    overflow-x:auto;
+  }
+  .mini-tab{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:transparent;
+    border:none;
+    font-family:'DM Sans',sans-serif;
+    font-weight:500;
+    font-size:13px;
+    color:#5C6D63;
+    padding:9px 14px;
+    border-radius:999px;
+    cursor:pointer;
+    white-space:nowrap;
+    text-decoration:none;
+    transition:background .15s ease, color .15s ease;
+  }
+  .mini-tab.active{background:var(--ink); color:var(--paper);}
+  .mini-tab:hover:not(.active){background:var(--paper-dim);}
+
+  /* ---------- CONTENT ---------- */
+  .content-section{padding:52px 24px; border-bottom:1px solid var(--line-dark);}
+  .content-section:nth-of-type(odd){background:var(--paper);}
+  .content-section:nth-of-type(even){background:var(--paper-dim);}
+  .content-section:last-of-type{border-bottom:none;}
+  .section-inner{max-width:720px; margin:0 auto;}
+  .kicker{
+    text-transform:uppercase;
+    letter-spacing:.14em;
+    font-size:12px;
+    color:var(--gold-dim);
+    font-weight:500;
+    margin:0 0 10px;
+  }
+  h2.section-title{
+    font-family:'Playfair Display',serif;
+    font-weight:600;
+    font-size:clamp(24px,3.4vw,32px);
+    margin:0 0 12px;
+  }
+  .section-lede{
+    font-size:15px;
+    line-height:1.65;
+    color:#4C5E54;
+    margin:0 0 30px;
+  }
+
+  /* ---------- CARD ---------- */
+  .card{
+    background:#fff;
+    border:1px solid var(--line-dark);
+    border-radius:16px;
+    padding:26px 28px;
+    margin-bottom:20px;
+  }
+  .card h3{
+    font-family:'Playfair Display',serif;
+    font-weight:600;
+    font-size:17px;
+    margin:0 0 6px;
+  }
+  .card .prompt{
+    font-size:13px;
+    color:#5C6D63;
+    margin:0 0 16px;
+    line-height:1.55;
+  }
+
+  /* ---------- SENTENCE FILL (Part 1) ---------- */
+  .sentence{
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:clamp(17px,2.4vw,21px);
+    line-height:2.1;
+    color:var(--text-ink);
+  }
+  .sentence input.blank-inline{
+    font-family:'DM Sans',sans-serif;
+    font-style:normal;
+    font-weight:500;
+    font-size:15px;
+    width:clamp(130px,26vw,200px);
+    border:none;
+    border-bottom:2px dotted var(--slate);
+    background:transparent;
+    color:var(--gold-dim);
+    padding:2px 6px;
+    text-align:center;
+  }
+  .sentence input.blank-inline:focus{outline:none; border-bottom-color:var(--gold);}
+
+  /* ---------- BLANK LIST LINES (Part 2) ---------- */
+  .blank-lines{list-style:none; margin:0; padding:0;}
+  .blank-line{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:9px 0;
+    border-bottom:1px solid var(--line-dark);
+  }
+  .blank-line:last-child{border-bottom:none;}
+  .blank-line .dot{
+    width:6px; height:6px; border-radius:50%;
+    background:var(--gold);
+    flex-shrink:0;
+  }
+  .blank-input{
+    flex:1;
+    border:none;
+    background:transparent;
+    font-family:'DM Sans',sans-serif;
+    font-weight:300;
+    font-size:15px;
+    padding:6px 2px;
+    color:var(--text-ink);
+  }
+  .blank-input:focus{outline:none;}
+  .blank-line{transition:border-color .15s ease;}
+  .blank-line:focus-within{border-color:var(--gold);}
+  .blank-remove{
+    background:none; border:none;
+    color:var(--slate);
+    font-size:17px;
+    line-height:1;
+    cursor:pointer;
+    padding:4px 4px;
+    flex-shrink:0;
+  }
+  .blank-remove:hover{color:var(--gold-dim);}
+  .add-line{
+    display:inline-block;
+    margin-top:12px;
+    background:none;
+    border:none;
+    color:var(--gold-dim);
+    font-family:'DM Sans',sans-serif;
+    font-weight:500;
+    font-size:13px;
+    cursor:pointer;
+    padding:0;
+  }
+  .add-line:hover{color:var(--sage);}
+
+  /* ---------- TEXTAREAS ---------- */
+  textarea.long-answer{
+    width:100%;
+    min-height:90px;
+    border:1px solid var(--line-dark);
+    border-radius:10px;
+    padding:12px 14px;
+    font-family:'DM Sans',sans-serif;
+    font-weight:300;
+    font-size:15px;
+    line-height:1.55;
+    resize:vertical;
+    background:var(--paper);
+    color:var(--text-ink);
+  }
+  textarea.long-answer:focus{outline:2px solid var(--gold); outline-offset:1px;}
+  input.single-answer{
+    width:100%;
+    border:1px solid var(--line-dark);
+    border-radius:10px;
+    padding:12px 14px;
+    font-family:'DM Sans',sans-serif;
+    font-weight:300;
+    font-size:15px;
+    background:var(--paper);
+    color:var(--text-ink);
+  }
+  input.single-answer:focus{outline:2px solid var(--gold); outline-offset:1px;}
+  .field-label{
+    display:block;
+    font-size:13px;
+    font-weight:500;
+    color:#5C6D63;
+    margin:0 0 8px;
+  }
+  .field-group{margin-bottom:20px;}
+  .field-group:last-child{margin-bottom:0;}
+
+  /* ---------- THEREFORE SENTENCE ---------- */
+  .therefore-lead{
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:clamp(17px,2.4vw,20px);
+    line-height:1.6;
+    color:var(--text-ink);
+    margin:0 0 14px;
+  }
+  .therefore-lead .gold{color:var(--gold-dim); font-style:normal; font-weight:600;}
+
+  /* ---------- SAVE / EMAIL BLOCK ---------- */
+  .save-block{
+    background:var(--ink);
+    color:var(--paper);
+    border-radius:18px;
+    padding:30px 30px 26px;
+  }
+  .save-block h3{
+    font-family:'Playfair Display',serif;
+    font-weight:600;
+    font-size:20px;
+    margin:0 0 8px;
+  }
+  .save-block p{
+    font-size:14px;
+    line-height:1.6;
+    color:rgba(250,246,238,0.78);
+    margin:0 0 18px;
+  }
+  .email-row{display:flex; gap:10px; flex-wrap:wrap;}
+  .email-row input[type=email]{
+    flex:1;
+    min-width:200px;
+    font-family:'DM Sans',sans-serif;
+    font-weight:300;
+    font-size:14px;
+    padding:12px 14px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--ink-2);
+    color:var(--paper);
+  }
+  .email-row input[type=email]::placeholder{color:var(--slate);}
+  .email-row input[type=email]:focus{outline:2px solid var(--gold); outline-offset:1px;}
+  .btn{
+    font-family:'DM Sans',sans-serif;
+    font-weight:500;
+    font-size:14px;
+    padding:12px 22px;
+    border-radius:999px;
+    cursor:pointer;
+    border:1px solid var(--gold);
+    background:var(--gold);
+    color:var(--ink);
+    transition:background .15s ease;
+    white-space:nowrap;
+  }
+  .btn:hover{background:#f2b459;}
+  .copy-link{
+    display:inline-block;
+    margin-top:14px;
+    background:none; border:none;
+    color:var(--gold);
+    font-family:'DM Sans',sans-serif;
+    font-weight:500;
+    font-size:13px;
+    text-decoration:underline;
+    cursor:pointer;
+    padding:0;
+  }
+  .copy-link:hover{color:#f2b459;}
+  #saveNote{margin:10px 0 0; min-height:16px; font-size:13px; color:var(--slate);}
+
+  /* ---------- STATUS + FOOTER ---------- */
+  .status-strip{
+    text-align:center;
+    font-size:12px;
+    font-weight:500;
+    color:var(--slate);
+    padding:10px 24px 0;
+    height:24px;
+  }
+  footer{
+    background:var(--ink);
+    color:var(--slate);
+    padding:30px 24px;
+    text-align:center;
+    font-size:13px;
+  }
+  .reset-btn{
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--slate);
+    font-size:12px;
+    padding:8px 16px;
+    border-radius:999px;
+    cursor:pointer;
+    margin-top:14px;
+  }
+  .reset-btn:hover{border-color:var(--gold); color:var(--gold);}
+
+  a{color:inherit;}
+  ::selection{background:var(--gold); color:var(--ink);}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-rings" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <p class="hero-eyebrow">An identity activity</p>
+    <h1>My Identity Blueprint</h1>
+    <blockquote class="verse">
+      "See what great love the Father has lavished on us, that we should be called children of God! And that is what we are!"
+      <cite>— 1 John 3:1</cite>
+    </blockquote>
+    <p class="hero-note">Your answers save automatically, only for you, right in this browser.</p>
+  </div>
+</header>
+
+<nav class="mini-nav" id="miniNav">
+  <div class="mini-nav-inner">
+    <a href="#part1" class="mini-tab active" data-target="part1">Part 1</a>
+    <a href="#part2" class="mini-tab" data-target="part2">Part 2</a>
+    <a href="#pricetags" class="mini-tab" data-target="pricetags">Price Tags</a>
+    <a href="#therefore" class="mini-tab" data-target="therefore">Therefore</a>
+    <a href="#save" class="mini-tab" data-target="save">Save</a>
+  </div>
+</nav>
+<p class="status-strip" id="statusText"></p>
+
+<section id="part1" class="content-section">
+  <div class="section-inner">
+    <p class="kicker">Part 1</p>
+    <h2 class="section-title">I am a Masterpiece</h2>
+    <p class="section-lede">Write Psalm 139:14 in your own words.</p>
+    <div class="card">
+      <p class="sentence">
+        "I praise you, God, because I am
+        <input type="text" class="blank-inline" id="masterpiece1" placeholder="fearfully">
+        and
+        <input type="text" class="blank-inline" id="masterpiece2" placeholder="wonderfully">
+        made."
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="part2" class="content-section">
+  <div class="section-inner">
+    <p class="kicker">Part 2</p>
+    <h2 class="section-title">My Purpose Clues</h2>
+    <p class="section-lede">Purpose usually leaves clues. Look for them in what energizes you, what upsets you, and what people notice about you.</p>
+
+    <div class="card">
+      <h3>Purpose Clues</h3>
+      <p class="prompt">What makes you come alive? What makes you angry (a sign of a passion for justice)? What do people thank you for?</p>
+      <ul class="blank-lines" id="list-purposeClues"></ul>
+      <button type="button" class="add-line" data-list="purposeClues">+ add another line</button>
+    </div>
+
+    <div class="card">
+      <h3>My Gifts / Talents</h3>
+      <p class="prompt">What I'm good at.</p>
+      <ul class="blank-lines" id="list-gifts"></ul>
+      <button type="button" class="add-line" data-list="gifts">+ add another line</button>
+    </div>
+
+    <div class="card">
+      <h3>My Passions</h3>
+      <p class="prompt">What I love doing.</p>
+      <ul class="blank-lines" id="list-passions"></ul>
+      <button type="button" class="add-line" data-list="passions">+ add another line</button>
+    </div>
+
+    <div class="card">
+      <h3>My Values</h3>
+      <p class="prompt">What I believe is important.</p>
+      <ul class="blank-lines" id="list-values"></ul>
+      <button type="button" class="add-line" data-list="values">+ add another line</button>
+    </div>
+  </div>
+</section>
+
+<section id="pricetags" class="content-section">
+  <div class="section-inner">
+    <p class="kicker">Part 3</p>
+    <h2 class="section-title">Price Tags</h2>
+    <p class="section-lede">A "price tag" is a lie about your worth that you've believed. Name one, then replace it with what God actually says.</p>
+    <div class="card">
+      <div class="field-group">
+        <label class="field-label" for="priceTag">One price tag (a lie about your worth) I am going to rip off today:</label>
+        <input type="text" class="single-answer" id="priceTag" placeholder="e.g., I'm only valuable if I perform">
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="truth">Truth from God's Word to replace it with (e.g., "I am chosen" — Ephesians 1:4):</label>
+        <textarea class="long-answer" id="truth" placeholder="Write the truth, and the verse it comes from…"></textarea>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="therefore" class="content-section">
+  <div class="section-inner">
+    <p class="kicker">Part 4</p>
+    <h2 class="section-title">My "Therefore" Statement</h2>
+    <p class="section-lede">Everything above points somewhere. Finish the sentence.</p>
+    <div class="card">
+      <p class="therefore-lead">Because I am <span class="gold">fearfully and wonderfully made</span> by God, with a unique purpose and unshakable worth, I will therefore —</p>
+      <textarea class="long-answer" id="thereforeStatement" style="min-height:130px;" placeholder="Write what that truth changes about how you'll live, choose, and treat yourself and others…"></textarea>
+    </div>
+  </div>
+</section>
+
+<section id="save" class="content-section">
+  <div class="section-inner">
+    <p class="kicker">Keep it</p>
+    <h2 class="section-title">Email this to yourself</h2>
+    <p class="section-lede">Send your full Identity Blueprint to your own inbox so you can come back to it.</p>
+    <div class="save-block">
+      <h3>Send my Blueprint</h3>
+      <p>This puts everything you wrote — your masterpiece sentence, purpose clues, gifts, passions, values, price tag, truth, and therefore statement — into an email.</p>
+      <div class="email-row">
+        <input type="email" id="emailInput" placeholder="your@email.com">
+        <button type="button" class="btn" id="emailBtn">Email my Blueprint</button>
+      </div>
+      <button type="button" class="copy-link" id="copyBtn">Or copy the full text to your clipboard instead</button>
+      <p id="saveNote" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>This is between you and God. Nobody else sees your Blueprint.</div>
+  <button class="reset-btn" id="resetBtn">Start over</button>
+</footer>
+
+<script>
+(function(){
+  const STORAGE_KEY = 'identity-blueprint:v1';
+  const LIST_KEYS = ['purposeClues','gifts','passions','values'];
+
+  let state = {
+    masterpiece1:'', masterpiece2:'',
+    purposeClues:['','',''],
+    gifts:['','',''],
+    passions:['','',''],
+    values:['','',''],
+    priceTag:'',
+    truth:'',
+    thereforeStatement:''
+  };
+
+  const statusText = document.getElementById('statusText');
+  let saveTimer = null;
+  function setStatus(msg){ statusText.textContent = msg; }
+
+  function escapeHtml(str){
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+  function uid(){ return 'l'+Math.random().toString(36).slice(2,9); }
+
+  function loadState(){
+    setStatus('Loading…');
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(raw){
+        const parsed = JSON.parse(raw);
+        Object.keys(state).forEach(k=>{
+          if(parsed[k] !== undefined) state[k] = parsed[k];
+        });
+      }
+      setStatus('');
+    }catch(err){ setStatus(''); }
+  }
+
+  function saveState(){
+    setStatus('Saving…');
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(()=>{
+      try{
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        setStatus('Saved');
+        setTimeout(()=>setStatus(''), 1300);
+      }catch(err){
+        setStatus('Could not save — your changes stay for this visit');
+        setTimeout(()=>setStatus(''), 2200);
+      }
+    }, 400);
+  }
+
+  // ---------- SIMPLE FIELDS ----------
+  function bindSimpleField(id, key){
+    const el = document.getElementById(id);
+    el.value = state[key] || '';
+    el.addEventListener('input', ()=>{
+      state[key] = el.value;
+      saveState();
+    });
+  }
+
+  // ---------- BLANK LISTS (Part 2) ----------
+  function renderList(key){
+    const ul = document.getElementById('list-'+key);
+    ul.innerHTML = '';
+    state[key].forEach((val, i)=>{
+      const li = document.createElement('li');
+      li.className = 'blank-line';
+      li.innerHTML = `
+        <span class="dot"></span>
+        <input type="text" class="blank-input" data-list="${key}" data-idx="${i}" value="${escapeHtml(val)}" placeholder="Write here…">
+        <button type="button" class="blank-remove" data-list="${key}" data-idx="${i}" aria-label="Remove line">×</button>
+      `;
+      ul.appendChild(li);
+    });
+
+    ul.querySelectorAll('.blank-input').forEach(inp=>{
+      inp.addEventListener('input', e=>{
+        const k = e.target.dataset.list;
+        const idx = parseInt(e.target.dataset.idx,10);
+        state[k][idx] = e.target.value;
+        saveState();
+      });
+    });
+    ul.querySelectorAll('.blank-remove').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const k = btn.dataset.list;
+        const idx = parseInt(btn.dataset.idx,10);
+        if(state[k].length <= 1){
+          state[k][idx] = '';
+        } else {
+          state[k].splice(idx,1);
+        }
+        renderList(k);
+        saveState();
+      });
+    });
+  }
+
+  document.querySelectorAll('.add-line').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const key = btn.dataset.list;
+      state[key].push('');
+      renderList(key);
+      saveState();
+      const ul = document.getElementById('list-'+key);
+      const inputs = ul.querySelectorAll('.blank-input');
+      if(inputs.length) inputs[inputs.length-1].focus();
+    });
+  });
+
+  // ---------- MINI NAV SCROLL-SPY ----------
+  const miniTabs = document.querySelectorAll('.mini-tab');
+  const sections = document.querySelectorAll('.content-section');
+
+  miniTabs.forEach(tab=>{
+    tab.addEventListener('click', e=>{
+      e.preventDefault();
+      const target = document.getElementById(tab.dataset.target);
+      if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        miniTabs.forEach(t=> t.classList.toggle('active', t.dataset.target === entry.target.id));
+      }
+    });
+  }, {rootMargin:'-40% 0px -50% 0px', threshold:0});
+  sections.forEach(s=> observer.observe(s));
+
+  // ---------- EMAIL / COPY SUMMARY ----------
+  function buildSummaryText(){
+    const lines = [];
+    lines.push('MY IDENTITY BLUEPRINT');
+    lines.push(new Date().toLocaleDateString());
+    lines.push('');
+    lines.push('"See what great love the Father has lavished on us, that we should be');
+    lines.push('called children of God! And that is what we are!" — 1 John 3:1');
+    lines.push('');
+    lines.push('PART 1 — I AM A MASTERPIECE');
+    lines.push(`I praise you, God, because I am ${state.masterpiece1 || '____'} and ${state.masterpiece2 || '____'} made.`);
+    lines.push('');
+    lines.push('PART 2 — MY PURPOSE CLUES');
+    const listLabels = {purposeClues:'Purpose Clues', gifts:'My Gifts / Talents', passions:'My Passions', values:'My Values'};
+    LIST_KEYS.forEach(key=>{
+      lines.push(`${listLabels[key]}:`);
+      const items = state[key].filter(v=>v.trim());
+      if(items.length){
+        items.forEach(v=> lines.push(`  • ${v}`));
+      } else {
+        lines.push('  (nothing written yet)');
+      }
+      lines.push('');
+    });
+    lines.push('PRICE TAGS');
+    lines.push(`Price tag I'm ripping off: ${state.priceTag || '(not answered)'}`);
+    lines.push(`Truth to replace it with: ${state.truth || '(not answered)'}`);
+    lines.push('');
+    lines.push('MY "THEREFORE" STATEMENT');
+    lines.push('Because I am fearfully and wonderfully made by God, with a unique purpose');
+    lines.push('and unshakable worth, I will therefore —');
+    lines.push(state.thereforeStatement || '(not answered)');
+    return lines.join('\n');
+  }
+
+  const saveNote = document.getElementById('saveNote');
+
+  document.getElementById('emailBtn').addEventListener('click', ()=>{
+    const to = document.getElementById('emailInput').value.trim();
+    const subject = 'My Identity Blueprint';
+    const body = buildSummaryText();
+    const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    if(mailto.length > 1800){
+      saveNote.textContent = "This is fairly long, so some email apps may trim it when opened this way. Opening your email app now — if it looks cut off, use \"copy the full text\" below instead.";
+    } else {
+      saveNote.textContent = 'Opening your email app…';
+    }
+    window.location.href = mailto;
+    setTimeout(()=>{ if(saveNote.textContent.startsWith('Opening')) saveNote.textContent=''; }, 4000);
+  });
+
+  document.getElementById('copyBtn').addEventListener('click', async ()=>{
+    const text = buildSummaryText();
+    try{
+      await navigator.clipboard.writeText(text);
+      saveNote.textContent = 'Copied! Paste it into an email, note, or doc.';
+    }catch(err){
+      saveNote.textContent = "Couldn't copy automatically — select and copy the text from your browser instead.";
+    }
+    setTimeout(()=>{ saveNote.textContent=''; }, 3500);
+  });
+
+  // ---------- RESET ----------
+  document.getElementById('resetBtn').addEventListener('click', ()=>{
+    if(!confirm('Reset your Blueprint? This clears everything you have written.')) return;
+    state = {
+      masterpiece1:'', masterpiece2:'',
+      purposeClues:['','',''],
+      gifts:['','',''],
+      passions:['','',''],
+      values:['','',''],
+      priceTag:'',
+      truth:'',
+      thereforeStatement:''
+    };
+    document.getElementById('masterpiece1').value='';
+    document.getElementById('masterpiece2').value='';
+    document.getElementById('priceTag').value='';
+    document.getElementById('truth').value='';
+    document.getElementById('thereforeStatement').value='';
+    LIST_KEYS.forEach(renderList);
+    saveState();
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  // ---------- INIT ----------
+  loadState();
+  bindSimpleField('masterpiece1','masterpiece1');
+  bindSimpleField('masterpiece2','masterpiece2');
+  bindSimpleField('priceTag','priceTag');
+  bindSimpleField('truth','truth');
+  bindSimpleField('thereforeStatement','thereforeStatement');
+  LIST_KEYS.forEach(renderList);
+})();
+</script>
+</body>
+</html>
