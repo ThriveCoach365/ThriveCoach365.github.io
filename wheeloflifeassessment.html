@@ -42,7 +42,7 @@
   .hero{
     background:radial-gradient(circle at 20% -10%, #2C4A3B 0%, var(--ink) 55%);
     color:var(--paper);
-    padding:76px 24px 90px;
+    padding:76px 24px 64px;
     position:relative;
     overflow:hidden;
   }
@@ -109,8 +109,58 @@
     color:var(--slate);
   }
 
+  /* ---------- STEP NAV ---------- */
+  .step-nav{
+    position:sticky;
+    top:0;
+    z-index:30;
+    background:var(--warm-white);
+    border-bottom:1px solid var(--line-dark);
+  }
+  .step-nav-inner{
+    max-width:1080px;
+    margin:0 auto;
+    display:flex;
+    gap:4px;
+    padding:10px 24px;
+    overflow-x:auto;
+  }
+  .step-tab{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:transparent;
+    border:none;
+    font-family:'DM Sans',sans-serif;
+    font-weight:500;
+    font-size:13px;
+    color:#5C6D63;
+    padding:10px 14px;
+    border-radius:999px;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:background .15s ease, color .15s ease;
+  }
+  .step-tab-num{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:20px; height:20px;
+    border-radius:50%;
+    background:var(--paper-dim);
+    color:var(--gold-dim);
+    font-size:11px;
+    font-weight:500;
+    flex-shrink:0;
+  }
+  .step-tab.active{background:var(--ink); color:var(--paper);}
+  .step-tab.active .step-tab-num{background:var(--gold); color:var(--ink);}
+  .step-tab:hover:not(.active){background:var(--paper-dim);}
+
   /* ---------- SHARED SECTION STYLES ---------- */
-  section{padding:64px 24px;}
+  .step-panel{display:none; padding:56px 24px 72px;}
+  .step-panel.active{display:block;}
+  .step-panel{scroll-margin-top:70px;}
   .section-inner{max-width:1080px; margin:0 auto;}
   .kicker{
     text-transform:uppercase;
@@ -125,7 +175,7 @@
     font-weight:600;
     font-size:clamp(26px,3.6vw,38px);
     margin:0 0 12px;
-    max-width:20ch;
+    max-width:22ch;
   }
   .section-lede{
     font-size:16px;
@@ -134,6 +184,33 @@
     max-width:60ch;
     margin:0 0 40px;
   }
+
+  /* ---------- STEP ACTIONS (prev/next) ---------- */
+  .step-actions{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    margin-top:40px;
+  }
+  .step-btn{
+    font-family:'DM Sans',sans-serif;
+    font-weight:500;
+    font-size:14px;
+    padding:12px 22px;
+    border-radius:999px;
+    cursor:pointer;
+    border:1px solid transparent;
+    transition:all .15s ease;
+    background:transparent;
+  }
+  .step-btn.primary{background:var(--gold); color:var(--ink); border-color:var(--gold); margin-left:auto;}
+  .step-btn.primary:hover{background:#f2b459;}
+  .step-btn.ghost{color:#5C6D63; border-color:var(--line-dark);}
+  .step-btn.ghost:hover{border-color:var(--gold); color:var(--gold-dim);}
+  .step-btn[hidden]{display:none;}
+  #results .step-btn.ghost, #deeper .step-btn.ghost{color:var(--slate); border-color:var(--line);}
+  #results .step-btn.ghost:hover, #deeper .step-btn.ghost:hover{color:var(--gold); border-color:var(--gold);}
 
   /* ---------- ASSESSMENT GRID ---------- */
   #assessment{background:var(--paper);}
@@ -148,7 +225,7 @@
   }
   .wheel-panel{
     position:sticky;
-    top:20px;
+    top:74px;
     background:var(--ink);
     border-radius:22px;
     padding:26px 20px 22px;
@@ -297,7 +374,82 @@
   .focus-gap{font-family:'DM Sans',sans-serif; font-weight:500; text-align:right; font-size:13px; color:var(--slate);}
   .empty-note{color:var(--slate); font-size:14px;}
 
-  /* ---------- DEEPER ---------- */
+  /* ---------- DREAMS ---------- */
+  #dreams{background:var(--paper);}
+  .dream-card{
+    background:#fff;
+    border:1px solid var(--line-dark);
+    border-radius:16px;
+    padding:22px 24px;
+    margin-bottom:16px;
+  }
+  .dream-add-row{display:flex; gap:8px; margin-top:6px;}
+  .dream-input{
+    flex:1;
+    font-family:'DM Sans',sans-serif;
+    font-weight:300;
+    font-size:14px;
+    padding:11px 14px;
+    border:1px solid var(--line-dark);
+    border-radius:10px;
+    background:var(--paper);
+    color:var(--text-ink);
+  }
+  .dream-input:focus{outline:2px solid var(--gold); outline-offset:1px;}
+  .dream-add-btn{
+    font-family:'DM Sans',sans-serif;
+    font-weight:500;
+    font-size:13px;
+    padding:0 20px;
+    border-radius:10px;
+    border:1px solid var(--gold);
+    background:var(--gold);
+    color:var(--ink);
+    cursor:pointer;
+    white-space:nowrap;
+    transition:background .15s ease;
+  }
+  .dream-add-btn:hover{background:#f2b459;}
+  .dream-items{list-style:none; margin:16px 0 0; padding:0;}
+  .dream-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:11px 4px 11px 16px;
+    border-top:1px solid var(--line-dark);
+    font-size:14px;
+    position:relative;
+  }
+  .dream-item::before{
+    content:'';
+    position:absolute;
+    left:0; top:50%;
+    transform:translateY(-50%);
+    width:6px; height:6px;
+    border-radius:50%;
+    background:var(--gold);
+  }
+  .dream-remove{
+    background:none;
+    border:none;
+    color:var(--slate);
+    font-size:18px;
+    line-height:1;
+    cursor:pointer;
+    padding:4px 8px;
+    flex-shrink:0;
+  }
+  .dream-remove:hover{color:var(--gold-dim);}
+  .dream-empty{
+    color:var(--slate);
+    font-size:13px;
+    font-style:italic;
+    padding:10px 4px;
+    border-top:1px solid var(--line-dark);
+  }
+
+  /* ---------- DEEPER / REFLECT ---------- */
   #deeper{background:var(--paper-dim);}
   .deeper-intro{
     background:#fff;
@@ -307,10 +459,6 @@
     border:1px solid var(--line-dark);
   }
   .deeper-intro p{font-size:15px; line-height:1.7; color:#4C5E54; margin:0;}
-  .deeper-toggle{
-    display:inline-flex; align-items:center; gap:8px;
-    margin-top:14px; font-size:13px; color:var(--gold-dim); font-weight:500; cursor:pointer; user-select:none;
-  }
   .reflect-card{
     background:#fff;
     border:1px solid var(--line-dark);
@@ -322,8 +470,24 @@
     font-family:'Playfair Display',serif;
     font-weight:600;
     font-size:19px;
-    margin:0 0 16px;
+    margin:0 0 14px;
   }
+  .dream-recap{
+    background:var(--paper);
+    border-radius:12px;
+    padding:14px 16px;
+    margin-bottom:18px;
+  }
+  .dream-recap p.recap-label{
+    font-size:11px;
+    font-weight:500;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--gold-dim);
+    margin:0 0 8px;
+  }
+  .dream-recap ul{margin:0; padding-left:18px;}
+  .dream-recap li{font-size:14px; margin-bottom:4px;}
   .q-block{margin-bottom:16px;}
   .q-block .q-num{
     font-family:'DM Sans',sans-serif;
@@ -353,6 +517,55 @@
     padding-left:12px;
     margin-top:18px;
   }
+
+  .email-block{
+    background:#fff;
+    border:1px solid var(--line-dark);
+    border-radius:16px;
+    padding:26px 28px;
+    margin-top:28px;
+  }
+  .email-block h3{
+    font-family:'Playfair Display',serif;
+    font-weight:600;
+    font-size:20px;
+    margin:0 0 8px;
+  }
+  .email-block p{
+    font-size:14px;
+    line-height:1.6;
+    color:#4C5E54;
+    margin:0 0 16px;
+  }
+  .email-row{display:flex; gap:10px; flex-wrap:wrap;}
+  .email-row input[type=email]{
+    flex:1;
+    min-width:220px;
+    font-family:'DM Sans',sans-serif;
+    font-weight:300;
+    font-size:14px;
+    padding:12px 14px;
+    border:1px solid var(--line-dark);
+    border-radius:10px;
+    background:var(--paper);
+    color:var(--text-ink);
+  }
+  .email-row input[type=email]:focus{outline:2px solid var(--gold); outline-offset:1px;}
+  .email-row .step-btn{margin-left:0;}
+  .copy-link{
+    display:inline-block;
+    background:none;
+    border:none;
+    color:var(--gold-dim);
+    font-family:'DM Sans',sans-serif;
+    font-weight:500;
+    font-size:13px;
+    text-decoration:underline;
+    cursor:pointer;
+    padding:14px 0 0;
+  }
+  .copy-link:hover{color:var(--sage);}
+  #emailNote{margin:10px 0 0; min-height:16px;}
 
   /* ---------- FOOTER ---------- */
   footer{
@@ -385,13 +598,22 @@
   <div class="hero-inner">
     <p class="hero-eyebrow">A life goals self-assessment</p>
     <h1>Is your wheel <em>whole</em>?</h1>
-    <p>Most of us are pouring everything into one or two areas of life while the rest quietly go flat. This tool walks you through ten areas of a whole life, has you rate where you honestly stand, name where you want to grow, and points you to what deserves your attention first.</p>
-    <a href="#assessment" class="hero-cta">Start your assessment ↓</a>
-    <p class="hero-note">Takes about 10 minutes. Your answers are saved automatically, only for you.</p>
+    <p>Most of us are pouring everything into one or two areas of life while the rest quietly go flat. This tool walks you through ten areas of a whole life, has you name your biggest dreams for the areas that need it most, and tests those dreams before you chase them.</p>
+    <a href="#assessment" class="hero-cta" id="heroCta">Start your assessment ↓</a>
+    <p class="hero-note">Four short steps. Your answers are saved automatically, only for you, right in this browser.</p>
   </div>
 </header>
 
-<section id="assessment">
+<nav class="step-nav" id="stepNav">
+  <div class="step-nav-inner">
+    <button class="step-tab active" data-step="0"><span class="step-tab-num">1</span>Assess</button>
+    <button class="step-tab" data-step="1"><span class="step-tab-num">2</span>Focus</button>
+    <button class="step-tab" data-step="2"><span class="step-tab-num">3</span>Dreams</button>
+    <button class="step-tab" data-step="3"><span class="step-tab-num">4</span>Reflect</button>
+  </div>
+</nav>
+
+<section id="assessment" class="step-panel active" data-step="0">
   <div class="section-inner">
     <p class="kicker">Step 1</p>
     <h2 class="section-title">Rate each area, honestly</h2>
@@ -410,29 +632,70 @@
 
       <div class="areas-list" id="areasList"></div>
     </div>
+
+    <div class="step-actions">
+      <button class="step-btn ghost" data-goto="prev" hidden>← Back</button>
+      <button class="step-btn primary" data-goto="next">See your focus areas →</button>
+    </div>
   </div>
 </section>
 
-<section id="results">
+<section id="results" class="step-panel" data-step="1">
   <div class="section-inner">
     <p class="kicker">Step 2</p>
     <h2 class="section-title">Where the biggest gaps are</h2>
-    <p class="section-lede">This ranks areas by the size of the gap between where you are and where you want to be, weighted by how much of a priority you marked them. Start here — not everywhere at once.</p>
+    <p class="section-lede">This ranks areas by the size of the gap between where you are and where you want to be, weighted by how much of a priority you marked them. Your top four move on to the next step.</p>
     <div class="focus-list" id="focusList"></div>
+
+    <div class="step-actions">
+      <button class="step-btn ghost" data-goto="prev">← Back</button>
+      <button class="step-btn primary" data-goto="next">Write your dreams →</button>
+    </div>
   </div>
 </section>
 
-<section id="deeper">
+<section id="dreams" class="step-panel" data-step="2">
   <div class="section-inner">
-    <p class="kicker">Step 3 — optional</p>
+    <p class="kicker">Step 3</p>
+    <h2 class="section-title">Write the dream, not just the number</h2>
+    <p class="section-lede">For your top four focus areas, put your goals into words — as specific and as big as you actually want them. If it's a job, name the exact job. If it's a place, name the city. If it's a number, write the number. Don't edit yourself yet.</p>
+    <div id="dreamsList"></div>
+
+    <div class="step-actions">
+      <button class="step-btn ghost" data-goto="prev">← Back</button>
+      <button class="step-btn primary" data-goto="next">Test these dreams →</button>
+    </div>
+  </div>
+</section>
+
+<section id="deeper" class="step-panel" data-step="3">
+  <div class="section-inner">
+    <p class="kicker">Step 4</p>
     <h2 class="section-title">Five honest questions</h2>
-    <p class="section-lede">Before you chase a goal, it's worth testing it. These five questions are adapted from an old exercise for examining a dream before you commit to it. They're applied here to your top three focus areas.</p>
+    <p class="section-lede">Before you chase a goal, it's worth testing it. These five questions are adapted from an old exercise for examining a dream before you commit to it — applied here to what you wrote in Step 3 for your top four focus areas.</p>
 
     <div class="deeper-intro">
-      <p>A goal is worth the climb when it's actually yours, not someone else's expectation; when you're honest about the cost; when it doesn't come at another person's expense; and when it's not just about you. Sit with each question for your top areas below — there's no need to have a polished answer.</p>
+      <p>A goal is worth the climb when it's actually yours, not someone else's expectation; when you're honest about the cost; when it doesn't come at another person's expense; and when it's not just about you. Sit with each question — there's no need for a polished answer.</p>
     </div>
 
     <div id="reflectList"></div>
+
+    <div class="email-block">
+      <p class="kicker" style="margin-bottom:6px;">Keep a copy</p>
+      <h3>Email this to yourself</h3>
+      <p>This puts your wheel scores, focus areas, dreams, and answers into an email so you can revisit them later, or share with someone you trust.</p>
+      <div class="email-row">
+        <input type="email" id="emailInput" placeholder="your@email.com">
+        <button type="button" class="step-btn primary" id="emailBtn">Email my results</button>
+      </div>
+      <button type="button" class="copy-link" id="copyBtn">Or copy the full summary to your clipboard instead</button>
+      <p class="empty-note" id="emailNote" aria-live="polite"></p>
+    </div>
+
+    <div class="step-actions">
+      <button class="step-btn ghost" data-goto="prev">← Back</button>
+      <button class="step-btn primary" data-goto="next" hidden>Done</button>
+    </div>
   </div>
 </section>
 
@@ -465,22 +728,34 @@
   ];
 
   const PRIORITY_WEIGHT = {low:1, medium:1.5, high:2};
-  const STORAGE_KEY = 'wheel-of-life:v1';
+  const STORAGE_KEY = 'wheel-of-life:v2';
 
   let state = {
     entries: {},
+    dreams: {},
     reflections: {}
   };
 
   AREAS.forEach(a=>{
     state.entries[a.id] = {current:5, desired:7, priority:'medium'};
+    state.dreams[a.id] = [];
     state.reflections[a.id] = ['','','','','',];
   });
+
+  let currentTopFour = [];
 
   const statusText = document.getElementById('statusText');
   let saveTimer = null;
 
   function setStatus(msg){ statusText.textContent = msg; }
+
+  function escapeHtml(str){
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function uid(){ return 'd'+Math.random().toString(36).slice(2,9); }
 
   async function loadState(){
     setStatus('Loading your wheel…');
@@ -490,6 +765,7 @@
         const parsed = JSON.parse(raw);
         AREAS.forEach(a=>{
           if(parsed.entries && parsed.entries[a.id]) state.entries[a.id] = parsed.entries[a.id];
+          if(parsed.dreams && parsed.dreams[a.id]) state.dreams[a.id] = parsed.dreams[a.id];
           if(parsed.reflections && parsed.reflections[a.id]) state.reflections[a.id] = parsed.reflections[a.id];
         });
       }
@@ -514,6 +790,32 @@
     }, 400);
   }
 
+  // ---------- STEP NAVIGATION ----------
+  const stepPanels = document.querySelectorAll('.step-panel');
+  const stepTabs = document.querySelectorAll('.step-tab');
+  let currentStepIndex = 0;
+
+  function goToStep(n){
+    n = Math.max(0, Math.min(stepPanels.length-1, n));
+    currentStepIndex = n;
+    stepPanels.forEach(p=> p.classList.toggle('active', Number(p.dataset.step)===n));
+    stepTabs.forEach(t=> t.classList.toggle('active', Number(t.dataset.step)===n));
+    document.querySelectorAll('.step-panel.active [data-goto="prev"]').forEach(b=> b.hidden = (n===0));
+    document.querySelectorAll('.step-panel.active [data-goto="next"]').forEach(b=> b.hidden = (n===stepPanels.length-1));
+    const activePanel = document.querySelector('.step-panel.active');
+    if(activePanel) activePanel.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  stepTabs.forEach(t=> t.addEventListener('click', ()=> goToStep(Number(t.dataset.step))));
+  document.querySelectorAll('[data-goto="next"]').forEach(btn=> btn.addEventListener('click', ()=> goToStep(currentStepIndex+1)));
+  document.querySelectorAll('[data-goto="prev"]').forEach(btn=> btn.addEventListener('click', ()=> goToStep(currentStepIndex-1)));
+
+  document.getElementById('heroCta').addEventListener('click', e=>{
+    e.preventDefault();
+    goToStep(0);
+    document.getElementById('assessment').scrollIntoView({behavior:'smooth'});
+  });
+
   // ---------- WHEEL DRAWING ----------
   const svg = document.getElementById('wheelSvg');
   const CX=200, CY=200, MAXR=150, N=AREAS.length;
@@ -533,7 +835,6 @@
   function drawWheel(){
     svg.innerHTML='';
 
-    // grid rings
     [0.2,0.4,0.6,0.8,1.0].forEach(f=>{
       const c = ns('circle');
       c.setAttribute('cx',CX); c.setAttribute('cy',CY); c.setAttribute('r', MAXR*f);
@@ -542,7 +843,6 @@
       svg.appendChild(c);
     });
 
-    // axis spokes + number labels
     AREAS.forEach((a,i)=>{
       const [ex,ey] = axisEnd(i);
       const line = ns('line');
@@ -563,7 +863,6 @@
       svg.appendChild(label);
     });
 
-    // today polygon
     const todayPts = AREAS.map((a,i)=>polar(i, state.entries[a.id].current).join(',')).join(' ');
     const todayPoly = ns('polygon');
     todayPoly.setAttribute('points', todayPts);
@@ -572,7 +871,6 @@
     todayPoly.setAttribute('stroke-width','2');
     svg.appendChild(todayPoly);
 
-    // desired polygon
     const desiredPts = AREAS.map((a,i)=>polar(i, state.entries[a.id].desired).join(',')).join(' ');
     const desiredPoly = ns('polygon');
     desiredPoly.setAttribute('points', desiredPts);
@@ -582,7 +880,6 @@
     desiredPoly.setAttribute('stroke-dasharray','5,4');
     svg.appendChild(desiredPoly);
 
-    // priority dots on desired vertex
     AREAS.forEach((a,i)=>{
       const [px,py] = polar(i, state.entries[a.id].desired);
       const dot = ns('circle');
@@ -597,7 +894,7 @@
     });
   }
 
-  // ---------- AREA CARDS ----------
+  // ---------- AREA CARDS (Step 1) ----------
   const areasList = document.getElementById('areasList');
 
   function buildCards(){
@@ -693,7 +990,7 @@
     });
   }
 
-  // ---------- RESULTS ----------
+  // ---------- RESULTS (Step 2) ----------
   const focusList = document.getElementById('focusList');
 
   function computeFocus(){
@@ -710,46 +1007,123 @@
     focusList.innerHTML='';
     document.querySelectorAll('.area-card').forEach(c=>c.classList.remove('active-focus'));
 
+    currentTopFour = ranked.slice(0,4);
+
     if(ranked.every(r=>r.gap===0)){
-      focusList.innerHTML = '<p class="empty-note">No gaps yet — adjust your sliders above to see your focus areas here.</p>';
-      renderReflections([]);
-      return;
+      focusList.innerHTML = '<p class="empty-note">No gaps yet — adjust your sliders in Step 1 to see your focus areas here.</p>';
+    } else {
+      const shown = ranked.slice(0,5).filter(r=>r.gap>0);
+      const maxWeighted = Math.max(...shown.map(r=>r.weighted), 1);
+
+      shown.forEach((r,i)=>{
+        const row = document.createElement('div');
+        row.className='focus-row';
+        row.innerHTML = `
+          <div class="focus-rank">${i+1}</div>
+          <div>
+            <div class="focus-name">${r.name}</div>
+            <div class="focus-bar-track"><div class="focus-bar-fill" style="width:${(r.weighted/maxWeighted*100).toFixed(0)}%"></div></div>
+          </div>
+          <div class="focus-gap">${r.current} → ${r.desired}</div>
+        `;
+        focusList.appendChild(row);
+        const card = document.getElementById('card-'+r.id);
+        if(card) card.classList.add('active-focus');
+      });
     }
 
-    const top = ranked.slice(0,5).filter(r=>r.gap>0);
-    const maxWeighted = Math.max(...top.map(r=>r.weighted), 1);
-
-    top.forEach((r,i)=>{
-      const row = document.createElement('div');
-      row.className='focus-row';
-      row.innerHTML = `
-        <div class="focus-rank">${i+1}</div>
-        <div>
-          <div class="focus-name">${r.name}</div>
-          <div class="focus-bar-track"><div class="focus-bar-fill" style="width:${(r.weighted/maxWeighted*100).toFixed(0)}%"></div></div>
-        </div>
-        <div class="focus-gap">${r.current} → ${r.desired}</div>
-      `;
-      focusList.appendChild(row);
-      const card = document.getElementById('card-'+r.id);
-      if(card) card.classList.add('active-focus');
-    });
-
-    renderReflections(top.slice(0,3));
+    renderDreams(currentTopFour);
+    renderReflections(currentTopFour);
   }
 
-  // ---------- REFLECTIONS ----------
-  const reflectList = document.getElementById('reflectList');
+  // ---------- DREAMS (Step 3) ----------
+  const dreamsList = document.getElementById('dreamsList');
 
-  function renderReflections(topThree){
-    reflectList.innerHTML='';
-    if(!topThree.length){
-      reflectList.innerHTML = '<p class="empty-note">Once you have focus areas above, your five questions for each will show up here.</p>';
+  function renderDreams(topFour){
+    dreamsList.innerHTML='';
+    if(!topFour.length){
+      dreamsList.innerHTML = '<p class="empty-note">Once you have focus areas in Step 2, your top four will show up here to write dreams for.</p>';
       return;
     }
-    topThree.forEach(r=>{
+    topFour.forEach(r=>{
+      const idx = AREAS.findIndex(a=>a.id===r.id);
+      const card = document.createElement('div');
+      card.className='dream-card';
+      card.innerHTML = `
+        <div class="area-head">
+          <span class="area-num">${String(idx+1).padStart(2,'0')}</span>
+          <h3 class="area-name">${r.name}</h3>
+        </div>
+        <div class="dream-add-row">
+          <input type="text" class="dream-input" data-id="${r.id}" placeholder="Write one goal or dream for this area — be specific, be big">
+          <button type="button" class="dream-add-btn" data-id="${r.id}">Add</button>
+        </div>
+        <ul class="dream-items" id="dream-items-${r.id}"></ul>
+      `;
+      dreamsList.appendChild(card);
+      renderDreamItems(r.id);
+    });
+
+    dreamsList.querySelectorAll('.dream-add-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=> addDream(btn.dataset.id));
+    });
+    dreamsList.querySelectorAll('.dream-input').forEach(inp=>{
+      inp.addEventListener('keydown', e=>{
+        if(e.key==='Enter'){ e.preventDefault(); addDream(inp.dataset.id); }
+      });
+    });
+  }
+
+  function addDream(areaId){
+    const input = document.querySelector(`.dream-input[data-id="${areaId}"]`);
+    if(!input) return;
+    const text = input.value.trim();
+    if(!text) return;
+    if(!state.dreams[areaId]) state.dreams[areaId] = [];
+    state.dreams[areaId].push({id:uid(), text});
+    input.value='';
+    renderDreamItems(areaId);
+    renderReflections(currentTopFour);
+    saveState();
+    input.focus();
+  }
+
+  function renderDreamItems(areaId){
+    const ul = document.getElementById('dream-items-'+areaId);
+    if(!ul) return;
+    const items = state.dreams[areaId] || [];
+    ul.innerHTML = items.length
+      ? items.map(it=>`<li class="dream-item"><span>${escapeHtml(it.text)}</span><button type="button" class="dream-remove" data-id="${areaId}" data-item="${it.id}" aria-label="Remove this dream">×</button></li>`).join('')
+      : '<li class="dream-empty">No dreams written yet — add your first above.</li>';
+
+    ul.querySelectorAll('.dream-remove').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const aId = btn.dataset.id;
+        const itemId = btn.dataset.item;
+        state.dreams[aId] = (state.dreams[aId]||[]).filter(d=>d.id!==itemId);
+        renderDreamItems(aId);
+        renderReflections(currentTopFour);
+        saveState();
+      });
+    });
+  }
+
+  // ---------- REFLECTIONS (Step 4) ----------
+  const reflectList = document.getElementById('reflectList');
+
+  function renderReflections(topFour){
+    reflectList.innerHTML='';
+    if(!topFour.length){
+      reflectList.innerHTML = '<p class="empty-note">Once you have focus areas and dreams written down, your five questions for each will show up here.</p>';
+      return;
+    }
+    topFour.forEach(r=>{
       const card = document.createElement('div');
       card.className='reflect-card';
+      const dreamItems = state.dreams[r.id] || [];
+      const recapHtml = dreamItems.length
+        ? `<div class="dream-recap"><p class="recap-label">Your dreams for this area</p><ul>${dreamItems.map(d=>`<li>${escapeHtml(d.text)}</li>`).join('')}</ul></div>`
+        : `<div class="dream-recap"><p class="recap-label">Your dreams for this area</p><p class="empty-note" style="margin:0;">Nothing written yet — head back to Step 3 to add some.</p></div>`;
       const qBlocks = QUESTIONS.map((q,qi)=>`
         <div class="q-block">
           <div class="q-num">Question ${qi+1}</div>
@@ -757,7 +1131,7 @@
           <textarea data-area="${r.id}" data-q="${qi}" placeholder="Write a few honest words…">${state.reflections[r.id][qi] || ''}</textarea>
         </div>
       `).join('');
-      card.innerHTML = `<h4>${r.name}</h4>${qBlocks}
+      card.innerHTML = `<h4>${r.name}</h4>${recapHtml}${qBlocks}
         <p class="faith-note">If faith is part of your life, one more is worth asking: does this dream connect to something bigger than you — and are you willing to hold it open-handed?</p>`;
       reflectList.appendChild(card);
     });
@@ -772,17 +1146,94 @@
     });
   }
 
+  // ---------- EMAIL / COPY SUMMARY ----------
+  function buildSummaryText(){
+    const lines = [];
+    lines.push('MY WHEEL OF LIFE — RESULTS');
+    lines.push(new Date().toLocaleDateString());
+    lines.push('');
+    lines.push('YOUR WHEEL (current -> one-year goal, priority)');
+    AREAS.forEach((a,i)=>{
+      const e = state.entries[a.id];
+      lines.push(`${i+1}. ${a.name}: ${e.current} -> ${e.desired}  (${e.priority} priority)`);
+    });
+    lines.push('');
+
+    const ranked = computeFocus();
+    const topFour = ranked.slice(0,4);
+    lines.push('TOP 4 FOCUS AREAS');
+    topFour.forEach((r,i)=>{
+      lines.push(`${i+1}. ${r.name} — ${r.current} -> ${r.desired}`);
+    });
+    lines.push('');
+
+    lines.push('MY DREAMS');
+    topFour.forEach(r=>{
+      lines.push(`— ${r.name} —`);
+      const items = state.dreams[r.id] || [];
+      if(items.length){
+        items.forEach(it=> lines.push(`  • ${it.text}`));
+      } else {
+        lines.push('  (nothing written yet)');
+      }
+      lines.push('');
+    });
+
+    lines.push('FIVE HONEST QUESTIONS');
+    topFour.forEach(r=>{
+      lines.push(`— ${r.name} —`);
+      QUESTIONS.forEach((q,qi)=>{
+        const answer = (state.reflections[r.id][qi] || '').trim();
+        lines.push(`  Q${qi+1}: ${q}`);
+        lines.push(`  A: ${answer || '(not answered)'}`);
+      });
+      lines.push('');
+    });
+
+    return lines.join('\n');
+  }
+
+  const emailNote = document.getElementById('emailNote');
+
+  document.getElementById('emailBtn').addEventListener('click', ()=>{
+    const to = document.getElementById('emailInput').value.trim();
+    const subject = 'My Wheel of Life — Results';
+    const body = buildSummaryText();
+    const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    if(mailto.length > 1800){
+      emailNote.textContent = "Your results are fairly long, so some email apps may cut off the message when opened this way. Opening your email app now — if it looks trimmed, use \"copy the full summary\" below instead and paste it in.";
+    } else {
+      emailNote.textContent = 'Opening your email app…';
+    }
+    window.location.href = mailto;
+    setTimeout(()=>{ if(emailNote.textContent.startsWith('Opening')) emailNote.textContent=''; }, 4000);
+  });
+
+  document.getElementById('copyBtn').addEventListener('click', async ()=>{
+    const text = buildSummaryText();
+    try{
+      await navigator.clipboard.writeText(text);
+      emailNote.textContent = 'Copied! Paste it into an email, note, or doc.';
+    }catch(err){
+      emailNote.textContent = "Couldn't copy automatically — select and copy the text from your browser instead.";
+    }
+    setTimeout(()=>{ emailNote.textContent=''; }, 3500);
+  });
+
   // ---------- RESET ----------
-  document.getElementById('resetBtn').addEventListener('click', async ()=>{
-    if(!confirm('Reset your wheel? This clears all ratings and reflections.')) return;
+  document.getElementById('resetBtn').addEventListener('click', ()=>{
+    if(!confirm('Reset your wheel? This clears all ratings, dreams, and reflections.')) return;
     AREAS.forEach(a=>{
       state.entries[a.id] = {current:5, desired:7, priority:'medium'};
+      state.dreams[a.id] = [];
       state.reflections[a.id] = ['','','','','',];
     });
     buildCards();
     drawWheel();
     renderResults();
     saveState();
+    goToStep(0);
   });
 
   // ---------- INIT ----------
@@ -791,6 +1242,7 @@
     buildCards();
     drawWheel();
     renderResults();
+    goToStep(0);
   })();
 })();
 </script>
