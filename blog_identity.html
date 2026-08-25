@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Who Told You That? — Thrive Blog</title>
+<meta name="description" content="A Thrive catch-up on Identity, for teens and young adults.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #C9963A; --gold-light: #F0C97A; --forest: #1A3028; --sage: #2F5243;
+    --cream: #FAF6EE; --warm-white: #FDF9F3; --muted: #8A9E94;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--warm-white); color: var(--forest); overflow-x: hidden; line-height: 1.6; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 40px;
+    background: rgba(253,249,243,0.94); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,150,58,0.15);
+  }
+  .nav-logo { font-family: var(--font-display); font-size: 22px; font-weight: 900; color: var(--forest); text-decoration: none; letter-spacing: -0.5px; }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--sage); text-decoration: none; transition: color .2s; }
+  .nav-links a:hover { color: var(--forest); }
+  .nav-links a.active { color: var(--forest); }
+  .nav-cta { background: var(--gold); color: #fff; font-family: var(--font-body); font-size: 13px; font-weight: 500; padding: 10px 22px; border-radius: 99px; border: none; cursor: pointer; text-decoration: none; transition: background .2s; }
+  .nav-cta:hover { background: #b0812e; }
+
+  /* HERO */
+  .hero {
+    background: var(--forest); padding: 140px 40px 90px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: 'THRIVE'; position: absolute;
+    font-family: var(--font-display); font-size: 280px; font-weight: 900; font-style: italic;
+    color: rgba(255,255,255,0.025);
+    top: 50%; left: 50%; transform: translate(-50%,-50%);
+    white-space: nowrap; pointer-events: none; letter-spacing: -10px;
+  }
+  .hero-inner { max-width: 820px; margin: 0 auto; position: relative; z-index: 1; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 20px; }
+  .hero-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+  .hero h1 { font-family: var(--font-display); font-size: clamp(36px, 5vw, 58px); font-weight: 900; line-height: 1.12; color: var(--cream); letter-spacing: -1.5px; margin-bottom: 20px; }
+  .hero h1 em { font-style: italic; color: var(--gold-light); }
+  .hero-lead { font-size: 17px; color: rgba(250,246,238,.68); line-height: 1.85; font-weight: 300; max-width: 620px; }
+  .hero-meta { display:flex; gap:18px; margin-top:24px; flex-wrap:wrap; }
+  .hero-meta span { font-size: 12px; color: var(--gold-light); font-weight:500; letter-spacing:.04em; display:flex; align-items:center; gap:6px; }
+
+  /* SHARED */
+  .section-label { font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .section-label::before { content: ''; display: block; width: 20px; height: 1px; background: var(--gold); }
+  .section-heading { font-family: var(--font-display); font-size: clamp(26px, 3vw, 36px); font-weight: 900; line-height: 1.15; color: var(--forest); letter-spacing: -.5px; margin-bottom: 14px; }
+  .section-heading em { font-style: italic; color: var(--gold); }
+  .section-sub { font-size: 16px; color: #4a6055; line-height: 1.85; font-weight: 300; max-width: 620px; margin-bottom: 40px; }
+
+  /* AUDIENCE TOGGLE */
+  .toggle-wrap { max-width: 720px; margin: -34px auto 0; padding: 0 40px; position: relative; z-index: 2; }
+  .audience-toggle { background: var(--warm-white); border: 1px solid rgba(201,150,58,.2); border-radius: 99px; padding: 6px; display: flex; gap: 4px; box-shadow: 0 12px 32px rgba(26,48,40,.14); }
+  .toggle-btn { flex: 1; text-align: center; font-family: var(--font-body); font-size: 13px; font-weight: 500; padding: 12px 18px; border-radius: 99px; border: none; background: transparent; color: var(--sage); cursor: pointer; transition: background .2s, color .2s; }
+  .toggle-btn.active { background: var(--forest); color: var(--cream); }
+  .toggle-btn:not(.active):hover { color: var(--forest); }
+
+  /* ARTICLE */
+  .article-section { padding: 72px 40px 20px; background: var(--warm-white); }
+  .article-inner { max-width: 720px; margin: 0 auto; }
+  .tab-panel { display: none; animation: fadeUp .5s both; }
+  .tab-panel.active { display: block; }
+  .article-title { font-family: var(--font-display); font-size: clamp(26px, 4vw, 36px); font-weight: 900; color: var(--forest); line-height: 1.2; letter-spacing: -.5px; margin-bottom: 8px; }
+  .article-kicker { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 28px; }
+  .article-body p { font-size: 16.5px; color: #3d5548; line-height: 1.9; font-weight: 300; margin-bottom: 22px; }
+  .article-body p strong { font-weight: 500; color: var(--forest); }
+  .article-body h3 { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--forest); margin: 32px 0 14px; letter-spacing: -.2px; }
+  .article-body ul.fc-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .article-body ul.fc-list li { font-size: 15.5px; color: #4a6055; display: flex; gap: 10px; align-items: flex-start; line-height: 1.65; font-weight: 300; }
+  .article-body ul.fc-list li::before { content: '→'; color: var(--gold); flex-shrink: 0; font-weight: 500; }
+  .verse-block { border-left: 3px solid var(--gold); background: var(--cream); border-radius: 0 12px 12px 0; padding: 18px 24px; margin: 28px 0; }
+  .verse-block p { font-family: var(--font-display); font-style: italic; font-size: 17px; color: var(--forest); line-height: 1.5; margin-bottom: 0; }
+
+  /* CTA CALLOUT (activity sheet / signup) */
+  .cta-callout { border: 1px solid rgba(201,150,58,.25); background: var(--cream); border-radius: 16px; padding: 28px 30px; margin: 40px 0; }
+  .cta-callout .cc-label { font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .cta-callout h4 { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--forest); margin-bottom: 10px; line-height: 1.3; }
+  .cta-callout p { font-size: 14.5px; color: #4a6055; line-height: 1.7; font-weight: 300; margin-bottom: 18px; }
+  .cta-callout .ml-embed-slot { background: rgba(255,255,255,.6); border: 1.5px dashed rgba(201,150,58,.4); border-radius: 10px; padding: 18px; font-size: 12.5px; color: var(--muted); text-align: center; }
+  .cta-note { font-size: 12.5px; color: var(--muted); font-style: italic; margin-top: 14px; line-height: 1.6; }
+  .download-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--forest); color: #fff; font-size: 13.5px; font-weight: 500; padding: 12px 24px; border-radius: 99px; text-decoration: none; transition: background .2s; }
+  .download-btn:hover { background: var(--sage); }
+
+  /* PASTORAL FOOTER (in-article closing) */
+  .session-cta { background: var(--sage); border-radius: 18px; padding: 34px 32px; margin: 48px 0 8px; }
+  .session-cta p { color: rgba(250,246,238,.85); font-size: 15px; line-height: 1.75; font-weight: 300; margin-bottom: 18px; }
+  .session-cta .btn-row { justify-content: flex-start; }
+
+  .btn-row { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
+  .btn-primary { background: var(--gold); color: #fff; font-family: var(--font-body); font-size: 14px; font-weight: 500; padding: 13px 28px; border-radius: 99px; border: none; cursor: pointer; text-decoration: none; transition: background .2s, transform .15s; display:inline-block; }
+  .btn-primary:hover { background: #b0812e; transform: translateY(-1px); }
+  .btn-ghost { background: transparent; color: var(--forest); font-family: var(--font-body); font-size: 14px; font-weight: 500; padding: 12px 22px; border-radius: 99px; border: 1.5px solid rgba(26,48,40,.25); cursor: pointer; text-decoration: none; transition: border-color .2s; }
+  .btn-ghost:hover { border-color: var(--forest); }
+
+  /* RELATED / MORE */
+  .more-section { padding: 60px 40px 100px; background: var(--warm-white); }
+  .more-inner { max-width: 720px; margin: 0 auto; }
+  .more-inner .section-label { justify-content: flex-start; }
+  .more-grid { display: flex; flex-wrap: wrap; gap: 14px; }
+  .more-card { background: var(--cream); border: 1px solid rgba(201,150,58,.15); border-radius: 12px; padding: 18px 18px; text-decoration: none; transition: background .2s; flex: 1 1 180px; }
+  .more-card:hover { background: #f3ecdc; }
+  .more-card .mc-title { font-family: var(--font-display); font-size: 14.5px; font-weight: 700; color: var(--forest); line-height: 1.3; }
+
+  footer { background: var(--forest); padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .footer-logo { font-family: var(--font-display); font-size: 20px; font-weight: 900; color: var(--cream); }
+  .footer-logo span { color: var(--gold); }
+  .footer-verse { font-size: 12px; font-style: italic; color: rgba(250,246,238,.3); }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+  .hero-inner { animation: fadeUp .7s .1s both; }
+
+  @media(max-width:860px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 110px 20px 70px; }
+    .toggle-wrap { padding: 0 20px; }
+    .article-section, .more-section { padding: 56px 20px 20px; }
+    .more-grid { flex-direction: column; }
+    footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="../about.html">Thrive<span>.</span></a>
+  <div class="nav-links">
+    <a href="../about.html">About</a>
+    <a href="../resources.html">Resources</a>
+    <a href="index.html" class="active">Blog</a>
+    <a href="../programmes.html">Programmes</a>
+    <a href="../coach.html">Meet the Coach</a>
+  </div>
+  <a class="nav-cta" href="../seminar.html#register">Join Cohort 2 Waitlist</a>
+</nav>
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Thrive Blog · Missed a Session?</div>
+    <h1>Who told you<br>you weren't <em>enough?</em></h1>
+    <p class="hero-lead">A catch-up from our Identity session. Pick the version that speaks to where you are — the message is the same, the language just meets you differently.</p>
+  </div>
+</section>
+
+<div class="toggle-wrap">
+  <div class="audience-toggle" role="tablist" aria-label="Choose your version">
+    <button class="toggle-btn active" role="tab" aria-selected="true" onclick="setAudience('panel-teen', this)">For Teens</button>
+    <button class="toggle-btn" role="tab" aria-selected="false" onclick="setAudience('panel-ya', this)">For Young Adults</button>
+  </div>
+</div>
+
+<section class="article-section">
+  <div class="article-inner">
+
+    <!-- TEEN PANEL -->
+    <article id="panel-teen" class="tab-panel active">
+      <div class="article-kicker">Identity — For Teens</div>
+      <h2 class="article-title">Who Told You That?</h2>
+      <div class="article-body">
+        <p>You know that moment when someone says something small — "you're too loud," "you're not smart like your sister," "you'll never make the team" — and it just... sticks? Weeks later you're still carrying it around like a name tag you didn't ask to wear.</p>
+        <p>Here's the thing nobody tells you early enough: <strong>somebody is always going to have an opinion about who you are.</strong> Your job isn't to collect all of them. Your job is to find out what's actually true.</p>
+        <p>So — who told you that you're not enough? Was it a teacher, a comment section, a mirror, a bad grade? Now ask a better question: who told you that you're fearfully and wonderfully made (Psalm 139:14)? That one's from God, and He doesn't do rough drafts.</p>
+
+        <h3>A few identity lies that love to hang around campus and comment sections</h3>
+        <ul class="fc-list">
+          <li>"You are what people say about you."</li>
+          <li>"Your worth = your grades, your looks, or your likes."</li>
+          <li>"If you don't know who you are yet, something's wrong with you."</li>
+        </ul>
+
+        <h3>What's actually true</h3>
+        <ul class="fc-list">
+          <li>You were made on purpose, not by accident (Genesis 1:27).</li>
+          <li>Your identity was settled before your achievements started — Ephesians 2:10 says you're His workmanship, created for good works, not created by them.</li>
+          <li>Figuring out who you are is a process, not a test you can fail.</li>
+        </ul>
+
+        <p>Real talk: identity built on grades, followers, or other people's approval will always feel shaky, because all three can change by tomorrow. Identity built on "child of God" doesn't move — no matter what your report card, your relationship status, or your comment section says this week.</p>
+
+        <div class="verse-block"><p>"I praise you because I am fearfully and wonderfully made." — Psalm 139:14</p></div>
+
+        <p><strong>Try this:</strong> next time a label tries to stick, ask — "Did God say that about me?" If not, peel it off. You don't have to wear everything people hand you.</p>
+        <p>You are not your worst day, your last mistake, or your lowest follower count. You are His. Start there.</p>
+
+        <div class="cta-callout">
+          <div class="cc-label">Go Deeper</div>
+          <h4>My Identity Blueprint</h4>
+          <p>A simple, private worksheet to work through the labels you've picked up — and replace them with what's actually true.</p>
+          <div class="ml-embed-slot">MailerLite embedded form goes here — Identity signup form (Form ID 196624389121246384)</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- YOUNG ADULT PANEL -->
+    <article id="panel-ya" class="tab-panel">
+      <div class="article-kicker">Identity — For Young Adults</div>
+      <h2 class="article-title">The Job Title Isn't You</h2>
+      <div class="article-body">
+        <p>Somewhere between graduation and now, a question started following you around: "So what do you do?" And somewhere along the way, without quite noticing, you started answering it as if it were the same question as "So who are you?"</p>
+        <p>It isn't. But try telling that to a room full of twenty-somethings comparing job titles, relationship statuses, and how "put together" their lives look on paper.</p>
+        <p>Here's what nobody warns you about this season of life: it's when identity gets outsourced the fastest. To a job you haven't landed yet. To a relationship you're not in yet. To a version of "adulting" you're convinced everyone else has figured out. And when any of those wobble — layoff, breakup, another year unmarried, a business that hasn't taken off — it can feel like you are falling apart, not just your circumstances.</p>
+
+        <h3>A few identity traps that love this exact age bracket</h3>
+        <ul class="fc-list">
+          <li>"I'll know who I am once I have the job/marriage/house."</li>
+          <li>"Everyone else clearly has it figured out — I'm behind."</li>
+          <li>"My worth is directly tied to my productivity right now."</li>
+        </ul>
+
+        <h3>What's actually true</h3>
+        <ul class="fc-list">
+          <li>Ephesians 2:10 says you are God's workmanship, created for good works — your identity was settled before your career was.</li>
+          <li>Colossians 3:3 says your real life is "hidden with Christ" — secure even when your resume, relationship status, or bank account is in flux.</li>
+          <li>Comparison is a job with no retirement plan. It will never stop giving you new people to measure yourself against.</li>
+        </ul>
+
+        <p>Real talk: a job title can be taken away in a single meeting. A relationship can end in a single conversation. If either one is holding up your sense of self, you're building on sand. Identity anchored in "chosen, made on purpose, hidden in Christ" holds steady on the good years and the hard ones.</p>
+
+        <div class="verse-block"><p>"For we are God's handiwork, created in Christ Jesus to do good works." — Ephesians 2:10</p></div>
+
+        <p><strong>Try this:</strong> write one sentence that answers "who am I" without mentioning your job, relationship status, or achievements. If that's hard to do, that's worth sitting with.</p>
+        <p>You are not behind. You are not your LinkedIn. You are His — and that was already settled.</p>
+
+        <div class="cta-callout">
+          <div class="cc-label">Go Deeper</div>
+          <h4>My Identity Blueprint</h4>
+          <p>A simple, private worksheet to work through where your sense of self has been anchored — and reset it on something that doesn't move.</p>
+          <div class="ml-embed-slot">MailerLite embedded form goes here — Identity signup form (Form ID 196624389121246384)</div>
+          <!-- MailerLite Universal -->
+<script>
+    (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+    .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+    n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+    (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+    ml('account', '2590768');
+</script>
+<!-- End MailerLite Universal -->
+        </div>
+      </div>
+    </article>
+
+    <div class="session-cta">
+      <p>Missed the full session? This is just a taste of what we unpacked together live. If you want the full conversation, activities, and discussion — or you're hearing about Thrive for the first time — we'd love to have you at the next one.</p>
+      <div class="btn-row">
+        <a class="btn-primary" href="../seminar.html#register">Join the Waitlist →</a>
+        <a class="btn-ghost" href="../coach.html">Talk to a Coach</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="more-section">
+  <div class="more-inner">
+    <div class="section-label">Continue the series</div>
+    <div class="more-grid">
+      <a class="more-card" href="guard-the-mind.html"><div class="mc-title">Guard the Mind</div></a>
+      <a class="more-card" href="laws-of-the-mind.html"><div class="mc-title">Laws of the Mind</div></a>
+      <a class="more-card" href="sexuality.html"><div class="mc-title">Sexuality</div></a>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="footer-logo">Thrive<span>.</span></div>
+  <div class="footer-verse">"For we are God's handiwork, created in Christ Jesus to do good works." — Ephesians 2:10</div>
+</footer>
+
+<script>
+  function setAudience(panelId, btn) {
+    document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+    document.querySelectorAll('.toggle-btn').forEach(function(b){ b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+    document.getElementById(panelId).classList.add('active');
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected','true');
+  }
+</script>
+
+</body>
+</html>
