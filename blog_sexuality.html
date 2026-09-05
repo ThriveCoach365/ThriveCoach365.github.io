@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love, Waiting, and What's Sacred — Thrive Blog</title>
+<meta name="description" content="A Thrive catch-up on Sexuality, for teens and young adults.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #C9963A; --gold-light: #F0C97A; --forest: #1A3028; --sage: #2F5243;
+    --cream: #FAF6EE; --warm-white: #FDF9F3; --muted: #8A9E94;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--warm-white); color: var(--forest); overflow-x: hidden; line-height: 1.6; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 40px;
+    background: rgba(253,249,243,0.94); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,150,58,0.15);
+  }
+  .nav-logo { font-family: var(--font-display); font-size: 22px; font-weight: 900; color: var(--forest); text-decoration: none; letter-spacing: -0.5px; }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--sage); text-decoration: none; transition: color .2s; }
+  .nav-links a:hover { color: var(--forest); }
+  .nav-links a.active { color: var(--forest); }
+  .nav-cta { background: var(--gold); color: #fff; font-family: var(--font-body); font-size: 13px; font-weight: 500; padding: 10px 22px; border-radius: 99px; border: none; cursor: pointer; text-decoration: none; transition: background .2s; }
+  .nav-cta:hover { background: #b0812e; }
+
+  /* HERO */
+  .hero {
+    background: var(--forest); padding: 140px 40px 90px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: 'THRIVE'; position: absolute;
+    font-family: var(--font-display); font-size: 280px; font-weight: 900; font-style: italic;
+    color: rgba(255,255,255,0.025);
+    top: 50%; left: 50%; transform: translate(-50%,-50%);
+    white-space: nowrap; pointer-events: none; letter-spacing: -10px;
+  }
+  .hero-inner { max-width: 820px; margin: 0 auto; position: relative; z-index: 1; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 20px; }
+  .hero-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+  .hero h1 { font-family: var(--font-display); font-size: clamp(36px, 5vw, 58px); font-weight: 900; line-height: 1.12; color: var(--cream); letter-spacing: -1.5px; margin-bottom: 20px; }
+  .hero h1 em { font-style: italic; color: var(--gold-light); }
+  .hero-lead { font-size: 17px; color: rgba(250,246,238,.68); line-height: 1.85; font-weight: 300; max-width: 620px; }
+  .hero-meta { display:flex; gap:18px; margin-top:24px; flex-wrap:wrap; }
+  .hero-meta span { font-size: 12px; color: var(--gold-light); font-weight:500; letter-spacing:.04em; display:flex; align-items:center; gap:6px; }
+
+  /* SHARED */
+  .section-label { font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .section-label::before { content: ''; display: block; width: 20px; height: 1px; background: var(--gold); }
+  .section-heading { font-family: var(--font-display); font-size: clamp(26px, 3vw, 36px); font-weight: 900; line-height: 1.15; color: var(--forest); letter-spacing: -.5px; margin-bottom: 14px; }
+  .section-heading em { font-style: italic; color: var(--gold); }
+  .section-sub { font-size: 16px; color: #4a6055; line-height: 1.85; font-weight: 300; max-width: 620px; margin-bottom: 40px; }
+
+  /* AUDIENCE TOGGLE */
+  .toggle-wrap { max-width: 720px; margin: -34px auto 0; padding: 0 40px; position: relative; z-index: 2; }
+  .audience-toggle { background: var(--warm-white); border: 1px solid rgba(201,150,58,.2); border-radius: 99px; padding: 6px; display: flex; gap: 4px; box-shadow: 0 12px 32px rgba(26,48,40,.14); }
+  .toggle-btn { flex: 1; text-align: center; font-family: var(--font-body); font-size: 13px; font-weight: 500; padding: 12px 18px; border-radius: 99px; border: none; background: transparent; color: var(--sage); cursor: pointer; transition: background .2s, color .2s; }
+  .toggle-btn.active { background: var(--forest); color: var(--cream); }
+  .toggle-btn:not(.active):hover { color: var(--forest); }
+
+  /* ARTICLE */
+  .article-section { padding: 72px 40px 20px; background: var(--warm-white); }
+  .article-inner { max-width: 720px; margin: 0 auto; }
+  .tab-panel { display: none; animation: fadeUp .5s both; }
+  .tab-panel.active { display: block; }
+  .article-title { font-family: var(--font-display); font-size: clamp(26px, 4vw, 36px); font-weight: 900; color: var(--forest); line-height: 1.2; letter-spacing: -.5px; margin-bottom: 8px; }
+  .article-kicker { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 28px; }
+  .article-body p { font-size: 16.5px; color: #3d5548; line-height: 1.9; font-weight: 300; margin-bottom: 22px; }
+  .article-body p strong { font-weight: 500; color: var(--forest); }
+  .article-body h3 { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--forest); margin: 32px 0 14px; letter-spacing: -.2px; }
+  .article-body ul.fc-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .article-body ul.fc-list li { font-size: 15.5px; color: #4a6055; display: flex; gap: 10px; align-items: flex-start; line-height: 1.65; font-weight: 300; }
+  .article-body ul.fc-list li::before { content: '→'; color: var(--gold); flex-shrink: 0; font-weight: 500; }
+  .verse-block { border-left: 3px solid var(--gold); background: var(--cream); border-radius: 0 12px 12px 0; padding: 18px 24px; margin: 28px 0; }
+  .verse-block p { font-family: var(--font-display); font-style: italic; font-size: 17px; color: var(--forest); line-height: 1.5; margin-bottom: 0; }
+
+  /* CTA CALLOUT (activity sheet / signup) */
+  .cta-callout { border: 1px solid rgba(201,150,58,.25); background: var(--cream); border-radius: 16px; padding: 28px 30px; margin: 40px 0; }
+  .cta-callout .cc-label { font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .cta-callout h4 { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--forest); margin-bottom: 10px; line-height: 1.3; }
+  .cta-callout p { font-size: 14.5px; color: #4a6055; line-height: 1.7; font-weight: 300; margin-bottom: 18px; }
+  .cta-callout .ml-embed-slot { background: rgba(255,255,255,.6); border: 1.5px dashed rgba(201,150,58,.4); border-radius: 10px; padding: 18px; font-size: 12.5px; color: var(--muted); text-align: center; }
+  .cta-note { font-size: 12.5px; color: var(--muted); font-style: italic; margin-top: 14px; line-height: 1.6; }
+  .download-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--forest); color: #fff; font-size: 13.5px; font-weight: 500; padding: 12px 24px; border-radius: 99px; text-decoration: none; transition: background .2s; }
+  .download-btn:hover { background: var(--sage); }
+
+  /* PASTORAL FOOTER (in-article closing) */
+  .session-cta { background: var(--sage); border-radius: 18px; padding: 34px 32px; margin: 48px 0 8px; }
+  .session-cta p { color: rgba(250,246,238,.85); font-size: 15px; line-height: 1.75; font-weight: 300; margin-bottom: 18px; }
+  .session-cta .btn-row { justify-content: flex-start; }
+
+  .btn-row { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
+  .btn-primary { background: var(--gold); color: #fff; font-family: var(--font-body); font-size: 14px; font-weight: 500; padding: 13px 28px; border-radius: 99px; border: none; cursor: pointer; text-decoration: none; transition: background .2s, transform .15s; display:inline-block; }
+  .btn-primary:hover { background: #b0812e; transform: translateY(-1px); }
+  .btn-ghost { background: transparent; color: var(--forest); font-family: var(--font-body); font-size: 14px; font-weight: 500; padding: 12px 22px; border-radius: 99px; border: 1.5px solid rgba(26,48,40,.25); cursor: pointer; text-decoration: none; transition: border-color .2s; }
+  .btn-ghost:hover { border-color: var(--forest); }
+
+  /* RELATED / MORE */
+  .more-section { padding: 60px 40px 100px; background: var(--warm-white); }
+  .more-inner { max-width: 720px; margin: 0 auto; }
+  .more-inner .section-label { justify-content: flex-start; }
+  .more-grid { display: flex; flex-wrap: wrap; gap: 14px; }
+  .more-card { background: var(--cream); border: 1px solid rgba(201,150,58,.15); border-radius: 12px; padding: 18px 18px; text-decoration: none; transition: background .2s; flex: 1 1 180px; }
+  .more-card:hover { background: #f3ecdc; }
+  .more-card .mc-title { font-family: var(--font-display); font-size: 14.5px; font-weight: 700; color: var(--forest); line-height: 1.3; }
+
+  footer { background: var(--forest); padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .footer-logo { font-family: var(--font-display); font-size: 20px; font-weight: 900; color: var(--cream); }
+  .footer-logo span { color: var(--gold); }
+  .footer-verse { font-size: 12px; font-style: italic; color: rgba(250,246,238,.3); }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+  .hero-inner { animation: fadeUp .7s .1s both; }
+
+  @media(max-width:860px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 110px 20px 70px; }
+    .toggle-wrap { padding: 0 20px; }
+    .article-section, .more-section { padding: 56px 20px 20px; }
+    .more-grid { flex-direction: column; }
+    footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="../about.html">Thrive<span>.</span></a>
+  <div class="nav-links">
+    <a href="../about.html">About</a>
+    <a href="../resources.html">Resources</a>
+    <a href="index.html" class="active">Blog</a>
+    <a href="../programmes.html">Programmes</a>
+    <a href="../coach.html">Meet the Coach</a>
+  </div>
+  <a class="nav-cta" href="../seminar.html#register">Join Cohort 2 Waitlist</a>
+</nav>
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Thrive Blog · Missed a Session?</div>
+    <h1>Love, waiting, and<br>what's <em>sacred.</em></h1>
+    <p class="hero-lead">A catch-up from our Sexuality session. Pick the version that speaks to where you are — the message is the same, the language just meets you differently.</p>
+  </div>
+</section>
+
+<div class="toggle-wrap">
+  <div class="audience-toggle" role="tablist" aria-label="Choose your version">
+    <button class="toggle-btn active" role="tab" aria-selected="true" onclick="setAudience('panel-teen', this)">For Teens</button>
+    <button class="toggle-btn" role="tab" aria-selected="false" onclick="setAudience('panel-ya', this)">For Young Adults</button>
+  </div>
+</div>
+
+<section class="article-section">
+  <div class="article-inner">
+
+    <!-- TEEN PANEL -->
+    <article id="panel-teen" class="tab-panel active">
+      <div class="article-kicker">Sexuality — For Teens</div>
+      <h2 class="article-title">Love, Waiting, and Why Your Body Isn't "Just Yours"</h2>
+      <div class="article-body">
+        <p>Let's be honest for a second: most conversations about sex either say too little ("don't do it") or make you feel like damaged goods for even having questions. Neither one is helpful. So let's try something different.</p>
+        <p>Here's where it starts: God didn't create sex to embarrass you or scare you. He created it — on purpose, as His idea — to be good, meaningful, and safe inside marriage (Matthew 19:4-6). It was never meant to be shameful. It was meant to be sacred.</p>
+        <p>The problem is, the world around you is loud about a very different message — that love equals lust, that waiting is weird, that your worth is tied to your body count or your relationship status. None of that is true, and it's worth naming out loud.</p>
+
+        <h3>Some real talk on where the pressure actually comes from</h3>
+        <ul class="fc-list">
+          <li>Movies and shows that mix up "chemistry" with "true love" — leaving out the patience and commitment part completely (compare that to 1 Corinthians 13:4-7 sometime — it's a very different definition).</li>
+          <li>Peer pressure dressed up as "everyone's doing it" (they're not, and even if they were, that's not your compass).</li>
+          <li>A quiet lie that says your value depends on being wanted physically.</li>
+        </ul>
+
+        <h3>What guarding this part of your life can look like</h3>
+        <ul class="fc-list">
+          <li>Know your "why" before you're in the moment — decide your boundaries before you need them.</li>
+          <li>Guard what you watch and scroll — 1 Corinthians 6:18-20 puts it plainly: your body is a temple, not a testing ground.</li>
+          <li>Talk to someone you trust — a mentor, parent, or Thrive coach — before you're in a situation you didn't plan for.</li>
+          <li>Remember Matthew 5:27-28 — this is a heart issue before it's ever a physical one, so the real battle starts in your thought life.</li>
+        </ul>
+
+        <div class="verse-block"><p>"Create in me a pure heart, O God, and renew a steadfast spirit within me." — Psalm 51:10</p></div>
+
+        <p>And if you've already made choices you regret — you are not disqualified. That verse above is a prayer written by someone who messed up badly and was still loved and restored. Grace doesn't have a waiting list.</p>
+        <p>Your body isn't "just yours" to throw around carelessly — and it isn't something to be ashamed of either. It's a gift, on loan, worth protecting on purpose.</p>
+
+        <div class="cta-callout">
+          <div class="cc-label">Go Deeper</div>
+          <h4>Guarding My Story — Activity Sheet</h4>
+          <p>Private, honest prompts to help you think through boundaries, love, and where you're really seeking security.</p>
+          <a class="download-btn" href="#" download>⬇ Download the worksheet directly</a>
+          <p class="cta-note">This one's a direct download rather than an email signup, since some readers here are under 18. If you'd like to talk more, a Thrive coach is always happy to hear from you — parents and guardians welcome too.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- YOUNG ADULT PANEL -->
+    <article id="panel-ya" class="tab-panel">
+      <div class="article-kicker">Sexuality — For Young Adults</div>
+      <h2 class="article-title">The Seduction Playbook: Sex, Sponsors, and Screens</h2>
+      <div class="article-body">
+        <p>There's an old story in the Bible worth knowing, because it explains more about today's pressures than you'd expect. A man named Balaam was hired to curse God's people, but he couldn't — no curse can stick to those God has already blessed (Numbers 23:8). So he changed strategy entirely: instead of attacking from outside, he advised drawing people into compromise from the inside — through relationships, desire, and pleasure (Numbers 31:16). It worked. It's still working.</p>
+        <p>That's really the heart of it: when direct opposition fails, seduction is the fallback plan. And in our world, that plan shows up in some very specific, very current ways.</p>
+
+        <h3>Doorway 1 — Bodies ready before character is</h3>
+        <p>Culture moves fast; maturity doesn't always keep pace. Physical readiness and emotional, financial, or spiritual readiness are not the same thing — no matter how loudly culture insists otherwise.</p>
+
+        <h3>Doorway 2 — A distorted definition of love</h3>
+        <p>Movies, music, and social media routinely sell infatuation and physical chemistry as "true love," quietly leaving out the patience, commitment, and sacrifice part. Worth comparing against 1 Corinthians 13:4-7 — the gap is usually bigger than we'd like to admit.</p>
+
+        <h3>Doorway 3 — Sex stripped of its sacredness</h3>
+        <p>This is where "sponsor" culture and transactional relationships live — trading intimacy for financial support, school fees, or status — along with the quiet normalizing effect of pornography. Both patterns train the mind to treat something God designed as sacred (Matthew 19:4,6) as ordinary or transactional instead. First Corinthians 6:18-20 doesn't mince words here: flee it, because your body is a temple, not a bargaining chip.</p>
+
+        <h3>Doorway 4 — The quiet spiritual cost</h3>
+        <p>Jesus said lust is already a heart issue before it's ever a physical one (Matthew 5:27-28). Left unaddressed, this doorway often leads to shame, secrecy, and distance from God — exactly the isolation the "seduction strategy" was always counting on.</p>
+
+        <div class="verse-block"><p>"Where you go I will go... your God will be my God." — Ruth 1:16</p></div>
+
+        <h3>What's the alternative to chasing security through compromise?</h3>
+        <p>Consider Ruth. After tragedy left her with every logical reason to chase a "safer" path back to her old life, she chose covenant loyalty over a guaranteed shortcut (Ruth 1:16-17). Deuteronomy 8:3 backs her up: true security was never actually found in the "sure thing" — it's found in God's provision.</p>
+        <p>And if you're reading this carrying something you're not proud of — a relationship, a habit, a screen history — here's the whole point of this story: <strong>restoration is still on the table.</strong> Psalm 51:10-12 is a prayer for a clean heart written by someone who failed badly and was still fully restored. Joel 2:25 promises God can restore even the years that felt wasted. Grace was never meant to have a waiting list.</p>
+
+        <h3>A few honest next steps</h3>
+        <ul class="fc-list">
+          <li>Name which "doorway" feels most familiar in your own life right now — no one else has to see the answer but you.</li>
+          <li>If a relationship in your life runs on financial dependency rather than mutual respect, that's worth a hard, honest look.</li>
+          <li>Talk to a mentor or Thrive coach before — not after — you're standing in a situation you didn't plan for.</li>
+          <li>Remember: the goal was never shame. It was always freedom.</li>
+        </ul>
+
+        <div class="cta-callout">
+          <div class="cc-label">Go Deeper</div>
+          <h4>Guarding My Story — Activity Sheet</h4>
+          <p>Private, honest prompts to help you name the doorway you're facing, where you're really seeking security, and what restoration could look like for you.</p>
+          <div class="ml-embed-slot">MailerLite embedded form goes here — Sexuality signup form (Form ID 196624399376320300)</div>
+          <p class="cta-note">You'll get a quick confirmation link first — your worksheet lands right after you click it.</p>
+        </div>
+      </div>
+    </article>
+
+    <div class="session-cta">
+      <p>Missed the full session? This is just a taste of what we unpacked together live. If you want the full conversation, activities, and discussion — or you're hearing about Thrive for the first time — we'd love to have you at the next one.</p>
+      <div class="btn-row">
+        <a class="btn-primary" href="../seminar.html#register">Join the Waitlist →</a>
+        <a class="btn-ghost" href="../coach.html">Talk to a Coach</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="more-section">
+  <div class="more-inner">
+    <div class="section-label">Continue the series</div>
+    <div class="more-grid">
+      <a class="more-card" href="blog_identity.html"><div class="mc-title">Identity</div></a>
+      <a class="more-card" href="blog_guardthemind.html"><div class="mc-title">Guard the Mind</div></a>
+      <a class="more-card" href="blog_lawsofthemind.html"><div class="mc-title">Laws of the Mind</div></a>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="footer-logo">Thrive<span>.</span></div>
+  <div class="footer-verse">"For we are God's handiwork, created in Christ Jesus to do good works." — Ephesians 2:10</div>
+</footer>
+
+<script>
+  function setAudience(panelId, btn) {
+    document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+    document.querySelectorAll('.toggle-btn').forEach(function(b){ b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+    document.getElementById(panelId).classList.add('active');
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected','true');
+  }
+</script>
+
+</body>
+</html>
