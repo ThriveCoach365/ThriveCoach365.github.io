@@ -7,7 +7,7 @@
 <meta name="description" content="A 5-day mentorship bootcamp for ages 16–26. Reserve a spot on the waitlist.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&family=Playfair+Display:ital@1&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --dark-blue:#005da0;
@@ -21,10 +21,10 @@
     --pillar-mental:#2da1eb;
     --pillar-physical:#0e9aa8;
     --pillar-social:#5c6b7a;
-    --font-display:'Montserrat',sans-serif;
-    --font-body:'Lora',serif;
+    --font-display:'Playfair Display',Georgia,serif;
+    --font-body:'DM Sans',sans-serif;
     --font-quote:'Playfair Display',serif;
-    --font-caption:'Open Sans',sans-serif;
+    --font-caption:'DM Sans',sans-serif;
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
@@ -43,7 +43,7 @@
   .section-label.on-dark{color:var(--cyan);}
   .section-label.on-dark::before{background:var(--cyan);}
   .section-heading{
-    font-family:var(--font-display);font-weight:800;line-height:1.15;letter-spacing:-.01em;
+    font-family:var(--font-display);font-weight:900;line-height:1.15;letter-spacing:-.01em;
     color:var(--dark-blue);font-size:clamp(26px,3.4vw,38px);margin-bottom:16px;
   }
   .section-heading em{font-family:var(--font-quote);font-style:italic;font-weight:400;color:var(--med-blue);}
@@ -68,7 +68,7 @@
     position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
     padding:16px 40px;background:rgba(251,252,252,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,93,160,.1);
   }
-  .nav-logo{font-family:var(--font-display);font-size:20px;font-weight:800;color:var(--dark-blue);text-decoration:none;letter-spacing:-.02em;}
+  .nav-logo{font-family:var(--font-display);font-size:20px;font-weight:900;color:var(--dark-blue);text-decoration:none;letter-spacing:-.02em;}
   .nav-logo span{color:var(--med-blue);}
   .nav-links{display:flex;align-items:center;gap:28px;}
   .nav-links a{font-family:var(--font-caption);font-size:13.5px;font-weight:600;color:#3a4956;text-decoration:none;}
@@ -79,7 +79,7 @@
   /* ---- HERO ---- */
   .hero{background:var(--dark-blue);padding:150px 0 88px;position:relative;overflow:hidden;}
   .hero::before{
-    content:'THRIVE';position:absolute;font-family:var(--font-display);font-weight:800;font-size:260px;
+    content:'THRIVE';position:absolute;font-family:var(--font-display);font-weight:900;font-size:260px;
     color:rgba(255,255,255,.04);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;
     pointer-events:none;letter-spacing:-.05em;
   }
@@ -90,7 +90,7 @@
   }
   .hero-eyebrow::before{content:"";display:block;width:24px;height:2px;background:var(--cyan);}
   .hero h1{
-    font-family:var(--font-display);font-weight:800;font-size:clamp(34px,5vw,52px);line-height:1.14;
+    font-family:var(--font-display);font-weight:900;font-size:clamp(34px,5vw,52px);line-height:1.14;
     color:var(--white);letter-spacing:-.01em;margin-bottom:22px;
   }
   .hero h1 em{font-family:var(--font-quote);font-style:italic;font-weight:400;color:var(--cyan);}
@@ -140,7 +140,7 @@
   /* ---- PRICE CARD ---- */
   .price-card{background:var(--white);border:1px solid #e2e6e8;border-radius:16px;overflow:hidden;max-width:640px;}
   .price-header{background:var(--dark-blue);padding:32px 32px 26px;}
-  .price-num{font-family:var(--font-display);font-weight:800;font-size:38px;color:var(--white);}
+  .price-num{font-family:var(--font-display);font-weight:900;font-size:38px;color:var(--white);}
   .price-tag{font-family:var(--font-caption);font-size:13px;color:rgba(255,255,255,.7);margin-top:4px;}
   .price-body{padding:26px 32px 30px;}
   .price-body p{font-size:15.5px;color:#3a4956;margin-bottom:20px;}
@@ -158,12 +158,12 @@
   /* ---- CTA FOOTER ---- */
   .cta-footer{background:var(--dark-blue);padding:100px 0;text-align:center;position:relative;overflow:hidden;}
   .cta-footer::before{
-    content:'THRIVE';position:absolute;font-family:var(--font-display);font-weight:800;font-size:200px;
+    content:'THRIVE';position:absolute;font-family:var(--font-display);font-weight:900;font-size:200px;
     color:rgba(255,255,255,.035);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;
     pointer-events:none;letter-spacing:-.05em;
   }
   .cta-footer-inner{position:relative;z-index:1;padding:0 24px;}
-  .cta-footer h2{font-family:var(--font-display);font-weight:800;font-size:clamp(26px,4vw,36px);color:var(--white);max-width:20ch;margin:0 auto 16px;line-height:1.2;}
+  .cta-footer h2{font-family:var(--font-display);font-weight:900;font-size:clamp(26px,4vw,36px);color:var(--white);max-width:20ch;margin:0 auto 16px;line-height:1.2;}
   .cta-footer h2 span{font-family:var(--font-quote);font-style:italic;font-weight:400;color:var(--cyan);}
   .cta-footer p{font-size:16.5px;color:rgba(255,255,255,.72);max-width:48ch;margin:0 auto 32px;}
   .verse-footer{margin-top:36px;font-family:var(--font-quote);font-style:italic;font-size:14px;color:rgba(255,255,255,.4);}
@@ -171,7 +171,7 @@
   /* ---- FOOTER ---- */
   footer{background:var(--white);border-top:1px solid #e2e6e8;padding:48px 0 28px;}
   .footer-inner{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:40px;margin-bottom:36px;}
-  .footer-logo{font-family:var(--font-display);font-weight:800;font-size:20px;color:var(--dark-blue);margin-bottom:10px;}
+  .footer-logo{font-family:var(--font-display);font-weight:900;font-size:20px;color:var(--dark-blue);margin-bottom:10px;}
   .footer-logo span{color:var(--med-blue);}
   .footer-brand p{font-family:var(--font-caption);font-size:13px;color:#66747f;line-height:1.7;max-width:240px;}
   .footer-col h4{font-family:var(--font-caption);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--med-blue);margin-bottom:14px;}
@@ -222,7 +222,7 @@
         <a class="btn-outline" href="#faq">Have questions?</a>
       </div>
       <div class="hero-facts">
-        <div class="fact"><div class="fact-label">Proposed</div><div class="fact-value">November 2026</div></div>
+        <div class="fact"><div class="fact-label">Proposed</div><div class="fact-value">Early Dec 2026</div></div>
         <div class="fact"><div class="fact-label">Length</div><div class="fact-value">5 days, 4 nights</div></div>
         <div class="fact"><div class="fact-label">Who it's for</div><div class="fact-value">Ages 16–26</div></div>
         <div class="fact"><div class="fact-label">Investment</div><div class="fact-value">KES 15,000</div></div>
