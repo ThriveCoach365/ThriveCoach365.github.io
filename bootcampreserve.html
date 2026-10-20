@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thrive Bootcamp — Reserve a Spot</title>
-<meta name="description" content="A 5-day mentorship bootcamp for ages 16–26. Reserve a spot on the waitlist.">
+<title>Thrive Bootcamps — Reserve a Spot</title>
+<meta name="description" content="Two mentorship bootcamps: a Teen Bootcamp for high schoolers (15–18) in December 2026 and a Young Adult Bootcamp for campus and beyond (19–26) in January 2027. Reserve a spot.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -146,6 +146,28 @@
   .price-body p{font-size:15.5px;color:#3a4956;margin-bottom:20px;}
   .scholarship-note{background:var(--bg);border-left:4px solid var(--cyan);padding:16px 20px;font-size:14.5px;color:#3a4956;border-radius:0 8px 8px 0;}
 
+
+  /* ---- TWO BOOTCAMPS ---- */
+  .track-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  .track-card{background:var(--white);border:1px solid #d3d8db;border-radius:16px;padding:32px 30px;display:flex;flex-direction:column;border-top:6px solid var(--med-blue);}
+  .track-card.young{border-top-color:var(--dark-blue);}
+  .tc-tag{font-family:var(--font-caption);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--med-blue);margin-bottom:10px;}
+  .track-card.young .tc-tag{color:var(--dark-blue);}
+  .tc-title{font-family:var(--font-display);font-weight:900;font-size:26px;color:var(--dark-blue);line-height:1.2;margin-bottom:8px;}
+  .tc-meta{font-family:var(--font-caption);font-size:14px;font-weight:600;color:var(--ink);margin-bottom:16px;}
+  .tc-lead{font-size:15.5px;color:#3a4956;margin-bottom:20px;}
+  .tc-sub{font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--dark-blue);margin-bottom:10px;}
+  .tc-topics{list-style:none;margin-bottom:26px;}
+  .tc-topics li{font-size:14.5px;color:#3a4956;padding:7px 0 7px 22px;border-bottom:1px solid #eef0f1;position:relative;}
+  .tc-topics li::before{content:"";position:absolute;left:0;top:15px;width:10px;height:2px;background:var(--med-blue);}
+  .track-card .btn-primary{margin-top:auto;text-align:center;}
+  .which-note{margin-top:28px;font-size:15px;color:#3a4956;max-width:64ch;}
+  .pc-topics{font-family:var(--font-caption);font-size:12.5px;color:#66747f;line-height:1.6;margin-top:14px;padding-top:12px;border-top:1px solid #eef0f1;}
+  .price-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start;}
+  .price-grid .price-card{max-width:none;}
+  .price-dates{font-family:var(--font-caption);font-size:14px;font-weight:600;color:var(--dark-blue);margin-bottom:12px;}
+  .price-note{margin-top:22px;}
+
   /* ---- FAQ ---- */
   details{border-bottom:1px solid #d3d8db;padding:18px 0;}
   details:first-of-type{padding-top:0;}
@@ -189,7 +211,8 @@
     .hero{padding:120px 0 64px;}
     .band{padding:64px 0;}
     .mission-inner{flex-direction:column;align-items:flex-start;}
-    .pillars-grid{grid-template-columns:1fr;}
+    .pillars-grid,.track-grid,.price-grid{grid-template-columns:1fr;}
+    .track-card{padding:26px 22px;}
     .glance-cards{grid-template-columns:1fr;}
     .fact{flex:1 1 45%;padding-bottom:14px;}
     .price-header,.price-body{padding-left:22px;padding-right:22px;}
@@ -203,6 +226,7 @@
 <nav>
   <a class="nav-logo" href="#top">Thrive<span>.</span></a>
   <div class="nav-links">
+    <a href="#bootcamps">The Bootcamps</a>
     <a href="#program">The Program</a>
     <a href="#investment">Investment</a>
     <a href="#faq">FAQ</a>
@@ -215,18 +239,18 @@
 <section class="hero" id="top">
   <div class="wrap">
     <div class="hero-inner">
-      <div class="hero-eyebrow">Thrive Bootcamp · Ages 16–26</div>
+      <div class="hero-eyebrow">Thrive Bootcamps · Ages 15–26</div>
       <h1>A week of mentors, real talk, and decisions that <em>last.</em></h1>
-      <p class="hero-lead">A residential bootcamp built around Scripture, one-on-one mentorship, and honest conversation — the kind that shapes how you make decisions for the rest of your life.</p>
+      <p class="hero-lead">Two residential bootcamps, one for high schoolers and one for campus life and beyond. Both are built around Scripture, mentorship, and honest conversation about the things that shape how you make decisions for the rest of your life.</p>
       <div class="hero-actions">
         <a class="btn-primary" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Reserve a spot</a>
-        <a class="btn-outline" href="#faq">Have questions?</a>
+        <a class="btn-outline" href="#bootcamps">Compare the bootcamps</a>
       </div>
       <div class="hero-facts">
-        <div class="fact"><div class="fact-label">Proposed</div><div class="fact-value">Early Dec 2026</div></div>
-        <div class="fact"><div class="fact-label">Length</div><div class="fact-value">5 days, 4 nights</div></div>
-        <div class="fact"><div class="fact-label">Who it's for</div><div class="fact-value">Ages 16–26</div></div>
-        <div class="fact"><div class="fact-label">Investment</div><div class="fact-value">KES 15,000</div></div>
+        <div class="fact"><div class="fact-label">Teen Bootcamp · 15–18</div><div class="fact-value">Dec 6–10, 2026</div></div>
+        <div class="fact"><div class="fact-label">Young Adult Bootcamp · 19–26</div><div class="fact-value">Jan 4–8, 2027</div></div>
+        <div class="fact"><div class="fact-label">Teen investment</div><div class="fact-value">KES 7,000</div></div>
+        <div class="fact"><div class="fact-label">Young Adult investment</div><div class="fact-value">KES 8,000</div></div>
       </div>
     </div>
   </div>
@@ -243,32 +267,91 @@
   </div>
 </div>
 
+<!-- ================= TWO BOOTCAMPS ================= -->
+<section class="band band-alt" id="bootcamps">
+  <div class="wrap">
+    <div class="section-label">Choose your bootcamp</div>
+    <h2 class="section-heading">Two stages of life, two <em>bootcamps.</em></h2>
+    <p class="section-sub">A 16-year-old and a 22-year-old are not asking the same questions. So we split the bootcamp, and each one goes deeper on what matters at that stage.</p>
+    <div class="track-grid">
+
+      <div class="track-card teen">
+        <div class="tc-tag">High school · Ages 15–18</div>
+        <h3 class="tc-title">Teen Bootcamp</h3>
+        <div class="tc-meta">December 6–10, 2026 · 5 days, 4 nights · KES 7,000</div>
+        <p class="tc-lead">For teens working out who they are while handling exams, friends, phones, and parents. Practical, honest, and rooted in Scripture.</p>
+        <div class="tc-sub">What we'll talk about</div>
+        <ul class="tc-topics">
+          <li>Identity: who does God say I am?</li>
+          <li>Friendships: healthy and unhealthy</li>
+          <li>Family and parent-teen relationships</li>
+          <li>Emotions and feelings</li>
+          <li>Social media and the power of the mind</li>
+          <li>Dating, romance, and dealing with rejection</li>
+          <li>Sexuality: what was God's intention?</li>
+          <li>Staying safe: understanding sexual abuse</li>
+          <li>Time management, hygiene, and etiquette</li>
+          <li>Faith vs. feeling</li>
+        </ul>
+        <a class="btn-primary" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Reserve a teen spot</a>
+      </div>
+
+      <div class="track-card young">
+        <div class="tc-tag">Campus and beyond · Ages 19–26</div>
+        <h3 class="tc-title">Young Adult Bootcamp</h3>
+        <div class="tc-meta">January 4–8, 2027 · 5 days, 4 nights · KES 8,000</div>
+        <p class="tc-lead">For young adults carrying real freedom for the first time: money, relationships, career choices, and habits that will follow you for decades.</p>
+        <div class="tc-sub">What we'll talk about</div>
+        <ul class="tc-topics">
+          <li>Identity, purpose, goals, and aspirations</li>
+          <li>Careers and decision-making</li>
+          <li>Financial management</li>
+          <li>Healthy and unhealthy dating; sex: when and how</li>
+          <li>Addictions and mental health</li>
+          <li>The mind: its power, its laws, and guarding it</li>
+          <li>Rape and sexual abuse: prevention and healing</li>
+          <li>Personal freedom and dealing with rejection</li>
+          <li>Time management and a consistent devotional life</li>
+          <li>What shall I do to be saved?</li>
+        </ul>
+        <a class="btn-primary" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Reserve a young adult spot</a>
+      </div>
+
+    </div>
+    <p class="which-note"><strong>Which one is mine?</strong> If you are still in high school, choose the Teen Bootcamp. If you are on campus, out of school, or starting work, choose the Young Adult Bootcamp. Not sure? <a href="https://wa.me/254717585709" target="_blank" rel="noopener">WhatsApp us on +254 717 585709</a> and we will help you pick.</p>
+  </div>
+</section>
+
 <!-- ================= PILLARS ================= -->
 <section class="band" id="program">
   <div class="wrap">
     <div class="section-label">What this week is built to do</div>
     <h2 class="section-heading">Four ways we walk with <em>you.</em></h2>
-    <p class="section-sub">Built to meet you where you are, and move you toward who you're made to be.</p>
+    <p class="section-sub">Both bootcamps move through the same four areas of life. What changes is the emphasis, based on your stage.</p>
     <div class="pillars-grid">
       <div class="pillar-card">
         <div class="pc-icon">🙏</div>
         <div class="pc-title">Spiritual</div>
         <div class="pc-body">Daily teaching, worship, and prayer, grounded in Scripture and a mentor small-group of 6–8.</div>
+        <div class="pc-topics">Faith vs. feeling · What shall I do to be saved? · A consistent devotional life</div>
       </div>
       <div class="pillar-card">
-        <div class="pc-icon">🤝</div>
-        <div class="pc-title">Mentorship</div>
-        <div class="pc-body">The heart of the week: a mentor and a small group built for the honest conversations that shape how you'll actually decide things — not just talk about them.</div>
+        <div class="pc-icon">🧠</div>
+        <div class="pc-title">Mental</div>
+        <div class="pc-body">The heart of the week: a mentor and a small group built for the honest conversations that shape how you'll actually decide things, not just talk about them.</div>
+        <div class="pc-topics">Identity and purpose · Goals and aspirations · Emotions and feelings · The mind: power, laws, guarding · Addictions · Mental health · Decision-making</div>
       </div>
       <div class="pillar-card">
         <div class="pc-icon">💪</div>
         <div class="pc-title">Physical</div>
-        <div class="pc-body">Sunrise workouts, hikes, and daily productive work — real chores and skills, not games or tournaments.</div>
+        <div class="pc-body">Sunrise workouts, hikes, and daily productive work: real chores and skills, not games or tournaments.</div>
+        <div class="pc-topics">Financial management · Time management · Hygiene and sanitation · Sexuality: God's intention · Sexual abuse · Careers</div>
       </div>
       <div class="pillar-card">
         <div class="pc-icon">🔥</div>
         <div class="pc-title">Social</div>
-        <div class="pc-body">Real friendships, built face to face — the kind that's hard to grow when everyone's looking at a screen.</div>
+        <div class="pc-body">Real friendships, built face to face, the kind that's hard to grow when everyone's looking at a screen.</div>
+        <div class="pc-topics">Friendships · Healthy and unhealthy dating · Family and parent-teen relationships · Personal freedom · Etiquette · Dealing with rejection · Social media</div>
       </div>
     </div>
   </div>
@@ -327,16 +410,29 @@
   <div class="wrap">
     <div class="section-label">The investment</div>
     <h2 class="section-heading">Straightforward <em>pricing.</em></h2>
-    <div class="price-card">
-      <div class="price-header">
-        <div class="price-num">KES 15,000</div>
-        <div class="price-tag">per participant</div>
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="price-header">
+          <div class="price-num">KES 7,000</div>
+          <div class="price-tag">per participant · Teen Bootcamp</div>
+        </div>
+        <div class="price-body">
+          <div class="price-dates">December 6–10, 2026 · Ages 15–18</div>
+          <p>Lodging, meals, and materials included. Spots are limited to protect the mentor-to-camper ratio.</p>
+        </div>
       </div>
-      <div class="price-body">
-        <p>Lodging, meals, and materials included. Open to ages 16–26. Spots are limited to around 40, to protect the mentor-to-camper ratio.</p>
-        <div class="scholarship-note">If cost is the only thing standing in the way, say so on the form. A share of spots is set aside for those who need it — no one is turned away for finances.</div>
+      <div class="price-card">
+        <div class="price-header">
+          <div class="price-num">KES 8,000</div>
+          <div class="price-tag">per participant · Young Adult Bootcamp</div>
+        </div>
+        <div class="price-body">
+          <div class="price-dates">January 4–8, 2027 · Ages 19–26</div>
+          <p>Lodging, meals, and materials included. Spots are limited to protect the mentor-to-camper ratio.</p>
+        </div>
       </div>
     </div>
+    <div class="scholarship-note price-note" style="max-width:640px">If cost is the only thing standing in the way, say so on the form. A share of spots is set aside for those who need it — no one is turned away for finances.</div>
   </div>
 </section>
 
@@ -347,7 +443,17 @@
     <h2 class="section-heading">Good <em>questions.</em></h2>
 
     <details>
-      <summary>Is my teen safe without a phone for five days?</summary>
+      <summary>Why are there two bootcamps?</summary>
+      <p class="faq-answer">Feedback from parents and young people told us that high schoolers and campus-age adults need different things. The Teen Bootcamp (15–18) focuses on identity, family, friendships, and the pressures of school. The Young Adult Bootcamp (19–26) focuses on purpose, money, relationships, careers, and freedom from addictions.</p>
+    </details>
+
+    <details>
+      <summary>Which bootcamp should I register for?</summary>
+      <p class="faq-answer">Still in high school: the Teen Bootcamp, December 6–10, 2026. On campus, out of school, or working: the Young Adult Bootcamp, January 4–8, 2027. If you are on the line, <a href="https://wa.me/254717585709" target="_blank" rel="noopener">message us on +254 717 585709</a> and we will help you choose.</p>
+    </details>
+
+    <details>
+      <summary>Is my teen safe without a phone for the week?</summary>
       <p class="faq-answer">Every mentor and volunteer is background-checked. A staff member is on the camp-office line at all times for real emergencies, and mentors are told to interrupt any session if a message comes through.</p>
     </details>
 
@@ -362,7 +468,7 @@
     </details>
 
     <details>
-      <summary>What if we can't afford KES 15,000 right now?</summary>
+      <summary>What if we can't afford the fee right now?</summary>
       <p class="faq-answer">Tell us on the form. A share of spots is set aside specifically for those who need it.</p>
     </details>
   </div>
@@ -372,7 +478,7 @@
 <section class="cta-footer">
   <div class="cta-footer-inner">
     <h2>This starts as a <span>waitlist</span>, on purpose.</h2>
-    <p>We're checking real interest before we lock in a venue or a final date. Reserve a spot now and you'll be first to hear when dates and payment open.</p>
+    <p>We're checking real interest before we lock in a venue or final dates. The Teen Bootcamp is pencilled in for December 6–10, 2026 and the Young Adult Bootcamp for January 4–8, 2027. Reserve a spot now and you'll be first to hear when dates and payment open.</p>
     <a class="btn-inverse" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Reserve a spot</a>
     <div class="verse-footer">"As iron sharpens iron, so one person sharpens another." — Proverbs 27:17</div>
   </div>
