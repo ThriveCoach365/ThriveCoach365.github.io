@@ -97,7 +97,7 @@
   .upcoming-strip .section-label::before { background: var(--gold-light); }
   .upcoming-strip .section-heading { color: var(--cream); margin-bottom: 12px; }
   .upcoming-strip .section-sub { color: rgba(250,246,238,.6); margin-bottom: 40px; }
-  .upcoming-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .upcoming-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
   .uc-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 24px 22px; }
   .uc-pill { display: inline-flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; padding: 3px 10px; border-radius: 99px; margin-bottom: 12px; }
   .pill-c2 { background: rgba(201,150,58,.2); color: var(--gold-light); border: 1px solid rgba(201,150,58,.3); }
@@ -109,6 +109,12 @@
   .uc-desc { font-size: 13px; color: rgba(250,246,238,.55); line-height: 1.65; font-weight: 300; margin-bottom: 16px; }
   .uc-link { font-size: 12px; font-weight: 500; color: var(--gold-light); text-decoration: none; }
   .uc-link:hover { color: var(--cream); }
+
+  /* BOOTCAMP ADDITIONS */
+  .pc-link { display: inline-block; margin-top: 14px; font-size: 13px; font-weight: 500; color: var(--gold); text-decoration: none; }
+  .pc-link:hover { color: var(--forest); }
+  .uc-meta { font-size: 12px; font-weight: 500; color: var(--gold-light); margin-bottom: 10px; letter-spacing: .02em; }
+  .uc-links { display: flex; flex-wrap: wrap; gap: 8px 20px; }
 
   /* QUOTE STRIP */
   .quote-strip { background: var(--sage); padding: 72px 40px; text-align: center; }
@@ -182,10 +188,11 @@
   <div class="nav-links">
     <a href="about.html">About</a>
     <a href="programmes.html">Programmes</a>
+    <a href="bootcampreserve.html">Bootcamps</a>
     <a href="resources.html">Resources</a>
     <a href="coach.html">Meet the Coach</a>
   </div>
-  <a class="nav-cta" href="mailto:teensmentor365@gmail.com?subject=Thrive Cohort 2 Waitlist&body=Hi Janet,%0A%0APlease add me to the Thrive Cohort 2 waitlist.%0A%0AName:%0AAge:%0AWhatsApp number:">Join Cohort 2 Waitlist</a>
+  <a class="nav-cta" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Reserve a Bootcamp Spot</a>
 </nav>
 
 <!-- HERO -->
@@ -194,13 +201,19 @@
     <div class="hero-left">
       <div class="hero-eyebrow">Faith-rooted · Practical · For young people</div>
       <h1>Not just to survive —<br>to <em>Thrive.</em></h1>
-      <p class="hero-lead">Thrive is a mentorship platform for teenagers and young adults aged 13–28. We help young people discover who they are, what they stand for, and the purpose they were created to walk in — through seminars, boot camps, and relational mentorship.</p>
+      <p class="hero-lead">Thrive is a mentorship platform for teenagers and young adults aged 13–28. We help young people discover who they are, what they stand for, and the purpose they were created to walk in — through seminars, bootcamps for high schoolers and young adults, and relational mentorship.</p>
       <div class="hero-actions">
-        <a class="btn-gold" href="about.html">Discover Thrive →</a>
+        <a class="btn-gold" href="bootcampreserve.html">Reserve a bootcamp spot →</a>
+        <a class="btn-outline" href="about.html">Discover Thrive</a>
         <a class="btn-outline" href="programmes.html">See programmes</a>
       </div>
     </div>
     <div class="hero-right">
+      <a class="hero-nav-card" href="bootcampreserve.html">
+        <div class="hnc-icon">🔥</div>
+        <div class="hnc-text"><div class="hnc-title">Teen & Young Adult Bootcamps</div><div class="hnc-desc">Dec 6–10, 2026 (ages 15–18) · Jan 4–8, 2027 (ages 19–26) — reserve a spot</div></div>
+        <div class="hnc-arrow">→</div>
+      </a>
       <a class="hero-nav-card" href="seminar.html">
         <div class="hnc-icon">✦</div>
         <div class="hnc-text"><div class="hnc-title">Identity & Purpose Seminar</div><div class="hnc-desc">Cohort 2 coming September 2026 — join the waitlist</div></div>
@@ -223,7 +236,7 @@
       </a>
       <a class="hero-nav-card" href="programmes.html">
         <div class="hnc-icon">🏕️</div>
-        <div class="hnc-text"><div class="hnc-title">All Programmes</div><div class="hnc-desc">Seminar · Bootcamp · Roots and Wings</div></div>
+        <div class="hnc-text"><div class="hnc-title">All Programmes</div><div class="hnc-desc">Seminar · Bootcamps · Roots and Wings</div></div>
         <div class="hnc-arrow">→</div>
       </a>
     </div>
@@ -235,9 +248,9 @@
   <div class="mission-inner">
     <div>
       <div class="ms-text">"Transforming potential into purpose — one young person at a time."</div>
-      <div class="ms-sub">Cohort 1 completed May 2026 · Cohort 2 coming September 2026 · Bootcamp November 2026</div>
+      <div class="ms-sub">Cohort 1 completed May 2026 · Cohort 2 coming September 2026 · Teen Bootcamp December 2026 · Young Adult Bootcamp January 2027</div>
     </div>
-    <a class="btn-gold" style="white-space:nowrap" href="mailto:teensmentor365@gmail.com?subject=Thrive Cohort 2 Waitlist&body=Hi Janet,%0A%0APlease add me to the Thrive Cohort 2 waitlist.%0A%0AName:%0AAge:%0AWhatsApp number:">Join Cohort 2 Waitlist →</a>
+    <a class="btn-gold" style="white-space:nowrap" href="bootcampreserve.html">See the Bootcamps →</a>
   </div>
 </div>
 
@@ -261,7 +274,8 @@
       <div class="pillar-card">
         <div class="pc-icon">🏕️</div>
         <div class="pc-title">Faith-Based Boot Camps</div>
-        <div class="pc-body">Immersive residential experiences centred on building faith, leadership, and community service. Where participants deepen their understanding of their faith and its application to everyday life.</div>
+        <div class="pc-body">Immersive residential experiences centred on building faith, leadership, and community service. Two bootcamps: one for high schoolers (15–18) and one for campus-age young adults (19–26).</div>
+        <a class="pc-link" href="bootcampreserve.html">Reserve a bootcamp spot →</a>
       </div>
       <div class="pillar-card">
         <div class="pc-icon">✦</div>
@@ -364,8 +378,8 @@
 <section class="upcoming-strip">
   <div class="upcoming-inner">
     <div class="section-label">What's coming</div>
-    <h2 class="section-heading" style="color:var(--cream)">Three programmes.<br>September <em>through</em> November 2026.</h2>
-    <p class="section-sub">Cohort 1 proved the model. Now Thrive is growing — a second cohort, a residential bootcamp, and a programme for younger teens all in development.</p>
+    <h2 class="section-heading" style="color:var(--cream)">Four programmes.<br>Two bootcamps <em>open</em> for reservations.</h2>
+    <p class="section-sub">Cohort 1 proved the model. Now Thrive is growing — a second cohort, two residential bootcamps (one for high schoolers, one for campus-age young adults), and a programme for younger teens in development.</p>
     <div class="upcoming-cards">
       <div class="uc-card">
         <div class="uc-pill pill-c2">September 2026</div>
@@ -375,11 +389,26 @@
         <a class="uc-link" href="mailto:teensmentor365@gmail.com?subject=Thrive Cohort 2 Waitlist&body=Hi Janet,%0A%0APlease add me to the Thrive Cohort 2 waitlist.%0A%0AName:%0AAge:%0AWhatsApp number:">Join the waitlist →</a>
       </div>
       <div class="uc-card">
-        <div class="uc-pill pill-bc">November 2026</div>
+        <div class="uc-pill pill-bc">December 6–10, 2026</div>
         <div class="uc-icon">🏕️</div>
-        <div class="uc-title">Thrive<br><em>Bootcamp</em></div>
-        <p class="uc-desc">An immersive residential experience — deeper, longer, and more intensive than the seminar. Bible study, leadership, service, and transformation over multiple days.</p>
-        <a class="uc-link" href="mailto:teensmentor365@gmail.com?subject=Thrive Bootcamp November 2026 — notify me&body=Hi Janet,%0A%0APlease notify me when Bootcamp registration opens.%0A%0AName:%0AAge:%0AWhatsApp number:">Notify me →</a>
+        <div class="uc-title">Teen<br><em>Bootcamp</em></div>
+        <div class="uc-meta">Ages 15–18 · High school · KES 7,000</div>
+        <p class="uc-desc">Five days of Bible study, mentorship, and honest conversation on identity, friendships, family, social media, dating, and the pressures of school life.</p>
+        <div class="uc-links">
+          <a class="uc-link" href="bootcampreserve.html">See details →</a>
+          <a class="uc-link" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Reserve a spot →</a>
+        </div>
+      </div>
+      <div class="uc-card">
+        <div class="uc-pill pill-bc">January 4–8, 2027</div>
+        <div class="uc-icon">🔥</div>
+        <div class="uc-title">Young Adult<br><em>Bootcamp</em></div>
+        <div class="uc-meta">Ages 19–26 · Campus and beyond · KES 8,000</div>
+        <p class="uc-desc">Five days for campus-age young adults on purpose, careers, money, relationships, addictions, mental health, and the decisions that shape the next decade.</p>
+        <div class="uc-links">
+          <a class="uc-link" href="bootcampreserve.html">See details →</a>
+          <a class="uc-link" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Reserve a spot →</a>
+        </div>
       </div>
       <div class="uc-card">
         <div class="uc-pill pill-rw">In development</div>
@@ -424,7 +453,8 @@
   <h2>Every young person deserves<br>the chance to <span>Thrive.</span></h2>
   <p>Not just survive. Whether you're a young person carrying hard questions, a parent looking for support, or a church wanting to bring Thrive to your community — you are welcome here.</p>
   <div class="cta-row">
-    <a class="btn-gold" href="mailto:teensmentor365@gmail.com?subject=Thrive Cohort 2 Waitlist&body=Hi Janet,%0A%0APlease add me to the Thrive Cohort 2 waitlist.%0A%0AName:%0AAge:%0AWhatsApp number:">Join Cohort 2 Waitlist →</a>
+    <a class="btn-gold" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Reserve a Bootcamp Spot →</a>
+    <a class="btn-outline" href="mailto:teensmentor365@gmail.com?subject=Thrive Cohort 2 Waitlist&body=Hi Janet,%0A%0APlease add me to the Thrive Cohort 2 waitlist.%0A%0AName:%0AAge:%0AWhatsApp number:">Join Cohort 2 Waitlist →</a>
     <a class="btn-outline" href="programmes.html">See all programmes</a>
   </div>
   <div class="verse-footer">"For we are God's handiwork, created in Christ Jesus to do good works." — Ephesians 2:10</div>
@@ -440,7 +470,8 @@
     <div class="footer-col">
       <h4>Programmes</h4>
       <a href="seminar.html">Identity & Purpose Seminar</a>
-      <a href="programmes.html#bootcamp">Thrive Bootcamp</a>
+      <a href="bootcampreserve.html">Teen Bootcamp (Dec 2026)</a>
+      <a href="bootcampreserve.html">Young Adult Bootcamp (Jan 2027)</a>
       <a href="programmes.html#roots">Roots and Wings</a>
       <a href="programmes.html">All programmes</a>
     </div>
