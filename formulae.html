@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thrive — Guiding Young Lives Through Life's Challenges</title>
+<title>Weekly Formulae — Thrive</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -14,558 +14,427 @@
     --font-body: 'DM Sans', sans-serif;
   }
   html { scroll-behavior: smooth; }
-  body { font-family: var(--font-body); background: var(--warm-white); color: var(--forest); overflow-x: hidden; line-height: 1.6; }
+  body { font-family: var(--font-body); background: var(--warm-white); color: var(--forest); overflow-x: hidden; }
 
-  /* NAV */
   nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 40px; background: rgba(253,249,243,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201,150,58,0.15); }
   .nav-logo { font-family: var(--font-display); font-size: 22px; font-weight: 900; color: var(--forest); text-decoration: none; letter-spacing: -0.5px; }
   .nav-logo span { color: var(--gold); }
   .nav-links { display: flex; align-items: center; gap: 28px; }
   .nav-links a { font-size: 13px; font-weight: 500; color: var(--sage); text-decoration: none; transition: color .2s; }
-  .nav-links a:hover { color: var(--forest); }
+  .nav-links a:hover, .nav-links a.active { color: var(--forest); }
   .nav-cta { background: var(--gold); color: #fff; font-family: var(--font-body); font-size: 13px; font-weight: 500; padding: 10px 22px; border-radius: 99px; border: none; cursor: pointer; text-decoration: none; transition: background .2s; }
   .nav-cta:hover { background: #b0812e; }
 
   /* HERO */
-  .hero { min-height: 100vh; background: var(--forest); display: flex; align-items: center; padding: 120px 40px 80px; position: relative; overflow: hidden; }
-  .hero::before { content: 'THRIVE'; position: absolute; font-family: var(--font-display); font-size: 300px; font-weight: 900; font-style: italic; color: rgba(255,255,255,0.025); top: 50%; left: 50%; transform: translate(-50%,-50%); white-space: nowrap; pointer-events: none; letter-spacing: -12px; }
-  .hero-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; position: relative; z-index: 1; width: 100%; }
-  .hero-left { animation: fadeUp .7s .1s both; }
+  .hero { background: var(--forest); padding: 140px 40px 80px; position: relative; overflow: hidden; }
+  .hero::before { content: '7'; position: absolute; font-family: var(--font-display); font-size: 500px; font-weight: 900; font-style: italic; color: rgba(255,255,255,0.025); top: -60px; right: -30px; pointer-events: none; line-height: 1; }
+  .hero-inner { max-width: 700px; position: relative; z-index: 1; animation: fadeUp .7s .1s both; }
   .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 20px; }
   .hero-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
-  .hero h1 { font-family: var(--font-display); font-size: clamp(40px, 5.5vw, 64px); font-weight: 900; line-height: 1.05; color: var(--cream); letter-spacing: -2px; margin-bottom: 22px; }
+  .hero h1 { font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); font-weight: 900; line-height: 1.1; color: var(--cream); letter-spacing: -1.5px; margin-bottom: 22px; }
   .hero h1 em { font-style: italic; color: var(--gold-light); }
-  .hero-lead { font-size: 17px; color: rgba(250,246,238,.68); line-height: 1.85; font-weight: 300; max-width: 480px; margin-bottom: 36px; }
-  .hero-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-  .btn-gold { background: var(--gold); color: #fff; font-family: var(--font-body); font-size: 14px; font-weight: 500; padding: 14px 30px; border-radius: 99px; text-decoration: none; transition: background .2s, transform .15s; }
-  .btn-gold:hover { background: #b0812e; transform: translateY(-1px); }
-  .btn-outline { background: transparent; color: var(--cream); font-family: var(--font-body); font-size: 14px; font-weight: 500; padding: 13px 24px; border-radius: 99px; border: 1.5px solid rgba(250,246,238,.25); text-decoration: none; transition: border-color .2s; }
-  .btn-outline:hover { border-color: rgba(250,246,238,.6); }
+  .hero-lead { font-size: 16px; color: rgba(250,246,238,.65); line-height: 1.85; font-weight: 300; max-width: 600px; }
 
-  /* HERO NAV CARDS */
-  .hero-right { display: flex; flex-direction: column; gap: 10px; animation: fadeUp .7s .25s both; }
-  .hero-nav-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 16px 20px; text-decoration: none; display: flex; align-items: center; gap: 14px; transition: background .2s; }
-  .hero-nav-card:hover { background: rgba(255,255,255,.1); }
-  .hnc-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(201,150,58,.15); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-  .hnc-text { flex: 1; }
-  .hnc-title { font-size: 14px; font-weight: 500; color: var(--cream); margin-bottom: 2px; }
-  .hnc-desc { font-size: 12px; color: rgba(250,246,238,.45); line-height: 1.45; }
-  .hnc-arrow { font-size: 16px; color: var(--gold-light); flex-shrink: 0; }
+  /* DAY NAV */
+  .day-nav { background: var(--cream); border-bottom: 1px solid rgba(201,150,58,.15); padding: 0 40px; display: flex; gap: 0; position: sticky; top: 64px; z-index: 90; overflow-x: auto; }
+  .day-btn { font-size: 12px; font-weight: 500; padding: 14px 16px; border: none; background: transparent; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all .2s; white-space: nowrap; }
+  .day-btn.active { color: var(--forest); border-bottom-color: var(--gold); }
+  .day-btn:hover:not(.active) { color: var(--forest); }
 
-  /* MISSION STRIP */
-  .mission-strip { background: var(--gold); padding: 28px 40px; }
-  .mission-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-  .ms-text { font-family: var(--font-display); font-size: clamp(18px, 2.5vw, 26px); font-weight: 900; font-style: italic; color: #fff; line-height: 1.2; }
-  .ms-sub { font-size: 13px; color: rgba(255,255,255,.75); font-weight: 300; margin-top: 4px; }
+  /* DAY PANELS */
+  .days-section { padding: 0 40px 96px; }
+  .day-panel { display: none; max-width: 900px; margin: 0 auto; padding-top: 56px; animation: fadeUp .25s ease both; }
+  .day-panel.active { display: block; }
 
-  /* WHAT THRIVE IS */
-  .what-section { padding: 96px 40px; background: var(--warm-white); }
-  .what-inner { max-width: 1100px; margin: 0 auto; }
-  .section-label { font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-  .section-label::before { content: ''; display: block; width: 20px; height: 1px; background: var(--gold); }
-  .section-heading { font-family: var(--font-display); font-size: clamp(28px, 3.5vw, 44px); font-weight: 900; line-height: 1.1; color: var(--forest); letter-spacing: -.5px; margin-bottom: 14px; }
-  .section-heading em { font-style: italic; color: var(--gold); }
-  .section-sub { font-size: 16px; color: #4a6055; line-height: 1.85; font-weight: 300; max-width: 580px; margin-bottom: 56px; }
-  .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .pillar-card { background: var(--cream); border: 1px solid rgba(201,150,58,.12); border-radius: 16px; padding: 28px 24px; }
-  .pc-icon { font-size: 26px; margin-bottom: 14px; }
-  .pc-title { font-family: var(--font-display); font-size: 19px; font-weight: 700; color: var(--forest); margin-bottom: 10px; line-height: 1.3; }
-  .pc-body { font-size: 14px; color: #4a6055; line-height: 1.75; font-weight: 300; }
+  /* DAY HERO CARD */
+  .day-hero-card { background: var(--forest); border-radius: 20px; padding: 36px 40px; margin-bottom: 32px; position: relative; overflow: hidden; }
+  .day-hero-card::before { content: attr(data-acronym); position: absolute; right: -16px; top: -10px; font-family: var(--font-display); font-size: 120px; font-weight: 900; font-style: italic; color: rgba(255,255,255,.04); pointer-events: none; letter-spacing: -4px; line-height: 1; }
+  .dhc-day { font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 6px; }
+  .dhc-title { font-family: var(--font-display); font-size: clamp(24px, 3.5vw, 36px); font-weight: 900; color: var(--cream); line-height: 1.15; margin-bottom: 10px; }
+  .dhc-title em { font-style: italic; color: var(--gold-light); }
+  .dhc-formula { display: inline-flex; align-items: center; gap: 6px; background: rgba(201,150,58,.15); border: 1px solid rgba(201,150,58,.25); border-radius: 8px; padding: 6px 14px; margin-bottom: 14px; }
+  .dhc-formula-text { font-size: 13px; font-weight: 500; color: var(--gold-light); letter-spacing: .06em; }
+  .dhc-verse { font-size: 12px; font-style: italic; color: rgba(250,246,238,.4); border-left: 1px solid rgba(201,150,58,.25); padding-left: 12px; line-height: 1.65; }
+  .dhc-intro { font-size: 14px; color: rgba(250,246,238,.65); line-height: 1.75; font-weight: 300; margin-top: 16px; max-width: 560px; }
 
-  /* PAGES GRID */
-  .pages-section { padding: 96px 40px; background: var(--cream); }
-  .pages-inner { max-width: 1100px; margin: 0 auto; }
-  .pages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
-  .page-card { text-decoration: none; background: var(--warm-white); border: 1px solid rgba(26,48,40,.08); border-radius: 16px; overflow: hidden; transition: transform .2s, box-shadow .2s; display: flex; flex-direction: column; }
-  .page-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(26,48,40,.1); }
-  .pg-header { padding: 24px 24px 18px; position: relative; overflow: hidden; }
-  .pg-header.forest { background: var(--forest); }
-  .pg-header.sage { background: var(--sage); }
-  .pg-header.gold { background: linear-gradient(135deg, #b0812e 0%, var(--gold) 100%); }
-  .pg-header::before { content: attr(data-icon); position: absolute; font-size: 80px; right: -10px; bottom: -16px; opacity: .12; pointer-events: none; }
-  .pg-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 6px; }
-  .pg-header.gold .pg-eyebrow { color: rgba(255,255,255,.7); }
-  .pg-title { font-family: var(--font-display); font-size: 20px; font-weight: 900; color: var(--cream); line-height: 1.2; }
-  .pg-body { padding: 18px 24px 24px; flex: 1; display: flex; flex-direction: column; }
-  .pg-desc { font-size: 13px; color: #4a6055; line-height: 1.7; font-weight: 300; flex: 1; margin-bottom: 16px; }
-  .pg-link { font-size: 12px; font-weight: 500; color: var(--gold); display: flex; align-items: center; gap: 5px; }
+  /* FORMULA ITEMS */
+  .formula-grid { display: flex; flex-direction: column; gap: 12px; }
+  .formula-item { background: var(--cream); border: 1px solid rgba(201,150,58,.12); border-radius: 14px; overflow: hidden; cursor: pointer; transition: box-shadow .2s; }
+  .formula-item:hover { box-shadow: 0 6px 24px rgba(26,48,40,.08); }
+  .formula-item.open { box-shadow: 0 6px 24px rgba(26,48,40,.1); }
+  .fi-header { display: flex; align-items: flex-start; gap: 16px; padding: 16px 20px; }
+  .fi-letter { font-family: var(--font-display); font-size: 28px; font-weight: 900; font-style: italic; color: var(--gold); min-width: 28px; line-height: 1; }
+  .fi-head-text { flex: 1; }
+  .fi-word { font-size: 14px; font-weight: 500; color: var(--forest); margin-bottom: 3px; }
+  .fi-preview { font-size: 12px; color: var(--muted); font-style: italic; }
+  .fi-toggle { font-size: 18px; color: var(--muted); flex-shrink: 0; transition: transform .2s; }
+  .formula-item.open .fi-toggle { transform: rotate(45deg); }
+  .fi-body { display: none; padding: 0 20px 18px 64px; }
+  .formula-item.open .fi-body { display: block; }
+  .fi-explanation { font-size: 14px; color: #3d5548; line-height: 1.85; font-weight: 300; }
+  .fi-explanation strong { font-weight: 500; color: var(--forest); }
 
-  /* UPCOMING PROGRAMMES STRIP */
-  .upcoming-strip { background: var(--forest); padding: 80px 40px; }
-  .upcoming-inner { max-width: 1100px; margin: 0 auto; }
-  .upcoming-strip .section-label { color: var(--gold-light); }
-  .upcoming-strip .section-label::before { background: var(--gold-light); }
-  .upcoming-strip .section-heading { color: var(--cream); margin-bottom: 12px; }
-  .upcoming-strip .section-sub { color: rgba(250,246,238,.6); margin-bottom: 40px; }
-  .upcoming-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-  .uc-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 24px 22px; }
-  .uc-pill { display: inline-flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; padding: 3px 10px; border-radius: 99px; margin-bottom: 12px; }
-  .pill-c2 { background: rgba(201,150,58,.2); color: var(--gold-light); border: 1px solid rgba(201,150,58,.3); }
-  .pill-bc { background: rgba(47,82,67,.4); color: rgba(250,246,238,.7); border: 1px solid rgba(255,255,255,.12); }
-  .pill-rw { background: rgba(255,255,255,.06); color: rgba(250,246,238,.45); border: 1px solid rgba(255,255,255,.1); }
-  .uc-icon { font-size: 26px; margin-bottom: 10px; }
-  .uc-title { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--cream); line-height: 1.25; margin-bottom: 8px; }
-  .uc-title em { font-style: italic; color: var(--gold-light); }
-  .uc-desc { font-size: 13px; color: rgba(250,246,238,.55); line-height: 1.65; font-weight: 300; margin-bottom: 16px; }
-  .uc-link { font-size: 12px; font-weight: 500; color: var(--gold-light); text-decoration: none; }
-  .uc-link:hover { color: var(--cream); }
+  /* REFLECTION BLOCK */
+  .day-reflection { background: rgba(201,150,58,.08); border: 1px solid rgba(201,150,58,.2); border-radius: 14px; padding: 20px 24px; margin-top: 28px; }
+  .dr-label { font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .dr-question { font-size: 15px; font-weight: 500; color: var(--forest); line-height: 1.6; margin-bottom: 6px; }
+  .dr-hint { font-size: 13px; color: var(--muted); font-style: italic; line-height: 1.6; }
 
-  /* BOOTCAMP ADDITIONS */
-  .pc-link { display: inline-block; margin-top: 14px; font-size: 13px; font-weight: 500; color: var(--gold); text-decoration: none; }
-  .pc-link:hover { color: var(--forest); }
-  .uc-meta { font-size: 12px; font-weight: 500; color: var(--gold-light); margin-bottom: 10px; letter-spacing: .02em; }
-  .uc-links { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+  /* ATTRIBUTION */
+  .attribution { background: var(--sage); padding: 56px 40px; text-align: center; }
+  .attr-inner { max-width: 580px; margin: 0 auto; }
+  .attr-text { font-size: 15px; color: rgba(250,246,238,.7); line-height: 1.8; font-weight: 300; font-style: italic; margin-bottom: 10px; }
+  .attr-ref { font-size: 12px; color: rgba(250,246,238,.35); }
 
-  /* QUOTE STRIP */
-  .quote-strip { background: var(--sage); padding: 72px 40px; text-align: center; }
-  .qs-inner { max-width: 700px; margin: 0 auto; }
-  .qs-quote { font-family: var(--font-display); font-size: clamp(22px, 3vw, 32px); font-style: italic; color: var(--cream); line-height: 1.45; margin-bottom: 16px; }
-  .qs-quote em { color: var(--gold-light); }
-  .qs-attr { font-size: 12px; color: rgba(250,246,238,.4); font-weight: 500; letter-spacing: .06em; text-transform: uppercase; }
+  footer { background: var(--forest); padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .footer-logo { font-family: var(--font-display); font-size: 20px; font-weight: 900; color: var(--cream); }
+  .footer-logo span { color: var(--gold); }
+  .footer-verse { font-size: 12px; font-style: italic; color: rgba(250,246,238,.3); }
 
-  /* MEET THE COACH */
-  .coach-section { padding: 96px 40px; background: var(--warm-white); }
-  .coach-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: center; }
-  .coach-visual { background: var(--forest); border-radius: 20px; overflow: hidden; aspect-ratio: 3/4; position: relative; }
-  .coach-visual img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
-  .coach-visual-fallback { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 80px; font-weight: 900; font-style: italic; color: rgba(255,255,255,.08); }
-  .coach-badge { position: absolute; bottom: 20px; left: 20px; background: var(--gold); color: #fff; font-size: 11px; font-weight: 500; padding: 6px 14px; border-radius: 99px; letter-spacing: .06em; text-transform: uppercase; }
-  .coach-content .section-label { margin-bottom: 14px; }
-  .coach-content h2 { font-family: var(--font-display); font-size: clamp(28px, 3.5vw, 42px); font-weight: 900; line-height: 1.1; color: var(--forest); letter-spacing: -.5px; margin-bottom: 20px; }
-  .coach-content h2 em { font-style: italic; color: var(--gold); }
-  .coach-content p { font-size: 15px; color: #3d5548; line-height: 1.9; font-weight: 300; margin-bottom: 18px; }
-  .coach-content p strong { font-weight: 500; color: var(--forest); }
-  .coach-pullquote { font-family: var(--font-display); font-size: 18px; font-style: italic; color: var(--forest); border-left: 3px solid var(--gold); padding-left: 18px; line-height: 1.5; margin: 24px 0; }
-  .coach-link { display: inline-flex; align-items: center; gap: 7px; font-size: 14px; font-weight: 500; color: var(--gold); text-decoration: none; margin-top: 6px; }
-  .coach-link:hover { color: var(--forest); }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
 
-  /* CTA FOOTER */
-  .cta-footer { background: var(--forest); padding: 96px 40px; text-align: center; position: relative; overflow: hidden; }
-  .cta-footer::before { content: 'THRIVE'; position: absolute; font-family: var(--font-display); font-size: 220px; font-weight: 900; font-style: italic; color: rgba(255,255,255,.03); top: 50%; left: 50%; transform: translate(-50%,-50%); white-space: nowrap; pointer-events: none; letter-spacing: -8px; }
-  .cta-footer h2 { font-family: var(--font-display); font-size: clamp(30px, 5vw, 52px); font-weight: 900; font-style: italic; color: var(--cream); line-height: 1.15; margin-bottom: 16px; position: relative; }
-  .cta-footer h2 span { color: var(--gold-light); }
-  .cta-footer p { font-size: 16px; color: rgba(250,246,238,.6); line-height: 1.75; max-width: 460px; margin: 0 auto 36px; font-weight: 300; position: relative; }
-  .cta-row { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; position: relative; }
-  .verse-footer { margin-top: 40px; font-size: 13px; font-style: italic; color: rgba(250,246,238,.3); position: relative; }
-
-  footer { background: var(--forest); border-top: 1px solid rgba(255,255,255,.06); padding: 40px 40px 28px; }
-  .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr repeat(3, 1fr); gap: 40px; margin-bottom: 40px; }
-  .footer-brand .footer-logo { font-family: var(--font-display); font-size: 24px; font-weight: 900; color: var(--cream); letter-spacing: -.5px; margin-bottom: 10px; }
-  .footer-brand .footer-logo span { color: var(--gold); }
-  .footer-brand p { font-size: 13px; color: rgba(250,246,238,.4); line-height: 1.7; font-weight: 300; max-width: 220px; }
-  .footer-col h4 { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 14px; }
-  .footer-col a { display: block; font-size: 13px; color: rgba(250,246,238,.5); text-decoration: none; margin-bottom: 8px; transition: color .2s; }
-  .footer-col a:hover { color: var(--cream); }
-  .footer-bottom { border-top: 1px solid rgba(255,255,255,.06); padding-top: 20px; max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-  .footer-verse { font-size: 12px; font-style: italic; color: rgba(250,246,238,.25); }
-  .footer-email { font-size: 12px; color: rgba(250,246,238,.35); text-decoration: none; }
-  .footer-email:hover { color: var(--gold-light); }
-
-
-  /* SCOPE & DISCLAIMER */
-  .scope-section { padding: 96px 40px; background: var(--cream); border-top: 1px solid rgba(201,150,58,.12); }
-  .scope-inner { max-width: 1100px; margin: 0 auto; }
-  .scope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
-  .scope-card { background: var(--warm-white); border: 1px solid rgba(26,48,40,.08); border-radius: 16px; padding: 30px 28px; }
-  .scope-card.does { border-top: 4px solid var(--gold); }
-  .scope-card.doesnt { border-top: 4px solid var(--forest); }
-  .scope-card h3 { font-family: var(--font-display); font-size: 21px; font-weight: 700; color: var(--forest); margin-bottom: 16px; line-height: 1.3; }
-  .scope-card ul { list-style: none; }
-  .scope-card li { font-size: 14.5px; color: #3d5548; line-height: 1.7; font-weight: 300; padding: 6px 0 6px 26px; position: relative; }
-  .scope-card.does li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
-  .scope-card.doesnt li::before { content: '✕'; position: absolute; left: 0; color: var(--forest); font-weight: 700; }
-  .scope-referral { font-size: 14px; color: #3d5548; line-height: 1.75; font-weight: 300; margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(26,48,40,.1); }
-  .scope-referral strong { font-weight: 500; color: var(--forest); }
-  .scope-notice { background: var(--forest); border-radius: 16px; padding: 28px 32px; display: flex; gap: 18px; align-items: flex-start; }
-  .scope-notice-icon { font-size: 22px; flex-shrink: 0; line-height: 1.5; }
-  .scope-notice p { font-size: 15px; color: rgba(250,246,238,.85); line-height: 1.8; font-weight: 300; }
-  .scope-notice p strong { color: var(--gold-light); font-weight: 500; }
-  .scope-notice p + p { margin-top: 10px; font-size: 13px; color: rgba(250,246,238,.6); }
-  .footer-scope { max-width: 1100px; margin: 0 auto 20px; font-size: 12px; line-height: 1.7; color: rgba(250,246,238,.4); font-weight: 300; }
-  .footer-scope strong { font-weight: 500; color: rgba(250,246,238,.6); }
-
-  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-
-  @media(max-width:900px) {
+  @media(max-width:860px) {
     nav { padding: 14px 20px; }
     .nav-links { display: none; }
-    .hero { padding: 110px 20px 60px; min-height: auto; }
-    .hero-inner { grid-template-columns: 1fr; gap: 40px; }
-    .hero-right { display: none; }
-    .mission-strip { padding: 24px 20px; }
-    .what-section, .pages-section, .upcoming-strip, .coach-section, .cta-footer { padding: 64px 20px; }
-    .pillars-grid, .pages-grid, .upcoming-cards, .scope-grid { grid-template-columns: 1fr; }
-    .scope-section { padding: 64px 20px; }
-    .scope-notice { padding: 22px 20px; }
-    .coach-inner { grid-template-columns: 1fr; gap: 40px; }
-    .coach-visual { aspect-ratio: 4/3; }
-    .quote-strip { padding: 48px 20px; }
-    .footer-inner { grid-template-columns: 1fr 1fr; gap: 28px; }
-    footer { padding: 40px 20px 24px; }
-    .footer-bottom { flex-direction: column; align-items: flex-start; }
+    .hero { padding: 110px 20px 60px; }
+    .day-nav { padding: 0 20px; top: 58px; }
+    .days-section { padding: 0 20px 64px; }
+    .day-hero-card { padding: 24px 22px; }
+    .fi-body { padding: 0 16px 16px 16px; }
+    .attribution { padding: 40px 20px; }
+    footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
 <body>
 
 <nav>
-  <a class="nav-logo" href="index.html">Thrive<span>.</span></a>
+  <a class="nav-logo" href="seminar.html">Thrive<span>.</span></a>
   <div class="nav-links">
     <a href="about.html">About</a>
+    <a href="resources.html" class="active">Resources</a>
     <a href="programmes.html">Programmes</a>
-    <a href="mentoring.html">1:1 Mentoring</a>
-    <a href="bootcampreserve.html">Bootcamps</a>
-    <a href="resources.html">Resources</a>
     <a href="coach.html">Meet the Coach</a>
-    <a href="#scope">Scope</a>
   </div>
-  <a class="nav-cta" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Reserve a Bootcamp Spot</a>
+  <a class="nav-cta" href="seminar.html#register">Join Cohort 2 Waitlist</a>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-left">
-      <div class="hero-eyebrow">Faith-rooted · Practical · For young people</div>
-      <h1>Not just to survive —<br>to <em>Thrive.</em></h1>
-      <p class="hero-lead">Thrive is a mentorship platform for teenagers and young adults aged 13–28. We help young people discover who they are, what they stand for, and the purpose they were created to walk in — through seminars, bootcamps for high schoolers and young adults, and relational mentorship.</p>
-      <div class="hero-actions">
-        <a class="btn-gold" href="bootcampreserve.html">Reserve a bootcamp spot →</a>
-        <a class="btn-outline" href="about.html">Discover Thrive</a>
-        <a class="btn-outline" href="programmes.html">See programmes</a>
-      </div>
-    </div>
-    <div class="hero-right">
-      <a class="hero-nav-card" href="bootcampreserve.html">
-        <div class="hnc-icon">🔥</div>
-        <div class="hnc-text"><div class="hnc-title">Teen & Young Adult Bootcamps</div><div class="hnc-desc">Dec 6–10, 2026 (ages 15–18) · Jan 4–8, 2027 (ages 19–26) — reserve a spot</div></div>
-        <div class="hnc-arrow">→</div>
-      </a>
-      <a class="hero-nav-card" href="mentoring.html">
-        <div class="hnc-icon">🤝</div>
-        <div class="hnc-text"><div class="hnc-title">One-to-One Mentoring</div><div class="hnc-desc">Private sessions for teens and young adults from KES 600 — sign the agreement, book a time</div></div>
-        <div class="hnc-arrow">→</div>
-      </a>
-      <a class="hero-nav-card" href="seminar.html">
-        <div class="hnc-icon">✦</div>
-        <div class="hnc-text"><div class="hnc-title">Identity & Purpose Seminar</div><div class="hnc-desc">Cohort 2 coming September 2026 — join the waitlist</div></div>
-        <div class="hnc-arrow">→</div>
-      </a>
-      <a class="hero-nav-card" href="about.html">
-        <div class="hnc-icon">🌿</div>
-        <div class="hnc-text"><div class="hnc-title">About Thrive</div><div class="hnc-desc">Our mission, focus areas, and brand voice</div></div>
-        <div class="hnc-arrow">→</div>
-      </a>
-      <a class="hero-nav-card" href="coach.html">
-        <div class="hnc-icon">👤</div>
-        <div class="hnc-text"><div class="hnc-title">Meet Your Coach</div><div class="hnc-desc">Janet Oyende — she lived the itch</div></div>
-        <div class="hnc-arrow">→</div>
-      </a>
-      <a class="hero-nav-card" href="resources.html">
-        <div class="hnc-icon">📖</div>
-        <div class="hnc-text"><div class="hnc-title">Resources & Teen Life</div><div class="hnc-desc">Articles, Bible promises, weekly formulae</div></div>
-        <div class="hnc-arrow">→</div>
-      </a>
-      <a class="hero-nav-card" href="programmes.html">
-        <div class="hnc-icon">🏕️</div>
-        <div class="hnc-text"><div class="hnc-title">All Programmes</div><div class="hnc-desc">Seminar · Bootcamps · Roots and Wings</div></div>
-        <div class="hnc-arrow">→</div>
-      </a>
-    </div>
+    <div class="hero-eyebrow">Weekly Formulae · Teen Life</div>
+    <h1>A formula for<br>every day of the <em>week.</em></h1>
+    <p class="hero-lead">Seven days. Seven frameworks. Each one anchored in Scripture and designed to give young people a practical, memorable way to approach each day — from Monday's mindset to Sunday's worship. Pick one. Practice it. Then come back for the next.</p>
   </div>
 </section>
 
-<!-- MISSION STRIP -->
-<div class="mission-strip">
-  <div class="mission-inner">
-    <div>
-      <div class="ms-text">"Transforming potential into purpose — one young person at a time."</div>
-      <div class="ms-sub">Cohort 1 completed May 2026 · Cohort 2 coming September 2026 · Teen Bootcamp December 2026 · Young Adult Bootcamp January 2027</div>
-    </div>
-    <a class="btn-gold" style="white-space:nowrap" href="bootcampreserve.html">See the Bootcamps →</a>
-  </div>
+<div class="day-nav">
+  <button class="day-btn active" onclick="showDay('sunday', this)">Sunday · W.A.I.T.</button>
+  <button class="day-btn" onclick="showDay('monday', this)">Monday · S.H.I.E.L.D.</button>
+  <button class="day-btn" onclick="showDay('tuesday', this)">Tuesday · B.R.I.D.G.E.</button>
+  <button class="day-btn" onclick="showDay('wednesday', this)">Wednesday · T.A.B.L.E.</button>
+  <button class="day-btn" onclick="showDay('thursday', this)">Thursday · S.I.M.P.L.E.</button>
+  <button class="day-btn" onclick="showDay('friday', this)">Friday · R.E.S.T.</button>
+  <button class="day-btn" onclick="showDay('saturday', this)">Saturday · S.T.R.I.V.E.</button>
 </div>
 
-<!-- WHAT THRIVE IS -->
-<section class="what-section">
-  <div class="what-inner">
-    <div class="section-label">What we do</div>
-    <h2 class="section-heading">Six ways Thrive walks<br>with young <em>people.</em></h2>
-    <p class="section-sub">Thrive uses six core approaches — each designed to meet young people where they are and move them toward who they're made to be.</p>
-    <div class="pillars-grid">
-      <div class="pillar-card">
-        <div class="pc-icon">🤝</div>
-        <div class="pc-title">Relational Mentoring</div>
-        <div class="pc-body">Building meaningful one-on-one relationships between mentors and mentees. Trust, open communication, and genuine presence — because transformation happens in relationship, not in programmes.</div>
-        <a class="pc-link" href="mentoring.html">Book a 1:1 session →</a>
+<section class="days-section">
+
+  <!-- SUNDAY -->
+  <div id="day-sunday" class="day-panel active">
+    <div class="day-hero-card" data-acronym="WAIT">
+      <div class="dhc-day">Success Sunday</div>
+      <div class="dhc-title">The <em>W.A.I.T.</em> Strategy<br>for Patience</div>
+      <div class="dhc-formula"><span class="dhc-formula-text">Waiting on God renews your strength</span></div>
+      <div class="dhc-verse">"Those who hope in the Lord will renew their strength." — Isaiah 40:31</div>
+      <p class="dhc-intro">Sunday is the day the week begins — with worship, rest, and a reset. The W.A.I.T. strategy is for every young person who finds patience hard. Because it is hard. But waiting on God is not passive inaction. It is active trust.</p>
+    </div>
+    <div class="formula-grid">
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">W</div><div class="fi-head-text"><div class="fi-word">Worship while you wait</div><div class="fi-preview">Listen to uplifting music or praise</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">While you are waiting — for results, for a relationship to heal, for an answer to prayer, for your season to change — <strong>don't go silent towards God.</strong> Worship is not the reward for answered prayer. It is what you do in the waiting. It shifts your focus from what you don't have yet to who God already is. Put on something that lifts your eyes. Let it play. Let it do its work.</p></div>
       </div>
-      <div class="pillar-card">
-        <div class="pc-icon">💪</div>
-        <div class="pc-title">Character Development</div>
-        <div class="pc-body">Interactive workshops on integrity, resilience, empathy, and decision-making — grounded in the realities of everyday teen and young adult life. Not theory. Practical tools you use on Monday.</div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">A</div><div class="fi-head-text"><div class="fi-word">Accept God's timing</div><div class="fi-preview">Trust that everything happens for a purpose</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">This is the hardest one. Accepting God's timing means releasing the idea that <em>your</em> timeline is the right one. It doesn't mean being passive about your goals. It means trusting that the God who sees the end from the beginning has a better vantage point than you do. <strong>His delays are not denials.</strong> His timing is not your timing — and that is a good thing.</p></div>
       </div>
-      <div class="pillar-card">
-        <div class="pc-icon">🏕️</div>
-        <div class="pc-title">Faith-Based Boot Camps</div>
-        <div class="pc-body">Immersive residential experiences centred on building faith, leadership, and community service. Two bootcamps: one for high schoolers (15–18) and one for campus-age young adults (19–26).</div>
-        <a class="pc-link" href="bootcampreserve.html">Reserve a bootcamp spot →</a>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">I</div><div class="fi-head-text"><div class="fi-word">Invite His presence</div><div class="fi-preview">Pray and seek God daily</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">Waiting without connection becomes despair. But waiting with God — actively inviting His presence through prayer, through Scripture, through quiet — becomes formation. <strong>The waiting season is not wasted time.</strong> It is often where the deepest growth happens. But only if you invite Him into it. Don't wait in isolation. Wait in conversation with the One who holds the answer.</p></div>
       </div>
-      <div class="pillar-card">
-        <div class="pc-icon">✦</div>
-        <div class="pc-title">Mentorship Seminars</div>
-        <div class="pc-body">Structured online seminars like the Identity & Purpose Seminar — three days, three deliverables, one direction that is finally yours. Faith-rooted, practical, and built so participants leave with something written.</div>
-      </div>
-      <div class="pillar-card">
-        <div class="pc-icon">📖</div>
-        <div class="pc-title">Resources & Content</div>
-        <div class="pc-body">Articles, Bible promises, weekly formulae, and free content for young people navigating identity, purpose, failure, and faith — written honestly from lived experience.</div>
-      </div>
-      <div class="pillar-card">
-        <div class="pc-icon">🌱</div>
-        <div class="pc-title">Community & Alumni</div>
-        <div class="pc-body">Every Thrive programme builds community — a group of peers who've done the same honest work and will hold each other to it. The community continues long after the final session ends.</div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">T</div><div class="fi-head-text"><div class="fi-word">Trust in His plan</div><div class="fi-preview">Believe that good things are coming</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">Trust is not a feeling. It is a choice. <strong>Choose to believe that God's plan for you is good</strong> — even when the circumstances say otherwise, even when you cannot see the next step, even when what you hoped for has not arrived. Jeremiah 29:11 was written to people in exile — people who had lost everything. "Plans to prosper you and not to harm you." He meant it then. He means it now.</p></div>
       </div>
     </div>
+    <div class="day-reflection">
+      <div class="dr-label">Sunday reflection</div>
+      <div class="dr-question">What are you waiting for right now — and how are you waiting for it?</div>
+      <div class="dr-hint">Are you waiting in worship, or in worry? In trust, or in resentment? The outcome may be the same. The person you become in the waiting is very different.</div>
+    </div>
+  </div>
+
+  <!-- MONDAY -->
+  <div id="day-monday" class="day-panel">
+    <div class="day-hero-card" data-acronym="SHIELD">
+      <div class="dhc-day">Mindset Monday</div>
+      <div class="dhc-title">The <em>S.H.I.E.L.D.</em><br>of Faith Formula</div>
+      <div class="dhc-formula"><span class="dhc-formula-text">Faith shields you from life's challenges</span></div>
+      <div class="dhc-verse">"Take up the shield of faith, with which you can extinguish all the flaming arrows of the evil one." — Ephesians 6:16</div>
+      <p class="dhc-intro">Monday brings the week with it — its pressures, expectations, and the residue of everything unresolved from last week. The S.H.I.E.L.D. formula is your mental armour for the week ahead. Not a wish. A stance.</p>
+    </div>
+    <div class="formula-grid">
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">S</div><div class="fi-head-text"><div class="fi-word">Stand firm in your beliefs</div><div class="fi-preview">Value your integrity</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">Monday will bring moments where it is easier to go with the crowd, to stay silent when you should speak, to agree when you actually disagree. <strong>Standing firm is a daily choice.</strong> It starts with knowing what you believe — not just intellectually, but convictionally. If you don't know what you stand for, Monday will decide for you.</p></div>
+      </div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">H</div><div class="fi-head-text"><div class="fi-word">Hold onto God's promises</div><div class="fi-preview">Remember His faithfulness</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">The week will bring circumstances that contradict what God has promised. Hold anyway. <strong>God's faithfulness is not circumstantial.</strong> It does not fluctuate with your Monday morning mood or your exam results. Take one promise into the week with you — one specific verse. Hold it. Let it hold you back.</p></div>
+      </div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">I</div><div class="fi-head-text"><div class="fi-word">Ignore negative influences</div><div class="fi-preview">Choose positivity</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">This is not about being naive or sheltered. It is about being intentional. <strong>What goes in shapes what comes out.</strong> The content you consume, the voices you amplify, the conversations you enter — all of these are influencing your mindset, whether you are conscious of it or not. Choose Monday's inputs carefully.</p></div>
+      </div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">E</div><div class="fi-head-text"><div class="fi-word">Equip yourself with Scripture</div><div class="fi-preview">Learn and meditate on God's Word</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">You would not go into an important event without preparation. Monday is an important event. <strong>Equip yourself.</strong> Read something before you open social media. Meditate on a verse before you respond to messages. Let God's Word shape the frame through which you interpret the day — before the day gets a chance to interpret itself.</p></div>
+      </div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">L</div><div class="fi-head-text"><div class="fi-word">Lift your faith through prayer</div><div class="fi-preview">Talk to God about your worries</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">Prayer is not a religious chore. It is a conversation with the most capable Person in the universe about the things that matter most to you. <strong>Talk to God about your worries before you talk to anyone else about them.</strong> Not because other voices don't matter — but because His voice orients all the others.</p></div>
+      </div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">D</div><div class="fi-head-text"><div class="fi-word">Depend on God's strength</div><div class="fi-preview">Rely on Him, never on yourself alone</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">Self-reliance feels strong until the moment it runs out. And it always runs out. <strong>Depending on God is not weakness — it is wisdom.</strong> It is the acknowledgement that you were never designed to carry the week alone. Philippians 4:13: "I can do all things through him who gives me strength." Not through my own cleverness. Through Him.</p></div>
+      </div>
+    </div>
+    <div class="day-reflection">
+      <div class="dr-label">Monday reflection</div>
+      <div class="dr-question">Which letter of S.H.I.E.L.D. do you need most this week — and why?</div>
+      <div class="dr-hint">Don't try to do all six on Monday. Pick one. Do it well. The shield is built one letter at a time.</div>
+    </div>
+  </div>
+
+  <!-- TUESDAY -->
+  <div id="day-tuesday" class="day-panel">
+    <div class="day-hero-card" data-acronym="BRIDGE">
+      <div class="dhc-day">Takeaway Tuesday</div>
+      <div class="dhc-title">The <em>B.R.I.D.G.E.</em><br>Strategy for Conflict</div>
+      <div class="dhc-formula"><span class="dhc-formula-text">Build bridges, not walls</span></div>
+      <div class="dhc-verse">"If your brother or sister sins, go and point out their fault, just between the two of you." — Matthew 18:15</div>
+      <p class="dhc-intro">Conflict is inevitable — at home, at school, in friendships, in teams. What you do with conflict determines whether it destroys or deepens relationships. The B.R.I.D.G.E. strategy gives you a framework to work through it with grace.</p>
+    </div>
+    <div class="formula-grid">
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">B</div><div class="fi-head-text"><div class="fi-word">Begin with prayer</div><div class="fi-preview">Seek God's guidance before the conversation</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">Before you send the message, have the conversation, or confront the person — <strong>pray first.</strong> Not to get God on your side. To get yourself aligned with God's. Ask for humility, clarity, and the right words. The conversation that begins with prayer is a fundamentally different conversation than one driven by hurt or anger.</p></div>
+      </div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">R</div><div class="fi-head-text"><div class="fi-word">Review the situation calmly</div><div class="fi-preview">Listen before reacting</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">Your first interpretation of a conflict is rarely the complete picture. <strong>Before you react, review.</strong> What actually happened — not just how it felt? What might the other person be carrying that you don't know about? Proverbs 18:17 says: "In a lawsuit the first to speak seems right, until someone comes forward and cross-examines." There is always another side.</p></div>
+      </div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">I</div><div class="fi-head-text"><div class="fi-word">Invite honest dialogue</div><div class="fi-preview">Share your feelings respectfully</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">Use "I" statements rather than "you" accusations. <strong>"I felt hurt when..." lands very differently from "You always..."</strong> Invite the other person into a real conversation — not a verdict. You are not looking to win. You are looking to understand and to be understood. Those are different goals, and they produce different conversations.</p></div>
+      </div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">D</div><div class="fi-head-text"><div class="fi-word">Discuss solutions together</div><div class="fi-preview">Find common ground</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">Once both sides have been heard, <strong>move toward solutions together.</strong> Not "here is what I need you to change" — but "what could we do differently going forward?" The shift from blame to problem-solving changes the entire dynamic. You are now on the same side of the table, looking at the problem together rather than at each other.</p></div>
+      </div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">G</div><div class="fi-head-text"><div class="fi-word">Give grace</div><div class="fi-preview">Forgive and move forward</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">Grace is giving something that was not earned. <strong>Forgiveness is grace in action.</strong> It does not mean pretending the hurt wasn't real. It means choosing not to let the hurt define the relationship going forward. Forgiveness is primarily an act you do for yourself — it releases you from carrying the weight of the offence. Colossians 3:13: "Forgive as the Lord forgave you."</p></div>
+      </div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">E</div><div class="fi-head-text"><div class="fi-word">End with reconciliation</div><div class="fi-preview">Restore the relationship wisely</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">Not every conflict ends in full reconciliation immediately — some take time. But <strong>the goal is always restoration, not victory.</strong> End the conversation with a commitment to the relationship, even if the process is not finished. A bridge is built one plank at a time. You don't need the whole bridge on Tuesday. You just need to lay the first plank.</p></div>
+      </div>
+    </div>
+    <div class="day-reflection">
+      <div class="dr-label">Tuesday reflection</div>
+      <div class="dr-question">Is there a conflict you have been avoiding that this framework could help you enter?</div>
+      <div class="dr-hint">The longer a conflict sits unaddressed, the heavier it becomes. The B.R.I.D.G.E. doesn't build itself. Someone has to take the first step.</div>
+    </div>
+  </div>
+
+  <!-- WEDNESDAY -->
+  <div id="day-wednesday" class="day-panel">
+    <div class="day-hero-card" data-acronym="TABLE">
+      <div class="dhc-day">Wisdom Wednesday</div>
+      <div class="dhc-title">The <em>T.A.B.L.E.</em><br>Method for Hospitality</div>
+      <div class="dhc-formula"><span class="dhc-formula-text">Create a welcoming atmosphere</span></div>
+      <div class="dhc-verse">"When you give a banquet, invite the poor, the crippled, the lame, the blind." — Luke 14:13</div>
+      <p class="dhc-intro">Wednesday is the hinge of the week — the day to look outward. Hospitality is not about having a big house or making elaborate meals. It is the posture of making room for other people. The T.A.B.L.E. method is about how you treat people — especially those the world tends to overlook.</p>
+    </div>
+    <div class="formula-grid">
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">T</div><div class="fi-head-text"><div class="fi-word">Take time to listen</div><div class="fi-preview">Show genuine interest in the person in front of you</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">The most hospitable thing you can give another person is your full attention. <strong>Not your advice. Not your experience. Your attention.</strong> Ask a question. Then listen — not to respond, but to understand. Most people in your life are not looking for someone to fix their problems. They are looking for someone who will actually hear them.</p></div>
+      </div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">A</div><div class="fi-head-text"><div class="fi-word">Appreciate your friends</div><div class="fi-preview">Make them feel valued</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">When did you last tell someone in your life that you appreciate them — specifically, and without a special occasion? <strong>Appreciation costs nothing and means everything.</strong> A text, a spoken sentence, a note. "I'm grateful for you because..." Name the specific thing. Generic appreciation lands softly. Specific appreciation lands deeply.</p></div>
+      </div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">B</div><div class="fi-head-text"><div class="fi-word">Break bread together</div><div class="fi-preview">Share meals and stories</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">There is something about sharing food that lowers defences and opens conversations. Jesus consistently ate with people — with the excluded, the despised, the overlooked. <strong>The table is a posture, not just a piece of furniture.</strong> Who have you not eaten with recently that you should? A family member. A classmate who always eats alone. A neighbour you've never spoken to properly.</p></div>
+      </div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">L</div><div class="fi-head-text"><div class="fi-word">Lead with kindness</div><div class="fi-preview">Be a positive influence — we all have influence</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">You have influence. Every person does. The question is not whether you are influencing the people around you — you are, constantly. The question is <strong>what direction you are pointing them.</strong> Kindness is not weakness. It is one of the most powerful forces available to a young person. People remember how you made them feel far longer than they remember what you said.</p></div>
+      </div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">E</div><div class="fi-head-text"><div class="fi-word">Encourage connection</div><div class="fi-preview">Foster new friendships</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">Introduce people. Create spaces where connection can happen. Invite the person on the edge of the group into the centre. <strong>Hospitality is not just about welcoming people into your home — it is about welcoming them into your attention, your conversation, your care.</strong> Be the person who makes the room bigger, not smaller.</p></div>
+      </div>
+    </div>
+    <div class="day-reflection">
+      <div class="dr-label">Wednesday reflection</div>
+      <div class="dr-question">Who in your world is on the edge of the group — and what would it look like to make room for them at your table this week?</div>
+      <div class="dr-hint">The person who is easiest to overlook is often the one who most needs to be seen. That is rarely an accident. It is an invitation.</div>
+    </div>
+  </div>
+
+  <!-- THURSDAY -->
+  <div id="day-thursday" class="day-panel">
+    <div class="day-hero-card" data-acronym="SIMPLE">
+      <div class="dhc-day">Thankful Thursday</div>
+      <div class="dhc-title">The <em>S.I.M.P.L.E.</em><br>Formula for Well-being</div>
+      <div class="dhc-formula"><span class="dhc-formula-text">Pure air, sunlight, rest, and trust — a life in balance</span></div>
+      <div class="dhc-verse">"Do you not know that your bodies are temples of the Holy Spirit?" — 1 Corinthians 6:19</div>
+      <p class="dhc-intro">You are not just a mind or a soul. You are a whole person — body, mind, and spirit — and all three need tending. The S.I.M.P.L.E. formula is not complicated. That's the point. The basics, practised consistently, build the foundation for everything else.</p>
+    </div>
+    <div class="formula-grid">
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">S</div><div class="fi-head-text"><div class="fi-word">Sunlight exposure</div><div class="fi-preview">Spend time outdoors daily — breathe fresh air</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">Your body needs sunlight — it regulates your sleep, your mood, and your vitamin D levels. Fresh air resets the nervous system. <strong>Step outside today.</strong> Not for hours — even 10–15 minutes of intentional outdoor time can shift your energy and your mood. God made a beautiful world. You are allowed to be in it.</p></div>
+      </div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">I</div><div class="fi-head-text"><div class="fi-word">Improve diet naturally</div><div class="fi-preview">Eat balanced, natural foods — avoid junk and fizzy drinks</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">What you eat affects how you think, how you feel, and how you perform. <strong>You cannot pour dirty fuel into a precision engine and expect peak performance.</strong> You don't need to be perfect about food — but one better choice today is better than one perfect day. Water over fizzy drinks. A fruit over a packet of crisps. Small shifts compound.</p></div>
+      </div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">M</div><div class="fi-head-text"><div class="fi-word">Maintain physical activity</div><div class="fi-preview">Stay active — find a sport or activity you enjoy</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">Exercise is not punishment. It is one of the most effective tools you have for managing stress, improving sleep, sharpening thinking, and lifting mood. <strong>Find something you enjoy</strong> — walking, dancing, football, swimming, anything — and do it consistently. Three times a week. Start there.</p></div>
+      </div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">P</div><div class="fi-head-text"><div class="fi-word">Practice moderation</div><div class="fi-preview">Balance screen time and rest</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">Your screen is not the enemy. How you use it is what matters. <strong>Moderation means conscious use</strong> — not mindless consumption. Set a time to put the phone down in the evening. Notice how it feels. The apps are designed to pull you back. Moderation is a form of courage in a world engineered for excess.</p></div>
+      </div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">L</div><div class="fi-head-text"><div class="fi-word">Leave time for rest</div><div class="fi-preview">Prioritise sleep and downtime</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">Rest is not laziness. It is a biological need and a spiritual discipline. <strong>God rested on the seventh day — not because He was tired, but to model something important.</strong> Productive rest renews you. Sleep is when your brain consolidates memory, your body repairs itself, and your spirit settles. Protect your sleep like it matters. It does.</p></div>
+      </div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">E</div><div class="fi-head-text"><div class="fi-word">Embrace trust in God's care</div><div class="fi-preview">Rely on Him for peace and strength</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">All the above helps. But the deepest well-being comes from trust — from knowing that you are held by Someone who does not sleep, does not tire, and does not lose track of you. <strong>Cast your anxiety on Him.</strong> Not once, but as often as it returns. 1 Peter 5:7: "Cast all your anxiety on him because he cares for you." He actually cares for you. Let that do its work.</p></div>
+      </div>
+    </div>
+    <div class="day-reflection">
+      <div class="dr-label">Thursday reflection — give thanks</div>
+      <div class="dr-question">Which of the S.I.M.P.L.E. letters is most neglected in your life right now? What is one thing you could do about it today?</div>
+      <div class="dr-hint">Well-being is not a goal you arrive at. It is a set of small daily choices. Pick one. Start today.</div>
+    </div>
+  </div>
+
+  <!-- FRIDAY -->
+  <div id="day-friday" class="day-panel">
+    <div class="day-hero-card" data-acronym="REST">
+      <div class="dhc-day">Focused Friday</div>
+      <div class="dhc-title">The <em>R.E.S.T.</em><br>Formula for Refreshment</div>
+      <div class="dhc-formula"><span class="dhc-formula-text">Rest renews your soul</span></div>
+      <div class="dhc-verse">"He makes me lie down in green pastures, he leads me beside quiet waters, he refreshes my soul." — Psalm 23:2-3</div>
+      <p class="dhc-intro">Friday is the day to intentionally slow down before the weekend. Not to escape your responsibilities — to restore yourself so you can return to them with more to give. The R.E.S.T. formula is active, not passive. Real rest requires intention.</p>
+    </div>
+    <div class="formula-grid">
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">R</div><div class="fi-head-text"><div class="fi-word">Release worries</div><div class="fi-preview">Write down or talk about your concerns</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">Worries held inside keep you awake and on edge. <strong>Externalise them.</strong> Write them in a journal. Talk to a trusted friend. Pray them out loud. The act of expressing a worry often reduces its power over you. You are not ignoring the concern — you are releasing your grip on it so it stops gripping you. Philippians 4:6: present your requests to God, with thanksgiving.</p></div>
+      </div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">E</div><div class="fi-head-text"><div class="fi-word">Enjoy God's presence</div><div class="fi-preview">Spend quiet time with Him</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">Not productive time. Not study time. Not prayer-list time. <strong>Simply being with God.</strong> Reading a psalm slowly. Sitting quietly. Letting your mind settle. The most profound rest is not the absence of activity — it is the presence of God. He leads beside quiet waters. Let Him lead you there today.</p></div>
+      </div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">S</div><div class="fi-head-text"><div class="fi-word">Still your mind</div><div class="fi-preview">Meditate on God's promises and breathe deeply</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">A racing mind cannot receive. <strong>Stillness is a skill — and it takes practice.</strong> Start small. Two minutes of intentional breathing and one verse to meditate on. Psalm 46:10: "Be still, and know that I am God." The instruction is to stop striving long enough to know. Knowing God is what follows stillness, not what precedes it.</p></div>
+      </div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">T</div><div class="fi-head-text"><div class="fi-word">Trust God's plan</div><div class="fi-preview">Believe that He is guiding you</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">Real rest is only possible when you trust the One who holds what you cannot control. <strong>If you are carrying the weight of everything — every outcome, every relationship, every uncertainty — you cannot actually rest.</strong> Trust is what transfers the weight. "Cast all your anxiety on him." That transfer is an act of will. Do it intentionally. Then rest.</p></div>
+      </div>
+    </div>
+    <div class="day-reflection">
+      <div class="dr-label">Friday reflection</div>
+      <div class="dr-question">What would it look like to genuinely rest this evening — not just stop working, but actually restore?</div>
+      <div class="dr-hint">Rest is not automatic. It is chosen. What do you need to release to make room for it?</div>
+    </div>
+  </div>
+
+  <!-- SATURDAY -->
+  <div id="day-saturday" class="day-panel">
+    <div class="day-hero-card" data-acronym="STRIVE">
+      <div class="dhc-day">Serene Saturday</div>
+      <div class="dhc-title">The <em>S.T.R.I.V.E.</em><br>Strategy for Excellence</div>
+      <div class="dhc-formula"><span class="dhc-formula-text">Strive for your best in all you do</span></div>
+      <div class="dhc-verse">"Whatever you do, work at it with all your heart, as working for the Lord, not for human masters." — Colossians 3:23</div>
+      <p class="dhc-intro">Excellence is not perfectionism. It is giving your best — consistently, deliberately, and for the right reasons. The S.T.R.I.V.E. strategy is for the young person who wants to excel — not just to impress others, but to honour God with the gifts and opportunities they have been given.</p>
+    </div>
+    <div class="formula-grid">
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">S</div><div class="fi-head-text"><div class="fi-word">Set realistic goals</div><div class="fi-preview">Aim high but stay grounded</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">A goal without a plan is a wish. A goal that is impossibly out of reach becomes discouragement. <strong>Set goals that stretch you without breaking you.</strong> High enough to require growth. Specific enough to track. Time-bound enough to create momentum. And then — crucially — write them down. The goal that lives only in your head rarely survives contact with Monday.</p></div>
+      </div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">T</div><div class="fi-head-text"><div class="fi-word">Train diligently</div><div class="fi-preview">Practice consistently and improve daily</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">Excellence is built in the unglamorous repetition of daily practice. <strong>There is no substitute for consistent effort over time.</strong> The musician who plays scales every day. The athlete who trains when no one is watching. The student who reads before anyone is impressed. Diligence is the bridge between potential and performance.</p></div>
+      </div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">R</div><div class="fi-head-text"><div class="fi-word">Review your progress</div><div class="fi-preview">Celebrate wins and learn from failures</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">Unreflected effort is just busy-ness. <strong>Build in regular review.</strong> What worked? What didn't? What would you do differently? Celebration is not vanity — it is acknowledgement that progress happened, and it motivates the next step. Learning from failure is not wallowing — it is extracting the lesson so the effort was not wasted.</p></div>
+      </div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">I</div><div class="fi-head-text"><div class="fi-word">Innovate and adapt</div><div class="fi-preview">Be creative and flexible</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">The world changes. What worked last year may not work this year. <strong>Excellence requires adaptability.</strong> Be willing to try a different approach, to learn something new, to change the method while holding the goal. Rigidity in a changing world is not strength — it is fragility. Creativity and flexibility are themselves skills worth developing.</p></div>
+      </div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">V</div><div class="fi-head-text"><div class="fi-word">Value quality over speed</div><div class="fi-preview">Do your best — not just to finish first</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">The world rewards speed. God rewards faithfulness. <strong>Quality outlasts speed every time.</strong> Work done well — with care, attention, and integrity — produces something that lasts. Work done fast to impress produces something that fades. Focus on doing it right. The time it takes is part of what makes the result trustworthy.</p></div>
+      </div>
+      <div class="formula-item" onclick="this.classList.toggle('open')">
+        <div class="fi-header"><div class="fi-letter">E</div><div class="fi-head-text"><div class="fi-word">Excel for God's glory</div><div class="fi-preview">Let every effort honour Him</div></div><div class="fi-toggle">+</div></div>
+        <div class="fi-body"><p class="fi-explanation">This is the one that changes everything else. When you do your work <em>for God</em> — not for grades, not for approval, not to beat someone else — the quality of your motivation changes. <strong>Colossians 3:23: "Whatever you do, work at it with all your heart, as working for the Lord."</strong> Whatever you is doing today — let it be an act of worship. Then do it excellently.</p></div>
+      </div>
+    </div>
+    <div class="day-reflection">
+      <div class="dr-label">Saturday reflection</div>
+      <div class="dr-question">In which area of your life are you settling for good enough when you could be striving for excellent — and what is one step that would change that this week?</div>
+      <div class="dr-hint">Excellence is not about comparing yourself to others. It is about comparing who you are to who you are capable of becoming — and closing that gap, one day at a time.</div>
+    </div>
+  </div>
+
+</section>
+
+<section class="attribution">
+  <div class="attr-inner">
+    <p class="attr-text">"Adapted from Delbert Baker's sharing on Facebook, June 22, 2025 — with reflections for young people by Thrive."</p>
+    <div class="attr-ref">Weekly Formulae · Thrive Teen Life Resources</div>
   </div>
 </section>
 
-<!-- SCOPE & DISCLAIMER -->
-<section class="scope-section" id="scope">
-  <div class="scope-inner">
-    <div class="section-label">Scope &amp; disclaimer</div>
-    <h2 class="section-heading">What Thrive mentorship is &mdash;<br>and what it <em>isn&rsquo;t.</em></h2>
-    <p class="section-sub">We want you to know exactly what to expect before you join. Thrive is life-experience mentorship, not clinical care.</p>
-    <div class="scope-grid">
-      <div class="scope-card does">
-        <h3>What Thrive offers</h3>
-        <ul>
-          <li>Non-judgmental listening in a safe, confidential-minded space</li>
-          <li>Guidance on goal-setting and building a plan you can follow</li>
-          <li>Support in navigating personal challenges</li>
-          <li>Tools for building resilience and character</li>
-          <li>Help with career and life transitions</li>
-          <li>Faith-rooted encouragement, and more besides</li>
-        </ul>
-      </div>
-      <div class="scope-card doesnt">
-        <h3>What Thrive does not offer</h3>
-        <ul>
-          <li>Clinical mental health therapy</li>
-          <li>Medical or psychological diagnosis</li>
-          <li>Crisis counselling</li>
-        </ul>
-        <p class="scope-referral"><strong>Need deeper support?</strong> When a young person needs deep psychological support, we provide referrals to professional counsellors and therapists, and work alongside them where appropriate. If someone is in immediate danger, please contact local emergency services right away.</p>
-      </div>
-    </div>
-    <div class="scope-notice" role="note">
-      <div class="scope-notice-icon" aria-hidden="true">ℹ️</div>
-      <div>
-        <p><strong>Note:</strong> I am a life experience mentor, not a licensed counsellor or psychologist. I do not offer clinical mental health therapy or medical diagnoses. If psychological or clinical mental health support is required, I work alongside or refer to licensed professionals.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PAGES GRID -->
-<section class="pages-section">
-  <div class="pages-inner">
-    <div class="section-label">Explore Thrive</div>
-    <h2 class="section-heading">Everything in one <em>place.</em></h2>
-    <p class="section-sub">Everything Thrive has built — programmes, resources, promises, wisdom for every day of the week, and the person behind it all.</p>
-    <div class="pages-grid">
-
-      <a class="page-card" href="seminar.html">
-        <div class="pg-header forest" data-icon="✦">
-          <div class="pg-eyebrow">Flagship programme</div>
-          <div class="pg-title">Identity & Purpose Seminar</div>
-        </div>
-        <div class="pg-body">
-          <p class="pg-desc">Three days to answer the questions that determine the direction of your life. Cohort 1 complete. Cohort 2 — September 2026.</p>
-          <div class="pg-link">Join Cohort 2 Waitlist →</div>
-        </div>
-      </a>
-
-      <a class="page-card" href="about.html">
-        <div class="pg-header sage" data-icon="🌿">
-          <div class="pg-eyebrow">Who we are</div>
-          <div class="pg-title">About Thrive</div>
-        </div>
-        <div class="pg-body">
-          <p class="pg-desc">Our mission, four focus areas, brand voice, and the story of why Thrive exists in the first place.</p>
-          <div class="pg-link">Read about Thrive →</div>
-        </div>
-      </a>
-
-      <a class="page-card" href="coach.html">
-        <div class="pg-header forest" data-icon="👤">
-          <div class="pg-eyebrow">Your facilitator</div>
-          <div class="pg-title">Meet Janet Oyende-Kariuki</div>
-        </div>
-        <div class="pg-body">
-          <p class="pg-desc">She lived the itch — the identity confusion, the gliding and being taken by the tides. She built Thrive so others don't take as long to find their footing.</p>
-          <div class="pg-link">Meet the coach →</div>
-        </div>
-      </a>
-
-      <a class="page-card" href="resources.html">
-        <div class="pg-header gold" data-icon="📖">
-          <div class="pg-eyebrow">Teen Life Articles</div>
-          <div class="pg-title">Resources</div>
-        </div>
-        <div class="pg-body">
-          <p class="pg-desc">Seven Reasons You Matter, Fear of Failure, Search for Significance, and more — honest writing for real teen life.</p>
-          <div class="pg-link">Read the articles →</div>
-        </div>
-      </a>
-
-      <a class="page-card" href="promises.html">
-        <div class="pg-header sage" data-icon="📜">
-          <div class="pg-eyebrow">Scripture</div>
-          <div class="pg-title">22 Bible Promises</div>
-        </div>
-        <div class="pg-body">
-          <p class="pg-desc">The 22 verses Janet took to heart as a young person — with reflections for the young person carrying them today.</p>
-          <div class="pg-link">Read the promises →</div>
-        </div>
-      </a>
-
-      <a class="page-card" href="formulae.html">
-        <div class="pg-header forest" data-icon="🗓️">
-          <div class="pg-eyebrow">Daily practice</div>
-          <div class="pg-title">Weekly Formulae</div>
-        </div>
-        <div class="pg-body">
-          <p class="pg-desc">Seven days. Seven frameworks — W.A.I.T., S.H.I.E.L.D., B.R.I.D.G.E., T.A.B.L.E., S.I.M.P.L.E., R.E.S.T., S.T.R.I.V.E.</p>
-          <div class="pg-link">Explore the formulae →</div>
-        </div>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<!-- UPCOMING PROGRAMMES -->
-<section class="upcoming-strip">
-  <div class="upcoming-inner">
-    <div class="section-label">What's coming</div>
-    <h2 class="section-heading" style="color:var(--cream)">Four programmes.<br>Two bootcamps <em>open</em> for reservations.</h2>
-    <p class="section-sub">Cohort 1 proved the model. Now Thrive is growing — a second cohort, two residential bootcamps (one for high schoolers, one for campus-age young adults), and a programme for younger teens in development.</p>
-    <div class="upcoming-cards">
-      <div class="uc-card">
-        <div class="uc-pill pill-c2">September 2026</div>
-        <div class="uc-icon">✦</div>
-        <div class="uc-title">Identity & Purpose<br><em>Seminar — Cohort 2</em></div>
-        <p class="uc-desc">The same three-day online framework that transformed Cohort 1. Who am I? What do I stand for? Where am I going? Three deliverables. One direction that is finally yours.</p>
-        <a class="uc-link" href="mailto:teensmentor365@gmail.com?subject=Thrive Cohort 2 Waitlist&body=Hi Janet,%0A%0APlease add me to the Thrive Cohort 2 waitlist.%0A%0AName:%0AAge:%0AWhatsApp number:">Join the waitlist →</a>
-      </div>
-      <div class="uc-card">
-        <div class="uc-pill pill-bc">December 6–10, 2026</div>
-        <div class="uc-icon">🏕️</div>
-        <div class="uc-title">Teen<br><em>Bootcamp</em></div>
-        <div class="uc-meta">Ages 15–18 · High school · KES 7,000</div>
-        <p class="uc-desc">Five days of Bible study, mentorship, and honest conversation on identity, friendships, family, social media, dating, and the pressures of school life.</p>
-        <div class="uc-links">
-          <a class="uc-link" href="bootcampreserve.html">See details →</a>
-          <a class="uc-link" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Reserve a spot →</a>
-        </div>
-      </div>
-      <div class="uc-card">
-        <div class="uc-pill pill-bc">January 4–8, 2027</div>
-        <div class="uc-icon">🔥</div>
-        <div class="uc-title">Young Adult<br><em>Bootcamp</em></div>
-        <div class="uc-meta">Ages 19–26 · Campus and beyond · KES 8,000</div>
-        <p class="uc-desc">Five days for campus-age young adults on purpose, careers, money, relationships, addictions, mental health, and the decisions that shape the next decade.</p>
-        <div class="uc-links">
-          <a class="uc-link" href="bootcampreserve.html">See details →</a>
-          <a class="uc-link" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Reserve a spot →</a>
-        </div>
-      </div>
-      <div class="uc-card">
-        <div class="uc-pill pill-rw">In development</div>
-        <div class="uc-icon">🌱</div>
-        <div class="uc-title">Roots and<br><em>Wings</em></div>
-        <p class="uc-desc">For teens aged 13–18. Deep roots of faith and character — and the wings to launch into adulthood with confidence. Building the foundations before the storm arrives.</p>
-        <a class="uc-link" href="mailto:teensmentor365@gmail.com?subject=Roots and Wings — notify me&body=Hi Janet,%0A%0APlease notify me when Roots and Wings launches.%0A%0AName:%0AAge:%0AWhatsApp number:">Register interest →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- QUOTE -->
-<section class="quote-strip">
-  <div class="qs-inner">
-    <div class="qs-quote">"I was that teenager looking around the room, wondering who to talk to. That itch never left me — and it became the reason I built <em>Thrive.</em>"</div>
-    <div class="qs-attr">— Janet Oyende-Kariuki · Thrive Coach</div>
-  </div>
-</section>
-
-<!-- MEET THE COACH -->
-<section class="coach-section">
-  <div class="coach-inner">
-    <div class="coach-visual">
-      <img src="DSC_0742.JPG" alt="Janet Oyende-Kariuki — Thrive Coach" onerror="this.style.display='none'">
-      <div class="coach-visual-fallback">JO</div>
-      <div class="coach-badge">Thrive Coach</div>
-    </div>
-    <div class="coach-content">
-      <div class="section-label">Your facilitator</div>
-      <h2>Meet <em>Janet Oyende-Kariuki.</em></h2>
-      <p>Janet has been working with young people for over a decade — in schools, universities, churches, and communities across Kenya and beyond. She is a learning and development professional, a missionary, a youth leader, and the person who built Thrive out of her own lived experience.</p>
-      <div class="coach-pullquote">"I didn't always have the answers. As a teenager, I looked around the room and wondered who would reach out. That memory is why Thrive exists."</div>
-      <p>She visits high school and university campuses as a speaker, serves on the board of Generation Youth Christ Africa, and leads youth ministry at her local church. <strong>She is still in the rooms where young people are.</strong></p>
-      <a class="coach-link" href="coach.html">Read her full story →</a>
-    </div>
-  </div>
-</section>
-
-<!-- CTA FOOTER -->
-<section class="cta-footer">
-  <h2>Every young person deserves<br>the chance to <span>Thrive.</span></h2>
-  <p>Not just survive. Whether you're a young person carrying hard questions, a parent looking for support, or a church wanting to bring Thrive to your community — you are welcome here.</p>
-  <div class="cta-row">
-    <a class="btn-gold" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Reserve a Bootcamp Spot →</a>
-    <a class="btn-outline" href="mailto:teensmentor365@gmail.com?subject=Thrive Cohort 2 Waitlist&body=Hi Janet,%0A%0APlease add me to the Thrive Cohort 2 waitlist.%0A%0AName:%0AAge:%0AWhatsApp number:">Join Cohort 2 Waitlist →</a>
-    <a class="btn-outline" href="programmes.html">See all programmes</a>
-  </div>
-  <div class="verse-footer">"For we are God's handiwork, created in Christ Jesus to do good works." — Ephesians 2:10</div>
-</section>
-
-<!-- FOOTER -->
 <footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="footer-logo">Thrive<span>.</span></div>
-      <p>Guiding young lives through life's challenges. Faith-rooted, practical, and built for transformation that sticks.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Programmes</h4>
-      <a href="mentoring.html">One-to-One Mentoring</a>
-      <a href="seminar.html">Identity & Purpose Seminar</a>
-      <a href="bootcampreserve.html">Teen Bootcamp (Dec 2026)</a>
-      <a href="bootcampreserve.html">Young Adult Bootcamp (Jan 2027)</a>
-      <a href="programmes.html#roots">Roots and Wings</a>
-      <a href="programmes.html">All programmes</a>
-    </div>
-    <div class="footer-col">
-      <h4>Resources</h4>
-      <a href="resources.html">Teen Life Articles</a>
-      <a href="promises.html">Bible Promises</a>
-      <a href="formulae.html">Weekly Formulae</a>
-    </div>
-    <div class="footer-col">
-      <h4>Thrive</h4>
-      <a href="about.html">About</a>
-      <a href="coach.html">Meet the Coach</a>
-      <a href="mailto:teensmentor365@gmail.com">Contact</a>
-      <a href="mailto:teensmentor365@gmail.com?subject=Thrive Cohort 2 Waitlist&body=Hi Janet,%0A%0APlease add me to the Thrive Cohort 2 waitlist.%0A%0AName:%0AAge:%0AWhatsApp number:">Join Cohort 2 Waitlist</a>
-    </div>
-  </div>
-  <p class="footer-scope"><strong>Note:</strong> I am a life experience mentor, not a licensed counsellor or psychologist. I do not offer clinical mental health therapy or medical diagnoses. If psychological or clinical mental health support is required, I work alongside or refer to licensed professionals.</p>
-  <div class="footer-bottom">
-    <div class="footer-verse">"For we are God's handiwork, created in Christ Jesus to do good works." — Ephesians 2:10</div>
-    <a class="footer-email" href="mailto:teensmentor365@gmail.com">teensmentor365@gmail.com</a>
-  </div>
+  <div class="footer-logo">Thrive<span>.</span></div>
+  <div class="footer-verse">"Whatever you do, work at it with all your heart, as working for the Lord." — Colossians 3:23</div>
 </footer>
 
+<script>
+function showDay(id, btn) {
+  document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('day-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: document.querySelector('.days-section').offsetTop - 100, behavior: 'smooth' });
+}
+</script>
 </body>
 </html>
