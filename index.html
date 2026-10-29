@@ -184,6 +184,23 @@
   .footer-scope { max-width: 1100px; margin: 0 auto 20px; font-size: 12px; line-height: 1.7; color: rgba(250,246,238,.4); font-weight: 300; }
   .footer-scope strong { font-weight: 500; color: rgba(250,246,238,.6); }
 
+
+  /* MOBILE MENU + FEATURED */
+  .mnav { display: none; position: relative; }
+  .mnav summary { list-style: none; cursor: pointer; font-size: 13px; font-weight: 500; color: var(--forest); padding: 8px 16px; border: 1.5px solid rgba(26,48,40,.2); border-radius: 99px; }
+  .mnav summary::-webkit-details-marker { display: none; }
+  .mnav-links { position: absolute; right: 0; top: calc(100% + 10px); background: var(--warm-white); border: 1px solid rgba(201,150,58,.25); border-radius: 14px; padding: 8px; min-width: 210px; box-shadow: 0 12px 32px rgba(26,48,40,.15); }
+  .mnav-links a { display: block; padding: 10px 14px; font-size: 14px; color: var(--forest); text-decoration: none; border-radius: 8px; }
+  .mnav-links a:hover { background: var(--cream); }
+  .hero-nav-card.featured { background: rgba(201,150,58,.18); border-color: rgba(201,150,58,.55); }
+  .hero-path-label { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 2px; }
+  .uc-card.featured { grid-column: 1 / -1; background: rgba(201,150,58,.1); border-color: rgba(201,150,58,.4); }
+  .more-strip { background: var(--cream); padding: 44px 40px; }
+  .more-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 14px 22px; flex-wrap: wrap; }
+  .more-inner .section-label { margin: 0; }
+  .more-inner a { font-size: 14px; font-weight: 500; color: var(--forest); text-decoration: none; padding: 9px 18px; border: 1px solid rgba(26,48,40,.15); border-radius: 99px; background: var(--warm-white); transition: border-color .2s; }
+  .more-inner a:hover { border-color: var(--gold); }
+
   @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
 
   @media(max-width:900px) {
@@ -191,7 +208,10 @@
     .nav-links { display: none; }
     .hero { padding: 110px 20px 60px; min-height: auto; }
     .hero-inner { grid-template-columns: 1fr; gap: 40px; }
-    .hero-right { display: none; }
+    .nav-cta { margin-left: auto; padding: 9px 14px; font-size: 12px; }
+    nav { gap: 10px; }
+    .mnav { display: block; }
+    .more-strip { padding: 36px 20px; }
     .mission-strip { padding: 24px 20px; }
     .what-section, .pages-section, .upcoming-strip, .coach-section, .cta-footer { padding: 64px 20px; }
     .pillars-grid, .pages-grid, .upcoming-cards, .scope-grid { grid-template-columns: 1fr; }
@@ -211,15 +231,25 @@
 <nav>
   <a class="nav-logo" href="index.html">Thrive<span>.</span></a>
   <div class="nav-links">
-    <a href="about.html">About</a>
-    <a href="programmes.html">Programmes</a>
     <a href="mentoring.html">1:1 Mentoring</a>
     <a href="bootcampreserve.html">Bootcamps</a>
+    <a href="programmes.html">Programmes</a>
     <a href="resources.html">Resources</a>
+    <a href="about.html">About</a>
     <a href="coach.html">Meet the Coach</a>
-    <a href="#scope">Scope</a>
   </div>
-  <a class="nav-cta" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Reserve a Bootcamp Spot</a>
+  <a class="nav-cta" href="mentoring.html">Start 1:1 Mentoring</a>
+  <details class="mnav">
+    <summary>Menu</summary>
+    <div class="mnav-links">
+      <a href="mentoring.html">1:1 Mentoring</a>
+      <a href="bootcampreserve.html">Bootcamps</a>
+      <a href="programmes.html">Programmes</a>
+      <a href="resources.html">Resources</a>
+      <a href="about.html">About</a>
+      <a href="coach.html">Meet the Coach</a>
+    </div>
+  </details>
 </nav>
 
 <!-- HERO -->
@@ -228,47 +258,27 @@
     <div class="hero-left">
       <div class="hero-eyebrow">Faith-rooted · Practical · For young people</div>
       <h1>Not just to survive —<br>to <em>Thrive.</em></h1>
-      <p class="hero-lead">Thrive is a mentorship platform for teenagers and young adults aged 13–28. We help young people discover who they are, what they stand for, and the purpose they were created to walk in — through seminars, bootcamps for high schoolers and young adults, and relational mentorship.</p>
+      <p class="hero-lead">Faith-rooted mentorship for teenagers and young adults aged 13–28. Discover who you are, what you stand for, and the purpose you were made for. Choose how you’d like to begin.</p>
       <div class="hero-actions">
-        <a class="btn-gold" href="bootcampreserve.html">Reserve a bootcamp spot →</a>
-        <a class="btn-outline" href="about.html">Discover Thrive</a>
-        <a class="btn-outline" href="programmes.html">See programmes</a>
+        <a class="btn-gold" href="mentoring.html">Start one-to-one mentoring →</a>
+        <a class="btn-outline" href="bootcampreserve.html">See bootcamps</a>
       </div>
     </div>
     <div class="hero-right">
-      <a class="hero-nav-card" href="bootcampreserve.html">
-        <div class="hnc-icon">🔥</div>
-        <div class="hnc-text"><div class="hnc-title">Teen & Young Adult Bootcamps</div><div class="hnc-desc">Dec 6–10, 2026 (ages 15–18) · Jan 4–8, 2027 (ages 19–26) — reserve a spot</div></div>
+      <div class="hero-path-label">Choose your path</div>
+      <a class="hero-nav-card featured" href="mentoring.html">
+        <div class="hnc-icon">🤝</div>
+        <div class="hnc-text"><div class="hnc-title">One-to-One Mentoring</div><div class="hnc-desc">Private sessions with Janet, from KES 600. Sign the agreement, pick a tier, book a time.</div></div>
         <div class="hnc-arrow">→</div>
       </a>
-      <a class="hero-nav-card" href="mentoring.html">
-        <div class="hnc-icon">🤝</div>
-        <div class="hnc-text"><div class="hnc-title">One-to-One Mentoring</div><div class="hnc-desc">Private sessions for teens and young adults from KES 600 — sign the agreement, book a time</div></div>
+      <a class="hero-nav-card" href="bootcampreserve.html">
+        <div class="hnc-icon">🔥</div>
+        <div class="hnc-text"><div class="hnc-title">Bootcamps</div><div class="hnc-desc">Dec 6–10, 2026 (ages 15–18) · Jan 4–8, 2027 (ages 19–26)</div></div>
         <div class="hnc-arrow">→</div>
       </a>
       <a class="hero-nav-card" href="seminar.html">
         <div class="hnc-icon">✦</div>
-        <div class="hnc-text"><div class="hnc-title">Identity & Purpose Seminar</div><div class="hnc-desc">Cohort 2 coming September 2026 — join the waitlist</div></div>
-        <div class="hnc-arrow">→</div>
-      </a>
-      <a class="hero-nav-card" href="about.html">
-        <div class="hnc-icon">🌿</div>
-        <div class="hnc-text"><div class="hnc-title">About Thrive</div><div class="hnc-desc">Our mission, focus areas, and brand voice</div></div>
-        <div class="hnc-arrow">→</div>
-      </a>
-      <a class="hero-nav-card" href="coach.html">
-        <div class="hnc-icon">👤</div>
-        <div class="hnc-text"><div class="hnc-title">Meet Your Coach</div><div class="hnc-desc">Janet Oyende — she lived the itch</div></div>
-        <div class="hnc-arrow">→</div>
-      </a>
-      <a class="hero-nav-card" href="resources.html">
-        <div class="hnc-icon">📖</div>
-        <div class="hnc-text"><div class="hnc-title">Resources & Teen Life</div><div class="hnc-desc">Articles, Bible promises, weekly formulae</div></div>
-        <div class="hnc-arrow">→</div>
-      </a>
-      <a class="hero-nav-card" href="programmes.html">
-        <div class="hnc-icon">🏕️</div>
-        <div class="hnc-text"><div class="hnc-title">All Programmes</div><div class="hnc-desc">Seminar · Bootcamps · Roots and Wings</div></div>
+        <div class="hnc-text"><div class="hnc-title">Identity &amp; Purpose Seminar</div><div class="hnc-desc">Three days online. Join the waitlist.</div></div>
         <div class="hnc-arrow">→</div>
       </a>
     </div>
@@ -279,180 +289,29 @@
 <div class="mission-strip">
   <div class="mission-inner">
     <div>
-      <div class="ms-text">"Transforming potential into purpose — one young person at a time."</div>
-      <div class="ms-sub">Cohort 1 completed May 2026 · Cohort 2 coming September 2026 · Teen Bootcamp December 2026 · Young Adult Bootcamp January 2027</div>
+      <div class="ms-text">“Transforming potential into purpose — one young person at a time.”</div>
+      <div class="ms-sub">Relational mentoring · Character development · Faith-based bootcamps</div>
     </div>
-    <a class="btn-gold" style="white-space:nowrap" href="bootcampreserve.html">See the Bootcamps →</a>
   </div>
 </div>
-
-<!-- WHAT THRIVE IS -->
-<section class="what-section">
-  <div class="what-inner">
-    <div class="section-label">What we do</div>
-    <h2 class="section-heading">Six ways Thrive walks<br>with young <em>people.</em></h2>
-    <p class="section-sub">Thrive uses six core approaches — each designed to meet young people where they are and move them toward who they're made to be.</p>
-    <div class="pillars-grid">
-      <div class="pillar-card">
-        <div class="pc-icon">🤝</div>
-        <div class="pc-title">Relational Mentoring</div>
-        <div class="pc-body">Building meaningful one-on-one relationships between mentors and mentees. Trust, open communication, and genuine presence — because transformation happens in relationship, not in programmes.</div>
-        <a class="pc-link" href="mentoring.html">Book a 1:1 session →</a>
-      </div>
-      <div class="pillar-card">
-        <div class="pc-icon">💪</div>
-        <div class="pc-title">Character Development</div>
-        <div class="pc-body">Interactive workshops on integrity, resilience, empathy, and decision-making — grounded in the realities of everyday teen and young adult life. Not theory. Practical tools you use on Monday.</div>
-      </div>
-      <div class="pillar-card">
-        <div class="pc-icon">🏕️</div>
-        <div class="pc-title">Faith-Based Boot Camps</div>
-        <div class="pc-body">Immersive residential experiences centred on building faith, leadership, and community service. Two bootcamps: one for high schoolers (15–18) and one for campus-age young adults (19–26).</div>
-        <a class="pc-link" href="bootcampreserve.html">Reserve a bootcamp spot →</a>
-      </div>
-      <div class="pillar-card">
-        <div class="pc-icon">✦</div>
-        <div class="pc-title">Mentorship Seminars</div>
-        <div class="pc-body">Structured online seminars like the Identity & Purpose Seminar — three days, three deliverables, one direction that is finally yours. Faith-rooted, practical, and built so participants leave with something written.</div>
-      </div>
-      <div class="pillar-card">
-        <div class="pc-icon">📖</div>
-        <div class="pc-title">Resources & Content</div>
-        <div class="pc-body">Articles, Bible promises, weekly formulae, and free content for young people navigating identity, purpose, failure, and faith — written honestly from lived experience.</div>
-      </div>
-      <div class="pillar-card">
-        <div class="pc-icon">🌱</div>
-        <div class="pc-title">Community & Alumni</div>
-        <div class="pc-body">Every Thrive programme builds community — a group of peers who've done the same honest work and will hold each other to it. The community continues long after the final session ends.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SCOPE & DISCLAIMER -->
-<section class="scope-section" id="scope">
-  <div class="scope-inner">
-    <div class="section-label">Scope &amp; disclaimer</div>
-    <h2 class="section-heading">What Thrive mentorship is &mdash;<br>and what it <em>isn&rsquo;t.</em></h2>
-    <p class="section-sub">We want you to know exactly what to expect before you join. Thrive is life-experience mentorship, not clinical care.</p>
-    <div class="scope-grid">
-      <div class="scope-card does">
-        <h3>What Thrive offers</h3>
-        <ul>
-          <li>Non-judgmental listening in a safe, confidential-minded space</li>
-          <li>Guidance on goal-setting and building a plan you can follow</li>
-          <li>Support in navigating personal challenges</li>
-          <li>Tools for building resilience and character</li>
-          <li>Help with career and life transitions</li>
-          <li>Faith-rooted encouragement, and more besides</li>
-        </ul>
-      </div>
-      <div class="scope-card doesnt">
-        <h3>What Thrive does not offer</h3>
-        <ul>
-          <li>Clinical mental health therapy</li>
-          <li>Medical or psychological diagnosis</li>
-          <li>Crisis counselling</li>
-        </ul>
-        <p class="scope-referral"><strong>Need deeper support?</strong> When a young person needs deep psychological support, we provide referrals to professional counsellors and therapists, and work alongside them where appropriate. If someone is in immediate danger, please contact local emergency services right away.</p>
-      </div>
-    </div>
-    <div class="scope-notice" role="note">
-      <div class="scope-notice-icon" aria-hidden="true">ℹ️</div>
-      <div>
-        <p><strong>Note:</strong> I am a life experience mentor, not a licensed counsellor or psychologist. I do not offer clinical mental health therapy or medical diagnoses. If psychological or clinical mental health support is required, I work alongside or refer to licensed professionals.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PAGES GRID -->
-<section class="pages-section">
-  <div class="pages-inner">
-    <div class="section-label">Explore Thrive</div>
-    <h2 class="section-heading">Everything in one <em>place.</em></h2>
-    <p class="section-sub">Everything Thrive has built — programmes, resources, promises, wisdom for every day of the week, and the person behind it all.</p>
-    <div class="pages-grid">
-
-      <a class="page-card" href="seminar.html">
-        <div class="pg-header forest" data-icon="✦">
-          <div class="pg-eyebrow">Flagship programme</div>
-          <div class="pg-title">Identity & Purpose Seminar</div>
-        </div>
-        <div class="pg-body">
-          <p class="pg-desc">Three days to answer the questions that determine the direction of your life. Cohort 1 complete. Cohort 2 — September 2026.</p>
-          <div class="pg-link">Join Cohort 2 Waitlist →</div>
-        </div>
-      </a>
-
-      <a class="page-card" href="about.html">
-        <div class="pg-header sage" data-icon="🌿">
-          <div class="pg-eyebrow">Who we are</div>
-          <div class="pg-title">About Thrive</div>
-        </div>
-        <div class="pg-body">
-          <p class="pg-desc">Our mission, four focus areas, brand voice, and the story of why Thrive exists in the first place.</p>
-          <div class="pg-link">Read about Thrive →</div>
-        </div>
-      </a>
-
-      <a class="page-card" href="coach.html">
-        <div class="pg-header forest" data-icon="👤">
-          <div class="pg-eyebrow">Your facilitator</div>
-          <div class="pg-title">Meet Janet Oyende-Kariuki</div>
-        </div>
-        <div class="pg-body">
-          <p class="pg-desc">She lived the itch — the identity confusion, the gliding and being taken by the tides. She built Thrive so others don't take as long to find their footing.</p>
-          <div class="pg-link">Meet the coach →</div>
-        </div>
-      </a>
-
-      <a class="page-card" href="resources.html">
-        <div class="pg-header gold" data-icon="📖">
-          <div class="pg-eyebrow">Teen Life Articles</div>
-          <div class="pg-title">Resources</div>
-        </div>
-        <div class="pg-body">
-          <p class="pg-desc">Seven Reasons You Matter, Fear of Failure, Search for Significance, and more — honest writing for real teen life.</p>
-          <div class="pg-link">Read the articles →</div>
-        </div>
-      </a>
-
-      <a class="page-card" href="promises.html">
-        <div class="pg-header sage" data-icon="📜">
-          <div class="pg-eyebrow">Scripture</div>
-          <div class="pg-title">22 Bible Promises</div>
-        </div>
-        <div class="pg-body">
-          <p class="pg-desc">The 22 verses Janet took to heart as a young person — with reflections for the young person carrying them today.</p>
-          <div class="pg-link">Read the promises →</div>
-        </div>
-      </a>
-
-      <a class="page-card" href="formulae.html">
-        <div class="pg-header forest" data-icon="🗓️">
-          <div class="pg-eyebrow">Daily practice</div>
-          <div class="pg-title">Weekly Formulae</div>
-        </div>
-        <div class="pg-body">
-          <p class="pg-desc">Seven days. Seven frameworks — W.A.I.T., S.H.I.E.L.D., B.R.I.D.G.E., T.A.B.L.E., S.I.M.P.L.E., R.E.S.T., S.T.R.I.V.E.</p>
-          <div class="pg-link">Explore the formulae →</div>
-        </div>
-      </a>
-
-    </div>
-  </div>
-</section>
 
 <!-- UPCOMING PROGRAMMES -->
 <section class="upcoming-strip">
   <div class="upcoming-inner">
-    <div class="section-label">What's coming</div>
-    <h2 class="section-heading" style="color:var(--cream)">Four programmes.<br>Two bootcamps <em>open</em> for reservations.</h2>
-    <p class="section-sub">Cohort 1 proved the model. Now Thrive is growing — a second cohort, two residential bootcamps (one for high schoolers, one for campus-age young adults), and a programme for younger teens in development.</p>
+    <div class="section-label">Ways to join</div>
+    <h2 class="section-heading" style="color:var(--cream)">Choose how you want to <em>Thrive.</em></h2>
+    <p class="section-sub">One-to-one mentoring is open now. Bootcamps are open for reservations.</p>
     <div class="upcoming-cards">
+      <div class="uc-card featured">
+        <div class="uc-pill pill-c2">Open now</div>
+        <div class="uc-icon">🤝</div>
+        <div class="uc-title">One-to-One <em>Mentoring</em></div>
+        <div class="uc-meta">Ages 13–28 · Community KES 600 · Standard KES 1,500 · Sponsor KES 3,000 per session</div>
+        <p class="uc-desc">A safe place to be heard and to think clearly, with someone in your corner. Three steps: sign the agreement, choose your tier, book your session.</p>
+        <div class="uc-links"><a class="uc-link" href="mentoring.html">See how it works &amp; fees →</a></div>
+      </div>
       <div class="uc-card">
-        <div class="uc-pill pill-c2">September 2026</div>
+        <div class="uc-pill pill-c2">Waitlist open</div>
         <div class="uc-icon">✦</div>
         <div class="uc-title">Identity & Purpose<br><em>Seminar — Cohort 2</em></div>
         <p class="uc-desc">The same three-day online framework that transformed Cohort 1. Who am I? What do I stand for? Where am I going? Three deliverables. One direction that is finally yours.</p>
@@ -491,11 +350,14 @@
   </div>
 </section>
 
-<!-- QUOTE -->
-<section class="quote-strip">
-  <div class="qs-inner">
-    <div class="qs-quote">"I was that teenager looking around the room, wondering who to talk to. That itch never left me — and it became the reason I built <em>Thrive.</em>"</div>
-    <div class="qs-attr">— Janet Oyende-Kariuki · Thrive Coach</div>
+<!-- MORE FROM THRIVE -->
+<section class="more-strip">
+  <div class="more-inner">
+    <div class="section-label">More from Thrive</div>
+    <a href="resources.html">Articles</a>
+    <a href="promises.html">22 Bible Promises</a>
+    <a href="formulae.html">Weekly Formulae</a>
+    <a href="about.html">About Thrive</a>
   </div>
 </section>
 
@@ -518,14 +380,28 @@
   </div>
 </section>
 
+<!-- SCOPE & DISCLAIMER -->
+<section class="scope-section" id="scope">
+  <div class="scope-inner">
+    <div class="section-label">Scope &amp; disclaimer</div>
+    <h2 class="section-heading">What mentoring is &mdash; and what it <em>isn&rsquo;t.</em></h2>
+    <p class="section-sub" style="margin-bottom:28px">Thrive offers non-judgmental listening, goal-setting, support through personal challenges, resilience-building, and help with career and life transitions. It does not offer clinical therapy, diagnosis or crisis counselling. Where deeper support is needed, we refer to licensed professionals. <a href="mentoring.html#scope" style="color:var(--gold);font-weight:500;text-decoration:none">Read the full scope →</a></p>
+    <div class="scope-notice" role="note">
+      <div class="scope-notice-icon" aria-hidden="true">ℹ️</div>
+      <div>
+        <p><strong>Note:</strong> I am a life experience mentor, not a licensed counsellor or psychologist. I do not offer clinical mental health therapy or medical diagnoses. If psychological or clinical mental health support is required, I work alongside or refer to licensed professionals.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CTA FOOTER -->
 <section class="cta-footer">
   <h2>Every young person deserves<br>the chance to <span>Thrive.</span></h2>
   <p>Not just survive. Whether you're a young person carrying hard questions, a parent looking for support, or a church wanting to bring Thrive to your community — you are welcome here.</p>
   <div class="cta-row">
-    <a class="btn-gold" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Reserve a Bootcamp Spot →</a>
-    <a class="btn-outline" href="mailto:teensmentor365@gmail.com?subject=Thrive Cohort 2 Waitlist&body=Hi Janet,%0A%0APlease add me to the Thrive Cohort 2 waitlist.%0A%0AName:%0AAge:%0AWhatsApp number:">Join Cohort 2 Waitlist →</a>
-    <a class="btn-outline" href="programmes.html">See all programmes</a>
+    <a class="btn-gold" href="mentoring.html">Start one-to-one mentoring →</a>
+    <a class="btn-outline" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Reserve a Bootcamp Spot</a>
   </div>
   <div class="verse-footer">"For we are God's handiwork, created in Christ Jesus to do good works." — Ephesians 2:10</div>
 </section>
