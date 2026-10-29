@@ -91,6 +91,11 @@
   .fee-notes { font-size: 14.5px; color: #3d5548; font-weight: 300; line-height: 1.8; max-width: 760px; }
   .fee-notes p + p { margin-top: 10px; } .fee-notes strong { font-weight: 500; color: var(--forest); }
 
+  .review { background: var(--cream); padding: 64px 40px; text-align: center; }
+  .review h2 { font-family: var(--font-display); font-size: clamp(24px, 3vw, 32px); font-weight: 900; margin-bottom: 12px; }
+  .review h2 em { font-style: italic; color: var(--gold); }
+  .review p { font-size: 15.5px; color: #3d5548; font-weight: 300; line-height: 1.8; max-width: 540px; margin: 0 auto 24px; }
+  .review .btn-gold { display: inline-block; }
   .cta { background: var(--forest); padding: 88px 40px; text-align: center; }
   .cta h2 { font-family: var(--font-display); font-size: clamp(30px, 4.5vw, 46px); font-weight: 900; font-style: italic; color: var(--cream); line-height: 1.15; margin-bottom: 16px; }
   .cta p { font-size: 16px; color: rgba(250,246,238,.65); font-weight: 300; line-height: 1.75; max-width: 480px; margin: 0 auto 32px; }
@@ -109,6 +114,7 @@
     section.block, .cta { padding: 60px 20px; }
     .steps, .two, .facts, .tiers { grid-template-columns: 1fr; }
     .notice { padding: 22px 20px; }
+    .review { padding: 48px 20px; }
     footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
   }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
@@ -144,19 +150,19 @@
 <section class="block light" id="start">
   <div class="wrap">
     <h2 class="section-heading">Three steps to your <em>first session.</em></h2>
-    <p class="section-sub">Please complete the agreement before your first session so we can start on time and everyone knows what to expect.</p>
+    <p class="section-sub">Please sign the agreement before your first session so we can start on time and everyone knows what to expect.</p>
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
-        <h3>Read the agreement</h3>
-        <p>It explains what mentoring covers, confidentiality and safety limits, fees, and cancellations. Clients under 18 need a parent or guardian to sign as well. Clients 18 and above sign for themselves.</p>
-        <a class="btn-step" href="https://docs.google.com/document/d/1K3VWHBflxUziXC-NuAw7ZTGqNIjlYKtdZBp4PuU2M9Y/edit?usp=sharing" target="_blank" rel="noopener">Open the agreement</a>
+        <h3>Sign the agreement</h3>
+        <p>Read it and sign online. It explains what mentoring covers, confidentiality and safety limits, fees, and cancellations. Clients under 18 need a parent or guardian to sign as well. Clients 18 and above sign for themselves.</p>
+        <a class="btn-step" href="https://form.jotform.com/262945355951063" target="_blank" rel="noopener">Open the agreement</a>
       </div>
       <div class="step">
         <div class="step-num">2</div>
-        <h3>Sign and return it</h3>
-        <p>Fill in the details, sign, and send it to <a href="mailto:teensmentor365@gmail.com?subject=Signed mentorship agreement">teensmentor365@gmail.com</a> before your first session.</p>
-        <a class="btn-step" href="mailto:teensmentor365@gmail.com?subject=Signed mentorship agreement&amp;body=Hi Janet,%0A%0AAttached is the signed Mentorship Consent Agreement.%0A%0AClient name:%0AParent/guardian name (if under 18):">Email it to Janet</a>
+        <h3>Choose your tier</h3>
+        <p>Pick the tier that fits your own budget: Community, Standard or Sponsor. Tell us which one you chose when you book.</p>
+        <a class="btn-step" href="#fees">See the tiers</a>
       </div>
       <div class="step">
         <div class="step-num">3</div>
@@ -202,12 +208,12 @@
 
 <section class="block cream" id="fees">
   <div class="wrap">
-    <h2 class="section-heading">Fees: choose the tier that is <em>honest for your household.</em></h2>
-    <p class="section-sub">Every tier receives the same mentoring, the same care and the same 50 to 60 minute sessions. The tiers exist so that a young person’s access does not depend on what their family can afford.</p>
+    <h2 class="section-heading">Fees: choose the tier that is <em>honest for your situation.</em></h2>
+    <p class="section-sub">Every tier receives the same mentoring, the same care and the same 50 to 60 minute sessions. The tiers exist so that access does not depend on what a person can afford.</p>
     <div class="tiers">
       <div class="tier community">
         <h3>Community</h3>
-        <p class="who">For families on a tight budget. This is a subsidised rate, so a young person can get the support they need without cost being a barrier.</p>
+        <p class="who">For anyone on a tight budget: a student, a young adult just starting out, or a family stretching to afford support. This is a subsidised rate, so cost is not a barrier.</p>
         <div class="detail"><strong>How it is offered</strong>Through community centres, by online audio call, or as a subsidised spot funded by Sponsor tier bookings.</div>
         <div class="price-label">Single session</div>
         <div class="price">KES 600</div>
@@ -220,21 +226,21 @@
       </div>
       <div class="tier standard">
         <h3>Standard</h3>
-        <p class="who">The everyday rate for most families. It covers the real cost of preparing and delivering each session, and keeps Thrive sustainable.</p>
+        <p class="who">The everyday rate for most clients. It covers the real cost of preparing and delivering each session, and keeps Thrive sustainable.</p>
         <div class="detail"><strong>What it covers</strong>The standard local rate for personal development and academic and life guidance.</div>
         <div class="price-label">Single session</div>
-        <div class="price">KES 2,000</div>
+        <div class="price">KES 1,500</div>
         <div class="path">
           <div class="price-label">4-Session Growth Pathway</div>
-          <div class="price">KES 7,000</div>
+          <div class="price">KES 5,000</div>
           <div class="save">Save KES 1,000 compared with four single sessions</div>
         </div>
         <a class="btn-step gold" href="https://calendar.app.google/jyEYQLGxGt2W6Mp89" target="_blank" rel="noopener">Book a session</a>
       </div>
       <div class="tier sponsor">
         <h3>Sponsor</h3>
-        <p class="who">For families, churches and organisations able to invest more. Sponsor bookings help fund Community spots for young people who could not otherwise afford mentoring.</p>
-        <div class="detail"><strong>What it includes</strong>A premium rate that includes regular progress updates for parents. Updates cover goals, attendance and themes, never the details of what a young person shares in session.</div>
+        <p class="who">For clients, families, churches and organisations able to invest more. Sponsor bookings help fund Community spots for young people who could not otherwise afford mentoring.</p>
+        <div class="detail"><strong>What it includes</strong>A premium rate that includes regular progress updates, shared with a parent, guardian or sponsor of the client’s choosing. For clients 18 and over, updates are shared only with the client’s written consent. They cover goals, attendance and themes, never what is shared in session.</div>
         <div class="price-label">Single session</div>
         <div class="price">KES 3,000</div>
         <div class="path">
@@ -248,7 +254,7 @@
     <div class="fee-notes">
       <p><strong>The Growth Pathway</strong> is four sessions with a clear focus: you set a goal in the first session, and we work towards it together across the four.</p>
       <p><strong>How to pay:</strong> by M-Pesa Till Number. The Till Number is in your booking confirmation and in the agreement. Payment is due before or at the time of the session.</p>
-      <p><strong>Choosing a tier:</strong> please tell us which tier you have chosen when you book. If you are unsure, write to us and we will talk it through.</p>
+      <p><strong>Choosing a tier:</strong> choose what fits your own budget. If you are under 18, a parent or guardian can help you decide. Please tell us which tier you chose when you book, and if you are unsure, write to us and we will talk it through.</p>
     </div>
   </div>
 </section>
@@ -260,10 +266,16 @@
     <div class="facts">
       <div class="fact"><h3>Sessions</h3><p>Standard sessions run 50 to 60 minutes. Fees are set out in the Fees section above and in the agreement. Payment is by M-Pesa Till Number.</p></div>
       <div class="fact"><h3>Cancelling or rescheduling</h3><p>Please give at least 24 hours’ notice. Late cancellations or missed sessions without notice may be charged at the standard rate.</p></div>
-      <div class="fact"><h3>Confidentiality</h3><p>What is shared stays between mentor and client, except where there is a risk of harm to self or others, abuse or serious neglect, or a legal requirement. For clients under 18, parents or guardians are contacted promptly when safety concerns arise. Parent progress updates (Sponsor tier) share goals, attendance and themes only.</p></div>
+      <div class="fact"><h3>Confidentiality</h3><p>What is shared stays between mentor and client, except where there is a risk of harm to self or others, abuse or serious neglect, or a legal requirement. For clients under 18, parents or guardians are contacted promptly when safety concerns arise. Progress updates (Sponsor tier) cover goals, attendance and themes only. For clients 18 and over they are shared with others only with the client’s written consent.</p></div>
       <div class="fact"><h3>Between sessions</h3><p>Short scheduling messages by WhatsApp or call are welcome between 8:00 AM and 6:00 PM. Mentoring and crisis support are not offered by text or outside session times.</p></div>
     </div>
   </div>
+</section>
+
+<section class="review" id="review">
+  <h2>Finished your sessions? <em>Tell us how it went.</em></h2>
+  <p>Past clients and parents: your honest review helps the next young person take their first step. It takes about five minutes.</p>
+  <a class="btn-gold" href="https://form.jotform.com/263016044935050" target="_blank" rel="noopener">Share your experience</a>
 </section>
 
 <section class="cta">
