@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thrive Teen Mentorship Bootcamp — Nov 29 – Dec 3, 2026</title>
-<meta name="description" content="A 5-day residential mentorship bootcamp for high schoolers (ages 15–18) from November 29 to December 3, 2026. Scripture, real talk, mentors, and lifelong decisions.">
+<meta name="description" content="A 5-day residential mentorship bootcamp for high schoolers (ages 14–18) from November 29 to December 3, 2026 at Nkoroi, Kajiado. Scripture, real talk, mentors, and lifelong decisions.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -141,19 +141,22 @@
   .pc-body{font-size:14.5px;color:#3a4956;line-height:1.65;}
 
   /* ---- MENTORS ---- */
-  .mentors-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;}
-  .mentor-card{background:var(--white);border:1px solid #d8dee2;border-radius:16px;padding:28px 26px;display:flex;flex-direction:column;}
-  .mentor-header{display:flex;align-items:center;gap:14px;margin-bottom:16px;}
+  .mentors-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:24px;}
+  .mentor-card{background:var(--white);border:1px solid #d8dee2;border-radius:16px;padding:24px 24px 26px;display:flex;flex-direction:column;}
+  .mentor-frame{
+    width:100%;height:270px;border-radius:12px;overflow:hidden;margin-bottom:18px;
+    background:#eef2f5;border:1px solid #e2e6e8;position:relative;
+  }
   .mentor-photo{
-    width:68px;height:68px;border-radius:50%;object-fit:cover;object-position:center top;
-    border:2px solid var(--med-blue);flex-shrink:0;background:#eef2f5;
+    width:100%;height:100%;object-fit:cover;object-position:center top;display:block;
   }
-  .mentor-avatar{
-    width:68px;height:68px;border-radius:50%;background:var(--dark-blue);color:var(--cyan);
-    font-family:var(--font-display);font-weight:900;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  .mentor-avatar-large{
+    width:100%;height:100%;background:var(--dark-blue);color:var(--cyan);
+    font-family:var(--font-display);font-weight:900;font-size:42px;
+    display:flex;align-items:center;justify-content:center;
   }
-  .mentor-name{font-family:var(--font-display);font-weight:900;font-size:19px;color:var(--dark-blue);line-height:1.2;}
-  .mentor-role{font-family:var(--font-caption);font-size:12.5px;font-weight:600;color:var(--med-blue);margin-top:3px;}
+  .mentor-name{font-family:var(--font-display);font-weight:900;font-size:20px;color:var(--dark-blue);line-height:1.2;}
+  .mentor-role{font-family:var(--font-caption);font-size:13px;font-weight:600;color:var(--med-blue);margin-top:4px;margin-bottom:14px;}
   .mentor-bio{font-size:14.5px;color:#3a4956;line-height:1.68;}
   .mentor-bio p{margin-bottom:10px;}
   .mentor-bio p:last-child{margin-bottom:0;}
@@ -171,10 +174,10 @@
 
   .venue-banner{
     background:rgba(45,161,235,.09);border:1.5px solid var(--med-blue);border-radius:14px;
-    padding:22px 26px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+    padding:24px 26px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
   }
-  .venue-banner strong{color:var(--dark-blue);font-size:16px;display:block;margin-bottom:4px;}
-  .venue-banner p{font-size:14.5px;color:#3a4956;max-width:66ch;}
+  .venue-banner strong{color:var(--dark-blue);font-size:16.5px;display:block;margin-bottom:6px;}
+  .venue-banner p{font-size:14.5px;color:#3a4956;max-width:68ch;line-height:1.65;}
 
   /* ---- QUOTE STRIP ---- */
   .quote-strip{background:var(--dark-blue);padding:76px 0;text-align:center;}
@@ -219,7 +222,7 @@
   /* ---- FOOTER ---- */
   footer{background:var(--white);border-top:1px solid #e2e6e8;padding:48px 0 28px;}
   .footer-inner{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:40px;margin-bottom:36px;}
-  .footer-logo{font-family:var(--font-display);font-weight:900;font-size:20px;color:var(--dark-blue);margin-bottom:10px;}
+  .footer-logo{display:inline-block;font-family:var(--font-display);font-weight:900;font-size:20px;color:var(--dark-blue);text-decoration:none;margin-bottom:10px;}
   .footer-logo span{color:var(--med-blue);}
   .footer-brand p{font-family:var(--font-caption);font-size:13px;color:#66747f;line-height:1.7;max-width:260px;}
   .footer-col h4{font-family:var(--font-caption);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--med-blue);margin-bottom:14px;}
@@ -251,7 +254,7 @@
 <body>
 
 <nav>
-  <a class="nav-logo" href="#top">Thrive<span>.</span></a>
+  <a class="nav-logo" href="https://thrivecoach365.github.io/" aria-label="Thrive Homepage">Thrive<span>.</span></a>
   <div class="nav-links">
     <a href="#program">The Program</a>
     <a href="#mentors">Mentors</a>
@@ -266,17 +269,17 @@
 <section class="hero" id="top">
   <div class="wrap">
     <div class="hero-inner">
-      <div class="hero-eyebrow">Teen Mentorship Bootcamp · High Schoolers (Ages 15–18)</div>
+      <div class="hero-eyebrow">Teen Mentorship Bootcamp · High Schoolers (Ages 14–18)</div>
       <h1>Five days of mentors, real talk, and decisions that <em>last.</em></h1>
-      <p class="hero-lead">Registration is now open for our November 2026 High School Bootcamp. Built around Scripture, dedicated mentors, and honest conversation about identity, friendships, family, social media, and the choices shaping your teen's future.</p>
+      <p class="hero-lead">Registration is now open for our November 2026 High School Bootcamp at Nkoroi, Kajiado. Built around Scripture, dedicated mentors, and honest conversation about identity, friendships, family, social media, and the choices shaping your teen's future.</p>
       <div class="hero-actions">
         <a class="btn-primary" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Register on Jotform →</a>
         <a class="btn-outline" href="#info-pack">Participant Info Pack</a>
       </div>
       <div class="hero-facts">
         <div class="fact"><div class="fact-label">Dates</div><div class="fact-value">Nov 29 – Dec 3, 2026</div></div>
-        <div class="fact"><div class="fact-label">Who it's for</div><div class="fact-value">High School · Ages 15–18</div></div>
-        <div class="fact"><div class="fact-label">Venue</div><div class="fact-value">Finalizing (Greater Nairobi)</div></div>
+        <div class="fact"><div class="fact-label">Who it's for</div><div class="fact-value">High School · Ages 14–18</div></div>
+        <div class="fact"><div class="fact-label">Venue</div><div class="fact-value">Nkoroi, Kajiado</div></div>
         <div class="fact"><div class="fact-label">All-Inclusive Fee</div><div class="fact-value">KES 7,000</div></div>
       </div>
     </div>
@@ -397,15 +400,27 @@
     <p class="section-sub">Every participant is placed in a small group led by vetted, experienced mentors who love God and know how to listen, challenge, and encourage teenagers.</p>
 
     <div class="mentors-grid">
+      <!-- Faith Gor -->
+      <div class="mentor-card">
+        <div class="mentor-frame">
+          <img class="mentor-photo" src="Faith Gor.jpg" alt="Portrait of Faith Gor">
+        </div>
+        <div class="mentor-name">Faith Gor</div>
+        <div class="mentor-role">Counselling Psychologist · Child &amp; Adolescent Therapist · Mentor</div>
+        <div class="mentor-bio">
+          <p>Faith is a Counselling Psychologist, Child &amp; Adolescent therapist, and mentor who blends psychology, lived experience, and a warm, faith-based approach to help young people navigate identity, emotions, relationships, and life choices without judgment.</p>
+          <p>Having supported individuals through trauma, grief, and life transitions—and partnered with parents to strengthen connection at home—she makes mental health practical and accessible. Her guiding belief is simple: teens don't need perfect adults, just present ones willing to listen and walk alongside them.</p>
+        </div>
+        <div class="mentor-tag">Focus: Child &amp; Adolescent Therapy, Emotional Health &amp; Parent-Teen Connection</div>
+      </div>
+
       <!-- Janet Oyende-Kariuki -->
       <div class="mentor-card">
-        <div class="mentor-header">
-          <img class="mentor-photo" src="DSC_0742.jpg" alt="Portrait of Janet Oyende-Kariuki">
-          <div>
-            <div class="mentor-name">Janet Oyende-Kariuki</div>
-            <div class="mentor-role">Communications, PR &amp; Alumni Engagement · Youth Mentor</div>
-          </div>
+        <div class="mentor-frame">
+          <img class="mentor-photo" src="DSC_0741.jpg" alt="Portrait of Janet Oyende-Kariuki">
         </div>
+        <div class="mentor-name">Janet Oyende-Kariuki</div>
+        <div class="mentor-role">Communications, PR &amp; Alumni Engagement · Youth Mentor</div>
         <div class="mentor-bio">
           <p>Janet is passionate about helping young people discover who they are in Christ and live with purpose, believing every teen has unique gifts, a meaningful calling, and the potential to make a difference right where they are.</p>
           <p>She serves at the Adventist University of Africa in communications, public relations, and alumni engagement, bringing a background in Information Technology and ICT for Development, university teaching, mentorship program design, and community leadership.</p>
@@ -416,13 +431,11 @@
 
       <!-- Joseph Kongoro -->
       <div class="mentor-card">
-        <div class="mentor-header">
+        <div class="mentor-frame">
           <img class="mentor-photo" src="Joseph Kongoro Portrait.jpg" alt="Portrait of Joseph Kongoro">
-          <div>
-            <div class="mentor-name">Joseph Kongoro</div>
-            <div class="mentor-role">Ordained Elder · Managing Partner, Verge Advisory Partners LLP</div>
-          </div>
         </div>
+        <div class="mentor-name">Joseph Kongoro</div>
+        <div class="mentor-role">Ordained Elder · Managing Partner, Verge Advisory Partners LLP</div>
         <div class="mentor-bio">
           <p>Joseph loves God deeply and wants to live his life entirely for Him across work, community, and home. An ordained elder and passionate youth mentor, he serves as Managing Partner of Verge Advisory Partners LLP (formerly a manager at Ernst &amp; Young) and has previously served on the Board of eMentoring Africa and with Aiducation International – Kenya.</p>
           <p>He is married to Felice Muluphi, with two children, Josiah and Grace, and enjoys meeting people, nature walks, and swimming.</p>
@@ -432,13 +445,11 @@
 
       <!-- Migok Misawo -->
       <div class="mentor-card">
-        <div class="mentor-header">
+        <div class="mentor-frame">
           <img class="mentor-photo" src="Migok Musawo Portrait.jpeg" alt="Portrait of Migok Misawo">
-          <div>
-            <div class="mentor-name">Migok Misawo</div>
-            <div class="mentor-role">Counselling Practitioner · Certified Clarity 4D Coach</div>
-          </div>
         </div>
+        <div class="mentor-name">Migok Misawo</div>
+        <div class="mentor-role">Counselling Practitioner · Certified Clarity 4D Coach</div>
         <div class="mentor-bio">
           <p>Migok brings a decade of experience mentoring, training, and empowering individuals—especially teenagers and families—with postgraduate training in Psychology, counselling, emotional intelligence, and Clarity 4D communication coaching.</p>
           <p>He specialises in childhood trauma healing, substance-use and addiction recovery, grief and loss, child therapy, parent-child reconciliation, healthy relationships, and behaviour change rooted in Christ.</p>
@@ -446,30 +457,13 @@
         <div class="mentor-tag">Focus: Emotional Wellbeing, Healing &amp; Behaviour Change</div>
       </div>
 
-      <!-- Faith Gor -->
-      <div class="mentor-card">
-        <div class="mentor-header">
-          <div class="mentor-avatar">FG</div>
-          <div>
-            <div class="mentor-name">Faith Gor</div>
-            <div class="mentor-role">Bootcamp Mentor</div>
-          </div>
-        </div>
-        <div class="mentor-bio">
-          <p>Faith Gor serves on the Thrive mentorship team for the Teen Bootcamp.</p>
-        </div>
-        <div class="mentor-tag">Thrive Mentorship Team</div>
-      </div>
-
       <!-- James Theuri -->
       <div class="mentor-card">
-        <div class="mentor-header">
-          <div class="mentor-avatar">JT</div>
-          <div>
-            <div class="mentor-name">James Theuri</div>
-            <div class="mentor-role">Bootcamp Mentor</div>
-          </div>
+        <div class="mentor-frame">
+          <div class="mentor-avatar-large">JT</div>
         </div>
+        <div class="mentor-name">James Theuri</div>
+        <div class="mentor-role">Bootcamp Mentor</div>
         <div class="mentor-bio">
           <p>James Theuri serves on the Thrive mentorship team for the Teen Bootcamp.</p>
         </div>
@@ -484,12 +478,12 @@
   <div class="wrap">
     <div class="section-label">Participant Information Pack</div>
     <h2 class="section-heading">Everything parents &amp; campers need to <em>know.</em></h2>
-    <p class="section-sub">Key logistics, check-in schedules, our device policy, and what to pack for the five days.</p>
+    <p class="section-sub">Confirmed venue details, parent safety assurances, check-in schedules, our device policy, and what to pack for the five days.</p>
 
     <div class="venue-banner" style="margin-bottom:28px;">
       <div>
-        <strong>📍 Venue Confirmation Update</strong>
-        <p>We are finalizing the camp venue and will share full location and arrival details with registered families as soon as confirmed.</p>
+        <strong>📍 Venue &amp; Parent Safety Assurance — Nkoroi, Kajiado</strong>
+        <p>We are hosting at a comfortable, well-secured residential home in <strong>Nkoroi, Kajiado</strong> suited to a focused, small-group bootcamp. Parents are assured of a protected, closely supervised environment with vetted mentors, continuous adult/staff oversight, "Phone Hotel" accountability, and a 24/7 camp-office emergency line shared with registered families.</p>
       </div>
       <a class="btn-primary" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Register Now</a>
     </div>
@@ -499,11 +493,12 @@
       <div class="pack-card">
         <h3>🗓️ Arrival, Check-Out &amp; Meals</h3>
         <ul class="pack-list">
+          <li><strong>Venue:</strong> Residential home in Nkoroi, Kajiado (exact pin &amp; directions shared with registered families).</li>
           <li><strong>Check-In:</strong> Day 1 (Sunday, Nov 29, 2026) afternoon arrival from 2:00 PM.</li>
           <li><strong>Check-Out:</strong> Day 5 (Thursday, Dec 3, 2026) following closing lunch, from 1:45 PM.</li>
           <li><strong>Meals Included:</strong> 12 meals (Day 1 dinner through Day 5 lunch) plus snacks, scheduled at least five hours apart.</li>
           <li><strong>Dietary Needs:</strong> Dietary restrictions and allergies collected at registration are accommodated.</li>
-          <li><strong>Accommodation:</strong> Residential cabins/dorms with mentor small groups of 6–8.</li>
+          <li><strong>Accommodation:</strong> Residential rooms/cabins with mentor small groups of 6–8.</li>
         </ul>
       </div>
 
@@ -511,10 +506,11 @@
       <div class="pack-card">
         <h3>📵 "Phone Hotel" &amp; Safety Protocol</h3>
         <ul class="pack-list">
+          <li><strong>Secured Setting:</strong> Well-secured residential property in Nkoroi, Kajiado designed for calm, focused group life.</li>
           <li><strong>Device-Free Week:</strong> Phones and personal gadgets are collected, logged, and stored at check-in ("Phone Hotel").</li>
           <li><strong>Re-Entry Debrief:</strong> Devices are returned at check-out on Day 5 after the closing lunch with a short re-entry conversation.</li>
           <li><strong>24/7 Emergency Contact:</strong> Parents/guardians receive a direct camp-office emergency number prior to camp.</li>
-          <li><strong>Safeguarding:</strong> Background checks, child-protection training for staff/volunteers, and first-aid/medical readiness.</li>
+          <li><strong>Safeguarding:</strong> Vetted mentors, child-protection &amp; safeguarding standards, and first-aid/medical readiness throughout.</li>
         </ul>
       </div>
 
@@ -523,9 +519,13 @@
         <h3>🎒 Camper Packing Checklist</h3>
         <ul class="pack-list">
           <li>Bible, journal, and pen</li>
-          <li>Comfortable athletic and work clothing, and closed-toe shoes</li>
+          <li>Comfortable athletic and work clothing, plus a warm layer for cool mornings and evenings</li>
+          <li>Closed-toe shoes suitable for walking, camp chores, and outdoor activities</li>
           <li>Weather-appropriate outdoor gear (early December can bring short rains)</li>
-          <li>Toiletries and a reusable water bottle</li>
+          <li>A reusable water bottle</li>
+          <li>Toiletries and bath towel</li>
+          <li><strong>Bed Linen:</strong> Bed sheets and pillowcase for a comfortable four-night stay</li>
+          <li>Any prescribed medications (clearly labeled to hand to staff at check-in)</li>
         </ul>
       </div>
 
@@ -563,15 +563,16 @@
           <div class="price-tag">per participant · Teen Bootcamp</div>
         </div>
         <div class="price-body">
-          <div class="price-dates">November 29 – December 3, 2026 · Ages 15–18</div>
+          <div class="price-dates">November 29 – December 3, 2026 · Ages 14–18 · Nkoroi, Kajiado</div>
           <p>Lodging, meals, and materials included. Spots are limited to protect the mentor-to-camper ratio.</p>
           <a class="btn-primary" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Complete Registration Form →</a>
         </div>
       </div>
 
       <div class="scholarship-note">
-        <strong>Need-Based Support</strong>
-        <p style="margin-bottom:14px;">If cost is the only thing standing in the way, say so on the form. A share of spots is set aside for those who need it — no one is turned away for finances.</p>
+        <strong>Walking Together on Costs</strong>
+        <p style="margin-bottom:14px;">Every shilling of this bootcamp goes straight toward giving high schoolers five days of Scripture, mentorship, and honest growth on a tight budget. We encourage families who can to register at the full <strong>KES 7,000</strong> fee, and if you are able and moved to give more, your generosity helps carry the cost of mentoring the next generation.</p>
+        <p style="margin-bottom:14px;">At the same time, if your family faces a truly dire, very needy situation, share that on the form and we will reach out with compassion.</p>
         <p>Questions? WhatsApp <a href="https://wa.me/254717585709" target="_blank" rel="noopener" style="color:var(--dark-blue);font-weight:600;">+254 717 585709</a>.</p>
       </div>
     </div>
@@ -586,17 +587,27 @@
 
     <details>
       <summary>How do I register?</summary>
-      <p class="faq-answer">Use the Jotform registration link on this page (<a href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">form.jotform.com/262450461253047</a>) to reserve a spot for the Teen Bootcamp (November 29 – December 3, 2026).</p>
+      <p class="faq-answer">Use the Jotform registration link on this page (<a href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">form.jotform.com/262450461253047</a>) to reserve a spot for the Teen Bootcamp (November 29 – December 3, 2026 at Nkoroi, Kajiado, open to teens aged 14–18).</p>
     </details>
 
     <details>
-      <summary>Is my teen safe without a phone for the week?</summary>
-      <p class="faq-answer">Every mentor and volunteer is background-checked. A staff member is on the camp-office line at all times for real emergencies, and mentors are told to interrupt any session if a message comes through.</p>
+      <summary>Is my teen safe at the venue and without a phone for the week?</summary>
+      <p class="faq-answer">Yes. The bootcamp takes place at a well-secured residential home in Nkoroi, Kajiado with vetted mentors, continuous supervision, and safeguarding protocols. Phones are held safely in the "Phone Hotel," and a staff member monitors the camp-office emergency line at all times.</p>
     </details>
 
     <details>
       <summary>What if there's a family emergency during the week?</summary>
-      <p class="faq-answer">Devices are stored, not destroyed. Families get a direct camp-office number before drop-off, reachable at any hour.</p>
+      <p class="faq-answer">Devices are stored, not destroyed. Families get a direct camp-office number before drop-off, reachable at any hour, and mentors will interrupt sessions if an urgent message comes through.</p>
+    </details>
+
+    <details>
+      <summary>What if my teen has dietary restrictions, allergies, or takes medication?</summary>
+      <p class="faq-answer">Please note all allergies, dietary needs, and medical details on the registration form so our team can plan well. Any prescribed medications should be clearly labeled and handed over to designated staff at check-in for safe administration.</p>
+    </details>
+
+    <details>
+      <summary>What does a typical day look like—and how are groups formed?</summary>
+      <p class="faq-answer">Days combine Scripture teaching, mentor small groups of 6–8 teens, morning movement and practical work blocks, rest, and evening worship/campfire time. Small groups and rooms are thoughtfully arranged by our leadership team to support healthy connection and care.</p>
     </details>
 
     <details>
@@ -605,8 +616,8 @@
     </details>
 
     <details>
-      <summary>What if we can't afford the fee right now?</summary>
-      <p class="faq-answer">Tell us on the form. A share of spots is set aside specifically for those who need it.</p>
+      <summary>What if our family is in a very needy situation—or we can give more?</summary>
+      <p class="faq-answer">We encourage families who can to register at the full KES 7,000 fee so we can keep costs lean and sustainable. If you are able and moved to give more, an extra contribution helps support young people across the camp—and if your family faces a truly dire, very needy situation, please share that on the form so we can reach out with compassion.</p>
     </details>
   </div>
 </section>
@@ -615,7 +626,7 @@
 <section class="cta-footer">
   <div class="cta-footer-inner">
     <h2>Teen Bootcamp · <span>Nov 29 – Dec 3, 2026.</span></h2>
-    <p>High schoolers (ages 15–18) · KES 7,000 all-inclusive. Reserve a spot on Jotform today.</p>
+    <p>High schoolers (ages 14–18) · Nkoroi, Kajiado · KES 7,000 all-inclusive. Reserve a spot on Jotform today.</p>
     <a class="btn-inverse" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Register on Jotform →</a>
     <div class="verse-footer">"As iron sharpens iron, so one person sharpens another." — Proverbs 27:17</div>
   </div>
@@ -625,7 +636,7 @@
 <footer>
   <div class="wrap footer-inner">
     <div class="footer-brand">
-      <div class="footer-logo">Thrive<span>.</span></div>
+      <a class="footer-logo" href="https://thrivecoach365.github.io/" aria-label="Thrive Homepage">Thrive<span>.</span></a>
       <p>Discipling teens and young adults through mentorship, Scripture, and real conversation.</p>
     </div>
     <div class="footer-col">
@@ -640,7 +651,7 @@
       <h4>Contact</h4>
       <a href="mailto:teensmentor365@gmail.com">teensmentor365@gmail.com</a>
       <span>WhatsApp: +254 717 585709</span>
-      <a href="index.html">About Thrive</a>
+      <a href="https://thrivecoach365.github.io/">Thrive Homepage</a>
     </div>
   </div>
   <div class="wrap footer-bottom">
