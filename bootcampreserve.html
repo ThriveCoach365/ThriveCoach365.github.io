@@ -1,542 +1,474 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thrive Teen Mentorship Bootcamp — Nov 29 – Dec 3, 2026</title>
-<meta name="description" content="A 5-day residential mentorship bootcamp for high schoolers (ages 14–18) from November 29 to December 3, 2026 at Nkoroi, Kajiado. Scripture, real talk, mentors, and lifelong decisions.">
+<title>Teen Bootcamp 2026 — Reserve a Spot · Thrive</title>
+<meta name="description" content="A five-day residential mentorship bootcamp for high schoolers, 29 November to 3 December 2026 in Nkoroi, Kajiado. Scripture, mentors, and honest conversation. KES 7,000 until 25 November.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!--
+  BEFORE PUBLISHING — items marked with a yellow "ADD" tag on the page:
+  1. James Theuri's bio and photo (yellow ADD tag in the mentors section).
+  2. Confirm ages, dates and venue against the Thrive website home page (see the gaps list).
+  The M-Pesa Till number (5526724) is taken from the live Jotform registration form.
+  Mentor photos load from the same folder: Faith Gor.jpg, DSC_0741.jpg, Joseph Kongoro Portrait.jpg, Migok Musawo Portrait.jpeg
+  Early-bird cut-off and registration close are set in the script at the bottom (25 and 27 Nov 2026, 11:59 PM East Africa Time).
+  The refund and transfer policy in the Investment section is a draft: the Thrive team should approve it before publishing.
+  Drop-off arrangements are not final: see the two places marked 'drop-off' (info pack card and FAQ).
+-->
 <style>
-  :root{
-    --dark-blue:#005da0;
-    --med-blue:#2da1eb;
-    --cyan:#8febff;
-    --gray:#e1e3e3;
-    --ink:#152230;
-    --bg:#fbfcfc;
-    --white:#ffffff;
-    --font-display:'Playfair Display',Georgia,serif;
-    --font-body:'DM Sans',sans-serif;
-    --font-quote:'Playfair Display',serif;
-    --font-caption:'DM Sans',sans-serif;
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    /* Thrive Teen Bootcamp blue palette (role names kept from the Thrive site stylesheet) */
+    --gold: #2da1eb;        /* medium blue: accents */
+    --gold-light: #8febff;  /* cyan: highlights on dark */
+    --forest: #005da0;      /* dark blue: headings, dark sections */
+    --sage: #3a4956;        /* slate: secondary text */
+    --cream: #f2f6f9;       /* light tint for cards */
+    --warm-white: #fbfcfc;
+    --gray: #e1e3e3;
+    --ink: #152230;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
   }
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-  html{scroll-behavior:smooth;}
-  body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
-  a{color:inherit;}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 40px;}
-  .band{padding:92px 0;}
-  .band-alt{background:var(--gray);}
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--warm-white); color: var(--ink); overflow-x: hidden; line-height: 1.6; }
+  a { color: inherit; }
 
-  /* ---- shared type patterns ---- */
-  .section-label{
-    font-family:var(--font-caption);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-    color:var(--med-blue);margin-bottom:14px;display:flex;align-items:center;gap:10px;
+  /* NAV (as on the Thrive site) */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 40px; background: rgba(251,252,252,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(45,161,235,0.15); }
+  .nav-logo { font-family: var(--font-display); font-size: 22px; font-weight: 900; color: var(--forest); text-decoration: none; letter-spacing: -0.5px; }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--sage); text-decoration: none; transition: color .2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--forest); }
+  .nav-cta { background: var(--forest); color: #fff; font-family: var(--font-body); font-size: 13px; font-weight: 500; padding: 10px 22px; border-radius: 99px; text-decoration: none; transition: background .2s; }
+  .nav-cta:hover { background: #00477a; }
+
+  /* shared */
+  .inner { max-width: 1100px; margin: 0 auto; }
+  .section { padding: 96px 40px; }
+  .section.cream { background: var(--gray); }
+  .section-label { font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .section-label::before { content: ''; display: block; width: 20px; height: 1px; background: var(--gold); }
+  .section-heading { font-family: var(--font-display); font-size: clamp(28px, 3.5vw, 44px); font-weight: 900; line-height: 1.1; color: var(--forest); letter-spacing: -.5px; margin-bottom: 14px; }
+  .section-heading em { font-style: italic; color: var(--gold); }
+  .section-sub { font-size: 16px; color: #3a4956; line-height: 1.85; font-weight: 300; max-width: 620px; margin-bottom: 48px; }
+  .btn-gold { display: inline-block; background: var(--forest); color: #fff; font-family: var(--font-body); font-size: 14px; font-weight: 500; padding: 14px 30px; border-radius: 99px; text-decoration: none; transition: background .2s, transform .15s; }
+  .btn-gold:hover { background: #00477a; transform: translateY(-1px); }
+  .btn-outline { display: inline-block; background: transparent; color: var(--cream); font-family: var(--font-body); font-size: 14px; font-weight: 500; padding: 13px 24px; border-radius: 99px; border: 1.5px solid rgba(251,252,252,.25); text-decoration: none; transition: border-color .2s; }
+  .btn-outline:hover { border-color: rgba(251,252,252,.6); }
+  .btn-white { display: inline-block; background: #fff; color: var(--forest); font-family: var(--font-body); font-size: 14px; font-weight: 500; padding: 14px 30px; border-radius: 99px; text-decoration: none; transition: background .2s; white-space: nowrap; }
+  .btn-white:hover { background: var(--cream); }
+  .hero .btn-gold, .cta-footer .btn-gold { background: var(--gold-light); color: var(--forest); }
+  .hero .btn-gold:hover, .cta-footer .btn-gold:hover { background: #fff; }
+  .todo { background: #FFF1B8; color: #5b4300; border: 1px dashed #c9963a; border-radius: 4px; padding: 0 6px; font-weight: 500; font-size: .92em; }
+
+  /* HERO */
+  .hero { background: var(--forest); padding: 140px 40px 88px; position: relative; overflow: hidden; }
+  .hero::before { content: 'THRIVE'; position: absolute; font-family: var(--font-display); font-size: 300px; font-weight: 900; font-style: italic; color: rgba(255,255,255,0.025); top: 50%; left: 50%; transform: translate(-50%,-50%); white-space: nowrap; pointer-events: none; letter-spacing: -12px; }
+  .hero-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.15fr .85fr; gap: 64px; align-items: center; position: relative; z-index: 1; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 20px; }
+  .hero-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+  .hero h1 { font-family: var(--font-display); font-size: clamp(38px, 5vw, 58px); font-weight: 900; line-height: 1.06; color: var(--cream); letter-spacing: -1.5px; margin-bottom: 22px; }
+  .hero h1 em { font-style: italic; color: var(--gold-light); }
+  .hero-lead { font-size: 17px; color: rgba(251,252,252,.7); line-height: 1.85; font-weight: 300; max-width: 520px; margin-bottom: 36px; }
+  .hero-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .hero-right { display: flex; flex-direction: column; gap: 10px; }
+  .fact-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 16px 20px; display: flex; align-items: center; gap: 14px; }
+  .fc-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(45,161,235,.15); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .fc-title { font-size: 14px; font-weight: 500; color: var(--cream); margin-bottom: 2px; }
+  .fc-desc { font-size: 12.5px; color: rgba(251,252,252,.55); line-height: 1.45; }
+  .fact-card.fee { border-color: rgba(45,161,235,.45); background: rgba(45,161,235,.1); }
+
+  /* EARLY-BIRD STRIP */
+  .strip { background: var(--gold); padding: 28px 40px; }
+  .strip-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+  .strip-text { font-family: var(--font-display); font-size: clamp(18px, 2.5vw, 26px); font-weight: 900; font-style: italic; color: #fff; line-height: 1.2; }
+  .strip-sub { font-size: 13.5px; color: #fff; font-weight: 500; margin-top: 4px; }
+  .is-late .only-early { display: none; }
+  html:not(.is-late) .only-late { display: none; }
+  .is-closed .only-late { display: none; }
+  html:not(.is-closed) .only-closed { display: none; }
+  .policy { background: #fff; border: 1px solid rgba(45,161,235,.25); border-radius: 16px; padding: 28px 30px; margin-top: 28px; }
+  .policy h3 { font-family: var(--font-display); font-size: 21px; font-weight: 900; color: var(--forest); margin-bottom: 8px; }
+  .policy > p { font-size: 14.5px; color: #3a4956; font-weight: 300; line-height: 1.8; margin-bottom: 12px; max-width: 70ch; }
+  .policy ul { list-style: none; }
+  .policy li { font-size: 14.5px; color: #3a4956; font-weight: 300; line-height: 1.75; padding: 10px 0 10px 22px; border-top: 1px solid rgba(21,34,48,.08); position: relative; }
+  .policy li::before { content: ''; position: absolute; left: 0; top: 21px; width: 10px; height: 2px; background: var(--gold); }
+  .policy li strong { font-weight: 600; color: var(--forest); }
+
+  /* DAYS */
+  .days-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 48px; }
+  .day-card { background: var(--cream); border: 1px solid rgba(45,161,235,.14); border-top: 3px solid var(--gold); border-radius: 14px; padding: 20px 16px; }
+  .day-num { font-size: 10.5px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .day-title { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--forest); line-height: 1.25; margin-bottom: 8px; }
+  .day-desc { font-size: 13px; color: #3a4956; line-height: 1.65; font-weight: 300; }
+  .program-split { display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; align-items: start; margin-bottom: 48px; }
+  .box { background: var(--cream); border: 1px solid rgba(45,161,235,.14); border-radius: 16px; padding: 30px 28px; }
+  .box h3 { font-family: var(--font-display); font-size: 21px; font-weight: 900; color: var(--forest); margin-bottom: 14px; }
+  .topic-list { list-style: none; }
+  .topic-list li { font-size: 14.5px; color: #3a4956; font-weight: 300; padding: 9px 0 9px 22px; border-bottom: 1px solid rgba(21,34,48,.07); position: relative; }
+  .topic-list li:last-child { border-bottom: none; }
+  .topic-list li::before { content: ''; position: absolute; left: 0; top: 19px; width: 10px; height: 1px; background: var(--gold); }
+  .topic-list strong { font-weight: 500; color: var(--forest); }
+  .rhythm { background: var(--forest); border-radius: 16px; padding: 30px 26px; }
+  .rhythm h3 { font-family: var(--font-display); font-size: 21px; font-weight: 900; color: var(--cream); margin-bottom: 6px; }
+  .rhythm-sub { font-size: 13.5px; color: rgba(251,252,252,.55); font-weight: 300; margin-bottom: 18px; }
+  .rhythm-row { display: flex; gap: 14px; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,.08); font-size: 13.5px; }
+  .rhythm-row:last-child { border-bottom: none; }
+  .rhythm-time { font-weight: 500; color: var(--gold-light); min-width: 112px; font-size: 12.5px; }
+  .rhythm-act { color: rgba(251,252,252,.82); font-weight: 300; }
+  .pillars-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .pillar-card { background: var(--cream); border: 1px solid rgba(45,161,235,.12); border-radius: 16px; padding: 26px 24px; }
+  .pc-icon { font-size: 26px; margin-bottom: 12px; }
+  .pc-title { font-family: var(--font-display); font-size: 19px; font-weight: 700; color: var(--forest); margin-bottom: 8px; }
+  .pc-body { font-size: 14px; color: #3a4956; line-height: 1.75; font-weight: 300; }
+
+  /* MENTORS */
+  .mentors-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 22px; }
+  .mentor-card { background: var(--warm-white); border: 1px solid rgba(21,34,48,.08); border-radius: 18px; padding: 22px 22px 24px; display: flex; flex-direction: column; }
+  .mentor-frame { width: 100%; height: 270px; border-radius: 12px; overflow: hidden; margin-bottom: 18px; background: var(--forest); position: relative; }
+  .mentor-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; position: relative; z-index: 1; }
+  .mentor-initials { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 900; font-style: italic; font-size: 64px; color: rgba(255,255,255,.12); }
+  .mentor-name { font-family: var(--font-display); font-weight: 900; font-size: 20px; color: var(--forest); line-height: 1.2; }
+  .mentor-role { font-size: 12.5px; font-weight: 500; color: var(--gold); margin: 4px 0 14px; }
+  .mentor-bio p { font-size: 14px; color: #3a4956; line-height: 1.75; font-weight: 300; margin-bottom: 10px; }
+  .mentor-bio p:last-child { margin-bottom: 0; }
+  .mentor-tag { margin-top: auto; padding-top: 14px; font-size: 12.5px; font-weight: 500; color: var(--sage); border-top: 1px solid rgba(21,34,48,.08); }
+
+  /* INFO PACK */
+  .venue-banner { background: rgba(45,161,235,.09); border: 1px solid rgba(45,161,235,.4); border-radius: 16px; padding: 24px 26px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 24px; }
+  .venue-banner strong { display: block; font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--forest); margin-bottom: 6px; }
+  .venue-banner p { font-size: 14.5px; color: #3a4956; font-weight: 300; max-width: 66ch; line-height: 1.75; }
+  .pack-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .pack-card { background: var(--cream); border: 1px solid rgba(45,161,235,.14); border-radius: 16px; padding: 26px 26px; }
+  .pack-card h3 { font-family: var(--font-display); font-size: 19px; font-weight: 700; color: var(--forest); margin-bottom: 12px; }
+  .pack-list { list-style: none; }
+  .pack-list li { font-size: 14px; color: #3a4956; font-weight: 300; padding: 8px 0 8px 22px; border-bottom: 1px solid rgba(21,34,48,.07); position: relative; line-height: 1.65; }
+  .pack-list li:last-child { border-bottom: none; }
+  .pack-list li::before { content: '✓'; position: absolute; left: 0; top: 8px; color: var(--gold); font-weight: 500; }
+  .pack-list.leave li::before { content: '✕'; color: #a94438; }
+  .pack-list strong { font-weight: 500; color: var(--forest); }
+
+  /* QUOTE STRIP */
+  .quote-strip { background: var(--forest); padding: 80px 40px; text-align: center; }
+  .qs-inner { max-width: 700px; margin: 0 auto; }
+  .qs-quote { font-family: var(--font-display); font-size: clamp(22px, 3vw, 30px); font-style: italic; color: var(--cream); line-height: 1.45; margin-bottom: 16px; }
+  .qs-attr { font-size: 12px; color: var(--gold-light); font-weight: 500; letter-spacing: .06em; text-transform: uppercase; }
+
+  /* INVESTMENT */
+  .tiers { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 40px; }
+  .tier { background: #fff; border: 1.5px solid rgba(21,34,48,.1); border-radius: 18px; padding: 28px 28px 26px; position: relative; }
+  .tier.early { border-color: var(--gold); box-shadow: 0 10px 34px rgba(45,161,235,.14); }
+  .tier-badge { display: inline-block; font-size: 10.5px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; padding: 4px 12px; border-radius: 99px; margin-bottom: 14px; background: rgba(45,161,235,.14); color: #005da0; }
+  .tier.late .tier-badge { background: rgba(21,34,48,.07); color: var(--sage); }
+  .tier-price { font-family: var(--font-display); font-size: 42px; font-weight: 900; color: var(--forest); line-height: 1.05; }
+  .tier-when { font-size: 14px; color: #3a4956; margin: 8px 0 14px; font-weight: 500; }
+  .tier-note { font-size: 13.5px; color: #3a4956; font-weight: 300; line-height: 1.7; }
+  .is-late .tier.early { opacity: .55; box-shadow: none; border-color: rgba(21,34,48,.1); }
+  .is-late .tier.early .tier-price { text-decoration: line-through; }
+  .is-late .tier.late { border-color: var(--gold); box-shadow: 0 10px 34px rgba(45,161,235,.14); }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 36px; }
+  .step { background: var(--cream); border: 1px solid rgba(45,161,235,.14); border-radius: 16px; padding: 22px 22px; }
+  .step-num { font-family: var(--font-display); font-size: 26px; font-weight: 900; font-style: italic; color: var(--gold); margin-bottom: 6px; }
+  .step-title { font-size: 15px; font-weight: 500; color: var(--forest); margin-bottom: 6px; }
+  .step-body { font-size: 13.5px; color: #3a4956; font-weight: 300; line-height: 1.7; }
+  .step-body strong { font-weight: 500; color: var(--forest); }
+  .care-note { background: var(--cream); border-left: 3px solid var(--gold); border-radius: 0 14px 14px 0; padding: 24px 28px; font-size: 15px; color: #3a4956; font-weight: 300; line-height: 1.8; }
+  .care-note strong { display: block; font-family: var(--font-display); font-size: 19px; font-weight: 700; color: var(--forest); margin-bottom: 8px; }
+  .care-note p + p { margin-top: 10px; }
+  .care-note a { color: var(--forest); font-weight: 500; }
+
+  /* FAQ */
+  details { border-bottom: 1px solid rgba(21,34,48,.12); padding: 18px 0; }
+  details:first-of-type { padding-top: 0; }
+  summary { font-family: var(--font-display); font-weight: 700; font-size: 18px; color: var(--forest); cursor: pointer; list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: '+'; float: right; font-family: var(--font-body); font-size: 22px; color: var(--gold); }
+  details[open] summary::after { content: '–'; }
+  .faq-answer { margin-top: 12px; color: #3a4956; font-size: 15px; font-weight: 300; line-height: 1.8; max-width: 70ch; }
+  .faq-answer a { color: var(--forest); font-weight: 500; }
+
+  /* CTA FOOTER */
+  .cta-footer { background: var(--forest); padding: 96px 40px; text-align: center; position: relative; overflow: hidden; }
+  .cta-footer::before { content: 'THRIVE'; position: absolute; font-family: var(--font-display); font-size: 220px; font-weight: 900; font-style: italic; color: rgba(255,255,255,.03); top: 50%; left: 50%; transform: translate(-50%,-50%); white-space: nowrap; pointer-events: none; letter-spacing: -8px; }
+  .cta-footer h2 { font-family: var(--font-display); font-size: clamp(30px, 5vw, 50px); font-weight: 900; font-style: italic; color: var(--cream); line-height: 1.15; margin-bottom: 16px; position: relative; }
+  .cta-footer h2 span { color: var(--gold-light); }
+  .cta-footer p { font-size: 16px; color: rgba(251,252,252,.62); line-height: 1.75; max-width: 500px; margin: 0 auto 34px; font-weight: 300; position: relative; }
+  .cta-row { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; position: relative; }
+  .verse-footer { margin-top: 40px; font-size: 13px; font-style: italic; color: rgba(251,252,252,.32); position: relative; }
+
+  /* FOOTER */
+  footer { background: var(--forest); border-top: 1px solid rgba(255,255,255,.06); padding: 40px 40px 28px; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr repeat(3, 1fr); gap: 40px; margin-bottom: 40px; }
+  .footer-logo { font-family: var(--font-display); font-size: 24px; font-weight: 900; color: var(--cream); letter-spacing: -.5px; margin-bottom: 10px; text-decoration: none; display: inline-block; }
+  .footer-logo span { color: var(--gold); }
+  .footer-brand p { font-size: 13px; color: rgba(251,252,252,.42); line-height: 1.7; font-weight: 300; max-width: 230px; }
+  .footer-col h4 { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 14px; }
+  .footer-col a, .footer-col span { display: block; font-size: 13px; color: rgba(251,252,252,.5); text-decoration: none; margin-bottom: 8px; transition: color .2s; }
+  .footer-col a:hover { color: var(--cream); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,.06); padding-top: 20px; max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .footer-verse { font-size: 12px; font-style: italic; color: rgba(251,252,252,.28); }
+  .footer-email { font-size: 12px; color: rgba(251,252,252,.38); text-decoration: none; }
+  .footer-email:hover { color: var(--gold-light); }
+
+  @media (max-width: 960px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+    .days-grid { grid-template-columns: 1fr 1fr; }
+    .program-split, .pack-grid, .tiers, .steps, .pillars-grid { grid-template-columns: 1fr; }
   }
-  .section-label::before{content:"";display:block;width:22px;height:2px;background:var(--med-blue);}
-  .section-label.on-dark{color:var(--cyan);}
-  .section-label.on-dark::before{background:var(--cyan);}
-  .section-heading{
-    font-family:var(--font-display);font-weight:900;line-height:1.15;letter-spacing:-.01em;
-    color:var(--dark-blue);font-size:clamp(26px,3.4vw,38px);margin-bottom:16px;
-  }
-  .section-heading em{font-family:var(--font-quote);font-style:italic;font-weight:400;color:var(--med-blue);}
-  .section-heading.on-dark{color:var(--white);}
-  .section-heading.on-dark em{color:var(--cyan);}
-  .section-sub{font-size:16.5px;color:#3a4956;max-width:60ch;margin-bottom:44px;}
-  .section-sub.on-dark{color:rgba(255,255,255,.78);}
-
-  .btn-primary,.btn-outline,.btn-inverse{
-    display:inline-block;font-family:var(--font-caption);font-weight:700;font-size:15px;
-    padding:15px 28px;border-radius:99px;text-decoration:none;transition:all .15s ease;cursor:pointer;
-  }
-  .btn-primary{background:var(--dark-blue);color:var(--white);}
-  .btn-primary:hover{background:#00477a;}
-  .btn-outline{background:transparent;color:var(--ink);border:1.5px solid #c7cdd1;}
-  .btn-outline:hover{border-color:var(--dark-blue);color:var(--dark-blue);}
-  .btn-inverse{background:var(--white);color:var(--dark-blue);}
-  .btn-inverse:hover{background:var(--cyan);}
-
-  /* ---- NAV ---- */
-  nav{
-    position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
-    padding:16px 40px;background:rgba(251,252,252,.94);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,93,160,.1);
-  }
-  .nav-logo{font-family:var(--font-display);font-size:20px;font-weight:900;color:var(--dark-blue);text-decoration:none;letter-spacing:-.02em;}
-  .nav-logo span{color:var(--med-blue);}
-  .nav-links{display:flex;align-items:center;gap:24px;}
-  .nav-links a{font-family:var(--font-caption);font-size:13.5px;font-weight:600;color:#3a4956;text-decoration:none;}
-  .nav-links a:hover{color:var(--dark-blue);}
-  .nav-cta{background:var(--dark-blue);color:var(--white);font-family:var(--font-caption);font-size:13.5px;font-weight:700;padding:10px 22px;border-radius:99px;text-decoration:none;}
-  .nav-cta:hover{background:#00477a;}
-
-  /* ---- HERO ---- */
-  .hero{background:var(--dark-blue);padding:146px 0 84px;position:relative;overflow:hidden;}
-  .hero::before{
-    content:'THRIVE';position:absolute;font-family:var(--font-display);font-weight:900;font-size:260px;
-    color:rgba(255,255,255,.04);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;
-    pointer-events:none;letter-spacing:-.05em;
-  }
-  .hero-inner{position:relative;z-index:1;max-width:720px;}
-  .hero-eyebrow{
-    display:inline-flex;align-items:center;gap:8px;font-family:var(--font-caption);font-size:12px;font-weight:700;
-    letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);margin-bottom:20px;
-  }
-  .hero-eyebrow::before{content:"";display:block;width:24px;height:2px;background:var(--cyan);}
-  .hero h1{
-    font-family:var(--font-display);font-weight:900;font-size:clamp(34px,5vw,52px);line-height:1.14;
-    color:var(--white);letter-spacing:-.01em;margin-bottom:20px;
-  }
-  .hero h1 em{font-family:var(--font-quote);font-style:italic;font-weight:400;color:var(--cyan);}
-  .hero-lead{font-size:18px;color:rgba(255,255,255,.82);max-width:56ch;margin-bottom:34px;}
-  .hero-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:48px;}
-  .hero-actions .btn-primary{background:var(--cyan);color:var(--dark-blue);}
-  .hero-actions .btn-primary:hover{background:var(--white);}
-  .hero-actions .btn-outline{color:var(--white);border-color:rgba(255,255,255,.35);}
-  .hero-actions .btn-outline:hover{border-color:var(--white);color:var(--white);background:rgba(255,255,255,.08);}
-
-  .hero-facts{display:flex;flex-wrap:wrap;gap:0;border-top:1px solid rgba(255,255,255,.18);}
-  .fact{flex:1 1 160px;padding:18px 20px 4px 0;border-right:1px solid rgba(255,255,255,.16);}
-  .fact:last-child{border-right:none;}
-  .fact-label{font-family:var(--font-caption);font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:rgba(255,255,255,.6);margin-bottom:6px;}
-  .fact-value{font-family:var(--font-display);font-size:16.5px;font-weight:700;color:var(--white);}
-
-  /* ---- MISSION STRIP ---- */
-  .mission-strip{background:var(--med-blue);padding:30px 0;}
-  .mission-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
-  .ms-text{font-family:var(--font-quote);font-style:italic;font-size:clamp(18px,2.3vw,23px);color:var(--white);line-height:1.3;max-width:48ch;}
-  .ms-sub{font-family:var(--font-caption);font-size:13.5px;color:rgba(255,255,255,.88);margin-top:6px;}
-
-  /* ---- PROGRAM OVERVIEW & TOPICS ---- */
-  .program-split{display:grid;grid-template-columns:1.1fr 0.9fr;gap:32px;align-items:start;margin-bottom:52px;}
-  .program-box{background:var(--white);border:1px solid #d8dee2;border-radius:16px;padding:32px 30px;}
-  .program-box h3{font-family:var(--font-display);font-size:21px;font-weight:900;color:var(--dark-blue);margin-bottom:14px;}
-  .topic-list{list-style:none;}
-  .topic-list li{font-size:15px;color:#3a4956;padding:9px 0 9px 22px;border-bottom:1px solid #eef0f1;position:relative;}
-  .topic-list li:last-child{border-bottom:none;}
-  .topic-list li::before{content:"";position:absolute;left:0;top:18px;width:10px;height:2px;background:var(--med-blue);}
-
-  .rhythm-box{background:var(--dark-blue);color:var(--white);border-radius:16px;padding:32px 28px;}
-  .rhythm-box h3{font-family:var(--font-display);font-size:21px;font-weight:900;color:var(--white);margin-bottom:8px;}
-  .rhythm-sub{font-size:14px;color:rgba(255,255,255,.75);margin-bottom:20px;}
-  .rhythm-row{display:flex;gap:14px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.12);font-size:14px;}
-  .rhythm-row:last-child{border-bottom:none;}
-  .rhythm-time{font-weight:700;color:var(--cyan);min-width:118px;font-size:13px;}
-  .rhythm-act{color:rgba(255,255,255,.9);}
-
-  /* ---- 5-DAY ARC ---- */
-  .days-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:52px;}
-  .day-card{background:var(--white);border:1px solid #d8dee2;border-top:4px solid var(--med-blue);border-radius:12px;padding:20px 16px;}
-  .day-num{font-family:var(--font-caption);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--med-blue);margin-bottom:6px;}
-  .day-title{font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--dark-blue);line-height:1.25;margin-bottom:8px;}
-  .day-desc{font-size:13.5px;color:#4a5966;line-height:1.55;}
-
-  /* ---- PILLARS ---- */
-  .pillars-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
-  .pillar-card{background:var(--white);border:1px solid #e2e6e8;border-radius:14px;padding:24px 24px;}
-  .pc-icon{font-size:22px;margin-bottom:10px;}
-  .pc-title{font-family:var(--font-display);font-weight:700;font-size:17px;color:var(--dark-blue);margin-bottom:8px;}
-  .pc-body{font-size:14.5px;color:#3a4956;line-height:1.65;}
-
-  /* ---- MENTORS ---- */
-  .mentors-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:24px;}
-  .mentor-card{background:var(--white);border:1px solid #d8dee2;border-radius:16px;padding:24px 24px 26px;display:flex;flex-direction:column;}
-  .mentor-frame{
-    width:100%;height:270px;border-radius:12px;overflow:hidden;margin-bottom:18px;
-    background:#eef2f5;border:1px solid #e2e6e8;position:relative;
-  }
-  .mentor-photo{
-    width:100%;height:100%;object-fit:cover;object-position:center top;display:block;
-  }
-  .mentor-avatar-large{
-    width:100%;height:100%;background:var(--dark-blue);color:var(--cyan);
-    font-family:var(--font-display);font-weight:900;font-size:42px;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .mentor-name{font-family:var(--font-display);font-weight:900;font-size:20px;color:var(--dark-blue);line-height:1.2;}
-  .mentor-role{font-family:var(--font-caption);font-size:13px;font-weight:600;color:var(--med-blue);margin-top:4px;margin-bottom:14px;}
-  .mentor-bio{font-size:14.5px;color:#3a4956;line-height:1.68;}
-  .mentor-bio p{margin-bottom:10px;}
-  .mentor-bio p:last-child{margin-bottom:0;}
-  .mentor-tag{margin-top:auto;padding-top:14px;font-size:12.5px;font-weight:600;color:#5c6b7a;border-top:1px solid #eef0f1;}
-
-  /* ---- PARTICIPANT INFO PACK ---- */
-  .pack-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:28px;}
-  .pack-card{background:var(--white);border:1px solid #d8dee2;border-radius:16px;padding:28px 28px;}
-  .pack-card h3{font-family:var(--font-display);font-size:19px;font-weight:900;color:var(--dark-blue);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
-  .pack-list{list-style:none;}
-  .pack-list li{font-size:14.5px;color:#3a4956;padding:8px 0 8px 22px;border-bottom:1px solid #eef0f1;position:relative;}
-  .pack-list li:last-child{border-bottom:none;}
-  .pack-list li::before{content:"✓";position:absolute;left:0;top:8px;color:var(--med-blue);font-weight:700;}
-  .pack-list.no-list li::before{content:"✕";color:#c0392b;}
-
-  .venue-banner{
-    background:rgba(45,161,235,.09);border:1.5px solid var(--med-blue);border-radius:14px;
-    padding:24px 26px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
-  }
-  .venue-banner strong{color:var(--dark-blue);font-size:16.5px;display:block;margin-bottom:6px;}
-  .venue-banner p{font-size:14.5px;color:#3a4956;max-width:68ch;line-height:1.65;}
-
-  /* ---- QUOTE STRIP ---- */
-  .quote-strip{background:var(--dark-blue);padding:76px 0;text-align:center;}
-  .qs-inner{max-width:680px;margin:0 auto;padding:0 24px;}
-  .qs-quote{font-family:var(--font-quote);font-style:italic;font-size:clamp(22px,3vw,28px);color:var(--white);line-height:1.45;margin-bottom:16px;}
-  .qs-attr{font-family:var(--font-caption);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--cyan);}
-
-  /* ---- PRICE CARD ---- */
-  .investment-wrap{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;}
-  .price-card{background:var(--white);border:1px solid #d8dee2;border-radius:16px;overflow:hidden;}
-  .price-header{background:var(--dark-blue);padding:32px 32px 26px;}
-  .price-num{font-family:var(--font-display);font-weight:900;font-size:40px;color:var(--white);}
-  .price-tag{font-family:var(--font-caption);font-size:13.5px;color:var(--cyan);margin-top:4px;font-weight:600;}
-  .price-body{padding:28px 32px 32px;}
-  .price-dates{font-family:var(--font-caption);font-size:14.5px;font-weight:700;color:var(--dark-blue);margin-bottom:12px;}
-  .price-body p{font-size:15px;color:#3a4956;margin-bottom:22px;}
-  .scholarship-note{background:var(--white);border-left:4px solid var(--med-blue);padding:20px 24px;font-size:15px;color:#3a4956;border-radius:0 12px 12px 0;border-top:1px solid #e2e6e8;border-right:1px solid #e2e6e8;border-bottom:1px solid #e2e6e8;}
-  .scholarship-note strong{color:var(--dark-blue);display:block;margin-bottom:6px;font-size:16px;}
-
-  /* ---- FAQ ---- */
-  details{border-bottom:1px solid #cdd3d7;padding:18px 0;}
-  details:first-of-type{padding-top:0;}
-  summary{font-family:var(--font-display);font-weight:700;font-size:16.5px;color:var(--dark-blue);cursor:pointer;list-style:none;}
-  summary::-webkit-details-marker{display:none;}
-  summary::after{content:"+";float:right;font-size:20px;color:var(--med-blue);}
-  details[open] summary::after{content:"–";}
-  .faq-answer{margin-top:12px;color:#3a4956;font-size:15px;max-width:66ch;}
-
-  /* ---- CTA FOOTER ---- */
-  .cta-footer{background:var(--dark-blue);padding:96px 0;text-align:center;position:relative;overflow:hidden;}
-  .cta-footer::before{
-    content:'THRIVE';position:absolute;font-family:var(--font-display);font-weight:900;font-size:200px;
-    color:rgba(255,255,255,.035);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;
-    pointer-events:none;letter-spacing:-.05em;
-  }
-  .cta-footer-inner{position:relative;z-index:1;padding:0 24px;}
-  .cta-footer h2{font-family:var(--font-display);font-weight:900;font-size:clamp(26px,4vw,38px);color:var(--white);max-width:22ch;margin:0 auto 16px;line-height:1.2;}
-  .cta-footer h2 span{font-family:var(--font-quote);font-style:italic;font-weight:400;color:var(--cyan);}
-  .cta-footer p{font-size:16.5px;color:rgba(255,255,255,.8);max-width:52ch;margin:0 auto 32px;}
-  .verse-footer{margin-top:36px;font-family:var(--font-quote);font-style:italic;font-size:14px;color:rgba(255,255,255,.5);}
-
-  /* ---- FOOTER ---- */
-  footer{background:var(--white);border-top:1px solid #e2e6e8;padding:48px 0 28px;}
-  .footer-inner{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:40px;margin-bottom:36px;}
-  .footer-logo{display:inline-block;font-family:var(--font-display);font-weight:900;font-size:20px;color:var(--dark-blue);text-decoration:none;margin-bottom:10px;}
-  .footer-logo span{color:var(--med-blue);}
-  .footer-brand p{font-family:var(--font-caption);font-size:13px;color:#66747f;line-height:1.7;max-width:260px;}
-  .footer-col h4{font-family:var(--font-caption);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--med-blue);margin-bottom:14px;}
-  .footer-col a,.footer-col span{display:block;font-family:var(--font-caption);font-size:13.5px;color:#3a4956;text-decoration:none;margin-bottom:8px;}
-  .footer-col a:hover{color:var(--dark-blue);}
-  .footer-bottom{border-top:1px solid #e2e6e8;padding-top:20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
-  .footer-verse{font-family:var(--font-caption);font-size:12.5px;color:#8a97a1;}
-  .footer-email{font-family:var(--font-caption);font-size:12.5px;color:#8a97a1;text-decoration:none;}
-  .footer-email:hover{color:var(--dark-blue);}
-
-  @media(max-width:900px){
-    .days-grid{grid-template-columns:1fr 1fr;}
-    .program-split,.pack-grid,.investment-wrap,.pillars-grid{grid-template-columns:1fr;}
-  }
-  @media(max-width:800px){
-    .wrap{padding:0 22px;}
-    nav{padding:14px 20px;}
-    .nav-links{display:none;}
-    .hero{padding:120px 0 64px;}
-    .band{padding:64px 0;}
-    .mission-inner{flex-direction:column;align-items:flex-start;}
-    .days-grid{grid-template-columns:1fr;}
-    .fact{flex:1 1 45%;padding-bottom:14px;}
-    .footer-inner{grid-template-columns:1fr 1fr;}
-    .footer-bottom{flex-direction:column;align-items:flex-start;}
+  @media (max-width: 800px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 112px 20px 60px; }
+    .section { padding: 64px 20px; }
+    .strip { padding: 24px 20px; }
+    .days-grid { grid-template-columns: 1fr; }
+    .quote-strip, .cta-footer { padding: 64px 20px; }
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 28px; }
+    footer { padding: 40px 20px 24px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
 <body>
 
 <nav>
-  <a class="nav-logo" href="https://thrivecoach365.github.io/" aria-label="Thrive Homepage">Thrive<span>.</span></a>
+  <a class="nav-logo" href="index.html">Thrive<span>.</span></a>
   <div class="nav-links">
-    <a href="#program">The Program</a>
-    <a href="#mentors">Mentors</a>
-    <a href="#info-pack">Info Pack</a>
-    <a href="#investment">Investment</a>
-    <a href="#faq">FAQ</a>
+    <a href="about.html">About</a>
+    <a href="programmes.html">Programmes</a>
+    <a class="active" href="bootcampreserve.html">Bootcamps</a>
+    <a href="resources.html">Resources</a>
+    <a href="coach.html">Meet the Coach</a>
   </div>
-  <a class="nav-cta" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Register Now</a>
+  <a class="nav-cta" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Reserve a Spot</a>
 </nav>
 
 <!-- ================= HERO ================= -->
 <section class="hero" id="top">
-  <div class="wrap">
-    <div class="hero-inner">
-      <div class="hero-eyebrow">Teen Mentorship Bootcamp · High Schoolers (Ages 14–18)</div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">Teen Bootcamp · High schoolers, ages 14–18</div>
       <h1>Five days of mentors, real talk, and decisions that <em>last.</em></h1>
-      <p class="hero-lead">Registration is now open for our November 2026 High School Bootcamp at Nkoroi, Kajiado. Built around Scripture, dedicated mentors, and honest conversation about identity, friendships, family, social media, and the choices shaping your teen's future.</p>
+      <p class="hero-lead">A residential bootcamp in Nkoroi, Kajiado, built around Scripture, mentors who actually listen, and honest conversation about identity, friendships, family, and the choices that shape your future.</p>
       <div class="hero-actions">
-        <a class="btn-primary" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Register on Jotform →</a>
-        <a class="btn-outline" href="#info-pack">Participant Info Pack</a>
+        <a class="btn-gold" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Reserve a spot</a>
+        <a class="btn-outline" href="#info-pack">What parents need to know</a>
       </div>
-      <div class="hero-facts">
-        <div class="fact"><div class="fact-label">Dates</div><div class="fact-value">Nov 29 – Dec 3, 2026</div></div>
-        <div class="fact"><div class="fact-label">Who it's for</div><div class="fact-value">High School · Ages 14–18</div></div>
-        <div class="fact"><div class="fact-label">Venue</div><div class="fact-value">Nkoroi, Kajiado</div></div>
-        <div class="fact"><div class="fact-label">All-Inclusive Fee</div><div class="fact-value">KES 7,000</div></div>
-      </div>
+    </div>
+    <div class="hero-right">
+      <div class="fact-card"><div class="fc-icon">🗓️</div><div><div class="fc-title">Sunday 29 Nov – Thursday 3 Dec 2026</div><div class="fc-desc">Arrive from 2:00 PM on Day 1. Check-out after the closing lunch on Day 5.</div></div></div>
+      <div class="fact-card"><div class="fc-icon">📍</div><div><div class="fc-title">Nkoroi, Kajiado</div><div class="fc-desc">A secure residential home. Exact pin shared with registered families.</div></div></div>
+      <div class="fact-card"><div class="fc-icon">🤝</div><div><div class="fc-title">Mentor groups of 6–8</div><div class="fc-desc">Every camper walks the week with the same small group and mentor.</div></div></div>
+      <div class="fact-card fee"><div class="fc-icon">💛</div><div>
+        <div class="fc-title only-early">KES 7,000 until Wednesday 25 November</div>
+        <div class="fc-title only-late">KES 10,000 late registration fee</div>
+        <div class="fc-title only-closed">Registration has closed</div>
+        <div class="fc-desc only-early">Rises to KES 10,000 from Thursday 26 November. Registration closes Friday 27 November.</div>
+        <div class="fc-desc only-late">The early fee closed on 25 November. Registration closes 11:59 PM, Friday 27 November.</div>
+        <div class="fc-desc only-closed">Message us on WhatsApp to ask about a waiting-list place or the next bootcamp.</div>
+      </div></div>
     </div>
   </div>
 </section>
 
-<!-- ================= MISSION STRIP ================= -->
-<div class="mission-strip">
-  <div class="wrap mission-inner">
+<!-- ================= EARLY-BIRD STRIP ================= -->
+<div class="strip" id="earlybird">
+  <div class="strip-inner">
     <div>
-      <div class="ms-text">"This isn't a retreat you attend. It's a week of conversations that change how you decide."</div>
-      <div class="ms-sub">Every participant joins a mentor small-group of 6–8 for the entire bootcamp.</div>
+      <div class="strip-text only-early">Register and pay by Wednesday 25 November: KES 7,000.</div>
+      <div class="strip-text only-late">Late registration is open: KES 10,000.</div>
+      <div class="strip-text only-closed">Registration for the Teen Bootcamp has closed.</div>
+      <div class="strip-sub only-early">From Thursday 26 November the fee is KES 10,000, and registration closes on Friday 27 November. <span id="daysLeft"></span></div>
+      <div class="strip-sub only-late">Registration closes at 11:59 PM on Friday 27 November. Places are limited, so please register soon.</div>
+      <div class="strip-sub only-closed">Message us on WhatsApp to ask about a waiting-list place or the next bootcamp.</div>
     </div>
-    <a class="btn-inverse" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Secure a Spot →</a>
+    <a class="btn-white" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Reserve a spot</a>
   </div>
 </div>
 
-<!-- ================= WHAT THE PROGRAM LOOKS LIKE ================= -->
-<section class="band" id="program">
-  <div class="wrap">
-    <div class="section-label">What the program looks like</div>
+<!-- ================= PROGRAMME ================= -->
+<section class="section" id="program">
+  <div class="inner">
+    <div class="section-label">What the week looks like</div>
     <h2 class="section-heading">Structured, immersive, and built for <em>growth.</em></h2>
-    <p class="section-sub">Running from Sunday afternoon arrival (Nov 29) through Thursday lunch (Dec 3), each day weaves together spiritual grounding, emotional intelligence, physical discipline, and phone-free community.</p>
+    <p class="section-sub">From Sunday afternoon (29 Nov) to Thursday lunch (3 Dec), every day weaves together Scripture, emotional intelligence, physical discipline, and real community.</p>
 
-    <!-- 5-DAY ARC -->
     <div class="days-grid">
-      <div class="day-card">
-        <div class="day-num">Day 1 · Sun Nov 29</div>
-        <div class="day-title">Arrival &amp; Identity</div>
-        <div class="day-desc">Check-in, "Phone Hotel" drop-off, cabin team-building, Self-Awareness Snapshot, and evening session: <em>Who Does God Say I Am?</em></div>
-      </div>
-      <div class="day-card">
-        <div class="day-num">Day 2 · Mon Nov 30</div>
-        <div class="day-title">Mind &amp; Emotions</div>
-        <div class="day-desc">Guarding the mind, Emotional Intelligence workshop, Laws of the Mind, self-awareness circles, and evening goal-setting seminar.</div>
-      </div>
-      <div class="day-card">
-        <div class="day-num">Day 3 · Tue Dec 1</div>
-        <div class="day-title">Relationships &amp; Service</div>
-        <div class="day-desc">Family dynamics, biblical friendships, God's design for dating &amp; romance, plus an afternoon hands-on community service project.</div>
-      </div>
-      <div class="day-card">
-        <div class="day-num">Day 4 · Wed Dec 2</div>
-        <div class="day-title">Digital Life &amp; Stewardship</div>
-        <div class="day-desc">Challenge course, breaking free from addictions, scrolling with purpose, financial stewardship, 1-on-1 mentor check-ins, and open-mic Q&amp;A.</div>
-      </div>
-      <div class="day-card">
-        <div class="day-num">Day 5 · Thu Dec 3</div>
-        <div class="day-title">Purity &amp; Commissioning</div>
-        <div class="day-desc">Sunrise prayer walk, legacy service task, Sexuality &amp; Purity session, grace circle, commissioning ceremony, and closing lunch.</div>
-      </div>
+      <div class="day-card"><div class="day-num">Day 1 · Sun 29 Nov</div><div class="day-title">Arrival &amp; Identity</div><div class="day-desc">Check-in, cabin team-building, a Self-Awareness Snapshot, and the evening session <em>Who Does God Say I Am?</em></div></div>
+      <div class="day-card"><div class="day-num">Day 2 · Mon 30 Nov</div><div class="day-title">Mind &amp; Emotions</div><div class="day-desc">Guarding the mind, an Emotional Intelligence workshop, Laws of the Mind, self-awareness circles, and a goal-setting seminar.</div></div>
+      <div class="day-card"><div class="day-num">Day 3 · Tue 1 Dec</div><div class="day-title">Relationships &amp; Service</div><div class="day-desc">Family, biblical friendships, God's design for dating and romance, and an afternoon community service project.</div></div>
+      <div class="day-card"><div class="day-num">Day 4 · Wed 2 Dec</div><div class="day-title">Digital Life &amp; Stewardship</div><div class="day-desc">Challenge course, freedom from addictions, scrolling with purpose, money and stewardship, one-to-one mentor check-ins.</div></div>
+      <div class="day-card"><div class="day-num">Day 5 · Thu 3 Dec</div><div class="day-title">Purity &amp; Commissioning</div><div class="day-desc">Sunrise prayer walk, legacy service task, the sexuality and purity session, grace circle, commissioning, and closing lunch.</div></div>
     </div>
 
-    <!-- TOPICS + DAILY RHYTHM -->
     <div class="program-split">
-      <div class="program-box">
-        <h3>Core Curriculum Topics</h3>
+      <div class="box">
+        <h3>Core curriculum</h3>
         <ul class="topic-list">
-          <li><strong>Identity:</strong> Who does God say I am?</li>
-          <li><strong>Friendships:</strong> Navigating healthy vs. unhealthy peers</li>
-          <li><strong>Family:</strong> From conflict to connection at home</li>
-          <li><strong>Emotional Intelligence:</strong> Understanding triggers, feelings &amp; self-control</li>
-          <li><strong>Social Media &amp; The Mind:</strong> Guarding your thoughts and scrolling with purpose</li>
-          <li><strong>Dating &amp; Romance:</strong> Red flags, green flags, and dealing with rejection</li>
-          <li><strong>Sexuality &amp; Personal Safety:</strong> God's design, purity, and preventing sexual abuse</li>
-          <li><strong>Life Skills &amp; Stewardship:</strong> Time management, personal hygiene, etiquette, and money</li>
-          <li><strong>Faith vs. Feeling:</strong> Building a daily walk with Christ that lasts</li>
+          <li><strong>Identity:</strong> who does God say I am?</li>
+          <li><strong>Friendships:</strong> healthy and unhealthy peers</li>
+          <li><strong>Family:</strong> from conflict to connection at home</li>
+          <li><strong>Emotional intelligence:</strong> triggers, feelings, and self-control</li>
+          <li><strong>Social media and the mind:</strong> guarding your thoughts, scrolling with purpose</li>
+          <li><strong>Dating and romance:</strong> red flags, green flags, and rejection</li>
+          <li><strong>Sexuality and personal safety:</strong> God's design, purity, and preventing abuse</li>
+          <li><strong>Life skills and stewardship:</strong> time, hygiene, etiquette, and money</li>
+          <li><strong>Faith and feeling:</strong> a daily walk with Christ that lasts</li>
         </ul>
       </div>
-
-      <div class="rhythm-box">
-        <h3>The Daily Rhythm (Days 2–4)</h3>
-        <p class="rhythm-sub">Early nights and active mornings protect deep rest and keep focus sharp.</p>
-        <div class="rhythm-row"><div class="rhythm-time">5:00 – 6:00 AM</div><div class="rhythm-act">Wake up &amp; sunrise workout / hike</div></div>
-        <div class="rhythm-row"><div class="rhythm-time">6:00 – 6:45 AM</div><div class="rhythm-act">Productive Work Block I (camp chores &amp; grounds)</div></div>
-        <div class="rhythm-row"><div class="rhythm-time">6:45 – 7:30 AM</div><div class="rhythm-act">Personal devotion &amp; emotion check-in journaling</div></div>
-        <div class="rhythm-row"><div class="rhythm-time">7:30 – 8:30 AM</div><div class="rhythm-act">Breakfast &amp; morning reset</div></div>
-        <div class="rhythm-row"><div class="rhythm-time">8:30 AM – 1:00 PM</div><div class="rhythm-act">Interactive teaching sessions &amp; mentor small groups</div></div>
-        <div class="rhythm-row"><div class="rhythm-time">1:00 – 2:30 PM</div><div class="rhythm-act">Lunch &amp; screen-free rest hour</div></div>
-        <div class="rhythm-row"><div class="rhythm-time">2:30 – 3:15 PM</div><div class="rhythm-act">Productive Work Block II (practical life skills)</div></div>
-        <div class="rhythm-row"><div class="rhythm-time">3:15 – 6:30 PM</div><div class="rhythm-act">Afternoon workshops, 1-on-1 check-ins &amp; recreation</div></div>
-        <div class="rhythm-row"><div class="rhythm-time">6:30 – 9:00 PM</div><div class="rhythm-act">Dinner, worship, campfire &amp; cabin devotions</div></div>
+      <div class="rhythm">
+        <h3>The daily rhythm</h3>
+        <p class="rhythm-sub">Early nights and active mornings protect deep rest and keep minds sharp (Days 2–4).</p>
+        <div class="rhythm-row"><div class="rhythm-time">5:00 – 6:00 AM</div><div class="rhythm-act">Wake up, sunrise workout or hike</div></div>
+        <div class="rhythm-row"><div class="rhythm-time">6:00 – 6:45 AM</div><div class="rhythm-act">Productive work: camp chores and grounds</div></div>
+        <div class="rhythm-row"><div class="rhythm-time">6:45 – 7:30 AM</div><div class="rhythm-act">Personal devotion and emotion check-in journal</div></div>
+        <div class="rhythm-row"><div class="rhythm-time">7:30 – 8:30 AM</div><div class="rhythm-act">Breakfast</div></div>
+        <div class="rhythm-row"><div class="rhythm-time">8:30 AM – 1:00 PM</div><div class="rhythm-act">Teaching sessions and mentor small groups</div></div>
+        <div class="rhythm-row"><div class="rhythm-time">1:00 – 2:30 PM</div><div class="rhythm-act">Lunch and a quiet rest hour</div></div>
+        <div class="rhythm-row"><div class="rhythm-time">2:30 – 3:15 PM</div><div class="rhythm-act">Productive work: practical life skills</div></div>
+        <div class="rhythm-row"><div class="rhythm-time">3:15 – 6:30 PM</div><div class="rhythm-act">Afternoon sessions and mentor check-ins</div></div>
+        <div class="rhythm-row"><div class="rhythm-time">6:30 – 9:00 PM</div><div class="rhythm-act">Dinner, worship, campfire, cabin devotions</div></div>
         <div class="rhythm-row"><div class="rhythm-time">9:00 PM</div><div class="rhythm-act">Lights out</div></div>
       </div>
     </div>
 
-    <!-- FOUR PILLARS -->
     <div class="pillars-grid">
-      <div class="pillar-card">
-        <div class="pc-icon">🙏</div>
-        <div class="pc-title">Spiritual Pillar</div>
-        <div class="pc-body">Daily morning devotions, Scripture-grounded teaching sessions, worship, prayer, and a Day 5 commissioning ceremony.</div>
-      </div>
-      <div class="pillar-card">
-        <div class="pc-icon">🧠</div>
-        <div class="pc-title">Mental Pillar</div>
-        <div class="pc-body">Mentor small groups (6–8 teens), emotional intelligence workshops, personal journaling, 1-on-1 check-ins, and practical workbooks.</div>
-      </div>
-      <div class="pillar-card">
-        <div class="pc-icon">💪</div>
-        <div class="pc-title">Physical Pillar</div>
-        <div class="pc-body">Sunrise hikes, obstacle challenge courses, community service labor, and daily productive work blocks instead of passive downtime.</div>
-      </div>
-      <div class="pillar-card">
-        <div class="pc-icon">🔥</div>
-        <div class="pc-title">Social Pillar</div>
-        <div class="pc-body">100% phone-free environment with cabin "families," shared meals, campfire testimonies, and authentic face-to-face friendships.</div>
-      </div>
+      <div class="pillar-card"><div class="pc-icon">🙏</div><div class="pc-title">Spiritual</div><div class="pc-body">Morning devotions, Scripture-grounded teaching, worship and prayer, and a commissioning ceremony on the final day.</div></div>
+      <div class="pillar-card"><div class="pc-icon">🧠</div><div class="pc-title">Mentorship and mind</div><div class="pc-body">The heart of the week: mentor small groups, emotional intelligence, journaling, and one-to-one check-ins for the honest conversations that shape how you decide.</div></div>
+      <div class="pillar-card"><div class="pc-icon">💪</div><div class="pc-title">Physical</div><div class="pc-body">Sunrise hikes, a personal challenge course, community service, and daily productive work: real chores and real skills.</div></div>
+      <div class="pillar-card"><div class="pc-icon">🔥</div><div class="pc-title">Social</div><div class="pc-body">Real friendships made face to face: cabin “families”, shared meals, and campfire testimonies, with phones safely stored so conversation gets your full attention.</div></div>
     </div>
   </div>
 </section>
 
 <!-- ================= MENTORS ================= -->
-<section class="band band-alt" id="mentors">
-  <div class="wrap">
+<section class="section cream" id="mentors">
+  <div class="inner">
     <div class="section-label">Who will walk with your teen</div>
     <h2 class="section-heading">Meet the <em>mentors.</em></h2>
-    <p class="section-sub">Every participant is placed in a small group led by vetted, experienced mentors who love God and know how to listen, challenge, and encourage teenagers.</p>
-
+    <p class="section-sub">Every camper joins a small group led by experienced mentors who love God and know how to listen, challenge, and encourage young people.</p>
     <div class="mentors-grid">
-      <!-- Faith Gor -->
+
       <div class="mentor-card">
-        <div class="mentor-frame">
-          <img class="mentor-photo" src="Faith Gor.jpeg" alt="Portrait of Faith Gor">
-        </div>
+        <div class="mentor-frame"><div class="mentor-initials">FG</div><img src="Faith%20Gor.jpg" alt="Portrait of Faith Gor" onerror="this.style.display='none'"></div>
         <div class="mentor-name">Faith Gor</div>
         <div class="mentor-role">Counselling Psychologist · Child &amp; Adolescent Therapist · Mentor</div>
         <div class="mentor-bio">
-          <p>Faith is a Counselling Psychologist, Child &amp; Adolescent therapist, and mentor who blends psychology, lived experience, and a warm, faith-based approach to help young people navigate identity, emotions, relationships, and life choices without judgment.</p>
-          <p>Having supported individuals through trauma, grief, and life transitions—and partnered with parents to strengthen connection at home—she makes mental health practical and accessible. Her guiding belief is simple: teens don't need perfect adults, just present ones willing to listen and walk alongside them.</p>
+          <p>Faith is a Counselling Psychologist, Child &amp; Adolescent therapist, and mentor who blends psychology, lived experience, and a warm, faith-based approach to help young people navigate identity, emotions, relationships, and life choices without judgement.</p>
+          <p>Having supported individuals through trauma, grief, and life transitions, and partnered with parents to strengthen connection at home, she makes mental health practical and accessible. Her guiding belief is simple: teens don't need perfect adults, just present ones willing to listen and walk alongside them.</p>
         </div>
-        <div class="mentor-tag">Focus: Child &amp; Adolescent Therapy, Emotional Health &amp; Parent-Teen Connection</div>
+        <div class="mentor-tag">Focus: child and adolescent therapy, emotional health, parent–teen connection</div>
       </div>
 
-      <!-- Janet Oyende-Kariuki -->
       <div class="mentor-card">
-        <div class="mentor-frame">
-          <img class="mentor-photo" src="DSC_0741.jpg" alt="Portrait of Janet Oyende-Kariuki">
-        </div>
+        <div class="mentor-frame"><div class="mentor-initials">JO</div><img src="DSC_0741.jpg" alt="Portrait of Janet Oyende-Kariuki" onerror="this.style.display='none'"></div>
         <div class="mentor-name">Janet Oyende-Kariuki</div>
         <div class="mentor-role">Communications, PR &amp; Alumni Engagement · Youth Mentor</div>
         <div class="mentor-bio">
           <p>Janet is passionate about helping young people discover who they are in Christ and live with purpose, believing every teen has unique gifts, a meaningful calling, and the potential to make a difference right where they are.</p>
-          <p>She serves at the Adventist University of Africa in communications, public relations, and alumni engagement, bringing a background in Information Technology and ICT for Development, university teaching, mentorship program design, and community leadership.</p>
+          <p>She serves at the Adventist University of Africa in communications, public relations, and alumni engagement, bringing a background in Information Technology and ICT for Development, university teaching, mentorship programme design, and community leadership.</p>
           <p>Away from work, Janet enjoys meaningful conversations, photography, hiking, outreach missions, and spending time with young people.</p>
         </div>
-        <div class="mentor-tag">Focus: Identity in Christ, Purpose &amp; Servant Leadership</div>
+        <div class="mentor-tag">Focus: identity in Christ, purpose, servant leadership</div>
       </div>
 
-      <!-- Joseph Kongoro -->
       <div class="mentor-card">
-        <div class="mentor-frame">
-          <img class="mentor-photo" src="Joseph Kongoro Portrait.jpg" alt="Portrait of Joseph Kongoro">
-        </div>
+        <div class="mentor-frame"><div class="mentor-initials">JK</div><img src="Joseph%20Kongoro%20Portrait.jpg" alt="Portrait of Joseph Kongoro" onerror="this.style.display='none'"></div>
         <div class="mentor-name">Joseph Kongoro</div>
         <div class="mentor-role">Ordained Elder · Managing Partner, Verge Advisory Partners LLP</div>
         <div class="mentor-bio">
           <p>Joseph loves God deeply and wants to live his life entirely for Him across work, community, and home. An ordained elder and passionate youth mentor, he serves as Managing Partner of Verge Advisory Partners LLP (formerly a manager at Ernst &amp; Young) and has previously served on the Board of eMentoring Africa and with Aiducation International – Kenya.</p>
-          <p>He is married to Felice Muluphi, with two children, Josiah and Grace, and enjoys meeting people, nature walks, and swimming.</p>
+          <p>He is married with two children, and enjoys meeting people, nature walks, and swimming.</p>
         </div>
-        <div class="mentor-tag">Focus: Career, Life, Spirituality, Relationships &amp; Money</div>
+        <div class="mentor-tag">Focus: career, life, spirituality, relationships, money</div>
       </div>
 
-      <!-- Migok Misawo -->
       <div class="mentor-card">
-        <div class="mentor-frame">
-          <img class="mentor-photo" src="Migok Musawo Portrait.jpeg" alt="Portrait of Migok Misawo">
-        </div>
+        <div class="mentor-frame"><div class="mentor-initials">MM</div><img src="Migok%20Musawo%20Portrait.jpeg" alt="Portrait of Migok Misawo" onerror="this.style.display='none'"></div>
         <div class="mentor-name">Migok Misawo</div>
         <div class="mentor-role">Counselling Practitioner · Certified Clarity 4D Coach</div>
         <div class="mentor-bio">
-          <p>Migok brings a decade of experience mentoring, training, and empowering individuals—especially teenagers and families—with postgraduate training in Psychology, counselling, emotional intelligence, and Clarity 4D communication coaching.</p>
-          <p>He specialises in childhood trauma healing, substance-use and addiction recovery, grief and loss, child therapy, parent-child reconciliation, healthy relationships, and behaviour change rooted in Christ.</p>
+          <p>Migok brings a decade of experience mentoring, training, and empowering individuals, especially teenagers and families, with postgraduate training in Psychology, counselling, emotional intelligence, and Clarity 4D communication coaching.</p>
+          <p>He specialises in childhood trauma healing, substance-use and addiction recovery, grief and loss, child therapy, parent–child reconciliation, healthy relationships, and behaviour change rooted in Christ.</p>
         </div>
-        <div class="mentor-tag">Focus: Emotional Wellbeing, Healing &amp; Behaviour Change</div>
+        <div class="mentor-tag">Focus: emotional wellbeing, healing, behaviour change</div>
       </div>
 
-      <!-- James Theuri -->
       <div class="mentor-card">
-        <div class="mentor-frame">
-          <div class="mentor-avatar-large">JT</div>
-        </div>
+        <div class="mentor-frame"><div class="mentor-initials">JT</div></div>
         <div class="mentor-name">James Theuri</div>
         <div class="mentor-role">Bootcamp Mentor</div>
         <div class="mentor-bio">
-          <p>James Theuri serves on the Thrive mentorship team for the Teen Bootcamp.</p>
+          <p>James serves on the Thrive mentorship team for the Teen Bootcamp. <span class="todo">ADD a two-line bio and photo</span></p>
         </div>
-        <div class="mentor-tag">Thrive Mentorship Team</div>
+        <div class="mentor-tag">Thrive mentorship team</div>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- ================= PARTICIPANT INFORMATION PACK ================= -->
-<section class="band" id="info-pack">
-  <div class="wrap">
-    <div class="section-label">Participant Information Pack</div>
-    <h2 class="section-heading">Everything parents &amp; campers need to <em>know.</em></h2>
-    <p class="section-sub">Confirmed venue details, parent safety assurances, check-in schedules, our device policy, and what to pack for the five days.</p>
+<!-- ================= INFO PACK ================= -->
+<section class="section" id="info-pack">
+  <div class="inner">
+    <div class="section-label">For parents and campers</div>
+    <h2 class="section-heading">Everything you need to <em>know.</em></h2>
+    <p class="section-sub">Where we'll be, how check-in works, how we keep every camper safe, and what to pack.</p>
 
-    <div class="venue-banner" style="margin-bottom:28px;">
+    <div class="venue-banner">
       <div>
-        <strong>📍 Venue &amp; Parent Safety Assurance — Nkoroi, Kajiado</strong>
-        <p>We are hosting at a comfortable, well-secured residential home in <strong>Nkoroi, Kajiado</strong> suited to a focused, small-group bootcamp. Parents are assured of a protected, closely supervised environment with vetted mentors, continuous adult/staff oversight, "Phone Hotel" accountability, and a 24/7 camp-office emergency line shared with registered families.</p>
+        <strong>📍 The venue and your teen's safety</strong>
+        <p>We are hosting in a secure residential home in Nkoroi, Kajiado, ideal for a focused small-group week. Every camper is closely supervised by mentors, phones are kept safe in our “Phone Hotel”, and families receive a camp-office number that is answered at any hour.</p>
       </div>
-      <a class="btn-primary" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Register Now</a>
+      <a class="btn-gold" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Reserve a spot</a>
     </div>
 
     <div class="pack-grid">
-      <!-- Arrival & Departure -->
       <div class="pack-card">
-        <h3>🗓️ Arrival, Check-Out &amp; Meals</h3>
+        <h3>Arrival, check-out and meals</h3>
         <ul class="pack-list">
-          <li><strong>Venue:</strong> Residential home in Nkoroi, Kajiado (exact pin &amp; directions shared with registered families).</li>
-          <li><strong>Check-In:</strong> Day 1 (Sunday, Nov 29, 2026) afternoon arrival from 2:00 PM.</li>
-          <li><strong>Check-Out:</strong> Day 5 (Thursday, Dec 3, 2026) following closing lunch, from 1:45 PM.</li>
-          <li><strong>Meals Included:</strong> 12 meals (Day 1 dinner through Day 5 lunch) plus snacks, scheduled at least five hours apart.</li>
-          <li><strong>Dietary Needs:</strong> Dietary restrictions and allergies collected at registration are accommodated.</li>
-          <li><strong>Accommodation:</strong> Residential rooms/cabins with mentor small groups of 6–8.</li>
+          <li><strong>Venue:</strong> residential home in Nkoroi, Kajiado.</li>
+          <li><strong>Drop-off:</strong> we will confirm the drop-off point, any group transport, and the exact pin with registered families before camp.</li>
+          <li><strong>Check-in:</strong> Day 1, Sunday 29 November 2026, from 2:00 PM.</li>
+          <li><strong>Check-out:</strong> Day 5, Thursday 3 December 2026, after the closing lunch, from 1:45 PM.</li>
+          <li><strong>Meals:</strong> 12 vegetarian meals, from Day 1 dinner to Day 5 lunch: a hearty breakfast, a medium lunch, and a light dinner, at least five hours apart.</li>
+          <li><strong>Special diets:</strong> allergies and dietary needs shared at registration are catered for.</li>
+          <li><strong>Rooms:</strong> separate boys' and girls' rooms, with mentor small groups of 6–8.</li>
         </ul>
       </div>
-
-      <!-- Phone Policy & Safety -->
       <div class="pack-card">
-        <h3>📵 "Phone Hotel" &amp; Safety Protocol</h3>
+        <h3>Phones and safety</h3>
         <ul class="pack-list">
-          <li><strong>Secured Setting:</strong> Well-secured residential property in Nkoroi, Kajiado designed for calm, focused group life.</li>
-          <li><strong>Device-Free Week:</strong> Phones and personal gadgets are collected, logged, and stored at check-in ("Phone Hotel").</li>
-          <li><strong>Re-Entry Debrief:</strong> Devices are returned at check-out on Day 5 after the closing lunch with a short re-entry conversation.</li>
-          <li><strong>24/7 Emergency Contact:</strong> Parents/guardians receive a direct camp-office emergency number prior to camp.</li>
-          <li><strong>Safeguarding:</strong> Vetted mentors, child-protection &amp; safeguarding standards, and first-aid/medical readiness throughout.</li>
+          <li><strong>Phone Hotel:</strong> phones and gadgets are collected and logged at check-in, so conversations get everyone's full attention.</li>
+          <li><strong>Return:</strong> devices go back at check-out on Day 5, with a short chat about healthy phone use at home.</li>
+          <li><strong>Emergencies:</strong> parents and guardians get a direct camp-office number before camp.</li>
+          <li><strong>Safeguarding:</strong> every mentor and volunteer is background-checked, and a first-aid kit and medical plan are in place throughout.</li>
         </ul>
       </div>
-
-      <!-- What to Pack -->
       <div class="pack-card">
-        <h3>🎒 Camper Packing Checklist</h3>
+        <h3>What to pack</h3>
         <ul class="pack-list">
-          <li>Bible, journal, and pen</li>
-          <li>Comfortable athletic and work clothing, plus a warm layer for cool mornings and evenings</li>
-          <li>Closed-toe shoes suitable for walking, camp chores, and outdoor activities</li>
-          <li>Weather-appropriate outdoor gear (early December can bring short rains)</li>
-          <li>A reusable water bottle</li>
-          <li>Toiletries and bath towel</li>
-          <li><strong>Bed Linen:</strong> Bed sheets and pillowcase for a comfortable four-night stay</li>
-          <li>Any prescribed medications (clearly labeled to hand to staff at check-in)</li>
+          <li>Bible, journal, and pen.</li>
+          <li><strong>Bed linen:sheets, a blanket or duvet, and a pillowcase for four nights.</li>
+          <li>Modest, comfortable clothes for sport and work, plus a warm layer for cool mornings and evenings.</li>
+          <li>Closed shoes for walking, chores, and outdoor activities.</li>
+          <li>Rain gear: early December can bring short rains.</li>
+          <li>Toiletries, a bath towel, and a reusable water bottle.</li>
+          <li>Any prescribed medication, clearly labelled, to hand to a mentor at check-in.</li>
         </ul>
       </div>
-
-      <!-- What NOT to Bring -->
       <div class="pack-card">
-        <h3>🚫 Leave Off-Camp</h3>
-        <ul class="pack-list no-list">
-          <li>Mobile phones, tablets, laptops, gaming devices, or smartwatches (if carried for travel, they must be surrendered at the Phone Hotel)</li>
-          <li>Expensive jewelry, large amounts of cash, or valuables</li>
-          <li>Energy drinks, vapes, alcohol, or non-prescribed substances</li>
-          <li>Revealing or immodest clothing</li>
+        <h3>Please leave at home</h3>
+        <ul class="pack-list leave">
+          <li>Phones, tablets, laptops, gaming devices, and smartwatches. If one comes for the journey, it goes straight into the Phone Hotel.</li>
+          <li>Jewellery, large amounts of cash, and other valuables.</li>
+          <li>Energy drinks, vapes, alcohol, and non-prescribed substances.</li>
+          <li>Outside snacks. Meals are provided at set times.</li>
         </ul>
       </div>
     </div>
@@ -546,119 +478,178 @@
 <!-- ================= SCRIPTURE ================= -->
 <section class="quote-strip">
   <div class="qs-inner">
-    <div class="qs-quote">"Do not conform to the pattern of this world, but be transformed by the renewing of your mind."</div>
+    <div class="qs-quote">“Do not conform to the pattern of this world, but be transformed by the renewing of your mind.”</div>
     <div class="qs-attr">Romans 12:2</div>
   </div>
 </section>
 
 <!-- ================= INVESTMENT ================= -->
-<section class="band band-alt" id="investment">
-  <div class="wrap">
+<section class="section cream" id="investment">
+  <div class="inner">
     <div class="section-label">The investment</div>
-    <h2 class="section-heading">All-inclusive <em>pricing.</em></h2>
-    <div class="investment-wrap">
-      <div class="price-card">
-        <div class="price-header">
-          <div class="price-num">KES 7,000</div>
-          <div class="price-tag">per participant · Teen Bootcamp</div>
-        </div>
-        <div class="price-body">
-          <div class="price-dates">November 29 – December 3, 2026 · Ages 14–18 · Nkoroi, Kajiado</div>
-          <p>Lodging, meals, and materials included. Spots are limited to protect the mentor-to-camper ratio.</p>
-          <a class="btn-primary" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Complete Registration Form →</a>
-        </div>
-      </div>
+    <h2 class="section-heading">Register early and <em>save KES 3,000.</em></h2>
+    <p class="section-sub">Lodging, 12 vegetarian meals, and all materials are included. The early fee is for families who register and pay by the deadline, so we can plan well. Registration closes at 11:59 PM on Friday 27 November 2026.</p>
 
-      <div class="scholarship-note">
-        <strong>Walking Together on Costs</strong>
-        <p style="margin-bottom:14px;">Every shilling of this bootcamp goes straight toward giving high schoolers five days of Scripture, mentorship, and honest growth on a tight budget. We encourage families who can to register at the full <strong>KES 7,000</strong> fee, and if you are able and moved to give more, your generosity helps carry the cost of mentoring the next generation.</p>
-        <p style="margin-bottom:14px;">At the same time, if your family faces a truly dire, very needy situation, share that on the form and we will reach out with compassion.</p>
-        <p>Questions? WhatsApp <a href="https://wa.me/254717585709" target="_blank" rel="noopener" style="color:var(--dark-blue);font-weight:600;">+254 717 585709</a>.</p>
+    <div class="tiers">
+      <div class="tier early">
+        <span class="tier-badge">Early registration</span>
+        <div class="tier-price">KES 7,000</div>
+        <div class="tier-when">Registered and paid by 11:59 PM, Wednesday 25 November 2026</div>
+        <div class="tier-note">Lodging, meals, and materials included. This is the fee we hope every family can manage.</div>
       </div>
+      <div class="tier late">
+        <span class="tier-badge">Late registration</span>
+        <div class="tier-price">KES 10,000</div>
+        <div class="tier-when">Thursday 26 and Friday 27 November 2026</div>
+        <div class="tier-note">Same five days, same mentors. The later fee helps cover the extra cost of last-minute catering and preparation. Registration closes at 11:59 PM on Friday 27 November.</div>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-title">Fill in the form</div><div class="step-body">Tell us about your teen, plus any allergies, medication, and an emergency contact. <a href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener" style="color:var(--forest);font-weight:500;">Open the form</a>.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-title">Pay by M-Pesa</div><div class="step-body">Pay to M-Pesa <strong>Till number 5526724</strong>. Use your teen's full name as the reference, and pay by the deadline to secure the early fee.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-title">Get your confirmation</div><div class="step-body">Your place is confirmed once we receive your registration <strong>and</strong> payment. We'll message you on WhatsApp with next steps.</div></div>
+    </div>
+
+    <div class="care-note">
+      <strong>Walking together on costs</strong>
+      <p>Every shilling goes toward giving young people five days of Scripture, mentorship, and honest growth on a tight budget. Families who can are warmly encouraged to register at the early fee, and if you are able and moved to give more, your generosity helps carry the cost of mentoring the next generation.</p>
+      <p>If cost is a real barrier for your family, please tell us on the form and we will reach out with compassion. Questions? WhatsApp <a href="https://wa.me/254717585709" target="_blank" rel="noopener">+254 717 585709</a>.</p>
+    </div>
+
+    <!-- TEAM TO CONFIRM BEFORE PUBLISHING: refund and transfer policy (draft) -->
+    <div class="policy" id="refund-policy">
+      <h3>Refunds and transfers</h3>
+      <p>We plan food, beds, and mentors around every registered camper, so here is how refunds and transfers work. We will always treat families with kindness and fairness.</p>
+      <ul>
+        <li><strong>If we cancel, or cannot offer a place:</strong> you receive a full refund, or a transfer to the next Thrive bootcamp, whichever you prefer. The same applies if we cannot safely meet your teen's medical needs.</li>
+        <li><strong>Cancel by 11:59 PM on Thursday 26 November:</strong> full refund, less any M-Pesa transaction charge.</li>
+        <li><strong>Cancel from 10:00 AM on Friday 27 November until check-in:</strong> 50% refund, or a full credit toward a future Thrive programme, valid for 12 months. By then food and lodging are already committed.</li>
+        <li><strong>No-shows, leaving early, or cancelling after check-in:</strong> no refund. If there is a genuine medical or family emergency, talk to us and we will consider a credit.</li>
+        <li><strong>Transfers:</strong> you may pass your place to another teen aged 14–18 at no cost until check-in. They complete the registration form, and the fee already paid stays as paid. If you cancel and register again after 25 November, the late fee applies.</li>
+        <li><strong>Campership/Sponsorship places</strong> are for the named camper and cannot be transferred.</li>
+        <li><strong>How to ask:</strong> WhatsApp <a href="https://wa.me/254717585709" target="_blank" rel="noopener" style="color:var(--forest);font-weight:600;">+254 717 585709</a> or email teensmentor365@gmail.com with your teen's name and the M-Pesa transaction code. Refunds go back to the paying number within 7 working days.</li>
+      </ul>
     </div>
   </div>
 </section>
 
 <!-- ================= FAQ ================= -->
-<section class="band" id="faq">
-  <div class="wrap">
+<section class="section" id="faq">
+  <div class="inner">
     <div class="section-label">Questions parents ask first</div>
     <h2 class="section-heading">Good <em>questions.</em></h2>
 
     <details>
-      <summary>How do I register?</summary>
-      <p class="faq-answer">Use the Jotform registration link on this page (<a href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">form.jotform.com/262450461253047</a>) to reserve a spot for the Teen Bootcamp (November 29 – December 3, 2026 at Nkoroi, Kajiado, open to teens aged 14–18).</p>
+      <summary>How do I register, and when do I pay?</summary>
+      <p class="faq-answer">Complete the <a href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">registration form</a>, then pay by M-Pesa. Registering and paying by 11:59 PM on Wednesday 25 November 2026 secures the early fee of KES 7,000. On Thursday 26 and Friday 27 November the fee is KES 10,000, and registration closes at 6:00 PM on Friday 27 November. A place is confirmed once we have both your form and your payment.</p>
     </details>
-
     <details>
-      <summary>Is my teen safe at the venue and without a phone for the week?</summary>
-      <p class="faq-answer">Yes. The bootcamp takes place at a well-secured residential home in Nkoroi, Kajiado with vetted mentors, continuous supervision, and safeguarding protocols. Phones are held safely in the "Phone Hotel," and a staff member monitors the camp-office emergency line at all times.</p>
+      <summary>Is my teen safe at the venue, and without a phone?</summary>
+      <p class="faq-answer">Yes. The venue is a secure residential home, every mentor and volunteer is background-checked, and campers are supervised throughout. Phones are stored safely in the Phone Hotel, and the camp-office number is answered at any hour, so you can always reach us.</p>
     </details>
-
     <details>
       <summary>What if there's a family emergency during the week?</summary>
-      <p class="faq-answer">Devices are stored, not destroyed. Families get a direct camp-office number before drop-off, reachable at any hour, and mentors will interrupt sessions if an urgent message comes through.</p>
+      <p class="faq-answer">Devices are stored, never lost. You'll have a direct camp-office number before drop-off, and mentors will pause a session straight away if an urgent message comes through.</p>
     </details>
-
     <details>
-      <summary>What if my teen has dietary restrictions, allergies, or takes medication?</summary>
-      <p class="faq-answer">Please note all allergies, dietary needs, and medical details on the registration form so our team can plan well. Any prescribed medications should be clearly labeled and handed over to designated staff at check-in for safe administration.</p>
+      <summary>What about food, allergies, and medication?</summary>
+      <p class="faq-answer">Meals are vegetarian: a hearty breakfast, a medium lunch, and a light dinner. Please list any allergies, dietary needs, and medical details on the registration form. Prescribed medication should be clearly labelled and handed to a mentor at check-in.</p>
     </details>
-
     <details>
-      <summary>What does a typical day look like—and how are groups formed?</summary>
-      <p class="faq-answer">Days combine Scripture teaching, mentor small groups of 6–8 teens, morning movement and practical work blocks, rest, and evening worship/campfire time. Small groups and rooms are thoughtfully arranged by our leadership team to support healthy connection and care.</p>
+      <summary>Will you talk about sensitive topics like sexuality and addiction?</summary>
+      <p class="faq-answer">Yes, honestly and with care, always in a Scripture-grounded, age-appropriate way, led by trained mentors. These sessions include teaching on personal safety and how to speak up. If you would like to talk through the content before registering, WhatsApp us on <a href="https://wa.me/254717585709" target="_blank" rel="noopener">+254 717 585709</a>.</p>
     </details>
-
     <details>
-      <summary>My teen isn't big on church — will they feel out of place?</summary>
-      <p class="faq-answer">Thrive is built around Scripture, but the week leads with honest conversation, not performance. Doubt and questions are welcome.</p>
+      <summary>What does a typical day look like, and how are groups formed?</summary>
+      <p class="faq-answer">Days mix Scripture teaching, mentor small groups of 6–8, morning movement and practical work, rest, and evening worship and campfire time. Our leadership team arranges groups and rooms thoughtfully to support care and connection.</p>
     </details>
-
     <details>
-      <summary>What if our family is in a very needy situation—or we can give more?</summary>
-      <p class="faq-answer">We encourage families who can to register at the full KES 7,000 fee so we can keep costs lean and sustainable. If you are able and moved to give more, an extra contribution helps support young people across the camp—and if your family faces a truly dire, very needy situation, please share that on the form so we can reach out with compassion.</p>
+      <summary>My teen isn't big on church. Will they feel out of place?</summary>
+      <p class="faq-answer">Thrive is built around Scripture, but the week leads with honest conversation, not performance. Doubts and questions are welcome here.</p>
+    </details>
+    <details>
+      <summary>How do we get to the venue?</summary>
+      <p class="faq-answer">We will confirm the drop-off point, any group transport we arrange, and the exact pin in Nkoroi, Kajiado with registered families before camp. If you need help with transport, tell us on the form.</p>
+    </details>
+    <details>
+      <summary>What is your refund and transfer policy?</summary>
+      <p class="faq-answer">In short: a full refund (less M-Pesa charges) if you cancel by 6:00 PM on Friday 27 November, 50% or a future-programme credit after that and before check-in, and free transfers to another teen aged 14–18. The full details are in the <a href="#refund-policy">refunds and transfers</a> section above.</p>
     </details>
   </div>
 </section>
 
 <!-- ================= FINAL CTA ================= -->
 <section class="cta-footer">
-  <div class="cta-footer-inner">
-    <h2>Teen Bootcamp · <span>Nov 29 – Dec 3, 2026.</span></h2>
-    <p>High schoolers (ages 14–18) · Nkoroi, Kajiado · KES 7,000 all-inclusive. Reserve a spot on Jotform today.</p>
-    <a class="btn-inverse" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Register on Jotform →</a>
-    <div class="verse-footer">"As iron sharpens iron, so one person sharpens another." — Proverbs 27:17</div>
+  <h2>Give your teen a week that <span>shapes the years ahead.</span></h2>
+  <p>Sunday 29 November to Thursday 3 December 2026 · Nkoroi, Kajiado · KES 7,000 until 25 November, KES 10,000 until registration closes on 27 November.</p>
+  <div class="cta-row">
+    <a class="btn-gold" href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Reserve a spot</a>
+    <a class="btn-outline" href="https://wa.me/254717585709" target="_blank" rel="noopener">Ask us on WhatsApp</a>
   </div>
+  <div class="verse-footer">“As iron sharpens iron, so one person sharpens another.” — Proverbs 27:17</div>
 </section>
 
 <!-- ================= FOOTER ================= -->
 <footer>
-  <div class="wrap footer-inner">
+  <div class="footer-inner">
     <div class="footer-brand">
-      <a class="footer-logo" href="https://thrivecoach365.github.io/" aria-label="Thrive Homepage">Thrive<span>.</span></a>
-      <p>Discipling teens and young adults through mentorship, Scripture, and real conversation.</p>
+      <a class="footer-logo" href="index.html">Thrive<span>.</span></a>
+      <p>Guiding young lives through life's challenges. Faith-rooted, practical, and built for transformation that sticks.</p>
     </div>
     <div class="footer-col">
-      <h4>Teen Bootcamp 2026</h4>
-      <a href="#program">The Program</a>
+      <h4>Teen Bootcamp</h4>
+      <a href="#program">The programme</a>
       <a href="#mentors">Mentors</a>
-      <a href="#info-pack">Participant Info Pack</a>
+      <a href="#info-pack">Parent information</a>
       <a href="#investment">Investment</a>
-      <a href="https://form.jotform.com/262450461253047" target="_blank" rel="noopener">Jotform Registration</a>
+    </div>
+    <div class="footer-col">
+      <h4>Thrive</h4>
+      <a href="about.html">About</a>
+      <a href="programmes.html">Programmes</a>
+      <a href="resources.html">Resources</a>
+      <a href="coach.html">Meet the Coach</a>
     </div>
     <div class="footer-col">
       <h4>Contact</h4>
       <a href="mailto:teensmentor365@gmail.com">teensmentor365@gmail.com</a>
-      <span>WhatsApp: +254 717 585709</span>
-      <a href="https://thrivecoach365.github.io/">Thrive Homepage</a>
+      <a href="https://wa.me/254717585709" target="_blank" rel="noopener">WhatsApp +254 717 585709</a>
     </div>
   </div>
-  <div class="wrap footer-bottom">
+  <div class="footer-bottom">
     <div class="footer-verse">Your information is only used to tell you about this bootcamp.</div>
     <a class="footer-email" href="mailto:teensmentor365@gmail.com">teensmentor365@gmail.com</a>
   </div>
 </footer>
 
+<script>
+  // Early-bird cut-off: Wednesday 25 November 2026, 11:59 PM East Africa Time (UTC+3).
+  // Registration closes: Friday 27 November 2026, 11:59 PM East Africa Time.
+  // The page switches itself: early fee -> late fee -> closed (registration links turn into WhatsApp links).
+  (function () {
+    var EARLY_END = new Date('2026-11-25T23:59:59+03:00').getTime();
+    var CLOSE = new Date('2026-11-27T23:59:59+03:00').getTime();
+    var now = Date.now();
+    var root = document.documentElement;
+    if (now > CLOSE) {
+      root.classList.add('is-late', 'is-closed');
+      var wa = 'https://wa.me/254717585709?text=' + encodeURIComponent('Hello Thrive, I would like to ask about the Teen Bootcamp (29 Nov to 3 Dec).');
+      var links = document.querySelectorAll('a[href*="form.jotform.com"]');
+      for (var i = 0; i < links.length; i++) {
+        var a = links[i];
+        a.setAttribute('href', wa);
+        var isBtn = /(nav-cta|btn-gold|btn-white)/.test(a.className);
+        a.textContent = isBtn ? 'Message us on WhatsApp' : 'message us on WhatsApp';
+      }
+    } else if (now > EARLY_END) {
+      root.classList.add('is-late');
+    } else {
+      var days = Math.ceil((EARLY_END - now) / 86400000);
+      var el = document.getElementById('daysLeft');
+      if (el) el.textContent = days <= 1 ? 'Last day at the early price.' : days + ' days left at the early price.';
+    }
+  })();
+</script>
 </body>
 </html>
